@@ -16,10 +16,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','phone','BIN','manager_name',
+        'manager_phone','company_email','locality_id','address',
+        'role_id'
     ];
 
     /**
+     *
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -36,4 +39,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function documents(){
+        return $this->hasMany('App\UserDocument');
+    }
 }
