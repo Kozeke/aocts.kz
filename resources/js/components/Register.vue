@@ -20,32 +20,38 @@
                 <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">ФИО первого руководителя</label>
-                        <input type="text" placeholder="Введите ФИО руководителя">
+                        <input v-model="name" type="text" placeholder="Введите ФИО руководителя">
                     </div>
                     <div class="input-form flex-col">
                         <label class="label">БИН</label>
-                        <input type="text" placeholder="Введите 12 значный код">
+                        <input v-model="BIN" oninput="validity.valid||(value='');" v-mask="'############'" placeholder="Введите 12 значный код">
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <div class="input-form flex-col">
+                        <label class="label">Электронная почта</label>
+                        <input v-model="email" type="text" placeholder="Введите email">
+                    </div>
+                    <div class="input-form flex-col">
+                        <label class="label">Ваш телефонный номер</label>
+                        <input v-model="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="Введите номер телефона">
                     </div>
                 </div>
                 <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">Пароль</label>
-                        <input type="password" placeholder="Введите пароль">
+                        <input v-model="password" type="password" placeholder="Введите пароль">
                     </div>
                     <div class="input-form flex-col">
-                        <label class="label">Электронная почта</label>
-                        <input type="text" placeholder="Введите email">
-                    </div>
+                        <label class="label">Повторите пароль</label>
+                        <input v-model="password_repeat" type="password" placeholder="Введите пароль еще раз">
+                    </div>  
                 </div>
                 <div class="flex-row">
                     <div class="input-form flex-col">
-                        <label class="label">Повторите пароль</label>
-                        <input type="password" placeholder="Введите пароль еще раз">
-                    </div>
-                    <div class="input-form flex-col">
                         <label class="label">Учредительные документы компании </label>
-                        <input class="file-input" type="text" placeholder="+ Добавить PDF-файл" readonly>
-                        <input class="file-hidden" type="file">
+                        <input :value="doc.name" class="file-input" type="text" placeholder="+ Добавить PDF-файл" readonly>
+                        <input class="file-hidden" type="file"  @change="uploadDoc">
                     </div>
                 </div>
                 <div class="flex-row row-last">
@@ -62,33 +68,63 @@
                 <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">Адрес компании</label>
-                        <input type="password" placeholder="Введите адрес компании">
+                        <select v-bind:class="{ 'not-selected' : selected_region === 'Выберите' }" class="input-form" v-model="selected_region">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions" :value="region.id" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="input-form flex-col">
                         <label class="label">ФИО менеджера компании</label>
-                        <input type="password" placeholder="Введите ФИО менеджера">
+                        <select v-bind:class="{ 'not-selected' : selected_district === 'Выберите' }" v-if="selected_region !== 'Выберите'" class="input-form" v-model="selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions.find(x => x.id === selected_region).districts" :value="region.id" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <select v-else class="input-form not-selected" v-model="selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                        </select>
                     </div>
                 </div>
                 <div class="flex-row">
                     <div class="input-form flex-col">
-                        <label class="label">Ваш телефонный номер</label>
-                        <input type="text" placeholder="Введите номер телефона">
+                        <label class="label">ФИО менеджера компании</label>
+                        <select v-bind:class="{ 'not-selected' : selected_locality === 'Выберите' }" v-if="selected_district !== 'Выберите'" class="input-form" v-model="selected_locality">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions.find(x => x.id === selected_region).districts.find(x => x.id === selected_district).localities" :value="region.id" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <select v-else class="input-form not-selected" v-model="selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                        </select>
+                    </div>
+                    <div class="input-form flex-col">
+                        <label class="label">Адрес компании</label>
+                        <input v-model="address" type="text" placeholder="Введите адрес компании">
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <div class="input-form flex-col">
+                        <label class="label">ФИО менеджера компании</label>
+                        <input v-model="manager_name" type="text" placeholder="Введите ФИО менеджера">
                     </div>
                     <div class="input-form flex-col">
                         <label class="label">Телефонный номер менеджера</label>
-                        <input type="text" placeholder="Введите номер телефона менеджера">
+                        <input v-model="manager_phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="Введите номер телефона менеджера">
                     </div>
                 </div>
                 <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">Электронная почта компании</label>
-                        <input type="text" placeholder="Введите email для отправки документов">
+                        <input v-model="company_email" type="text" placeholder="Введите email для отправки документов">
                     </div>
-
                 </div>
                 <div class="flex-row row-last">
                     <div class="input-form flex-col">
-                        <span @click="firstPage = true" class="val">Отправить на расмотрение</span>
+                        <span @click="postUser()" class="val">Отправить на расмотрение</span>
                     </div>
                     <div class="text-form flex-col">
                         <label class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
@@ -99,14 +135,90 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     data(){
         return{
-            firstPage: true,
-            user_doc: {
-                file: '',
-                url: ''
+            firstPage: false,
+            regions: '',
+            selected_region: 'Выберите',
+            selected_district: 'Выберите',
+            selected_locality: 'Выберите',
+            doc: '',
+            name: '',
+            email: '',
+            phone: '',
+            BIN: '',
+            manager_name: '',
+            manager_phone: '',
+            company_email: '',
+            locality_id: '',
+            address: '',
+            password: '',
+            password_repeat: '',
+        }
+    },
+    mounted(){
+        this.getRegions()
+    },
+    methods: {
+        uploadDoc(e){
+            const file = e.target.files[0]
+            this.doc = file
+        },
+        getRegions(){
+            axios.get('/api/regions')
+            .then(res => {
+                this.regions = res.data
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+        postUser(){
+            if( this.email ){
+                const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if( !pattern.test(String(this.email).toLowerCase()) ){
+                    alert("Напишите валидную почту.");
+                    return
+                } 
             }
+            if( this.company_email ){
+                const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if( !pattern.test(String(this.company_email).toLowerCase()) ){
+                    alert("Напишите валидную почту.");
+                    return
+                } 
+            }
+            let data = new FormData();
+                
+            data.append("name", this.name);
+            data.append("email", this.email);
+            data.append("phone", this.phone);
+            data.append("BIN", this.BIN);
+            data.append("manager_name", this.manager_name);
+            data.append("manager_phone", this.manager_phone);
+            data.append("company_email", this.company_email);
+            data.append("locality_id", this.selected_locality);
+            data.append("address", this.address);
+            data.append("password", this.password);
+            data.append("document", this.doc, this.doc.name);
+           
+            for (var pair of data.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]) + ',' + typeof(pair[1]); 
+            }
+
+            console.log(data)
+            axios.post('/api/register', data, {
+                headers: { 
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                })
+                .then(res => {
+                    console.log(res)
+                }).catch(err => {
+                console.log(err)
+            })
         }
     }
 }
@@ -141,11 +253,11 @@ export default {
             background: #FFFFFF;
             border-radius: 6px;
             height: 680px;
-            padding:50px 60px;
+            padding: 26px 60px;
             color: #06397D;
             .reg-top{
                 border-bottom: 1px solid #4985FF;
-                padding-bottom: 25px;
+                padding-bottom: 10px;
                 .header{
                     font-weight: bold;
                     font-size: 34px;
@@ -206,7 +318,7 @@ export default {
                 }
             }
             .top-sub-one{
-                margin-top: 30px;
+                margin-top: 15px;
             }
             .top-sub-one, .top-sub-last{
                 text-align: left;
@@ -220,7 +332,7 @@ export default {
                     position: relative;
                     width: 350px;
                     margin-right: 60px;
-                    margin-top: 30px;
+                    margin-top: 20px;
                     height: 86px;
                     .label{
                         text-align: left;
@@ -228,11 +340,11 @@ export default {
                         font-size: 16px;
                         line-height: 20px;
                     }
-                    input{
+                    input, select{
                         cursor: initial;
                         padding-left: 18px;
                         text-align: left;
-                        margin-top: 8px;
+                        margin-top: 4px;
                         height: 50px;
                         font-weight: normal;
                         font-size: 14px;
@@ -242,6 +354,14 @@ export default {
                         border: 1px solid #E6EAF3;
                         box-sizing: border-box;
                         border-radius: 6px;
+                    }
+                    select{
+                        padding: 18px auto;
+                        -webkit-appearance: none;
+                        -moz-appearance : none;
+                    }
+                    .not-selected{
+                        color: rgba(111, 111, 111, 0.25);
                     }
                     ::placeholder{
                         font-weight: normal;
@@ -267,7 +387,7 @@ export default {
                     }
                 }
                 .check-form{
-                    margin-top: 52px;
+                    margin-top: 42px;
                     input{
                         cursor: pointer;
                         margin-left: 3px;
@@ -289,7 +409,7 @@ export default {
                 }
                 .text-form{
                     max-width: 520px;
-                    margin-top: 40px;
+                    margin-top: 28px;
                     .label{
                         text-align: left;
                         font-weight: 500;

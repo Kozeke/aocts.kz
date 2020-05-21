@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueTheMask from 'vue-the-mask'
 
 Vue.use(VueRouter)
+Vue.use(VueTheMask)
 
 import App from './components/App'
 import Home from './components/Home'
