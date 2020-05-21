@@ -22,10 +22,12 @@ class UserController extends Controller
             'BIN' => 'required|unique:users',
             'manager_name' => 'required',
             'manager_phone' => 'required|unique:users',
-            'company_email' => 'required|unique:users',
+            'company_email' => 'required|email|unique:users',
             'locality_id' => 'required',
             'address' => 'required',
             'password' => 'required',
+            'title' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 422);
