@@ -2067,6 +2067,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2097,7 +2099,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    validateForm: function validateForm(e) {
+      var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (e.target.id === 'email') {
+        if (!pattern.test(String(e.target.value).toLowerCase())) {
+          document.getElementById('err-email').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-email').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.id === 'password') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-password').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-password').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+    },
+    logIn: function logIn() {
+      if (this.email === '') {
+        document.getElementById('err-email').style.visibility = 'visible';
+        document.getElementById('email').classList.add('error');
+        return;
+      }
+
+      if (this.password === '') {
+        document.getElementById('err-password').style.visibility = 'visible';
+        document.getElementById('password').classList.add('error');
+        return;
+      }
+
+      var data = {
+        email: this.email,
+        password: this.password
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', data).then(function (res) {
+        alert('Профиль успешно прошел валидацию.');
+        console.log(res);
+      })["catch"](function (err) {
+        if (err.response.status === 402) {
+          alert('Профиль проверяется модератором.');
+        }
+
+        console.log(err);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -2256,11 +2329,95 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      firstPage: false,
+      userRegistration: true,
+      firstPage: true,
       regions: '',
       selected_region: 'Выберите',
       selected_district: 'Выберите',
@@ -2276,16 +2433,159 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       locality_id: '',
       address: '',
       password: '',
-      password_repeat: ''
+      password_repeat: '',
+      agreement: false
     };
   },
   mounted: function mounted() {
     this.getRegions();
   },
   methods: {
+    validateForm: function validateForm(e) {
+      var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (e.target.name === 'name') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-name').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-name').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'BIN') {
+        if (String(e.target.value).length !== 12) {
+          document.getElementById('err-BIN').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-BIN').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'email') {
+        if (!pattern.test(String(e.target.value).toLowerCase())) {
+          document.getElementById('err-email').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-email').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'phone') {
+        if (String(e.target.value).length !== 16) {
+          document.getElementById('err-phone').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-phone').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'password') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-password').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-password').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'password_repeat') {
+        if (String(e.target.value) !== this.password) {
+          document.getElementById('err-password_repeat').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-password_repeat').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'selected_region') {
+        if (e.target.value !== this.selected_region) {
+          this.selected_district = 'Выберите';
+          this.selected_locality = 'Выберите';
+        }
+      }
+
+      if (e.target.name === 'selected_district') {
+        if (e.target.value !== this.selected_district) {
+          this.selected_locality = 'Выберите';
+        }
+      }
+
+      if (e.target.name === 'address') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-address').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-address').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'manager_name') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-manager_name').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-manager_name').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'manager_phone') {
+        if (String(e.target.value).length !== 16) {
+          document.getElementById('err-manager_phone').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-manager_phone').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'company_email') {
+        if (!pattern.test(String(e.target.value).toLowerCase())) {
+          document.getElementById('err-company_email').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-company_email').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+    },
     uploadDoc: function uploadDoc(e) {
       var file = e.target.files[0];
       this.doc = file;
+
+      if (file.type !== 'application/pdf') {
+        document.getElementById('err-doc').style.visibility = 'visible';
+        document.getElementById('doc').classList.add('error');
+        this.hasError = true;
+      } else {
+        document.getElementById('err-doc').style.visibility = 'hidden';
+        document.getElementById('doc').classList.remove('error');
+        this.hasError = false;
+      }
+    },
+    goNextForm: function goNextForm() {
+      if (this.name && this.BIN && this.email && this.phone && this.password && this.password_repeat && this.doc) {
+        if (document.getElementsByClassName('error').length !== 0) {
+          alert('Заполните все поля правильно.');
+          return;
+        }
+
+        if (this.agreement) {
+          this.firstPage = false;
+        } else {
+          alert('Согласитесь с условием пользователя.');
+        }
+      } else {
+        alert('Заполните все поля.');
+      }
     },
     getRegions: function getRegions() {
       var _this = this;
@@ -2297,61 +2597,56 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     postUser: function postUser() {
-      if (this.email) {
-        var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var _this2 = this;
 
-        if (!pattern.test(String(this.email).toLowerCase())) {
-          alert("Напишите валидную почту.");
+      if (this.address && this.manager_name && this.manager_phone && this.company_email && this.selected_locality !== 'Выберите') {
+        if (document.getElementsByClassName('error').length !== 0) {
+          alert('Заполните все поля правильно.');
           return;
         }
-      }
 
-      if (this.company_email) {
-        var _pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var data = new FormData();
+        data.append("name", this.name);
+        data.append("email", this.email);
+        data.append("phone", this.phone);
+        data.append("BIN", this.BIN);
+        data.append("manager_name", this.manager_name);
+        data.append("manager_phone", this.manager_phone);
+        data.append("company_email", this.company_email);
+        data.append("locality_id", this.selected_locality);
+        data.append("address", this.address);
+        data.append("password", this.password);
+        data.append("document", this.doc, this.doc.name);
 
-        if (!_pattern.test(String(this.company_email).toLowerCase())) {
-          alert("Напишите валидную почту.");
-          return;
+        var _iterator = _createForOfIteratorHelper(data.entries()),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var pair = _step.value;
+            console.log(pair[0] + ', ' + pair[1]) + ',' + _typeof(pair[1]);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
         }
+
+        console.log(data);
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (res) {
+          _this2.userRegistration = false;
+          console.log(res);
+        })["catch"](function (err) {
+          alert(err);
+          console.log(err);
+        });
+      } else {
+        alert('Заполните все поля.');
       }
-
-      var data = new FormData();
-      data.append("name", this.name);
-      data.append("email", this.email);
-      data.append("phone", this.phone);
-      data.append("BIN", this.BIN);
-      data.append("manager_name", this.manager_name);
-      data.append("manager_phone", this.manager_phone);
-      data.append("company_email", this.company_email);
-      data.append("locality_id", this.selected_locality);
-      data.append("address", this.address);
-      data.append("password", this.password);
-      data.append("document", this.doc, this.doc.name);
-
-      var _iterator = _createForOfIteratorHelper(data.entries()),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var pair = _step.value;
-          console.log(pair[0] + ', ' + pair[1]) + ',' + _typeof(pair[1]);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      console.log(data);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        console.log(err);
-      });
     }
   }
 });
@@ -2408,7 +2703,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-6bdc8b8e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-6bdc8b8e] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .login-left[data-v-6bdc8b8e] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-6bdc8b8e] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-6bdc8b8e] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .check-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\n.main .login-left .login-text .check-form input[data-v-6bdc8b8e] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .login-enter[data-v-6bdc8b8e] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-6bdc8b8e] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-6bdc8b8e], .main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-6bdc8b8e] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n}", ""]);
+exports.push([module.i, ".main[data-v-6bdc8b8e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-6bdc8b8e] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .login-left[data-v-6bdc8b8e] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-6bdc8b8e] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-6bdc8b8e] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-6bdc8b8e] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-6bdc8b8e] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-6bdc8b8e] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .check-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\n.main .login-left .login-text .check-form input[data-v-6bdc8b8e] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .login-enter[data-v-6bdc8b8e] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-6bdc8b8e] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-6bdc8b8e], .main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-6bdc8b8e] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n}", ""]);
 
 // exports
 
@@ -2427,7 +2722,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: left, top;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  line-height: 42px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 15px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 20px;\n  height: 86px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 4px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 42px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 28px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n@media only screen and (min-width: 1520px) {\n.main .register[data-v-97358ae4] {\n    width: 64%;\n}\n}", ""]);
+exports.push([module.i, ".main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: left, top;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  line-height: 42px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 15px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 20px;\n  height: 86px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 4px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 42px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 28px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n@media only screen and (min-width: 1520px) {\n.main .register[data-v-97358ae4] {\n    width: 64%;\n}\n}", ""]);
 
 // exports
 
@@ -4016,13 +4311,132 @@ var render = function() {
       _c("div", { staticClass: "login-text" }, [
         _c("div", { staticClass: "head" }, [_vm._v("С Возвращением!")]),
         _vm._v(" "),
+        _c("div", { staticClass: "input-form flex-col" }, [
+          _c("label", { staticClass: "label" }, [_vm._v("Электронная почта")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.email,
+                expression: "email"
+              }
+            ],
+            attrs: {
+              type: "text",
+              id: "email",
+              placeholder: "Введите ваш электронный адрес"
+            },
+            domProps: { value: _vm.email },
+            on: {
+              keyup: function($event) {
+                return _vm.validateForm($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "err", attrs: { id: "err-email" } }, [
+            _c(
+              "svg",
+              {
+                attrs: {
+                  width: "4",
+                  height: "13",
+                  viewBox: "0 0 4 13",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                    fill: "#E4002F"
+                  }
+                })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-form flex-col" }, [
+          _c("label", { staticClass: "label" }, [_vm._v("Пароль")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            attrs: {
+              type: "password",
+              id: "password",
+              placeholder: "Введите пароль"
+            },
+            domProps: { value: _vm.password },
+            on: {
+              keyup: function($event) {
+                return _vm.validateForm($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "err", attrs: { id: "err-password" } }, [
+            _c(
+              "svg",
+              {
+                attrs: {
+                  width: "4",
+                  height: "13",
+                  viewBox: "0 0 4 13",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                    fill: "#E4002F"
+                  }
+                })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c("div", { staticClass: "login-enter" }, [_vm._v("Войти")]),
+        _c(
+          "div",
+          {
+            staticClass: "login-enter",
+            on: {
+              click: function($event) {
+                return _vm.logIn()
+              }
+            }
+          },
+          [_vm._v("Войти")]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "login-last flex-row" }, [
           _c(
@@ -4047,30 +4461,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-form flex-col" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Электронная почта")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "Введите ваш электронный адрес" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-form flex-col" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Пароль")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "password", placeholder: "Введите пароль" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -4117,763 +4507,1314 @@ var render = function() {
       [_vm._v("DARIS")]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "register" }, [
-      _c("div", { staticClass: "reg-top flex-row" }, [
-        _c("div", { staticClass: "header" }, [_vm._v("Регистрация")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "step" }, [_vm._v("Шаг")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "one",
-            class: { "current-step": _vm.firstPage },
-            on: {
-              click: function($event) {
-                _vm.firstPage = true
-              }
-            }
-          },
-          [_vm._v("1")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "two",
-            class: { "current-step": !_vm.firstPage },
-            on: {
-              click: function($event) {
-                _vm.firstPage = false
-              }
-            }
-          },
-          [_vm._v("2")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "reg-top-r flex-row" }, [
-          _c("label", [_vm._v("У Вас уже есть аккаунт?")]),
+    _vm.userRegistration
+      ? _c("div", { staticClass: "register" }, [
+          _c("div", { staticClass: "reg-top flex-row" }, [
+            _c("div", { staticClass: "header" }, [_vm._v("Регистрация")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "step" }, [_vm._v("Шаг")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "one", class: { "current-step": _vm.firstPage } },
+              [_vm._v("1")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "two", class: { "current-step": !_vm.firstPage } },
+              [_vm._v("2")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "reg-top-r flex-row" }, [
+              _c("label", [_vm._v("У Вас уже есть аккаунт?")]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push({ name: "login" })
+                    }
+                  }
+                },
+                [_vm._v("Войти в систему")]
+              )
+            ])
+          ]),
           _vm._v(" "),
-          _c(
-            "span",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.$router.push({ name: "login" })
-                }
-              }
-            },
-            [_vm._v("Войти в систему")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.firstPage
-        ? _c("div", { staticClass: "top-sub-one" }, [
-            _vm._v("Пожалуйста заполните все необходимые данные,")
-          ])
-        : _c("div", { staticClass: "top-sub-one" }, [
-            _vm._v("Добавьте ваши контактные данные и данные вашего менеджера")
-          ]),
-      _vm._v(" "),
-      _vm.firstPage
-        ? _c("div", { staticClass: "top-sub-last" }, [
-            _vm._v("Мы ответственно подходим к работе с каждым клиентом.")
-          ])
-        : _c("div", { staticClass: "top-sub-last" }, [
-            _vm._v("чтобы закончить регистрацию.")
-          ]),
-      _vm._v(" "),
-      _vm.firstPage
-        ? _c("div", { staticClass: "reg-form flex-col" }, [
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("ФИО первого руководителя")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.name,
-                      expression: "name"
-                    }
-                  ],
-                  attrs: {
-                    type: "text",
-                    placeholder: "Введите ФИО руководителя"
-                  },
-                  domProps: { value: _vm.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.name = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [_vm._v("БИН")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.BIN,
-                      expression: "BIN"
-                    },
-                    {
-                      name: "mask",
-                      rawName: "v-mask",
-                      value: "############",
-                      expression: "'############'"
-                    }
-                  ],
-                  attrs: {
-                    oninput: "validity.valid||(value='');",
-                    placeholder: "Введите 12 значный код"
-                  },
-                  domProps: { value: _vm.BIN },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.BIN = $event.target.value
-                    }
-                  }
-                })
+          _vm.firstPage
+            ? _c("div", { staticClass: "top-sub-one" }, [
+                _vm._v("Пожалуйста заполните все необходимые данные,")
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Электронная почта")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.email,
-                      expression: "email"
-                    }
-                  ],
-                  attrs: { type: "text", placeholder: "Введите email" },
-                  domProps: { value: _vm.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.email = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Ваш телефонный номер")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.phone,
-                      expression: "phone"
-                    },
-                    {
-                      name: "mask",
-                      rawName: "v-mask",
-                      value: "+7(###)###-##-##",
-                      expression: "'+7(###)###-##-##'"
-                    }
-                  ],
-                  attrs: {
-                    oninput: "validity.valid||(value='');",
-                    placeholder: "Введите номер телефона"
-                  },
-                  domProps: { value: _vm.phone },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.phone = $event.target.value
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [_vm._v("Пароль")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.password,
-                      expression: "password"
-                    }
-                  ],
-                  attrs: { type: "password", placeholder: "Введите пароль" },
-                  domProps: { value: _vm.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.password = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Повторите пароль")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.password_repeat,
-                      expression: "password_repeat"
-                    }
-                  ],
-                  attrs: {
-                    type: "password",
-                    placeholder: "Введите пароль еще раз"
-                  },
-                  domProps: { value: _vm.password_repeat },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.password_repeat = $event.target.value
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Учредительные документы компании ")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "file-input",
-                  attrs: {
-                    type: "text",
-                    placeholder: "+ Добавить PDF-файл",
-                    readonly: ""
-                  },
-                  domProps: { value: _vm.doc.name }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "file-hidden",
-                  attrs: { type: "file" },
-                  on: { change: _vm.uploadDoc }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex-row row-last" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "val",
-                    on: {
-                      click: function($event) {
-                        _vm.firstPage = false
-                      }
-                    }
-                  },
-                  [_vm._v("Продолжить регистрацию")]
+            : _c("div", { staticClass: "top-sub-one" }, [
+                _vm._v(
+                  "Добавьте ваши контактные данные и данные вашего менеджера"
                 )
               ]),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
-          ])
-        : _c("div", { staticClass: "reg-form flex-col" }, [
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Адрес компании")
+          _vm._v(" "),
+          _vm.firstPage
+            ? _c("div", { staticClass: "top-sub-last" }, [
+                _vm._v("Мы ответственно подходим к работе с каждым клиентом.")
+              ])
+            : _c("div", { staticClass: "top-sub-last" }, [
+                _vm._v("чтобы закончить регистрацию.")
+              ]),
+          _vm._v(" "),
+          _vm.firstPage
+            ? _c("div", { staticClass: "reg-form flex-col" }, [
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("ФИО первого руководителя")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name"
+                        }
+                      ],
+                      attrs: {
+                        name: "name",
+                        type: "text",
+                        placeholder: "Введите ФИО руководителя"
+                      },
+                      domProps: { value: _vm.name },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-name" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [_vm._v("БИН")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.BIN,
+                          expression: "BIN"
+                        },
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "############",
+                          expression: "'############'"
+                        }
+                      ],
+                      attrs: {
+                        name: "BIN",
+                        oninput: "validity.valid||(value='');",
+                        placeholder: "Введите 12 значный код"
+                      },
+                      domProps: { value: _vm.BIN },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.BIN = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-BIN" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selected_region,
-                        expression: "selected_region"
-                      }
-                    ],
-                    staticClass: "input-form",
-                    class: {
-                      "not-selected": _vm.selected_region === "Выберите"
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.selected_region = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      {
-                        attrs: { disabled: "" },
-                        domProps: { value: "Выберите" }
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Электронная почта")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.email,
+                          expression: "email"
+                        }
+                      ],
+                      attrs: {
+                        name: "email",
+                        type: "text",
+                        placeholder: "Введите email"
                       },
-                      [_vm._v("Выберите")]
+                      domProps: { value: _vm.email },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.email = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-email" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Ваш телефонный номер")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.phone,
+                          expression: "phone"
+                        },
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "+7(###)###-##-##",
+                          expression: "'+7(###)###-##-##'"
+                        }
+                      ],
+                      attrs: {
+                        name: "phone",
+                        oninput: "validity.valid||(value='');",
+                        placeholder: "Введите номер телефона"
+                      },
+                      domProps: { value: _vm.phone },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.phone = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-phone" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [_vm._v("Пароль")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
+                      attrs: {
+                        name: "password",
+                        type: "password",
+                        placeholder: "Введите пароль"
+                      },
+                      domProps: { value: _vm.password },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-password" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Повторите пароль")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password_repeat,
+                          expression: "password_repeat"
+                        }
+                      ],
+                      attrs: {
+                        name: "password_repeat",
+                        type: "password",
+                        placeholder: "Введите пароль еще раз"
+                      },
+                      domProps: { value: _vm.password_repeat },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password_repeat = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "err",
+                        attrs: { id: "err-password_repeat" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Учредительные документы компании")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "file-input",
+                      attrs: {
+                        id: "doc",
+                        name: "doc",
+                        type: "text",
+                        placeholder: "+ Добавить PDF-файл",
+                        readonly: ""
+                      },
+                      domProps: { value: _vm.doc.name },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "file-hidden",
+                      attrs: { type: "file" },
+                      on: { change: _vm.uploadDoc }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-doc" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-row row-last" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "val",
+                        on: {
+                          click: function($event) {
+                            return _vm.goNextForm()
+                          }
+                        }
+                      },
+                      [_vm._v("Продолжить регистрацию")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "check-form flex-row" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.agreement,
+                          expression: "agreement"
+                        }
+                      ],
+                      attrs: { type: "checkbox" },
+                      domProps: {
+                        checked: Array.isArray(_vm.agreement)
+                          ? _vm._i(_vm.agreement, null) > -1
+                          : _vm.agreement
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.agreement,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.agreement = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.agreement = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.agreement = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Согласиться с условиями")
+                    ])
+                  ])
+                ])
+              ])
+            : _c("div", { staticClass: "reg-form flex-col" }, [
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Выберите регион")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selected_region,
+                            expression: "selected_region"
+                          }
+                        ],
+                        staticClass: "input-form",
+                        class: {
+                          "not-selected": _vm.selected_region === "Выберите"
+                        },
+                        attrs: { name: "selected_region" },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected_region = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            function($event) {
+                              return _vm.validateForm($event)
+                            }
+                          ]
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: { disabled: "" },
+                            domProps: { value: "Выберите" }
+                          },
+                          [_vm._v("Выберите")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.regions, function(region) {
+                          return _c(
+                            "option",
+                            { key: region.id, domProps: { value: region.id } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(region.name) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
                     ),
                     _vm._v(" "),
-                    _vm._l(_vm.regions, function(region) {
-                      return _c(
-                        "option",
-                        { key: region.id, domProps: { value: region.id } },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(region.name) +
-                              "\n                        "
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("ФИО менеджера компании")
-                ]),
-                _vm._v(" "),
-                _vm.selected_region !== "Выберите"
-                  ? _c(
-                      "select",
+                    _c(
+                      "div",
                       {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.selected_district,
-                            expression: "selected_district"
-                          }
-                        ],
-                        staticClass: "input-form",
-                        class: {
-                          "not-selected": _vm.selected_district === "Выберите"
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selected_district = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
+                        staticClass: "err",
+                        attrs: { id: "err-selected_region" }
                       },
                       [
                         _c(
-                          "option",
+                          "svg",
                           {
-                            attrs: { disabled: "" },
-                            domProps: { value: "Выберите" }
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
                           },
-                          [_vm._v("Выберите")]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(
-                          _vm.regions.find(function(x) {
-                            return x.id === _vm.selected_region
-                          }).districts,
-                          function(region) {
-                            return _c(
-                              "option",
-                              {
-                                key: region.id,
-                                domProps: { value: region.id }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(region.name) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          }
-                        )
-                      ],
-                      2
-                    )
-                  : _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.selected_district,
-                            expression: "selected_district"
-                          }
-                        ],
-                        staticClass: "input-form not-selected",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selected_district = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          {
-                            attrs: { disabled: "" },
-                            domProps: { value: "Выберите" }
-                          },
-                          [_vm._v("Выберите")]
-                        )
-                      ]
-                    )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("ФИО менеджера компании")
-                ]),
-                _vm._v(" "),
-                _vm.selected_district !== "Выберите"
-                  ? _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.selected_locality,
-                            expression: "selected_locality"
-                          }
-                        ],
-                        staticClass: "input-form",
-                        class: {
-                          "not-selected": _vm.selected_locality === "Выберите"
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selected_locality = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          {
-                            attrs: { disabled: "" },
-                            domProps: { value: "Выберите" }
-                          },
-                          [_vm._v("Выберите")]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(
-                          _vm.regions
-                            .find(function(x) {
-                              return x.id === _vm.selected_region
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
                             })
-                            .districts.find(function(x) {
-                              return x.id === _vm.selected_district
-                            }).localities,
-                          function(region) {
-                            return _c(
-                              "option",
-                              {
-                                key: region.id,
-                                domProps: { value: region.id }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(region.name) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          }
-                        )
-                      ],
-                      2
-                    )
-                  : _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.selected_district,
-                            expression: "selected_district"
-                          }
-                        ],
-                        staticClass: "input-form not-selected",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selected_district = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          {
-                            attrs: { disabled: "" },
-                            domProps: { value: "Выберите" }
-                          },
-                          [_vm._v("Выберите")]
+                          ]
                         )
                       ]
                     )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Адрес компании")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Выберите город")
+                    ]),
+                    _vm._v(" "),
+                    _vm.selected_region !== "Выберите"
+                      ? _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected_district,
+                                expression: "selected_district"
+                              }
+                            ],
+                            staticClass: "input-form",
+                            class: {
+                              "not-selected":
+                                _vm.selected_district === "Выберите"
+                            },
+                            attrs: { name: "selected_district" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.selected_district = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                function($event) {
+                                  return _vm.validateForm($event)
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { disabled: "" },
+                                domProps: { value: "Выберите" }
+                              },
+                              [_vm._v("Выберите")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.regions.find(function(x) {
+                                return x.id === _vm.selected_region
+                              }).districts,
+                              function(region) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: region.id,
+                                    domProps: { value: region.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(region.name) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                )
+                              }
+                            )
+                          ],
+                          2
+                        )
+                      : _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected_district,
+                                expression: "selected_district"
+                              }
+                            ],
+                            staticClass: "input-form not-selected",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.selected_district = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { disabled: "" },
+                                domProps: { value: "Выберите" }
+                              },
+                              [_vm._v("Выберите")]
+                            )
+                          ]
+                        ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "err",
+                        attrs: { id: "err-selected_district" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.address,
-                      expression: "address"
-                    }
-                  ],
-                  attrs: {
-                    type: "text",
-                    placeholder: "Введите адрес компании"
-                  },
-                  domProps: { value: _vm.address },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Выберите район")
+                    ]),
+                    _vm._v(" "),
+                    _vm.selected_district !== "Выберите"
+                      ? _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected_locality,
+                                expression: "selected_locality"
+                              }
+                            ],
+                            staticClass: "input-form",
+                            class: {
+                              "not-selected":
+                                _vm.selected_locality === "Выберите"
+                            },
+                            attrs: { name: "selected_locality" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.selected_locality = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                function($event) {
+                                  return _vm.validateForm($event)
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { disabled: "" },
+                                domProps: { value: "Выберите" }
+                              },
+                              [_vm._v("Выберите")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.regions
+                                .find(function(x) {
+                                  return x.id === _vm.selected_region
+                                })
+                                .districts.find(function(x) {
+                                  return x.id === _vm.selected_district
+                                }).localities,
+                              function(region) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: region.id,
+                                    domProps: { value: region.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(region.name) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                )
+                              }
+                            )
+                          ],
+                          2
+                        )
+                      : _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected_district,
+                                expression: "selected_district"
+                              }
+                            ],
+                            staticClass: "input-form not-selected",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.selected_district = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { disabled: "" },
+                                domProps: { value: "Выберите" }
+                              },
+                              [_vm._v("Выберите")]
+                            )
+                          ]
+                        ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "err",
+                        attrs: { id: "err-selected_locality" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Адрес компании")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.address,
+                          expression: "address"
+                        }
+                      ],
+                      attrs: {
+                        name: "address",
+                        type: "text",
+                        placeholder: "Введите адрес компании"
+                      },
+                      domProps: { value: _vm.address },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.address = $event.target.value
+                        }
                       }
-                      _vm.address = $event.target.value
-                    }
-                  }
-                })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-address" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("ФИО менеджера компании")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.manager_name,
+                          expression: "manager_name"
+                        }
+                      ],
+                      attrs: {
+                        name: "manager_name",
+                        type: "text",
+                        placeholder: "Введите ФИО менеджера"
+                      },
+                      domProps: { value: _vm.manager_name },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.manager_name = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "err", attrs: { id: "err-manager_name" } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Телефонный номер менеджера")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.manager_phone,
+                          expression: "manager_phone"
+                        },
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "+7(###)###-##-##",
+                          expression: "'+7(###)###-##-##'"
+                        }
+                      ],
+                      attrs: {
+                        name: "manager_phone",
+                        oninput: "validity.valid||(value='');",
+                        placeholder: "Введите номер телефона менеджера"
+                      },
+                      domProps: { value: _vm.manager_phone },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.manager_phone = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "err",
+                        attrs: { id: "err-manager_phone" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-row" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Электронная почта компании")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.company_email,
+                          expression: "company_email"
+                        }
+                      ],
+                      attrs: {
+                        name: "company_email",
+                        type: "text",
+                        placeholder: "Введите email для отправки документов"
+                      },
+                      domProps: { value: _vm.company_email },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.validateForm($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.company_email = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "err",
+                        attrs: { id: "err-company_email" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "4",
+                              height: "13",
+                              viewBox: "0 0 4 13",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                fill: "#E4002F"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-row row-last" }, [
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "val",
+                        on: {
+                          click: function($event) {
+                            return _vm.postUser()
+                          }
+                        }
+                      },
+                      [_vm._v("Отправить на расмотрение")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
               ])
+        ])
+      : _c("div", { staticClass: "confirm flex-row" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "right flex-col" }, [
+            _c("div", { staticClass: "header" }, [
+              _vm._v("Заявка отправлена на расмотренние")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("ФИО менеджера компании")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.manager_name,
-                      expression: "manager_name"
-                    }
-                  ],
-                  attrs: { type: "text", placeholder: "Введите ФИО менеджера" },
-                  domProps: { value: _vm.manager_name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.manager_name = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Телефонный номер менеджера")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.manager_phone,
-                      expression: "manager_phone"
-                    },
-                    {
-                      name: "mask",
-                      rawName: "v-mask",
-                      value: "+7(###)###-##-##",
-                      expression: "'+7(###)###-##-##'"
-                    }
-                  ],
-                  attrs: {
-                    oninput: "validity.valid||(value='');",
-                    placeholder: "Введите номер телефона менеджера"
-                  },
-                  domProps: { value: _vm.manager_phone },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.manager_phone = $event.target.value
-                    }
-                  }
-                })
-              ])
+            _c("div", { staticClass: "sub" }, [
+              _vm._v(
+                "В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту."
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "flex-row" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c("label", { staticClass: "label" }, [
-                  _vm._v("Электронная почта компании")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.company_email,
-                      expression: "company_email"
-                    }
-                  ],
-                  attrs: {
-                    type: "text",
-                    placeholder: "Введите email для отправки документов"
-                  },
-                  domProps: { value: _vm.company_email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.company_email = $event.target.value
-                    }
-                  }
-                })
-              ])
+            _c("div", { staticClass: "sub" }, [
+              _vm._v(
+                "Пожалуста, не забывайте проверять почту и папку спама в течении недели."
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "flex-row row-last" }, [
-              _c("div", { staticClass: "input-form flex-col" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "val",
-                    on: {
-                      click: function($event) {
-                        return _vm.postUser()
-                      }
-                    }
-                  },
-                  [_vm._v("Отправить на расмотрение")]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
+            _c("div", { staticClass: "sub" }, [
+              _vm._v(
+                "Если вы не чего не получите, тогда обратитесь в службу поддержки!"
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "sub-l" }, [
+              _vm._v("Хорошего дня! Спасибо что вы с нами!")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "btn",
+                on: {
+                  click: function($event) {
+                    return _vm.$router.push({ name: "home" })
+                  }
+                }
+              },
+              [_vm._v("Вернутся на главную")]
+            )
           ])
-    ])
+        ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "check-form flex-row" }, [
-      _c("input", { attrs: { type: "checkbox" } }),
-      _vm._v(" "),
-      _c("label", { staticClass: "label" }, [_vm._v("Согласиться с условиями")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -4884,6 +5825,14 @@ var staticRenderFns = [
           "В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту."
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "left" }, [
+      _c("img", { attrs: { src: "/images/confirm-layout.svg", alt: "" } })
     ])
   }
 ]
