@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\UserDocument;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Storage;
 
 class UserController extends Controller
 {
@@ -26,11 +28,19 @@ class UserController extends Controller
             'locality_id' => 'required',
             'address' => 'required',
             'password' => 'required',
-            'title' => 'required',
+            'document' => 'required',
 
         ]);
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 422);
+        }
+        $file = $request->file('document');
+        if ($file->getClientOriginalExtension() === "pdf") {
+            $url = Storage::putFile('public/user_documents', new File($file));
+            $text = url('/') . '/storage/app/public/' . substr($url, 7);
+        } else {
+            return response()->json(['document'], 422);
+
         }
 //        if($input['document']){
 //            $exploded=explode('/', $input['document']);
@@ -53,7 +63,7 @@ class UserController extends Controller
                 ]);
                 UserDocument::create([
                     'user_id'=>$user->id,
-                    'title' => $input['document']
+                    'title' => $text
                 ]);
 //            }else{
 //                return response()->json(['image'], 422);
