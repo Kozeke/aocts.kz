@@ -2412,6 +2412,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2434,7 +2451,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       address: '',
       password: '',
       password_repeat: '',
-      agreement: false
+      agreement: false,
+      errors: ''
     };
   },
   mounted: function mounted() {
@@ -2445,61 +2463,97 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
       if (e.target.name === 'name') {
+        if (this.errors.name) {
+          delete this.errors.name;
+        }
+
         if (String(e.target.value).length === 0) {
           document.getElementById('err-name').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-name').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'BIN') {
+        if (this.errors.BIN) {
+          delete this.errors.BIN;
+        }
+
         if (String(e.target.value).length !== 12) {
           document.getElementById('err-BIN').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-BIN').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'email') {
+        if (this.errors.email) {
+          delete this.errors.email;
+        }
+
         if (!pattern.test(String(e.target.value).toLowerCase())) {
           document.getElementById('err-email').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-email').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'phone') {
+        if (this.errors.phone) {
+          delete this.errors.phone;
+        }
+
         if (String(e.target.value).length !== 16) {
           document.getElementById('err-phone').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-phone').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'password') {
+        if (this.errors.password) {
+          delete this.errors.password;
+        }
+
         if (String(e.target.value).length === 0) {
           document.getElementById('err-password').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-password').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'password_repeat') {
+        if (this.errors.password) {
+          delete this.errors.password;
+        }
+
         if (String(e.target.value) !== this.password) {
           document.getElementById('err-password_repeat').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-password_repeat').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
@@ -2518,46 +2572,74 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       if (e.target.name === 'address') {
+        if (this.errors.address) {
+          delete this.errors.address;
+        }
+
         if (String(e.target.value).length === 0) {
           document.getElementById('err-address').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-address').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'manager_name') {
+        if (this.errors.manager_name) {
+          delete this.errors.manager_name;
+        }
+
         if (String(e.target.value).length === 0) {
           document.getElementById('err-manager_name').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-manager_name').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'manager_phone') {
+        if (this.errors.manager_phone) {
+          delete this.errors.manager_phone;
+        }
+
         if (String(e.target.value).length !== 16) {
           document.getElementById('err-manager_phone').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-manager_phone').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
 
       if (e.target.name === 'company_email') {
+        if (this.errors.company_email) {
+          delete this.errors.company_email;
+        }
+
         if (!pattern.test(String(e.target.value).toLowerCase())) {
           document.getElementById('err-company_email').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-company_email').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
       }
     },
     uploadDoc: function uploadDoc(e) {
+      if (this.errors.document) {
+        delete this.errors.document;
+      }
+
       var file = e.target.files[0];
       this.doc = file;
 
@@ -2571,8 +2653,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         this.hasError = false;
       }
     },
-    goNextForm: function goNextForm() {
-      if (this.name && this.BIN && this.email && this.phone && this.password && this.password_repeat && this.doc) {
+    getRegions: function getRegions() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/regions').then(function (res) {
+        console.log(res.data);
+        _this.regions = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    postUser: function postUser() {
+      var _this2 = this;
+
+      var city = this.selected_locality;
+
+      if (this.selected_district.is_city === 1) {
+        city = this.selected_district;
+      }
+
+      if (this.address && this.manager_name && this.manager_phone && this.company_email && city !== 'Выберите' && this.name && this.BIN && this.email && this.phone && this.password && this.password_repeat && this.doc) {
         if (document.getElementsByClassName('error').length !== 0) {
           alert('Заполните все поля правильно.');
           return;
@@ -2582,26 +2682,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           this.firstPage = false;
         } else {
           alert('Согласитесь с условием пользователя.');
-        }
-      } else {
-        alert('Заполните все поля.');
-      }
-    },
-    getRegions: function getRegions() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/regions').then(function (res) {
-        _this.regions = res.data;
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    },
-    postUser: function postUser() {
-      var _this2 = this;
-
-      if (this.address && this.manager_name && this.manager_phone && this.company_email && this.selected_locality !== 'Выберите') {
-        if (document.getElementsByClassName('error').length !== 0) {
-          alert('Заполните все поля правильно.');
           return;
         }
 
@@ -2613,7 +2693,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         data.append("manager_name", this.manager_name);
         data.append("manager_phone", this.manager_phone);
         data.append("company_email", this.company_email);
-        data.append("locality_id", this.selected_locality);
+        data.append("locality_id", city.id);
         data.append("address", this.address);
         data.append("password", this.password);
         data.append("document", this.doc, this.doc.name);
@@ -2641,7 +2721,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           _this2.userRegistration = false;
           console.log(res);
         })["catch"](function (err) {
-          alert(err);
+          if (err.response.status == 422) {
+            _this2.errors = Object.assign({}, err.response.data.error);
+            console.log(_this2.errors);
+          }
+
+          alert('Что-то пошло не так. Проверьте данные еще раз.');
           console.log(err);
         });
       } else {
@@ -2722,7 +2807,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: left, top;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  line-height: 42px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 15px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 20px;\n  height: 86px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 4px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 42px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 28px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n@media only screen and (min-width: 1520px) {\n.main .register[data-v-97358ae4] {\n    width: 64%;\n}\n}", ""]);
+exports.push([module.i, ".main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: left, top;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  line-height: 42px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 15px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 12px;\n  height: 98px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 0px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form .err-text[data-v-97358ae4] {\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 34px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 18px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n@media only screen and (min-width: 1520px) {\n.main .register[data-v-97358ae4] {\n    width: 64%;\n}\n}", ""]);
 
 // exports
 
@@ -4516,13 +4601,29 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "one", class: { "current-step": _vm.firstPage } },
+              {
+                staticClass: "one",
+                class: { "current-step": _vm.firstPage },
+                on: {
+                  click: function($event) {
+                    _vm.firstPage = true
+                  }
+                }
+              },
               [_vm._v("1")]
             ),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "two", class: { "current-step": !_vm.firstPage } },
+              {
+                staticClass: "two",
+                class: { "current-step": !_vm.firstPage },
+                on: {
+                  click: function($event) {
+                    _vm.firstPage = false
+                  }
+                }
+              },
               [_vm._v("2")]
             ),
             _vm._v(" "),
@@ -4578,6 +4679,7 @@ var render = function() {
                           expression: "name"
                         }
                       ],
+                      class: { error: _vm.errors.name },
                       attrs: {
                         name: "name",
                         type: "text",
@@ -4597,9 +4699,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.name
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-name" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.name[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-name" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.name ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-name" }
+                      },
                       [
                         _c(
                           "svg",
@@ -4644,6 +4763,7 @@ var render = function() {
                           expression: "'############'"
                         }
                       ],
+                      class: { error: _vm.errors.BIN },
                       attrs: {
                         name: "BIN",
                         oninput: "validity.valid||(value='');",
@@ -4663,9 +4783,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.BIN
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-BIN" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.BIN[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-BIN" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.BIN ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-BIN" }
+                      },
                       [
                         _c(
                           "svg",
@@ -4708,6 +4845,7 @@ var render = function() {
                           expression: "email"
                         }
                       ],
+                      class: { error: _vm.errors.email },
                       attrs: {
                         name: "email",
                         type: "text",
@@ -4727,9 +4865,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.email
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-email" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.email[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-email" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.email ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-email" }
+                      },
                       [
                         _c(
                           "svg",
@@ -4776,6 +4931,7 @@ var render = function() {
                           expression: "'+7(###)###-##-##'"
                         }
                       ],
+                      class: { error: _vm.errors.phone },
                       attrs: {
                         name: "phone",
                         oninput: "validity.valid||(value='');",
@@ -4795,9 +4951,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.phone
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-phone" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.phone[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-phone" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.phone ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-phone" }
+                      },
                       [
                         _c(
                           "svg",
@@ -4838,6 +5011,7 @@ var render = function() {
                           expression: "password"
                         }
                       ],
+                      class: { error: _vm.errors.password },
                       attrs: {
                         name: "password",
                         type: "password",
@@ -4857,9 +5031,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.password
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-password" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.password[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-password" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.password ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-password" }
+                      },
                       [
                         _c(
                           "svg",
@@ -4900,6 +5091,7 @@ var render = function() {
                           expression: "password_repeat"
                         }
                       ],
+                      class: { error: _vm.errors.password },
                       attrs: {
                         name: "password_repeat",
                         type: "password",
@@ -4919,10 +5111,24 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.password
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-password_repeat" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.password[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
                       {
                         staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.password ? "visible" : "hidden"
+                        },
                         attrs: { id: "err-password_repeat" }
                       },
                       [
@@ -4960,6 +5166,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "file-input",
+                      class: { error: _vm.errors.document },
                       attrs: {
                         id: "doc",
                         name: "doc",
@@ -4981,9 +5188,26 @@ var render = function() {
                       on: { change: _vm.uploadDoc }
                     }),
                     _vm._v(" "),
+                    _vm.errors.document
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-doc" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.document[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-doc" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.document ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-doc" }
+                      },
                       [
                         _c(
                           "svg",
@@ -5019,7 +5243,7 @@ var render = function() {
                         staticClass: "val",
                         on: {
                           click: function($event) {
-                            return _vm.goNextForm()
+                            _vm.firstPage = false
                           }
                         }
                       },
@@ -5092,6 +5316,7 @@ var render = function() {
                         ],
                         staticClass: "input-form",
                         class: {
+                          error: _vm.errors.locality_id,
                           "not-selected": _vm.selected_region === "Выберите"
                         },
                         attrs: { name: "selected_region" },
@@ -5147,6 +5372,11 @@ var render = function() {
                       "div",
                       {
                         staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.locality_id
+                            ? "visible"
+                            : "hidden"
+                        },
                         attrs: { id: "err-selected_region" }
                       },
                       [
@@ -5194,6 +5424,7 @@ var render = function() {
                             ],
                             staticClass: "input-form",
                             class: {
+                              error: _vm.errors.locality_id,
                               "not-selected":
                                 _vm.selected_district === "Выберите"
                             },
@@ -5233,13 +5464,35 @@ var render = function() {
                             _vm._l(
                               _vm.regions.find(function(x) {
                                 return x.id === _vm.selected_region
+                              }).localities,
+                              function(region) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: region.id,
+                                    domProps: { value: region }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(region.name) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                )
+                              }
+                            ),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.regions.find(function(x) {
+                                return x.id === _vm.selected_region
                               }).districts,
                               function(region) {
                                 return _c(
                                   "option",
                                   {
                                     key: region.id,
-                                    domProps: { value: region.id }
+                                    domProps: { value: region }
                                   },
                                   [
                                     _vm._v(
@@ -5298,6 +5551,11 @@ var render = function() {
                       "div",
                       {
                         staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.locality_id
+                            ? "visible"
+                            : "hidden"
+                        },
                         attrs: { id: "err-selected_district" }
                       },
                       [
@@ -5328,160 +5586,174 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex-row" }, [
-                  _c("div", { staticClass: "input-form flex-col" }, [
-                    _c("label", { staticClass: "label" }, [
-                      _vm._v("Выберите район")
-                    ]),
-                    _vm._v(" "),
-                    _vm.selected_district !== "Выберите"
-                      ? _c(
-                          "select",
-                          {
-                            directives: [
+                  _vm.selected_district.is_city !== 1
+                    ? _c("div", { staticClass: "input-form flex-col" }, [
+                        _c("label", { staticClass: "label" }, [
+                          _vm._v("Выберите район")
+                        ]),
+                        _vm._v(" "),
+                        _vm.selected_district !== "Выберите" ||
+                        _vm.selected_district.is_city === 0
+                          ? _c(
+                              "select",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selected_locality,
-                                expression: "selected_locality"
-                              }
-                            ],
-                            staticClass: "input-form",
-                            class: {
-                              "not-selected":
-                                _vm.selected_locality === "Выберите"
-                            },
-                            attrs: { name: "selected_locality" },
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.selected_locality = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selected_locality,
+                                    expression: "selected_locality"
+                                  }
+                                ],
+                                staticClass: "input-form",
+                                class: {
+                                  error: _vm.errors.locality_id,
+                                  "not-selected":
+                                    _vm.selected_locality === "Выберите"
                                 },
-                                function($event) {
-                                  return _vm.validateForm($event)
+                                attrs: { name: "selected_locality" },
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.selected_locality = $event.target
+                                        .multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                    function($event) {
+                                      return _vm.validateForm($event)
+                                    }
+                                  ]
                                 }
-                              ]
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { disabled: "" },
-                                domProps: { value: "Выберите" }
                               },
-                              [_vm._v("Выберите")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(
-                              _vm.regions
-                                .find(function(x) {
-                                  return x.id === _vm.selected_region
-                                })
-                                .districts.find(function(x) {
-                                  return x.id === _vm.selected_district
-                                }).localities,
-                              function(region) {
-                                return _c(
+                              [
+                                _c(
                                   "option",
                                   {
-                                    key: region.id,
-                                    domProps: { value: region.id }
+                                    attrs: { disabled: "" },
+                                    domProps: { value: "Выберите" }
                                   },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(region.name) +
-                                        "\n                        "
+                                  [_vm._v("Выберите")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.regions
+                                    .find(function(x) {
+                                      return x.id === _vm.selected_region
+                                    })
+                                    .districts.find(function(x) {
+                                      return x.id === _vm.selected_district.id
+                                    }).localities,
+                                  function(region) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: region.id,
+                                        domProps: { value: region }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(region.name) +
+                                            "\n                        "
+                                        )
+                                      ]
                                     )
-                                  ]
+                                  }
                                 )
-                              }
+                              ],
+                              2
                             )
-                          ],
-                          2
-                        )
-                      : _c(
-                          "select",
-                          {
-                            directives: [
+                          : _c(
+                              "select",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selected_district,
-                                expression: "selected_district"
-                              }
-                            ],
-                            staticClass: "input-form not-selected",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.selected_district = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              }
-                            }
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selected_district,
+                                    expression: "selected_district"
+                                  }
+                                ],
+                                staticClass: "input-form not-selected",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.selected_district = $event.target
+                                      .multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: { disabled: "" },
+                                    domProps: { value: "Выберите" }
+                                  },
+                                  [_vm._v("Выберите")]
+                                )
+                              ]
+                            ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "err",
+                            style: {
+                              visibility: _vm.errors.locality_id
+                                ? "visible"
+                                : "hidden"
+                            },
+                            attrs: { id: "err-selected_locality" }
                           },
                           [
                             _c(
-                              "option",
+                              "svg",
                               {
-                                attrs: { disabled: "" },
-                                domProps: { value: "Выберите" }
+                                attrs: {
+                                  width: "4",
+                                  height: "13",
+                                  viewBox: "0 0 4 13",
+                                  fill: "none",
+                                  xmlns: "http://www.w3.org/2000/svg"
+                                }
                               },
-                              [_vm._v("Выберите")]
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                                    fill: "#E4002F"
+                                  }
+                                })
+                              ]
                             )
                           ]
-                        ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "err",
-                        attrs: { id: "err-selected_locality" }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              width: "4",
-                              height: "13",
-                              viewBox: "0 0 4 13",
-                              fill: "none",
-                              xmlns: "http://www.w3.org/2000/svg"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
-                                fill: "#E4002F"
-                              }
-                            })
-                          ]
                         )
-                      ]
-                    )
-                  ]),
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("div", { staticClass: "input-form flex-col" }, [
                     _c("label", { staticClass: "label" }, [
@@ -5497,6 +5769,7 @@ var render = function() {
                           expression: "address"
                         }
                       ],
+                      class: { error: _vm.errors.address },
                       attrs: {
                         name: "address",
                         type: "text",
@@ -5516,9 +5789,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.address
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-address" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.address[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-address" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.address ? "visible" : "hidden"
+                        },
+                        attrs: { id: "err-address" }
+                      },
                       [
                         _c(
                           "svg",
@@ -5561,6 +5851,7 @@ var render = function() {
                           expression: "manager_name"
                         }
                       ],
+                      class: { error: _vm.errors.manager_name },
                       attrs: {
                         name: "manager_name",
                         type: "text",
@@ -5580,9 +5871,28 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.manager_name
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-manager_name" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.manager_name[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "err", attrs: { id: "err-manager_name" } },
+                      {
+                        staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.manager_name
+                            ? "visible"
+                            : "hidden"
+                        },
+                        attrs: { id: "err-manager_name" }
+                      },
                       [
                         _c(
                           "svg",
@@ -5629,6 +5939,7 @@ var render = function() {
                           expression: "'+7(###)###-##-##'"
                         }
                       ],
+                      class: { error: _vm.errors.manager_phone },
                       attrs: {
                         name: "manager_phone",
                         oninput: "validity.valid||(value='');",
@@ -5648,10 +5959,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.manager_phone
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-manager_phone" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.manager_phone[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
                       {
                         staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.manager_phone
+                            ? "visible"
+                            : "hidden"
+                        },
                         attrs: { id: "err-manager_phone" }
                       },
                       [
@@ -5696,6 +6023,7 @@ var render = function() {
                           expression: "company_email"
                         }
                       ],
+                      class: { error: _vm.errors.company_email },
                       attrs: {
                         name: "company_email",
                         type: "text",
@@ -5715,10 +6043,26 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
+                    _vm.errors.company_email
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "err-text",
+                            attrs: { id: "err-text-company_email" }
+                          },
+                          [_vm._v(_vm._s(_vm.errors.company_email[0]))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "div",
                       {
                         staticClass: "err",
+                        style: {
+                          visibility: _vm.errors.company_email
+                            ? "visible"
+                            : "hidden"
+                        },
                         attrs: { id: "err-company_email" }
                       },
                       [
@@ -20936,8 +21280,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
 /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue");
@@ -20946,7 +21290,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_7___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_2___default.a);
 
 
 
