@@ -669,6 +669,10 @@ export default {
                         padding: 18px auto;
                         -webkit-appearance: none;
                         -moz-appearance : none;
+                        color: #000000;
+                        option{
+                            color: #000000;
+                        }
                     }
                     .not-selected{
                         color: rgba(111, 111, 111, 0.25);
