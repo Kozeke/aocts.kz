@@ -2429,12 +2429,35 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      userRegistration: true,
+      userRegistration: false,
       firstPage: true,
+      infoMark: false,
       regions: '',
       selected_region: 'Выберите',
       selected_district: 'Выберите',
@@ -2636,35 +2659,40 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     },
     uploadDoc: function uploadDoc(e) {
+      var _this = this;
+
+      console.log(e.target.files);
+
       if (this.errors.document) {
         delete this.errors.document;
       }
 
-      var file = e.target.files[0];
-      this.doc = file;
-
-      if (file.type !== 'application/pdf') {
-        document.getElementById('err-doc').style.visibility = 'visible';
-        document.getElementById('doc').classList.add('error');
-        this.hasError = true;
-      } else {
-        document.getElementById('err-doc').style.visibility = 'hidden';
-        document.getElementById('doc').classList.remove('error');
-        this.hasError = false;
-      }
+      var file = e.target.files;
+      this.doc = "загружен " + file.length + " файл";
+      file.forEach(function (item) {
+        if (item.type !== 'application/pdf') {
+          document.getElementById('err-doc').style.visibility = 'visible';
+          document.getElementById('doc').classList.add('error');
+          _this.hasError = true;
+        } else {
+          document.getElementById('err-doc').style.visibility = 'hidden';
+          document.getElementById('doc').classList.remove('error');
+          _this.hasError = false;
+        }
+      });
     },
     getRegions: function getRegions() {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/regions').then(function (res) {
         console.log(res.data);
-        _this.regions = res.data;
+        _this2.regions = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
     },
     postUser: function postUser() {
-      var _this2 = this;
+      var _this3 = this;
 
       var city = this.selected_locality;
 
@@ -2672,7 +2700,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         city = this.selected_district;
       }
 
-      if (this.address && this.manager_name && this.manager_phone && this.company_email && city !== 'Выберите' && this.name && this.BIN && this.email && this.phone && this.password && this.password_repeat && this.doc) {
+      if (this.address && this.manager_name && this.manager_phone && this.company_email && city !== 'Выберите' && this.name && this.BIN && this.email && this.phone && this.password && this.doc) {
         if (document.getElementsByClassName('error').length !== 0) {
           alert('Заполните все поля правильно.');
           return;
@@ -2718,12 +2746,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             'Content-Type': 'multipart/form-data'
           }
         }).then(function (res) {
-          _this2.userRegistration = false;
+          _this3.userRegistration = false;
           console.log(res);
         })["catch"](function (err) {
           if (err.response.status == 422) {
-            _this2.errors = Object.assign({}, err.response.data.error);
-            console.log(_this2.errors);
+            _this3.errors = Object.assign({}, err.response.data.error);
+            console.log(_this3.errors);
           }
 
           alert('Что-то пошло не так. Проверьте данные еще раз.');
@@ -2788,7 +2816,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-6bdc8b8e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-6bdc8b8e] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .login-left[data-v-6bdc8b8e] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-6bdc8b8e] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-6bdc8b8e] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-6bdc8b8e] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-6bdc8b8e] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-6bdc8b8e] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .check-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\n.main .login-left .login-text .check-form input[data-v-6bdc8b8e] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .login-enter[data-v-6bdc8b8e] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-6bdc8b8e] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-6bdc8b8e], .main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-6bdc8b8e] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n}", ""]);
+exports.push([module.i, ".main[data-v-6bdc8b8e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-6bdc8b8e] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(19%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  z-index: 99;\n}\n.main .login-left[data-v-6bdc8b8e] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-6bdc8b8e] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-6bdc8b8e] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-6bdc8b8e] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-6bdc8b8e] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-6bdc8b8e] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .check-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\n.main .login-left .login-text .check-form input[data-v-6bdc8b8e] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .login-enter[data-v-6bdc8b8e] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-6bdc8b8e] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-6bdc8b8e], .main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-6bdc8b8e] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n@media screen and (max-width: 1420px) {\n.login-left[data-v-6bdc8b8e] {\n    width: 58% !important;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    left: 33% !important;\n}\n.login-right[data-v-6bdc8b8e] {\n    width: 42% !important;\n}\n}\n@media screen and (max-width: 1020px) {\n.logo[data-v-6bdc8b8e] {\n    left: calc(50% - 160px) !important;\n}\n.login-left[data-v-6bdc8b8e] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    margin: 0 auto;\n    left: auto !important;\n}\n.login-left .login-text .head[data-v-6bdc8b8e] {\n    font-size: 28px !important;\n}\n.login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .input-form input[data-v-6bdc8b8e] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-enter[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-last[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-right[data-v-6bdc8b8e] {\n    width: 0 !important;\n}\n}\n@media screen and (max-width: 520px) {\n.logo[data-v-6bdc8b8e] {\n    left: calc(50% - 130px) !important;\n}\n.login-left[data-v-6bdc8b8e] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    top: 140px !important;\n    left: auto !important;\n    width: 260px !important;\n}\n.login-left .login-text .head[data-v-6bdc8b8e] {\n    font-size: 24px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form input[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .check-form[data-v-6bdc8b8e] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n.login-left .login-text .login-enter[data-v-6bdc8b8e] {\n    margin-top: 30px !important;\n    font-size: 12px !important;\n}\n.login-left .login-text .login-last[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n}", ""]);
 
 // exports
 
@@ -2807,7 +2835,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: left, top;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(18%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  line-height: 42px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 15px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 12px;\n  height: 98px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 0px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form .err-text[data-v-97358ae4] {\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .register .reg-form .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 34px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 18px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n@media only screen and (min-width: 1520px) {\n.main .register[data-v-97358ae4] {\n    width: 64%;\n}\n}", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n.main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(14%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  height: 56px;\n  position: relative;\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 20px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form[data-v-97358ae4] {\n  margin-top: 12px;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form .err-text[data-v-97358ae4] {\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .register .reg-form .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 25px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4], .main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 15px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4], .main .register .reg-form .text-form-hide .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  display: none;\n  margin-top: 0;\n}\n.main .register .reg-form .info-extra[data-v-97358ae4] {\n  top: 214px;\n  width: 420px;\n  left: 470px;\n  position: absolute;\n  z-index: 100;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  /* активный элемент */\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n  border-radius: 10px;\n  padding: 20px 25px;\n}\n.main .register .reg-form .info-extra .exit-icon[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  right: 25px;\n  top: 20px;\n}\n.main .register .reg-form .info-extra .head-text[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra .sub-head-text[data-v-97358ae4] {\n  margin-top: 20px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 15px;\n  line-height: 170%;\n  display: flex;\n  align-items: center;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra ul[data-v-97358ae4] {\n  margin-top: 5px;\n  padding-left: 0;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4] {\n  list-style: none;\n  text-align: left;\n  margin-top: 10px;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4]:before {\n  margin-right: 15px;\n  content: \"\";\n  display: inline-block;\n  background: #4985FF;\n  height: 10px;\n  width: 10px;\n  border-radius: 50%;\n  padding-left: 0;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  cursor: pointer;\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .register .reg-form .info-mark[data-v-97358ae4] {\n  cursor: pointer;\n  padding: 8px;\n  position: absolute;\n  top: 38px;\n  z-index: 99;\n  left: calc(100% + 15px);\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n  background: #FFFFFF;\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n@media screen and (max-width: 1420px) {\n.register[data-v-97358ae4] {\n    height: 720px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 88px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    position: absolute;\n    right: auto;\n    left: 0;\n    top: 42px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1320px) {\n.logo[data-v-97358ae4] {\n    left: calc(8%) !important;\n}\n.register[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 425px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 425px;\n    height: 100%;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1120px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1020px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 14px !important;\n}\n.reg-form .flex-row[data-v-97358ae4] {\n    flex-wrap: wrap;\n}\n.reg-form .input-form[data-v-97358ae4] {\n    margin-top: 10px !important;\n    width: 100% !important;\n}\n.reg-form .row-last .input-form[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.reg-form .row-last .text-form[data-v-97358ae4] {\n    display: none;\n}\n.reg-form .row-last .text-form-hide[data-v-97358ae4] {\n    display: block !important;\n}\n.reg-form .row-last .text-form-hide label[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 558px !important;\n    width: 420px;\n    left: calc(100% - 440px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    font-size: 14px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 13px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 385px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 385px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 920px) {\n.confirm .left[data-v-97358ae4] {\n    max-width: 285px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 285px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 720px) {\n.logo[data-v-97358ae4] {\n    left: calc(20px) !important;\n}\n.register[data-v-97358ae4] {\n    height: 1060px !important;\n    width: calc(100% - 40px) !important;\n    margin: 0 20px;\n    padding: 15px 20px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    text-align: left !important;\n    height: 130px !important;\n    flex-direction: column !important;\n}\n.register .reg-top .header[data-v-97358ae4] {\n    text-align: left;\n    font-size: 26px !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    position: absolute;\n    top: 84px;\n}\n.register .dis-d .step[data-v-97358ae4] {\n    margin-left: 0 !important;\n    font-size: 22px !important;\n    line-height: 36px !important;\n}\n.register .dis-d .one[data-v-97358ae4], .register .dis-d .two[data-v-97358ae4] {\n    margin-left: 20px !important;\n    font-size: 20px !important;\n    line-height: 34px !important;\n    height: 34px !important;\n    width: 34px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 42px;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 580px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 240px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 240px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -90px;\n    padding: 15px 20px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 0 !important;\n    font-size: 26px !important;\n    line-height: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 14px !important;\n    font-size: 14px !important;\n    left: 20px !important;\n    line-height: 22px !important;\n}\n.confirm .right .sub-l[data-v-97358ae4] {\n    bottom: 85px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 20px !important;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 620px) {\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1090px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 164px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 52px;\n    flex-wrap: wrap;\n}\n.register .reg-top-r label[data-v-97358ae4], .register .reg-top-r span[data-v-97358ae4] {\n    text-align: left !important;\n    width: 100%;\n    line-height: 18px !important;\n    margin-left: 0 !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    top: 120px;\n}\n.input-form[data-v-97358ae4] {\n    margin-right: 0 !important;\n}\n#doc[data-v-97358ae4] {\n    margin-right: 50px !important;\n}\n.info-mark[data-v-97358ae4] {\n    left: calc(100% - 30px) !important;\n}\n.val[data-v-97358ae4] {\n    width: calc(100%) !important;\n    font-size: 14px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n}\n@media screen and (max-width: 520px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1120px !important;\n}\n.reg-top-r label[data-v-97358ae4], .reg-top-r span[data-v-97358ae4] {\n    font-size: 13px !important;\n    line-height: 18px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 11px !important;\n}\n.check-form input[data-v-97358ae4] {\n    /* IE */\n    /* FF */\n    /* Safari and Chrome */\n    /* Opera */\n    transform: scale(1.2) !important;\n}\n.check-form .label[data-v-97358ae4] {\n    margin-left: 15px !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n    width: 280px !important;\n    left: calc(100% - 270px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    width: calc(100% - 40px);\n    font-size: 12px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 11px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 10px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n.confirm .right .header[data-v-97358ae4] {\n    font-size: 22px !important;\n    line-height: 28px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 20px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n}", ""]);
 
 // exports
 
@@ -4597,35 +4625,37 @@ var render = function() {
           _c("div", { staticClass: "reg-top flex-row" }, [
             _c("div", { staticClass: "header" }, [_vm._v("Регистрация")]),
             _vm._v(" "),
-            _c("div", { staticClass: "step" }, [_vm._v("Шаг")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "one",
-                class: { "current-step": _vm.firstPage },
-                on: {
-                  click: function($event) {
-                    _vm.firstPage = true
+            _c("div", { staticClass: "dis-d flex-row" }, [
+              _c("div", { staticClass: "step" }, [_vm._v("Шаг")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "one",
+                  class: { "current-step": _vm.firstPage },
+                  on: {
+                    click: function($event) {
+                      _vm.firstPage = true
+                    }
                   }
-                }
-              },
-              [_vm._v("1")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "two",
-                class: { "current-step": !_vm.firstPage },
-                on: {
-                  click: function($event) {
-                    _vm.firstPage = false
+                },
+                [_vm._v("1")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "two",
+                  class: { "current-step": !_vm.firstPage },
+                  on: {
+                    click: function($event) {
+                      _vm.firstPage = false
+                    }
                   }
-                }
-              },
-              [_vm._v("2")]
-            ),
+                },
+                [_vm._v("2")]
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "reg-top-r flex-row" }, [
               _c("label", [_vm._v("У Вас уже есть аккаунт?")]),
@@ -4648,19 +4678,13 @@ var render = function() {
             ? _c("div", { staticClass: "top-sub-one" }, [
                 _vm._v("Пожалуйста заполните все необходимые данные,")
               ])
-            : _c("div", { staticClass: "top-sub-one" }, [
-                _vm._v(
-                  "Добавьте ваши контактные данные и данные вашего менеджера"
-                )
-              ]),
+            : _vm._e(),
           _vm._v(" "),
           _vm.firstPage
             ? _c("div", { staticClass: "top-sub-last" }, [
                 _vm._v("Мы ответственно подходим к работе с каждым клиентом.")
               ])
-            : _c("div", { staticClass: "top-sub-last" }, [
-                _vm._v("чтобы закончить регистрацию.")
-              ]),
+            : _vm._e(),
           _vm._v(" "),
           _vm.firstPage
             ? _c("div", { staticClass: "reg-form flex-col" }, [
@@ -5079,88 +5103,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "input-form flex-col" }, [
                     _c("label", { staticClass: "label" }, [
-                      _vm._v("Повторите пароль")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password_repeat,
-                          expression: "password_repeat"
-                        }
-                      ],
-                      class: { error: _vm.errors.password },
-                      attrs: {
-                        name: "password_repeat",
-                        type: "password",
-                        placeholder: "Введите пароль еще раз"
-                      },
-                      domProps: { value: _vm.password_repeat },
-                      on: {
-                        keyup: function($event) {
-                          return _vm.validateForm($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.password_repeat = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.password
-                      ? _c(
-                          "span",
-                          {
-                            staticClass: "err-text",
-                            attrs: { id: "err-text-password_repeat" }
-                          },
-                          [_vm._v(_vm._s(_vm.errors.password[0]))]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "err",
-                        style: {
-                          visibility: _vm.errors.password ? "visible" : "hidden"
-                        },
-                        attrs: { id: "err-password_repeat" }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              width: "4",
-                              height: "13",
-                              viewBox: "0 0 4 13",
-                              fill: "none",
-                              xmlns: "http://www.w3.org/2000/svg"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
-                                fill: "#E4002F"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex-row" }, [
-                  _c("div", { staticClass: "input-form flex-col" }, [
-                    _c("label", { staticClass: "label" }, [
                       _vm._v("Учредительные документы компании")
                     ]),
                     _vm._v(" "),
@@ -5174,7 +5116,7 @@ var render = function() {
                         placeholder: "+ Добавить PDF-файл",
                         readonly: ""
                       },
-                      domProps: { value: _vm.doc.name },
+                      domProps: { value: _vm.doc },
                       on: {
                         keyup: function($event) {
                           return _vm.validateForm($event)
@@ -5184,7 +5126,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "file-hidden",
-                      attrs: { type: "file" },
+                      attrs: { type: "file", multiple: "" },
                       on: { change: _vm.uploadDoc }
                     }),
                     _vm._v(" "),
@@ -5231,26 +5173,98 @@ var render = function() {
                           ]
                         )
                       ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex-row row-last" }, [
-                  _c("div", { staticClass: "input-form flex-col" }, [
+                    ),
+                    _vm._v(" "),
                     _c(
-                      "span",
+                      "div",
                       {
-                        staticClass: "val",
+                        staticClass: "info-mark",
                         on: {
                           click: function($event) {
-                            _vm.firstPage = false
+                            _vm.infoMark = true
+                          },
+                          mouseover: function($event) {
+                            _vm.infoMark = true
                           }
                         }
                       },
-                      [_vm._v("Продолжить регистрацию")]
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "14",
+                              height: "20",
+                              viewBox: "0 0 14 20",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M6.7302 0C10.1897 0 13.5956 1.59326 13.5956 5.40421C13.5956 8.91858 9.56848 10.2701 8.7036 11.54C8.0543 12.4846 8.27116 13.8119 6.48719 13.8119C5.32509 13.8119 4.75743 12.8667 4.75743 12.0018C4.75743 8.78336 9.4862 8.05498 9.4862 5.40485C9.4862 3.94617 8.51544 3.08129 6.89284 3.08129C3.43333 3.08129 4.78422 6.64796 2.16407 6.64796C1.21819 6.64796 0.40625 6.0803 0.40625 4.99984C0.405612 2.34908 3.43205 0 6.7302 0ZM6.59562 15.5665C7.81002 15.5665 8.81203 16.5654 8.81203 17.7836C8.81203 19.0018 7.81193 20.0006 6.59562 20.0006C5.3793 20.0006 4.37857 19.0031 4.37857 17.7836C4.37857 16.566 5.3793 15.5665 6.59562 15.5665Z",
+                                fill: "#4985FF"
+                              }
+                            })
+                          ]
+                        )
+                      ]
                     )
                   ]),
                   _vm._v(" "),
+                  _vm.infoMark
+                    ? _c("div", { staticClass: "flex-col info-extra" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "exit-icon",
+                            on: {
+                              click: function($event) {
+                                _vm.infoMark = false
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                attrs: {
+                                  width: "15",
+                                  height: "15",
+                                  viewBox: "0 0 15 15",
+                                  fill: "none",
+                                  xmlns: "http://www.w3.org/2000/svg"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                                    fill: "#4985FF"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "head-text" }, [
+                          _vm._v("Учредительные документы компании")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "sub-head-text" }, [
+                          _vm._v("Добавьте перечисленные файлы:")
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-col row-last" }, [
                   _c("div", { staticClass: "check-form flex-row" }, [
                     _c("input", {
                       directives: [
@@ -5290,9 +5304,22 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", { staticClass: "label" }, [
-                      _vm._v("Согласиться с условиями")
-                    ])
+                    _vm._m(1)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-form flex-col" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "val",
+                        on: {
+                          click: function($event) {
+                            _vm.firstPage = false
+                          }
+                        }
+                      },
+                      [_vm._v("Продолжить регистрацию")]
+                    )
                   ])
                 ])
               ])
@@ -6093,11 +6120,14 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex-row row-last" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
                   _c("div", { staticClass: "input-form flex-col" }, [
                     _c(
                       "span",
                       {
                         staticClass: "val",
+                        staticStyle: { "margin-top": "15px" },
                         on: {
                           click: function($event) {
                             return _vm.postUser()
@@ -6108,12 +6138,12 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _vm._m(3)
                 ])
               ])
         ])
       : _c("div", { staticClass: "confirm flex-row" }, [
-          _vm._m(1),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "right flex-col" }, [
             _c("div", { staticClass: "header" }, [
@@ -6163,12 +6193,59 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("ul", [
+      _c("li", [_vm._v("Устав")]),
+      _vm._v(" "),
+      _c("li", [_vm._v("Свидетельство гос. Регистрации")]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._v("Приказ о назначении первого руководителя (директора)")
+      ]),
+      _vm._v(" "),
+      _c("li", [_vm._v("Банковские реквизиты")]),
+      _vm._v(" "),
+      _c("li", [_vm._v("Реквизиты организации (адрес,Юр-Факт; контакты)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "label" }, [
+      _vm._v("Согласиться с "),
+      _c("span", [_vm._v("правилами пользователя")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-form-hide flex-col" }, [
+      _c(
+        "label",
+        { staticClass: "label", staticStyle: { "margin-top": "15px" } },
+        [
+          _vm._v(
+            "В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту."
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-form flex-col" }, [
-      _c("label", { staticClass: "label" }, [
-        _vm._v(
-          "В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту."
-        )
-      ])
+      _c(
+        "label",
+        { staticClass: "label", staticStyle: { "margin-top": "15px" } },
+        [
+          _vm._v(
+            "В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту."
+          )
+        ]
+      )
     ])
   },
   function() {

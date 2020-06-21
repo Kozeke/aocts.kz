@@ -4,18 +4,18 @@
         <div v-if="userRegistration" class="register">
             <div class="reg-top flex-row">
                 <div class="header">Регистрация</div>
-                <div class="step">Шаг</div>
-                <div v-bind:class="{ 'current-step' : firstPage }" @click="firstPage = true" class="one">1</div>
-                <div v-bind:class="{ 'current-step' : !firstPage }" @click="firstPage = false" class="two">2</div>
+                <div class="dis-d flex-row">
+                    <div class="step">Шаг</div>
+                    <div v-bind:class="{ 'current-step' : firstPage }" @click="firstPage = true" class="one">1</div>
+                    <div v-bind:class="{ 'current-step' : !firstPage }" @click="firstPage = false" class="two">2</div>
+                </div>
                 <div class="reg-top-r flex-row">
                     <label>У Вас уже есть аккаунт?</label>
                     <span @click="$router.push({ name: 'login' })">Войти в систему</span>
                 </div>
             </div>
             <div v-if="firstPage" class="top-sub-one">Пожалуйста заполните все необходимые данные,</div> 
-            <div v-else class="top-sub-one">Добавьте ваши контактные данные и данные вашего менеджера</div>
             <div v-if="firstPage" class="top-sub-last">Мы ответственно подходим к работе с каждым клиентом.</div>
-            <div v-else class="top-sub-last">чтобы закончить регистрацию.</div>
             <div v-if="firstPage" class="reg-form flex-col">
                 <div class="flex-row">
                     <div class="input-form flex-col">
@@ -73,6 +73,38 @@
                         </div>
                     </div>
                     <div class="input-form flex-col">
+                        <label class="label">Учредительные документы компании</label>
+                        <input v-bind:class="{ 'error' : errors.document }" v-on:keyup="validateForm($event)" :value="doc" class="file-input" id="doc" name="doc" type="text" placeholder="+ Добавить PDF-файл" readonly>
+                        <input class="file-hidden" type="file"  @change="uploadDoc" multiple>
+                        <span v-if="errors.document" id="err-text-doc" class="err-text">{{ errors.document[0] }}</span>
+                        <div :style="{ 'visibility' : errors.document ? 'visible' : 'hidden' }" class="err" id="err-doc">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
+                        <div class="info-mark" @click="infoMark = true" @mouseover="infoMark = true">
+                            <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.7302 0C10.1897 0 13.5956 1.59326 13.5956 5.40421C13.5956 8.91858 9.56848 10.2701 8.7036 11.54C8.0543 12.4846 8.27116 13.8119 6.48719 13.8119C5.32509 13.8119 4.75743 12.8667 4.75743 12.0018C4.75743 8.78336 9.4862 8.05498 9.4862 5.40485C9.4862 3.94617 8.51544 3.08129 6.89284 3.08129C3.43333 3.08129 4.78422 6.64796 2.16407 6.64796C1.21819 6.64796 0.40625 6.0803 0.40625 4.99984C0.405612 2.34908 3.43205 0 6.7302 0ZM6.59562 15.5665C7.81002 15.5665 8.81203 16.5654 8.81203 17.7836C8.81203 19.0018 7.81193 20.0006 6.59562 20.0006C5.3793 20.0006 4.37857 19.0031 4.37857 17.7836C4.37857 16.566 5.3793 15.5665 6.59562 15.5665Z" fill="#4985FF"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div v-if="infoMark" class="flex-col info-extra">
+                        <div class="exit-icon" @click="infoMark = false">
+                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
+                            </svg>
+                        </div>
+                        <div class="head-text">Учредительные документы компании</div>
+                        <div class="sub-head-text">Добавьте перечисленные файлы:</div>
+                        <ul>
+                            <li>Устав</li>
+                            <li>Свидетельство гос. Регистрации</li>
+                            <li>Приказ о назначении первого руководителя (директора)</li>
+                            <li>Банковские реквизиты</li>
+                            <li>Реквизиты организации (адрес,Юр-Факт; контакты)</li>
+                        </ul>
+                    </div>
+                    <!-- <div class="input-form flex-col">
                         <label class="label">Повторите пароль</label>
                         <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password_repeat" name="password_repeat" type="password" placeholder="Введите пароль еще раз">
                         <span v-if="errors.password" id="err-text-password_repeat" class="err-text">{{ errors.password[0] }}</span>
@@ -81,28 +113,15 @@
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
                         </div>
-                    </div>  
+                    </div>   -->
                 </div>
-                <div class="flex-row">
-                    <div class="input-form flex-col">
-                        <label class="label">Учредительные документы компании</label>
-                        <input v-bind:class="{ 'error' : errors.document }" v-on:keyup="validateForm($event)" :value="doc.name" class="file-input" id="doc" name="doc" type="text" placeholder="+ Добавить PDF-файл" readonly>
-                        <input class="file-hidden" type="file"  @change="uploadDoc">
-                        <span v-if="errors.document" id="err-text-doc" class="err-text">{{ errors.document[0] }}</span>
-                        <div :style="{ 'visibility' : errors.document ? 'visible' : 'hidden' }" class="err" id="err-doc">
-                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-row row-last">
-                    <div class="input-form flex-col">
-                        <span @click="firstPage = false" class="val">Продолжить регистрацию</span>
-                    </div>
+                <div class="flex-col row-last">
                     <div class="check-form flex-row">
                         <input v-model="agreement" type="checkbox">
-                        <label class="label">Согласиться с условиями</label>
+                        <label class="label">Согласиться с <span>правилами пользователя</span></label>
+                    </div>
+                    <div class="input-form flex-col">
+                        <span @click="firstPage = false" class="val">Продолжить регистрацию</span>
                     </div>
                 </div>
             </div>
@@ -210,11 +229,14 @@
                     </div>
                 </div>
                 <div class="flex-row row-last">
+                     <div class="text-form-hide flex-col">
+                        <label style="margin-top: 15px" class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
+                    </div>
                     <div class="input-form flex-col">
-                        <span @click="postUser()" class="val">Отправить на расмотрение</span>
+                        <span style="margin-top: 15px" @click="postUser()" class="val">Отправить на расмотрение</span>
                     </div>
                     <div class="text-form flex-col">
-                        <label class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
+                        <label style="margin-top: 15px" class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
                     </div>
                 </div>
             </div>
@@ -239,8 +261,9 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            userRegistration: true,
+            userRegistration: false,
             firstPage: true,
+            infoMark: false,
             regions: '',
             selected_region: 'Выберите',
             selected_district: 'Выберите',
@@ -420,12 +443,15 @@ export default {
             }
         },
         uploadDoc(e){
+            console.log(e.target.files)
             if(this.errors.document){
                 delete this.errors.document
             }
-            const file = e.target.files[0]
-            this.doc = file
-                if(file.type !== 'application/pdf'){
+            const file = e.target.files
+            this.doc = "загружен " + file.length + " файл"
+            
+            file.forEach( item => {
+                if(item.type !== 'application/pdf'){
                     document.getElementById('err-doc').style.visibility = 'visible'
                     document.getElementById('doc').classList.add('error')
                     this.hasError = true
@@ -434,6 +460,7 @@ export default {
                     document.getElementById('doc').classList.remove('error')
                     this.hasError = false
                 }
+            });
         },
         getRegions(){
             axios.get('/api/regions')
@@ -451,7 +478,7 @@ export default {
                 city = this.selected_district
             } 
             if(this.address && this.manager_name && this.manager_phone && this.company_email && city !== 'Выберите' && 
-            this.name && this.BIN && this.email && this.phone && this.password && this.password_repeat && this.doc){
+            this.name && this.BIN && this.email && this.phone && this.password && this.doc){
                 if(document.getElementsByClassName('error').length !== 0){
                     alert('Заполните все поля правильно.')
                     return
@@ -514,11 +541,12 @@ export default {
         height: 900px;
         background-image: linear-gradient( rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4) ), url('/images/register-layout.svg');
         background-repeat: no-repeat;
-        background-position: left, top;
+        background-position: center;
+        background-size: cover;
         .logo{
             cursor: pointer;
             position: absolute;
-            left: calc(18%);
+            left: calc(14%);
             width: 160px;
             height: 50px;
             top: 25px;
@@ -539,6 +567,8 @@ export default {
             padding: 26px 60px;
             color: #06397D;
             .reg-top{
+                height: 56px;
+                position: relative;
                 border-bottom: 1px solid #4985FF;
                 padding-bottom: 10px;
                 .header{
@@ -584,7 +614,6 @@ export default {
                     position: absolute;
                     right: 60px;
                     label{
-                        line-height: 42px;
                         font-weight: 500;
                         font-size: 16px;
                         line-height: 44px;
@@ -601,7 +630,7 @@ export default {
                 }
             }
             .top-sub-one{
-                margin-top: 15px;
+                margin-top: 20px;
             }
             .top-sub-one, .top-sub-last{
                 text-align: left;
@@ -611,11 +640,12 @@ export default {
                 color: #06397D;
             }
             .reg-form{
+                margin-top: 12px;
                 .input-form{
                     position: relative;
                     width: 350px;
                     margin-right: 60px;
-                    margin-top: 12px;
+                    margin-top: 18px;
                     height: 98px;
                     .label{
                         text-align: left;
@@ -627,7 +657,7 @@ export default {
                         cursor: initial;
                         padding-left: 18px;
                         text-align: left;
-                        margin-top: 0px;
+                        margin-top: 5px;
                         height: 50px;
                         font-weight: normal;
                         font-size: 14px;
@@ -701,7 +731,7 @@ export default {
                     }
                 }
                 .check-form{
-                    margin-top: 34px;
+                    margin-top: 25px;
                     input{
                         cursor: pointer;
                         margin-left: 3px;
@@ -721,9 +751,9 @@ export default {
                         line-height: 20px;
                     }
                 }
-                .text-form{
+                .text-form, .text-form-hide{
                     max-width: 520px;
-                    margin-top: 18px;
+                    margin-top: 15px;
                     .label{
                         text-align: left;
                         font-weight: 500;
@@ -731,15 +761,90 @@ export default {
                         line-height: 20px;
                     }
                 }
+                .text-form-hide{
+                    display: none;
+                    margin-top: 0;
+                }
+                .info-extra{
+                    top: 214px;
+                    width: 420px;
+                    left: 470px;
+                    position: absolute;
+                    z-index: 100;
+                    background: #FCFCFC;
+                    border: 1px solid #E6EAF3;
+                    box-sizing: border-box;
+                    /* активный элемент */
+
+                    box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);
+                    border-radius: 10px;
+                    padding: 20px 25px;
+                    .exit-icon{
+                        cursor: pointer;
+                        position: absolute;
+                        right: 25px;
+                        top: 20px;
+                    }
+                    .head-text{
+                        text-align: left;
+                        font-weight: 600;
+                        font-size: 16px;
+                        line-height: 22px;
+                        color: #06397D;
+                    }
+                    .sub-head-text{
+                        margin-top: 20px;
+                        text-align: left;
+                        font-weight: 500;
+                        font-size: 15px;
+                        line-height: 170%;
+                        display: flex;
+                        align-items: center;
+                        color: #06397D;
+                    }
+                    ul{
+                        margin-top: 5px;
+                        padding-left: 0;
+                        li{
+                            list-style: none;
+                            text-align: left;
+                            margin-top: 10px;
+                        }
+                        li:before {
+                            margin-right: 15px;
+                            content: '';
+                            display: inline-block;
+                            background: #4985FF;
+                            height: 10px;
+                            width: 10px;
+                            border-radius: 50%;
+                            padding-left: 0;
+                        }
+                    }
+                }
                 .file-input::placeholder{
                     color: #4985FF;
                 }
                 .file-hidden{
+                    cursor: pointer;
                     opacity: 0;
                     top: 28px;
                     position: absolute;
                     width: 100%;
                     z-index: 99;
+                }
+                .info-mark{
+                    cursor: pointer;
+                    padding: 8px;
+                    position: absolute;
+                    top: 38px;
+                    z-index: 99;
+                    left: calc(100% + 15px);
+                    border-radius: 50%;
+                    height: 40px;
+                    width: 40px;
+                    background: #FFFFFF;
+                    box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);
                 }
             }
         }
@@ -803,10 +908,403 @@ export default {
             }
         }
     }
-    @media only screen and (min-width: 1520px){
-        .main .register{
-            width: 64%;
+    @media screen and (max-width: 1420px) {
+        .register{
+            height: 720px !important;
+            .reg-top{
+                height: 88px !important;
+            }
+            .reg-top-r{
+                position: absolute;
+                right: auto;
+                left: 0;
+                top: 42px;
+            }
+        }
+        .confirm{
+            .right{
+                padding: 30px !important;
+                .header{
+                    margin-bottom: 10px !important;
+                }
+                .sub, .sub-l{
+                    margin-top: 20px !important;
+                }
+            }
         }
     }
+    @media screen and (max-width: 1320px) {
+        .logo{
+            left: calc(8%) !important;      
+        }
+        .register{
+            width: 84% !important;
+        }
+        .confirm{
+            width: 84% !important;
+            .left{
+                // width: 54%;
+                max-width: 425px !important;
+                img{
+                    width: 425px;
+                    height: 100%;
+                }
+            }
+            .right{
+                padding: 30px !important;
+                .header{
+                    margin-bottom: 10px !important;
+                }
+                .sub, .sub-l{
+                    margin-top: 20px !important;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 1120px) {
+        .main{
+            height: 1340px !important;
+        }
+        .register{
+            height: 1020px !important;
+        }
+         .top-sub-one, .top-sub-last{
+                font-size: 14px !important;
+                line-height: 21px !important;
+            }
+        .reg-form{
+            label{
+                font-size: 14px !important;
+                line-height: 21px !important;
+            }
+            input, select, ::placeholder{
+                font-size: 14px !important;
+            }
+            .flex-row{
+                flex-wrap: wrap;
+            }
+            .input-form{
+                margin-top: 10px !important;
+                width: 100% !important;
+            }
+            .row-last{
+                .input-form{
+                    margin-top: 0 !important;
+                }
+                .text-form{
+                    display: none;
+                }
+                .text-form-hide{
+                    display: block !important;
+                    label{
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+        }
+        .info-extra{
+            top: 558px !important;
+            width: 420px;
+            left: calc(100% - 440px) !important;
+            .head-text{
+                font-size: 14px;
+                line-height: 21px;
+            }
+            .sub-head-text{
+                font-size: 13px;
+            }
+            ul{
+                li{
+                    font-size: 12px !important;
+                }
+            }
+        }
+        .confirm{
+            .left{
+                // width: 54%;
+                max-width: 385px !important;
+                img{
+                    width: 385px;
+                }
+            }
+            .right{
+                padding: 30px !important;
+                .header{
+                    margin-bottom: 10px !important;
+                    font-size: 26px !important;
+                }
+                .sub, .sub-l{
+                    margin-top: 20px !important;
+                    font-size: 14px !important;
+                    left: 30px !important;
+                }
+                .btn{
+                    position: absolute;
+                    width: 240px !important;
+                    cursor: pointer;
+                    text-align: left;
+                    bottom: 50px;
+                    height: 55px;
+                    font-weight: bold;
+                    font-size: 14px !important;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 920px) {
+        .confirm{
+            .left{
+                // width: 54%;
+                max-width: 285px !important;
+                img{
+                    width: 285px;
+                }
+            }
+            .right{
+                padding: 30px !important;
+                .header{
+                    margin-bottom: 10px !important;
+                    font-size: 26px !important;
+                }
+                .sub, .sub-l{
+                    margin-top: 20px !important;
+                    font-size: 14px !important;
+                    left: 30px !important;
+                }
+                .btn{
+                    position: absolute;
+                    width: 240px !important;
+                    cursor: pointer;
+                    text-align: left;
+                    bottom: 50px;
+                    height: 55px;
+                    font-weight: bold;
+                    font-size: 14px !important;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 720px) {
+        .logo{
+            left: calc(20px) !important;      
+        }
+        .register{
+            height: 1060px !important;
+            width: calc(100% - 40px) !important;
+            margin: 0 20px;
+            padding: 15px 20px !important;
+            .reg-top{
+                .header{
+                    text-align: left;
+                    font-size: 26px !important;
+                }
+                text-align: left !important;
+                height: 130px !important;
+                flex-direction: column !important;
+            }
+            .dis-d{
+                position: absolute;
+                top: 84px;
+                .step{
+                    margin-left: 0 !important;
+                    font-size: 22px !important;
+                    line-height: 36px  !important;
+                }
+                .one, .two{
+                    margin-left: 20px !important;
+                    font-size: 20px  !important;
+                    line-height: 34px  !important;
+                    height: 34px  !important;
+                    width: 34px  !important;
+                }
+
+            }
+            .reg-top-r{
+                top: 42px;
+            }
+        }
+        .confirm{
+            width: calc(100% - 40px) !important;
+            flex-wrap: wrap;
+            height: 580px !important;
+            .left{
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 240px !important;
+                img{
+                    width: 100% !important;
+                    height: 240px;
+                }
+            }
+            .right{
+                margin-top: -90px;
+                padding: 15px 20px !important;
+                .header{
+                    margin-bottom: 0 !important;
+                    font-size: 26px !important;
+                    line-height: 26px !important;
+                }
+                .sub, .sub-l{
+                    margin-top: 14px !important;
+                    font-size: 14px !important;
+                    left: 20px !important;
+                    line-height: 22px !important;
+                }
+                .sub-l{
+                    bottom: 85px !important;
+                }
+                .btn{
+                    width: 240px !important;
+                    cursor: pointer;
+                    text-align: left;
+                    bottom: 20px !important;
+                    height: 55px;
+                    font-weight: bold;
+                    font-size: 14px !important;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 620px) {
+        .info-extra{
+            top: 598px !important;
+        }
+        .register{
+            height: 1090px !important;
+            .reg-top{
+                height: 164px !important;
+            }
+            .reg-top-r{
+                top: 52px;
+                flex-wrap: wrap;
+                label, span{
+                    text-align: left !important;
+                    width: 100%;
+                    line-height: 18px !important;
+                    margin-left: 0 !important;
+                }
+            }
+            .dis-d{
+                top: 120px;
+            }
+        }
+        .input-form{
+            margin-right: 0 !important;
+        }
+        #doc{
+            margin-right: 50px !important;
+        }
+        .info-mark{
+            left: calc(100% - 30px) !important;
+        }
+        .val{
+            width: calc(100%) !important;
+            font-size: 14px !important;
+        }
+        .confirm{
+            width: calc(100% - 40px) !important;
+            flex-wrap: wrap;
+            height: 640px !important;
+            .left{
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 200px !important;
+                img{
+                    width: 100% !important;
+                    height: 200px;
+                }
+            }
+            .right{
+                margin-top: -140px;
+            }
+        }
+    }
+    @media screen and (max-width: 520px) {
+        .main{
+            height: 1340px !important;
+        }
+        .register{
+            height: 1120px !important;
+        }
+        .reg-top-r{
+            label, span{
+                font-size: 13px !important;
+                line-height: 18px !important;
+            }
+        }
+         .top-sub-one, .top-sub-last{
+                font-size: 12px !important;
+                line-height: 18px !important;
+            }
+        .reg-form{
+            label{
+                font-size: 12px !important;
+                line-height: 18px !important;
+            }
+            input, select, ::placeholder{
+                font-size: 11px !important;
+            }
+        }
+        .check-form{
+            input{
+                -ms-transform: scale(1.2) !important; /* IE */
+                -moz-transform: scale(1.2) !important; /* FF */
+                -webkit-transform: scale(1.2) !important; /* Safari and Chrome */
+                -o-transform: scale(1.2) !important; /* Opera */
+                transform: scale(1.2) !important;
+            }
+            .label{
+                margin-left: 15px !important;
+            }
+        }
+        .info-extra{
+            top: 598px !important;
+            width: 280px !important;
+            left: calc(100% - 270px) !important;
+            .head-text{
+                width: calc(100% - 40px);
+                font-size: 12px;
+                line-height: 21px;
+            }
+            .sub-head-text{
+                font-size: 11px;
+            }
+            ul{
+                li{
+                    font-size: 10px !important;
+                }
+            }
+        }
+        .confirm{
+            width: calc(100% - 40px) !important;
+            flex-wrap: wrap;
+            height: 640px !important;
+            .left{
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 200px !important;
+                img{
+                    width: 100% !important;
+                    height: 200px;
+                }
+            }
+            .right{
+                margin-top: -140px;
+                .header{
+                    font-size: 22px !important;
+                    line-height: 28px !important;
+                }
+                .sub, .sub-l{
+                    font-size: 12px !important;
+                    line-height: 20px !important;
+                }
+                .btn{
+                    font-size: 12px !important;
+                    // line-height: 20px !important;
+                }
+            }
+         }
+    }
+    
 </style>
 
