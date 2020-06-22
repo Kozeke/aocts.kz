@@ -42,6 +42,24 @@ class UserController extends Controller
             return response()->json(['document'], 422);
 
         }
+        if($request->file('document1')){
+            $file = $request->file('document1');
+            if ($file->getClientOriginalExtension() === "pdf") {
+                $url = Storage::putFile('public/user_documents', new File($file));
+                $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            } else {
+                return response()->json(['document'], 422);
+            }
+        }
+        if($request->file('document2')){
+            $file = $request->file('document2');
+            if ($file->getClientOriginalExtension() === "pdf") {
+                $url = Storage::putFile('public/user_documents', new File($file));
+                $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            } else {
+                return response()->json(['document'], 422);
+            }
+        }
 //        if($input['document']){
 //            $exploded=explode('/', $input['document']);
 //            $exploded2=explode('.', $exploded[5]);
