@@ -110,7 +110,7 @@ export default {
         .logo{
             cursor: pointer;
             position: absolute;
-            left: calc(18%);
+            left: calc(19%);
             width: 160px;
             height: 50px;
             top: 25px;
@@ -118,7 +118,8 @@ export default {
             font-size: 16px;
             line-height: 50px;
             color: #06397D;
-            font-weight: 500;         
+            font-weight: 500; 
+            z-index: 99;        
         }
         .login-left{
             position: relative;
@@ -247,6 +248,102 @@ export default {
             width: 52%;     
             background-image: linear-gradient( rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3) ), url('/images/login-layout.png');
             background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    }
+    @media screen and (max-width: 1420px) {
+        .login-left{
+            width: 58% !important;     
+            .login-text{
+                left: 33% !important;
+            }
+        }
+        .login-right{
+            width: 42% !important;     
+        }
+    }
+     @media screen and (max-width: 1020px) {
+        .logo{
+            left: calc(50% - 160px) !important;
+        }
+        .login-left{
+            width: 100% !important;    
+            margin: 0 auto; 
+            .login-text{
+                margin: 0 auto;
+                left: auto !important;
+                .head{
+                    font-size: 28px !important;
+                }
+                .input-form{
+                    .label{
+                        font-size: 15px !important;
+                    }
+                    input{
+                        font-size: 14px !important;
+                    }
+                    ::placeholder{
+                        font-size: 14px !important;
+                    }
+                }
+                .check-form{
+                    .label{
+                        font-size: 15px !important;
+                    }
+                }
+                .login-enter{
+                    font-size: 15px !important;
+                }
+                .login-last{
+                    font-size: 15px !important;
+                }
+            }
+        }
+        .login-right{
+            width: 0 !important;     
+        }
+    }
+     @media screen and (max-width: 520px) {
+         .logo{
+            left: calc(50% - 130px) !important;
+        }
+        .login-left{
+            width: 100% !important;    
+            margin: 0 auto; 
+            .login-text{
+                top: 140px !important;
+                left: auto !important;
+                width: 260px !important;
+                .head{
+                    font-size: 24px !important;
+                }
+                .input-form{
+                    margin-top: 20px !important;
+                    .label{
+                        font-size: 14px !important;
+                    }
+                    input{
+                        font-size: 12px !important;
+                    }
+                    ::placeholder{
+                        font-size: 12px !important;
+                    }
+                }
+                .check-form{
+                    margin-top: 20px !important;
+                    .label{
+                        font-size: 12px !important;
+                    }
+                }
+                .login-enter{
+                    margin-top: 30px !important;
+                    font-size: 12px !important;
+                }
+                .login-last{
+                    font-size: 12px !important;
+                }
+            }
         }
     }
 </style>
