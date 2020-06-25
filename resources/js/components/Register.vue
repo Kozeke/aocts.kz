@@ -261,7 +261,7 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            userRegistration: false,
+            userRegistration: true,
             firstPage: true,
             infoMark: false,
             regions: '',
@@ -281,7 +281,9 @@ export default {
             password: '',
             password_repeat: '',
             agreement: false,
-            errors: ''
+            errors: '',
+            document: '',
+            docs: []
         }
     },
     mounted(){
@@ -443,24 +445,24 @@ export default {
             }
         },
         uploadDoc(e){
-            console.log(e.target.files)
             if(this.errors.document){
                 delete this.errors.document
             }
             const file = e.target.files
+
             this.doc = "загружен " + file.length + " файл"
-            
-            file.forEach( item => {
+            for(var item of file){
                 if(item.type !== 'application/pdf'){
                     document.getElementById('err-doc').style.visibility = 'visible'
                     document.getElementById('doc').classList.add('error')
                     this.hasError = true
                 } else {
+                    this.docs.push(item)
                     document.getElementById('err-doc').style.visibility = 'hidden'
                     document.getElementById('doc').classList.remove('error')
                     this.hasError = false
                 }
-            });
+            }
         },
         getRegions(){
             axios.get('/api/regions')
@@ -502,8 +504,9 @@ export default {
                 data.append("locality_id", city.id);
                 data.append("address", this.address);
                 data.append("password", this.password);
-                data.append("document", this.doc, this.doc.name);
-            
+                console.log(this.docs);
+                data.append("document", this.docs[0]);
+                data.append("document1", this.docs[1]);
                 for (var pair of data.entries()) {
                     console.log(pair[0]+ ', ' + pair[1]) + ',' + typeof(pair[1]); 
                 }
@@ -689,6 +692,7 @@ export default {
                         }
                     }
                     .err-text{
+                        line-height: 1.2;
                         position: absolute;
                         bottom: 0;
                         text-align: left;
