@@ -504,9 +504,15 @@ export default {
                 data.append("locality_id", city.id);
                 data.append("address", this.address);
                 data.append("password", this.password);
-                console.log(this.docs);
-                data.append("document", this.docs[0]);
-                data.append("document1", this.docs[1]);
+
+                let docs = this.docs;
+                let tt = 1;
+                var str = 'document';
+                for(let doc of docs){
+                    data.append(str, doc);
+                    str = (str + tt.toString()).toString();
+                    tt += 1
+                }
                 for (var pair of data.entries()) {
                     console.log(pair[0]+ ', ' + pair[1]) + ',' + typeof(pair[1]); 
                 }
@@ -862,10 +868,10 @@ export default {
             height: 680px;
             color: #06397D;
             .left{
-                // width: 54%;
                 max-width: 545px;
                 img{
                     object-fit: cover;
+                    object-position: center;
                 }
             }
             .right{

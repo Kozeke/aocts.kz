@@ -1,19 +1,104 @@
 <template>
     <div class="main flex-col">
+        <div v-if="modalDisplay" class="contact-modal">
+            <div class="modal-body flex-row">
+                <div class="modal-exit" @click="modalDisplay = false">
+                    <svg style="cursor: pointer;" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0)">
+                    <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0">
+                    <rect width="15" height="15" fill="white"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
+                </div>
+                <div class="modal-left flex-col">
+                    <div class="ml-head">Связаться с нами</div>
+                    <div class="ml-sub">Мы с радостью готовы Вам помочь!</div>
+                    <div class="ml-contacts flex-row">
+                        <div class="contact flex-col">
+                            <div class="label">Горячая линия:</div>
+                            <a class="value">+7 (727) 250-30-20</a>
+                        </div>
+                        <div class="contact flex-col">
+                            <div class="label">Режим работы:</div>
+                            <a class="value">Ежедневно с 10:00 до 19:00</a>
+                        </div>
+                        <div class="contact flex-col">
+                            <div class="label">E-mail почта:</div>
+                            <a class="value">Daris_info@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="ml-back" @click="modalDisplay = false">Вернутся на главную</div>
+                </div>
+                <div class="modal-right">
+                    <img src="/images/contact-modal.png" alt="">
+                </div>
+            </div>
+        </div>
         <div class="nav-bar flex-row">
             <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
             <div class="slogan">Экономим ваше время!</div>
-            <div class="contact-us flex-row">
+            <div class="contact-us flex-row" @click="showModal()">
+                <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0)">
+                <path d="M7.50022 0.498047C3.91634 0.498047 1.00044 3.18945 1.00044 6.49783C1.00759 7.84784 1.49258 9.15168 2.36941 10.1782C2.1881 11.2786 1.40511 12.1845 0.342489 12.5231C0.0804382 12.6102 -0.0614121 12.8932 0.0256257 13.1552C0.0935627 13.3598 0.284952 13.4977 0.500482 13.4976C2.12655 13.555 3.7205 13.0353 5.00032 12.0306C5.79737 12.3402 6.64516 12.4986 7.50022 12.4976C11.0841 12.4976 14 9.8062 14 6.49783C14 3.18945 11.0841 0.498047 7.50022 0.498047Z" fill="#4985FF"/>
+                </g>
+                <defs>
+                <clipPath id="clip0">
+                <rect width="14" height="14" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>
                 <span>Связаться с нами</span>
-                <div class="circle"></div>
             </div>
-            <div class="login-us flex-row">
+            <div class="login-us flex-row" @click="$router.push({ name: 'login' })">
+                <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
+                <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
+                </svg>
                 <span>Войти</span>
-                <div class="circle"></div>
             </div>
-            <div class="lang-us flex-row">
-                <span>RU</span>
-                <div class="circle"></div>
+            <div class="lang-us flex-row" @click="showCountry = true">
+                <svg style="margin: 12px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0)">
+                <path d="M8.98866 10.0529C8.9334 9.98745 8.8511 9.94971 8.7645 9.94971H5.23601C5.14941 9.94971 5.0671 9.98745 5.01184 10.0529C4.95631 10.1183 4.9335 10.2045 4.94917 10.2881C5.36846 12.5178 6.17368 13.9585 7.00025 13.9585C7.82683 13.9585 8.63205 12.5178 9.05131 10.2881C9.06698 10.2045 9.0442 10.1183 8.98866 10.0529Z" fill="#4985FF"/>
+                <path d="M13.6672 4.995C13.6288 4.87643 13.5166 4.7959 13.3895 4.7959H10.1052C10.0229 4.7959 9.94426 4.83002 9.88899 4.89012C9.83346 4.95025 9.80669 5.03049 9.81495 5.11102C9.88246 5.7687 9.91664 6.43366 9.91664 7.08658C9.91664 7.73951 9.88246 8.40447 9.81495 9.06215C9.80669 9.14268 9.83346 9.22294 9.88899 9.28305C9.94426 9.34318 10.0229 9.37727 10.1052 9.37727H13.3896C13.5166 9.37727 13.6288 9.29674 13.6673 9.17817C13.888 8.49955 13.9999 7.79602 13.9999 7.08661C13.9999 6.3772 13.888 5.67367 13.6672 4.995Z" fill="#4985FF"/>
+                <path d="M9.66082 3.98433C9.68447 4.12217 9.8061 4.22313 9.94851 4.22313H12.8925C12.9953 4.22313 13.0908 4.16971 13.1435 4.08303C13.1959 3.99606 13.1979 3.88841 13.1486 3.79977C12.273 2.22462 10.7688 1.02477 9.02109 0.508017C8.90857 0.473899 8.78467 0.511641 8.70978 0.602536C8.63543 0.693698 8.6246 0.819812 8.68243 0.921578C9.10738 1.66929 9.44576 2.72824 9.66082 3.98433Z" fill="#4985FF"/>
+                <path d="M8.93306 4.7959H5.06562C4.91665 4.7959 4.79161 4.90607 4.77566 5.05148C4.70304 5.71252 4.66602 6.39731 4.66602 7.08662C4.66602 7.77592 4.70304 8.46071 4.77566 9.12175C4.79161 9.26716 4.91665 9.37733 5.06562 9.37733H8.93306C9.08203 9.37733 9.20707 9.26716 9.22301 9.12175C9.29564 8.46071 9.33266 7.77592 9.33266 7.08662C9.33266 6.39731 9.29564 5.71252 9.22301 5.05148C9.20707 4.90607 9.08203 4.7959 8.93306 4.7959Z" fill="#4985FF"/>
+                <path d="M1.10809 4.22321H4.05211C4.19452 4.22321 4.31614 4.12227 4.3398 3.9844C4.55485 2.72831 4.89323 1.66937 5.31818 0.92165C5.37601 0.819857 5.36519 0.693744 5.29084 0.602608C5.21622 0.512009 5.09287 0.473703 4.97953 0.50809C3.2318 1.02487 1.72759 2.22472 0.852017 3.79987C0.802744 3.88851 0.80474 3.99619 0.857158 4.08313C0.909849 4.16981 1.00525 4.22321 1.10809 4.22321Z" fill="#4985FF"/>
+                <path d="M4.11097 9.28305C4.1665 9.22292 4.19327 9.14269 4.18502 9.06215C4.1175 8.40447 4.08332 7.73952 4.08332 7.08659C4.08332 6.43366 4.1175 5.7687 4.18502 5.11102C4.19327 5.03049 4.1665 4.95023 4.11097 4.89012C4.05571 4.82999 3.97709 4.7959 3.89479 4.7959H0.610395C0.483355 4.7959 0.371137 4.87643 0.332691 4.995C0.111945 5.67365 0 6.37718 0 7.08659C0 7.796 0.111945 8.49953 0.332691 9.1782C0.371137 9.29677 0.483355 9.3773 0.610395 9.3773H3.89479C3.97709 9.37728 4.05571 9.34319 4.11097 9.28305Z" fill="#4985FF"/>
+                <path d="M4.33977 10.189C4.31612 10.0512 4.19449 9.9502 4.05208 9.9502H1.10809C1.00528 9.9502 0.909849 10.0036 0.857158 10.0903C0.80474 10.1773 0.802744 10.2849 0.852017 10.3736C1.72759 11.9487 3.23177 13.1486 4.9795 13.6653C5.00712 13.6737 5.03534 13.6776 5.06353 13.6776C5.1504 13.6776 5.23443 13.6393 5.29084 13.5708C5.36519 13.4796 5.37601 13.3535 5.31818 13.2518C4.89321 12.504 4.55483 11.4451 4.33977 10.189Z" fill="#4985FF"/>
+                <path d="M12.8925 9.9502H9.94851C9.8061 9.9502 9.68447 10.0511 9.66082 10.189C9.44576 11.4451 9.10738 12.504 8.68243 13.2518C8.6246 13.3535 8.63543 13.4797 8.70978 13.5708C8.76619 13.6393 8.85019 13.6776 8.93709 13.6776C8.96501 13.6776 8.9935 13.6737 9.02112 13.6653C10.7688 13.1486 12.273 11.9487 13.1486 10.3736C13.1979 10.2849 13.1959 10.1772 13.1435 10.0903C13.0907 10.0036 12.9953 9.9502 12.8925 9.9502Z" fill="#4985FF"/>
+                <path d="M5.01182 4.1199C5.06708 4.18535 5.14939 4.22309 5.23598 4.22309H8.76447C8.85107 4.22309 8.93338 4.18535 8.98864 4.1199C9.04417 4.05446 9.06698 3.96834 9.05131 3.88475C8.63202 1.655 7.8268 0.214355 7.00023 0.214355C6.17365 0.214355 5.36844 1.655 4.94917 3.88472C4.93351 3.96834 4.95628 4.05446 5.01182 4.1199Z" fill="#4985FF"/>
+                </g>
+                <defs>
+                <clipPath id="clip0">
+                <rect width="14" height="13.7442" fill="white" transform="translate(0 0.214355)"/>
+                </clipPath>
+                </defs>
+                </svg>
+                <span>{{ selectedLang }}</span>
+                <svg style="position:absolute; top: 14px;right: 15px;" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0)">
+                <path d="M4.50495 7.64518L0.20524 3.34534C-0.0684147 3.07182 -0.0684147 2.62835 0.20524 2.35496C0.478651 2.08155 0.922098 2.08155 1.19549 2.35496L5.00007 6.15966L8.80452 2.35507C9.07805 2.08166 9.52145 2.08166 9.79486 2.35507C10.0684 2.62848 10.0684 3.07193 9.79486 3.34545L5.49508 7.64529C5.35831 7.782 5.17925 7.85027 5.00009 7.85027C4.82085 7.85027 4.64165 7.78187 4.50495 7.64518Z" fill="#4985FF"/>
+                </g>
+                <defs>
+                <clipPath id="clip0">
+                <rect width="9.99998" height="10" fill="white" transform="translate(10) rotate(90)"/>
+                </clipPath>
+                </defs>
+                </svg>
+            </div>
+            <div v-if="showCountry" class="lang-list">
+                <div class="lang-item" v-for="lg in lang" :key="lg.id" @click="changeLang(lg)">{{ lg.name }}</div>
+            </div>
+            <div class="menu-btn">
+                <svg style="margin-top: -12px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.6 3.2H14.4C15.2832 3.2 16 2.484 16 1.6C16 0.716 15.284 0 14.4 0H1.6C0.716 0 0 0.716 0 1.6C0 2.484 0.716 3.2 1.6 3.2ZM14.4 6.4H1.6C0.716 6.4 0 7.116 0 8C0 8.88397 0.716 9.6 1.6 9.6H14.4C15.2832 9.6 16 8.88397 16 8C16 7.116 15.284 6.4 14.4 6.4ZM14.4 12.8H1.6C0.716 12.8 0 13.516 0 14.4C0 15.284 0.716 16 1.6 16H14.4C15.2832 16 16 15.284 16 14.4C16 13.516 15.284 12.8 14.4 12.8Z" fill="#4985FF"/>
+                </svg>
             </div>
         </div>
         <div class="layout flex-row">
@@ -186,7 +271,7 @@
             <div class="hl-sub">Lorem Ipsum - это текст-"рыба",</div>
             <div class="start flex-row">
                 <span>Начать сейчас</span>
-                <svg style="margin: 6px auto auto 4px;" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style="position: absolute; right: 30px;top: 14px;" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                         <path d="M5.08743 6.24219L3.35471 6.37361C2.87257 6.41019 2.44315 6.65827 2.17652 7.05421L0.178211 10.0213C-0.0240135 10.3216 -0.0561617 10.6973 0.0921575 11.0265C0.240516 11.3557 0.545396 11.5851 0.907698 11.6402L2.49421 11.8814C2.86534 9.9479 3.75377 8.01913 5.08743 6.24219Z" fill="white"/>
                         <path d="M8.85449 18.1249L9.10023 19.6824C9.15636 20.0381 9.39003 20.3374 9.7253 20.483C9.8648 20.5436 10.0125 20.5735 10.1594 20.5735C10.3657 20.5735 10.5706 20.5145 10.7493 20.3986L13.7717 18.4368C14.175 18.175 14.4277 17.7534 14.4649 17.2802L14.5987 15.5791C12.7887 16.8884 10.824 17.7606 8.85449 18.1249Z" fill="white"/>
@@ -208,31 +293,171 @@
         </div>
         <div class="footer">
             <div class="footer-body flex-row">
-                <div class="info flex-col">
-                    <label></label>
-                    <span>Lorem Ipsum - это текст -"рыба", часто Lorem Ipsum - это текст -"рыба", часто</span>
+                <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
+                <div class="f-mid flex-col">
+                    <div class="fm-head">О компании</div>
+                    <div class="fm-sub">Аутсорсинговая компания, оказывающая широкий спектр услуг по заключению Договоров и выполнению взаиморасчетов за оказанные Услуги. </div>
+                    <div class="fm-foot">© ООО «Правообладатель контента», 2010—2015</div>
                 </div>
-                <div class="menu flex-col" v-for="i in 4" :key="i">
-                    <label>Основные</label>
-                    <span>Главная</span>
-                    <span>Наши проекты</span>
-                    <span>Главная</span>
-                    <span>Наши проекты</span>
-                    <span>Наши</span>
+                <div class="f-right flex-col">
+                    <div class="fr-head">Мы с радостью готовы Вам помочь!</div>
+                    <div class="contacts flex-row">
+                        <div class="contact flex-col">
+                            <div class="label">Горячая линия:</div>
+                            <a class="value">+7 (727) 250-30-20</a>
+                        </div>
+                        <div class="contact flex-col">
+                            <div class="label">Режим работы:</div>
+                            <a class="value">Ежедневно с 10:00 до 19:00</a>
+                        </div>
+                        <div class="contact flex-col">
+                            <div class="label">E-mail почта:</div>
+                            <a class="value">Daris_info@gmail.com</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 <script>
     export default {
+        data(){
+            return {
+                showCountry: false,
+                modalDisplay: false,
+                selectedLang: 'RU',
+                lang: [
+                    {
+                        id: 1,
+                        name: 'Казахский',
+                        attr: 'KZ'
+                    },
+                    {
+                        id: 2,
+                        name: 'Русский',
+                        attr: 'RU'
+                    },
+                    {
+                        id: 3,
+                        name: 'English',
+                        attr: 'EN'
+                    }
+                ]
+            }
+        },
         mounted() {
             console.log('Component mounted.')
+        },
+        methods:{
+            changeLang(val){
+                this.selectedLang = val.attr
+                this.showCountry = false
+            },
+            showModal(){
+                this.modalDisplay = true
+            }
         }
     }
 </script>
 <style lang="scss" scoped>
+    .contact-modal{
+        z-index: 998;
+        width: 100%;
+        position: fixed;
+        height: 100%;
+        padding: 150px 20%;
+        background: rgba(45, 76, 100, 0.7);
+        .modal-body{
+            position: relative;
+            padding: 0;
+            border-radius: 12px;
+            height: 500px;
+            background: #FFFFFF;
+            .modal-left{
+                position: relative;
+                width: 54%;
+                padding: 50px;
+                .ml-head{
+                    text-align: left;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 32px;
+                    line-height: 146.28%;
+                    color: #2D4C64;
+                }
+                .ml-sub{
+                    text-align: left;
+                    margin-top: 20px;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 20px;
+                    line-height: 150%;
+                    color: #2D4C64;
+                }
+                .ml-contacts{
+                    margin-top: 10px;
+                    flex-wrap: wrap;
+                    .contact{
+                        margin-top: 15px;
+                        margin-right: 40px;
+                        .label{
+                            text-align: left;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 18px;
+                            line-height: 22px;
+                            color: #4985FF;
+                        }
+                        .value{
+                            margin-top: 5px;
+                            text-align: left;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 16px;
+                            line-height: 25px;
+                            color: #999999;
+                        }
+                    }
+                }
+                .ml-back{
+                    position: absolute;
+                    cursor: pointer;
+                    bottom: 50px;
+                    width: calc(100% - 100px);
+                    height: 50px;
+                    border-radius: 6px;
+                    padding-top: 14px;
+                    background: #4985FF;
+                    box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
+                    border-radius: 6px;
+                    text-align: center;
+                    color: #FFFFFF;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 20px;
+                }
+            }
+            .modal-right{
+                width: 46%;
+                height: 100%;
+                overflow: hidden;
+                border-bottom-right-radius: 12px;
+                border-top-right-radius: 12px;
+                img{
+                    object-fit: contain;
+                    object-position: center;
+                }
+            }
+            .modal-exit{
+                z-index: 999;
+                cursor: pointer;
+                position: absolute;
+                top: 25px;
+                right: 25px;
+            }
+        }
+    }
     .nav-bar{
         position: relative;
         width: 100%;
@@ -255,7 +480,7 @@
             position: absolute;
             height: 50px;
             top: 25px;
-            left: calc(18% + 140px);
+            left: calc(18% + 146px);
             width: 260px;
         }
         .contact-us{
@@ -271,16 +496,7 @@
             border-radius: 6px;
             span{
                 cursor: pointer;
-                margin: -5px 6px 5px 10px;
-            }
-            .circle{
-                cursor: pointer;
-                margin-left: 6px;
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background: #4985FF;
-                margin-top: 12px;
+                margin: -5px 6px 5px 8px;
             }
         }
         .login-us{
@@ -296,16 +512,7 @@
             border-radius: 6px;
             span{
                 cursor: pointer;
-                margin: -5px 6px 5px 10px;
-            }
-            .circle{
-                cursor: pointer;
-                margin-left: 6px;
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background: #4985FF;
-                margin-top: 12px;
+                margin: -5px 6px 5px 6px;
             }
         }
         .lang-us{
@@ -321,17 +528,48 @@
             border-radius: 6px;
             span{
                 cursor: pointer;
-                margin: -5px 6px 5px 10px;
+                margin: -5px 6px 5px 6px;
             }
-            .circle{
+        }
+        .lang-list{
+            transition: all 1s ease 0s;
+            z-index: 999;
+            position: absolute;
+            cursor: pointer;
+            width: 95px;
+            top: 76px;
+            right: calc(18%);
+            border: 1px solid #4985FF;
+            box-sizing: border-box;
+            border-radius: 6px;
+            overflow: hidden;
+            .lang-item{
+                text-align: left;
                 cursor: pointer;
-                margin-left: 6px;
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background: #4985FF;
-                margin-top: 12px;
+                height: 34px;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 11px;
+                line-height: 13px;
+                color: #4985FF;
+                padding: 10px 15px;
             }
+            .lang-item:hover{
+                background: #4985FF;
+                color: #FFFFFF;
+            }
+        }
+        .menu-btn{
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            width: 48px;
+            height: 42px;
+            top: 30px;
+            right: calc(10%);
+            border: 1px solid #4985FF;
+            box-sizing: border-box;
+            border-radius: 6px;
         }
     }
     .main{
@@ -655,6 +893,7 @@
                     width: 100%;
                     background: rgba(233, 233, 233, 0.4);
                     object-fit: cover;
+                    object-position: center;
                 }
                 .head{
                     height: 120px;
@@ -701,8 +940,8 @@
         height: 700px;
         background: rgba(228, 233, 244, 0.2);
         overflow: hidden;
+        padding: 80px 18% 0 18%;
         .hl-header{
-            margin-top: 80px;
             font-weight: bold;
             font-size: 36px;
             line-height: 53px;
@@ -745,55 +984,95 @@
                 margin-top: 14px;
             }
         }
-        img{
-            
+        img{  
             margin-top: 100px;
         }
     }
     .footer{
         position: relative;
-        height: 412px;
+        height: auto;
+        padding-bottom: 30px;
         background: #FFFFFF;
-        padding-top: 60px;
+        padding-top: 40px;
         .footer-body{
             position: relative;
-            width: 70%;
-            left: 15%;
-            .info{
-                width: 24%;
-                label{
-                    width: 130px;
-                    height: 60px;
-                    background: #F6F6F8;
-                }
-                span{
+            width: 64%;
+            left: 18%;
+            .logo{
+                cursor: pointer;
+                font-size: 16px;
+                line-height: 50px;
+                color: #06397D;
+                font-weight: 500;
+                width: 160px;
+                height: 50px;
+                background: #F6F6F8;            
+            }
+            .f-mid{
+                width: 440px;
+                margin-left: 30px;
+                .fm-head{
                     text-align: left;
-                    margin-top: 30px;
+                    margin-top: 15px;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: #2D4C64;
+                }
+                .fm-sub, .fm-foot{
+                    text-align: left;
+                    font-style: normal;
                     font-weight: normal;
                     font-size: 16px;
                     line-height: 25px;
+                    display: flex;
                     color: #999999;
+                }
+                .fm-sub{
+                    margin-top: 25px;
+                }
+                .fm-foot{
+                    margin-top: 40px;
                 }
             }
-            .menu{
-                width: 15%;
-                margin: 0 2%;
-                span, label{
+            .f-right{
+                position: absolute;
+                right: 0;
+                width: 460px;
+                .fr-head{
                     text-align: left;
-                }
-                label{
-                    font-weight: 600;
+                    margin-top: 15px;
+                    font-style: normal;
+                    font-weight: bold;
                     font-size: 18px;
                     line-height: 22px;
-                    color: #000000;
-                    margin-bottom: 30px;
+                    color: #2D4C64;
                 }
-                span{
-                    font-weight: 500;
-                    font-size: 16px;
-                    line-height: 20px;
-                    color: #999999;
-                    margin-bottom: 25px;
+                .contacts{
+                    margin-top: 10px;
+                    flex-wrap: wrap;
+                    .contact{
+                        margin-top: 15px;
+                        margin-right: 40px;
+                        .label{
+                            text-align: left;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 18px;
+                            line-height: 22px;
+                            color: #4985FF;
+                        }
+                        .value{
+                            margin-top: 5px;
+                            text-align: left;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 16px;
+                            line-height: 25px;
+                            color: #999999;
+                        }
+                    }
                 }
             }
         }
@@ -840,7 +1119,58 @@
             }
         }
     }
+    @media only screen and (max-width: 1720px){
+        .footer{
+            .footer-body{
+                width: 80%;
+                left: 10%;
+                .f-mid{
+                    width: 410px;
+                }
+                .fm-sub{
+                    margin-top: 15px;
+                }
+                .fm-foot{
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
     @media only screen and (max-width: 1340px){
+        .contact-modal{
+            padding: 150px 12%;
+            .modal-body{
+                .modal-left{
+                    padding: 40px;
+                    .ml-back{
+                        position: absolute;
+                        cursor: pointer;
+                        bottom: 40px;
+                        width: calc(100% - 80px);
+                    }
+                }
+            }
+        }
+        .nav-bar{
+            .logo{
+                left: 10%;          
+            }
+            .slogan{
+                left: calc(10% + 146px);
+            }
+            .contact-us{
+                right: calc(10% + 110px + 120px);
+            }
+            .login-us{
+                right: calc(10% + 110px);
+            }
+            .lang-us{
+                right: calc(10%);
+            }
+            .lang-list{
+                right: calc(10%);
+            }
+        }
         .layout{
             height: 560px !important;
             .layout-left{
@@ -872,8 +1202,76 @@
         .module{
             padding: 50px 10% !important;
         }
+        .home-last{
+            height: 700px;
+            padding: 50px 10% 0 10% !important;
+        }
+        .footer{
+            padding-top: 30px;
+            .footer-body{
+                .f-right{
+                    width: 264px;
+                    .contacts{
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 1120px){
+        .footer{
+            .footer-body{
+                .logo{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+                width: 80%;
+                left: 10%;
+                .f-mid{
+                    margin-left: 20px;
+                    margin-top: 50px;
+                    width: 410px;
+                }
+                .f-right{
+                    margin-top: 50px;
+                }
+                .fm-sub{
+                    margin-top: 25px;
+                }
+                .fm-foot{
+                    margin-top: 40px;
+                }
+            }
+        }
     }
     @media only screen and (max-width: 1020px){
+        .contact-modal{
+            padding: 120px 8%;
+            .modal-body{
+                .modal-left{
+                    width: 60%;
+                    padding: 25px;
+                    .ml-back{
+                        position: absolute;
+                        cursor: pointer;
+                        bottom: 25px;
+                        width: calc(100% - 50px);
+                    }
+                }
+                .modal-right{
+                    width: 40%;
+                }
+            }
+        }
+        .nav-bar{
+            .menu-btn{
+                display: block;
+            }
+            .slogan,   .contact-us, .login-us, .lang-us{
+                display: none;
+            }
+        }
         .layout{
             height: 480px !important;
             .layout-left{
@@ -998,6 +1396,85 @@
                     .service-icon{
                         left: 30px !important;
                     }
+                }
+            }
+        }
+        .footer{
+            .footer-body{
+                .f-mid{
+                    margin-left: 0;
+                    width: 100%;
+                    margin-top: 190px;
+                }
+                .f-right{
+                    margin-top: 60px;
+                    width: 100%;
+                }
+                .fm-sub{
+                    margin-top: 15px;
+                }
+                .fm-foot{
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 836px){
+        .footer{
+            height: auto;
+            padding-bottom: 10px;
+            .footer-body{
+                .f-mid{
+                    margin-left: 0;
+                    width: 100%;
+                    margin-top: 250px;
+                    .fm-sub{
+                        margin-top: 10px;
+                    }
+                    .fm-foot{
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 640px){
+        .contact-modal{
+            padding: 120px 8%;
+            .modal-body{
+                height: 550px;
+                .modal-left{
+                    margin-top: 190px;
+                    width: 100%;
+                    .ml-head{
+                        font-size: 28px;
+                        line-height: 38px;
+                    }
+                    .ml-sub{
+                        margin-top: 16px;
+                        font-size: 16px;
+                        line-height: 130%;
+                    }
+                    .ml-contacts{
+                        .contact{
+                            margin-top: 10px;
+                            margin-right: 20px;
+                            .label{
+                                font-size: 14px;
+                                line-height: 18px;
+                            }
+                            .value{
+                                font-size: 14px;
+                                line-height: 18px;
+                            }
+                        }
+                    }
+                }
+                .modal-right{
+                    position: absolute;
+                    top: 0;
+                    height: 190px;
+                    width: 100%;
                 }
             }
         }
@@ -1154,6 +1631,87 @@
             }
             .more-module{
                 display: flex !important;
+            }
+        }
+        .home-last{
+            height: 660px;
+            padding: 30px 10% 0 10% !important;
+            .hl-header{
+                font-size: 28px !important;
+                line-height: 38px !important;
+            }
+            .hl-sub{
+                font-size: 16px !important;
+                line-height: 25px !important;
+            }
+            .start{
+                left: 0;
+                width: 100%;
+            }
+        }
+        .footer{
+            .footer-body{
+                .f-mid{
+                    margin-top: 210px;
+                    .fm-head{
+                        font-size: 14px;
+                        line-height: 18px;
+                    }
+                    .fm-sub, .fm-foot{
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                }
+                .f-right{
+                    .fr-head{
+                        font-size: 14px;
+                        line-height: 18px;
+                    }
+                    .contacts{
+                        .contact{
+                            .label{
+                                text-align: left;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 12px;
+                                line-height: 18px;
+                                color: #4985FF;
+                            }
+                            .value{
+                                margin-top: 5px;
+                                text-align: left;
+                                font-style: normal;
+                                font-weight: normal;
+                                font-size: 12px;
+                                line-height: 18px;
+                                color: #999999;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 444px){
+        .contact-modal{
+            .modal-body{
+                height: 570px;
+            }
+         }
+        .footer{
+            .footer-body{
+                .f-mid{
+                    margin-top: 260px;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 339px){
+        .footer{
+            .footer-body{
+                .f-mid{
+                    margin-top: 276px;
+                }
             }
         }
     }
