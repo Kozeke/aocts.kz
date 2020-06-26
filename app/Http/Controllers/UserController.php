@@ -60,6 +60,24 @@ class UserController extends Controller
                 return response()->json(['document'], 422);
             }
         }
+        if($request->file('document3')){
+            $file = $request->file('document3');
+            if ($file->getClientOriginalExtension() === "pdf") {
+                $url = Storage::putFile('public/user_documents', new File($file));
+                $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            } else {
+                return response()->json(['document'], 422);
+            }
+        }
+        if($request->file('document4')){
+            $file = $request->file('document4');
+            if ($file->getClientOriginalExtension() === "pdf") {
+                $url = Storage::putFile('public/user_documents', new File($file));
+                $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            } else {
+                return response()->json(['document'], 422);
+            }
+        }
 //        if($input['document']){
 //            $exploded=explode('/', $input['document']);
 //            $exploded2=explode('.', $exploded[5]);
