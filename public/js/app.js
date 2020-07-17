@@ -1927,6 +1927,111 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forget.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    validateForm: function validateForm(e) {
+      var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (e.target.id === 'email') {
+        if (!pattern.test(String(e.target.value).toLowerCase())) {
+          document.getElementById('err-email').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-email').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.id === 'password') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-password').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-password').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+    },
+    logIn: function logIn() {
+      if (this.email === '') {
+        document.getElementById('err-email').style.visibility = 'visible';
+        document.getElementById('email').classList.add('error');
+        return;
+      }
+
+      if (this.password === '') {
+        document.getElementById('err-password').style.visibility = 'visible';
+        document.getElementById('password').classList.add('error');
+        return;
+      }
+
+      var data = {
+        email: this.email,
+        password: this.password
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', data).then(function (res) {
+        alert('Профиль успешно прошел валидацию.');
+        console.log(res);
+      })["catch"](function (err) {
+        if (err.response.status === 402) {
+          alert('Профиль проверяется модератором.');
+        }
+
+        console.log(err);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home.vue?vue&type=script&lang=js& ***!
@@ -2258,11 +2363,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       showCountry: false,
       modalDisplay: false,
+      sideMenu: false,
       selectedLang: 'RU',
       lang: [{
         id: 1,
@@ -2351,7 +2531,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errors: ''
     };
   },
   methods: {
@@ -2379,6 +2560,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     logIn: function logIn() {
+      var _this = this;
+
       if (this.email === '') {
         document.getElementById('err-email').style.visibility = 'visible';
         document.getElementById('email').classList.add('error');
@@ -2403,6 +2586,12 @@ __webpack_require__.r(__webpack_exports__);
           alert('Профиль проверяется модератором.');
         }
 
+        if (err.response.status === 401) {
+          alert('Не зарегистрирован.');
+        }
+
+        _this.errors = Object.assign({}, err.response.data.error);
+        console.log(_this.errors);
         console.log(err);
       });
     }
@@ -3032,6 +3221,155 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reset.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ResetPage.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    validateForm: function validateForm(e) {
+      var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (e.target.id === 'email') {
+        if (!pattern.test(String(e.target.value).toLowerCase())) {
+          document.getElementById('err-email').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-email').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.id === 'password') {
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-password').style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-password').style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+    },
+    logIn: function logIn() {
+      if (this.email === '') {
+        document.getElementById('err-email').style.visibility = 'visible';
+        document.getElementById('email').classList.add('error');
+        return;
+      }
+
+      if (this.password === '') {
+        document.getElementById('err-password').style.visibility = 'visible';
+        document.getElementById('password').classList.add('error');
+        return;
+      }
+
+      var data = {
+        email: this.email,
+        password: this.password
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', data).then(function (res) {
+        alert('Профиль успешно прошел валидацию.');
+        console.log(res);
+      })["catch"](function (err) {
+        if (err.response.status === 402) {
+          alert('Профиль проверяется модератором.');
+        }
+
+        console.log(err);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/App.vue?vue&type=style&index=0&id=332fccf4&lang=scss&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/App.vue?vue&type=style&index=0&id=332fccf4&lang=scss&scoped=true& ***!
@@ -3051,6 +3389,25 @@ exports.push([module.i, ".nav-bar[data-v-332fccf4] {\n  position: relative;\n  w
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".main[data-v-573ad198] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-573ad198] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(19%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  z-index: 99;\n}\n.main .login-left[data-v-573ad198] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-573ad198] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-573ad198] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 30px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .sub-head[data-v-573ad198] {\n  font-weight: normal;\n  font-size: 18px;\n  line-height: 170%;\n  text-align: left;\n  color: #06397D;\n}\n.main .login-left .login-text .input-form[data-v-573ad198] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-573ad198] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-573ad198] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-573ad198] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-573ad198] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-573ad198] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-573ad198] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-573ad198] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-573ad198] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-573ad198] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-573ad198] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .login-enter[data-v-573ad198] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-573ad198] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-573ad198], .main .login-left .login-text .login-last .right[data-v-573ad198] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-573ad198] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-573ad198] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/forget.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n@media screen and (max-width: 1420px) {\n.login-left[data-v-573ad198] {\n    width: 58% !important;\n}\n.login-left .login-text[data-v-573ad198] {\n    left: 33% !important;\n}\n.login-right[data-v-573ad198] {\n    width: 42% !important;\n}\n}\n@media screen and (max-width: 1020px) {\n.logo[data-v-573ad198] {\n    left: calc(50% - 160px) !important;\n}\n.login-left[data-v-573ad198] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-573ad198] {\n    margin: 0 auto;\n    left: auto !important;\n}\n.login-left .login-text .head[data-v-573ad198] {\n    font-size: 28px !important;\n}\n.login-left .login-text .sub-head[data-v-573ad198] {\n    font-size: 16px !important;\n}\n.login-left .login-text .input-form .label[data-v-573ad198] {\n    font-size: 15px !important;\n}\n.login-left .login-text .input-form input[data-v-573ad198] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .check-form .label[data-v-573ad198] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-enter[data-v-573ad198] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-last[data-v-573ad198] {\n    font-size: 15px !important;\n}\n.login-right[data-v-573ad198] {\n    width: 0 !important;\n}\n}\n@media screen and (max-width: 520px) {\n.logo[data-v-573ad198] {\n    left: calc(50% - 130px) !important;\n}\n.login-left[data-v-573ad198] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-573ad198] {\n    top: 140px !important;\n    left: auto !important;\n    width: 260px !important;\n}\n.login-left .login-text .head[data-v-573ad198] {\n    font-size: 24px !important;\n}\n.login-left .login-text .sub-head[data-v-573ad198] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .input-form .label[data-v-573ad198] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form input[data-v-573ad198] {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::-webkit-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::-moz-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] :-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-573ad198] ::placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .check-form[data-v-573ad198] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .check-form .label[data-v-573ad198] {\n    font-size: 12px !important;\n}\n.login-left .login-text .login-enter[data-v-573ad198] {\n    margin-top: 30px !important;\n    font-size: 12px !important;\n}\n.login-left .login-text .login-last[data-v-573ad198] {\n    font-size: 12px !important;\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home.vue?vue&type=style&index=0&id=f2b6376c&lang=scss&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home.vue?vue&type=style&index=0&id=f2b6376c&lang=scss&scoped=true& ***!
@@ -3063,7 +3420,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contact-modal[data-v-f2b6376c] {\n  z-index: 998;\n  width: 100%;\n  position: fixed;\n  height: 100%;\n  padding: 150px 20%;\n  background: rgba(45, 76, 100, 0.7);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n  position: relative;\n  padding: 0;\n  border-radius: 12px;\n  height: 500px;\n  background: #FFFFFF;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n  position: relative;\n  width: 54%;\n  padding: 50px;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 20px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 20px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n  position: absolute;\n  cursor: pointer;\n  bottom: 50px;\n  width: calc(100% - 100px);\n  height: 50px;\n  border-radius: 6px;\n  padding-top: 14px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n  width: 46%;\n  height: 100%;\n  overflow: hidden;\n  border-bottom-right-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.contact-modal .modal-body .modal-right img[data-v-f2b6376c] {\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.contact-modal .modal-body .modal-exit[data-v-f2b6376c] {\n  z-index: 999;\n  cursor: pointer;\n  position: absolute;\n  top: 25px;\n  right: 25px;\n}\n.nav-bar[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n  height: 100px;\n  background: #FFFFFF;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.nav-bar .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  left: 18%;\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n  position: absolute;\n  height: 50px;\n  top: 25px;\n  left: calc(18% + 146px);\n  width: 260px;\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 200px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px + 120px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .contact-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 8px;\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 105px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .login-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 95px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .lang-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n  transition: all 1s ease 0s;\n  z-index: 999;\n  position: absolute;\n  cursor: pointer;\n  width: 95px;\n  top: 76px;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  border-radius: 6px;\n  overflow: hidden;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c] {\n  text-align: left;\n  cursor: pointer;\n  height: 34px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 11px;\n  line-height: 13px;\n  color: #4985FF;\n  padding: 10px 15px;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c]:hover {\n  background: #4985FF;\n  color: #FFFFFF;\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n  display: none;\n  cursor: pointer;\n  position: absolute;\n  width: 48px;\n  height: 42px;\n  top: 30px;\n  right: calc(10%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n}\n.main .layout[data-v-f2b6376c] {\n  background: #FFFFFF;\n  position: relative;\n  height: 720px;\n}\n.main .layout .layout-left[data-v-f2b6376c] {\n  position: relative;\n  width: 56%;\n  background-image: linear-gradient(rgba(196, 196, 196, 0.4), rgba(196, 196, 196, 0.4)), url(\"/images/layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .layout .layout-left .layout-text[data-v-f2b6376c] {\n  width: 460px;\n  position: relative;\n  top: 160px;\n  left: 32%;\n  color: #06397D;\n}\n.main .layout .layout-left .layout-text .header[data-v-f2b6376c] {\n  text-align: left;\n  font-weight: 800;\n  font-size: 42px;\n  line-height: 56px;\n}\n.main .layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n  margin-top: 30px;\n  text-align: left;\n  height: 77px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n}\n.main .layout .layout-left .layout-text .join[data-v-f2b6376c] {\n  cursor: pointer;\n  width: 250px;\n  margin-top: 54px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .layout .layout-left .layout-text .join .circle[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 6px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  margin-top: 14px;\n}\n.main .layout .layout-left .layout-text .login[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .layout .layout-left .layout-text .login .go-login[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 10px;\n  font-weight: 600;\n  -webkit-text-decoration-line: underline;\n          text-decoration-line: underline;\n  color: #4985FF;\n}\n.main .layout .layout-right[data-v-f2b6376c] {\n  background: #FFFFFF;\n}\n.main .layout .layout-right .layout-img[data-v-f2b6376c] {\n  width: 720px;\n  position: absolute;\n  left: 44%;\n  top: 114px;\n}\n.main .layout .layout-right .layout-img-in[data-v-f2b6376c] {\n  width: 555px;\n  position: absolute;\n  left: 44%;\n  top: 138px;\n}\n.service[data-v-f2b6376c] {\n  position: relative;\n  height: 700px;\n  background: #D6E6FF;\n  padding: 0 18%;\n}\n.service .service-header[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 80px;\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.service .service-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: left;\n  color: #06397D;\n}\n.service .service-list[data-v-f2b6376c] {\n  position: relative;\n  margin-top: 45px;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n  position: relative;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 10px;\n  padding: 0 30px;\n  height: 240px;\n  width: calc(50% - 15px);\n}\n.service .service-list .service-single div[data-v-f2b6376c] {\n  text-align: left;\n}\n.service .service-list .service-single .circle[data-v-f2b6376c] {\n  margin-top: 8px;\n  width: 50px;\n  height: 50px;\n  background: #4985FF;\n  opacity: 0.1;\n  border-radius: 50%;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n  position: absolute;\n  top: 45px;\n  left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n  margin-top: 25px;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 170%;\n  color: #06397D;\n}\n.service .service-list .service-single .head span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.service .service-list .service-single[data-v-f2b6376c]:last-of-type {\n  margin-left: 30px;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n  top: 38px;\n  left: 40px;\n}\n.service .service-list .service-single:last-of-type .head[data-v-f2b6376c] {\n  margin-top: 12px;\n}\n.description[data-v-f2b6376c] {\n  position: relative;\n  background: #FFFFFF;\n}\n.description .description-one[data-v-f2b6376c] {\n  position: relative;\n}\n.description .description-one .desc-left[data-v-f2b6376c] {\n  padding: 70px 20px 70px 18%;\n  width: 54%;\n  color: #06397D;\n}\n.description .description-one .desc-left div[data-v-f2b6376c] {\n  text-align: left;\n}\n.description .description-one .desc-left .head[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n}\n.description .description-one .desc-left .desc-list[data-v-f2b6376c] {\n  margin-top: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n  margin-top: 30px;\n}\n.description .description-one .desc-left .desc-list .desc-item .circle[data-v-f2b6376c] {\n  width: 50px;\n  height: 50px;\n  background: rgba(73, 133, 255, 0.1);\n  border-radius: 50%;\n  padding: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n  margin-left: 25px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 150%;\n  color: #06397D;\n}\n.description .description-one .desc-left .desc-list .desc-item div span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-one .desc-right[data-v-f2b6376c] {\n  position: relative;\n  margin-left: 6%;\n  width: 46%;\n  overflow: hidden;\n}\n.description .description-one .desc-right img[data-v-f2b6376c] {\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  min-height: 100%;\n  min-width: 100%;\n  transform: translate(-50%, -50%);\n}\n.description .description-two[data-v-f2b6376c] {\n  position: relative;\n  padding: 70px 18%;\n  background: #D6E6FF;\n}\n.description .description-two .dt-top .dt-header[data-v-f2b6376c] {\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n  color: #06397D;\n  width: 33%;\n}\n.description .description-two .dt-top .dt-sub[data-v-f2b6376c] {\n  width: calc(66% - 24px);\n  margin-left: 24px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 26px;\n  color: #06397D;\n  text-align: left;\n}\n.description .description-two .dt-list[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c] {\n  padding: 0 4px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  border-radius: 10px;\n  height: 100px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 24px;\n  align-items: center;\n  text-align: center;\n  color: #06397D;\n}\n.description .description-two .dt-list .dt-item span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module[data-v-f2b6376c] {\n  position: relative;\n  padding: 80px 18%;\n  background: #FCFCFC;\n}\n.module .module-header[data-v-f2b6376c] {\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 53px;\n  text-align: center;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.module .module-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: center;\n  color: #999999;\n}\n.module .module-list[data-v-f2b6376c] {\n  flex-wrap: wrap;\n  position: relative;\n  margin-top: 30px;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n  background: #FFFFFF;\n  padding: 20px;\n  height: 380px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  box-shadow: 0px 0px 15px #D8D8D8;\n  border-radius: 10px;\n}\n.module .module-list .module-single img[data-v-f2b6376c] {\n  height: 210px;\n  width: 100%;\n  background: rgba(233, 233, 233, 0.4);\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n  height: 120px;\n  margin-top: 30px;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 150%;\n  display: flex;\n  text-align: center;\n  justify-content: center;\n  align-items: center;\n  color: #06397D;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module .more-module[data-v-f2b6376c] {\n  display: none;\n  position: relative;\n  cursor: pointer;\n  width: 100%;\n  margin-top: 42px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.module .more-module span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.home-last[data-v-f2b6376c] {\n  position: relative;\n  height: 700px;\n  background: rgba(228, 233, 244, 0.2);\n  overflow: hidden;\n  padding: 80px 18% 0 18%;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #2D4C64;\n  margin-bottom: 15px;\n}\n.home-last .hl-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: center;\n  color: #2D4C64;\n}\n.home-last .start[data-v-f2b6376c] {\n  position: relative;\n  left: calc(50% - 125px);\n  cursor: pointer;\n  width: 250px;\n  margin-top: 40px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.home-last .start span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 42px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.home-last .start .circle[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 6px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  margin-top: 14px;\n}\n.home-last img[data-v-f2b6376c] {\n  margin-top: 100px;\n}\n.footer[data-v-f2b6376c] {\n  position: relative;\n  height: auto;\n  padding-bottom: 30px;\n  background: #FFFFFF;\n  padding-top: 40px;\n}\n.footer .footer-body[data-v-f2b6376c] {\n  position: relative;\n  width: 64%;\n  left: 18%;\n}\n.footer .footer-body .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  width: 160px;\n  height: 50px;\n  background: #F6F6F8;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n  width: 440px;\n  margin-left: 30px;\n}\n.footer .footer-body .f-mid .fm-head[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 15px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 22px;\n  color: #2D4C64;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c], .footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  display: flex;\n  color: #999999;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c] {\n  margin-top: 25px;\n}\n.footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n  margin-top: 40px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n  position: absolute;\n  right: 0;\n  width: 460px;\n}\n.footer .footer-body .f-right .fr-head[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 15px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 22px;\n  color: #2D4C64;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.footer .footer-body .f-right .contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.footer .footer-body .f-right .contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.footer .footer-body .f-right .contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n@media only screen and (max-width: 1480px) {\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    max-width: 420px;\n}\n}\n@media only screen and (min-width: 1520px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 760px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 585px;\n    right: 150px;\n}\n}\n@media only screen and (min-width: 1620px) {\n.module-list .module-single[data-v-f2b6376c] {\n    padding: 30px !important;\n    height: 380px;\n}\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 820px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 645px;\n}\n}\n@media only screen and (min-width: 1740px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 920px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 845px;\n}\n}\n@media only screen and (max-width: 1720px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    width: 410px;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n}\n@media only screen and (max-width: 1340px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 150px 12%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    padding: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 40px;\n    width: calc(100% - 80px);\n}\n.nav-bar .logo[data-v-f2b6376c] {\n    left: 10%;\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n    left: calc(10% + 146px);\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n    right: calc(10% + 110px + 120px);\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n    right: calc(10% + 110px);\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n    right: calc(10%);\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n    right: calc(10%);\n}\n.layout[data-v-f2b6376c] {\n    height: 560px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    top: 80px !important;\n    left: 18% !important;\n}\n.layout .layout-right .layout-img[data-v-f2b6376c] {\n    left: 46% !important;\n    top: 114px !important;\n    width: 520px !important;\n}\n.service[data-v-f2b6376c] {\n    height: 660px;\n    padding: 0 10%;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 20px 60px 10% !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.home-last[data-v-f2b6376c] {\n    height: 700px;\n    padding: 50px 10% 0 10% !important;\n}\n.footer[data-v-f2b6376c] {\n    padding-top: 30px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    width: 264px;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n    margin-top: 0;\n}\n}\n@media only screen and (max-width: 1120px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n.footer .footer-body .logo[data-v-f2b6376c] {\n    position: absolute;\n    left: 0;\n    top: 0;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-left: 20px;\n    margin-top: 50px;\n    width: 410px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    margin-top: 50px;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 25px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 40px;\n}\n}\n@media only screen and (max-width: 1020px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    width: 60%;\n    padding: 25px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 25px;\n    width: calc(100% - 50px);\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    width: 40%;\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n    display: block;\n}\n.nav-bar .slogan[data-v-f2b6376c], .nav-bar .contact-us[data-v-f2b6376c], .nav-bar .login-us[data-v-f2b6376c], .nav-bar .lang-us[data-v-f2b6376c] {\n    display: none;\n}\n.layout[data-v-f2b6376c] {\n    height: 480px !important;\n}\n.layout .layout-left[data-v-f2b6376c] {\n    width: 100% !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 60% !important;\n    top: 70px !important;\n    left: 20% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-weight: 700 !important;\n    font-size: 32px !important;\n    line-height: 52px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 25px !important;\n    height: 70px !important;\n    font-size: 16spx !important;\n    line-height: 23px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 36px !important;\n    height: 50px !important;\n}\n.layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n    font-size: 14px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 50px;\n}\n.service .service-list[data-v-f2b6376c] {\n    flex-direction: column !important;\n    margin-top: 25px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 30px;\n    height: 180px;\n    width: calc(100%);\n    margin-left: 0 !important;\n    margin-top: 20px;\n}\n.description-one[data-v-f2b6376c] {\n    flex-wrap: wrap;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    margin-left: 0 !important;\n    width: 100% !important;\n    height: 280px !important;\n}\n.description-two .dt-top[data-v-f2b6376c] {\n    flex-direction: column !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    text-align: left;\n    font-size: 32px;\n    line-height: 42px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    text-align: left;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 16px;\n    line-height: 26px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 24px;\n    margin-top: 24px;\n    width: calc(50% - 12px) !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 24px !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0 !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 32px !important;\n    margin-top: 32px !important;\n    width: calc(50% - 16px) !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 32px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0px !important;\n}\n}\n@media only screen and (max-width: 920px) {\n.service[data-v-f2b6376c] {\n    height: 700px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 200px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    left: 30px !important;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-left: 0;\n    width: 100%;\n    margin-top: 190px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    margin-top: 60px;\n    width: 100%;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n}\n@media only screen and (max-width: 836px) {\n.footer[data-v-f2b6376c] {\n    height: auto;\n    padding-bottom: 10px;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-left: 0;\n    width: 100%;\n    margin-top: 250px;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n    margin-top: 20px;\n}\n}\n@media only screen and (max-width: 640px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 550px;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    margin-top: 190px;\n    width: 100%;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n    margin-top: 16px;\n    font-size: 16px;\n    line-height: 130%;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n    margin-top: 10px;\n    margin-right: 20px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    position: absolute;\n    top: 0;\n    height: 190px;\n    width: 100%;\n}\n}\n@media only screen and (max-width: 620px) {\n.layout[data-v-f2b6376c] {\n    height: 440px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 80% !important;\n    top: 40px !important;\n    left: 10% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 42px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 15px !important;\n    height: 110px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 32px !important;\n}\n.layout .layout-left .layout-text .login[data-v-f2b6376c] {\n    margin-top: 10px !important;\n    flex-direction: column !important;\n}\n.layout .layout-left .layout-text .login span[data-v-f2b6376c], .layout .layout-left .layout-text .login div[data-v-f2b6376c] {\n    text-align: left !important;\n    margin-left: 0 !important;\n    margin-top: 10px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service[data-v-f2b6376c] {\n    height: 800px;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 40px;\n    font-size: 28px;\n}\n.service .service-sub[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 20px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 240px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    top: 45px;\n    left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n    margin-top: 25px;\n    font-size: 16px;\n    line-height: 140%;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n    margin-top: 16px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n    top: 30px !important;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-left .head[data-v-f2b6376c] {\n    font-weight: bold;\n    font-size: 28px !important;\n    line-height: 40px !important;\n}\n.description-one .desc-left .desc-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n    margin-top: 25px !important;\n}\n.description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n    margin-left: 20px !important;\n    font-size: 14px !important;\n    line-height: 140% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    height: 200px !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 14px;\n    line-height: 22px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 0 !important;\n    width: calc(100% ) !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.module .module-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.module .module-sub[data-v-f2b6376c] {\n    font-size: 16px;\n    line-height: 22px !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 0 !important;\n    margin-top: 32px !important;\n    width: calc(100%) !important;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n    height: 120px;\n    margin-top: 20px;\n    font-size: 16px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 0px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(-n+3) {\n    display: none !important;\n}\n.module .more-module[data-v-f2b6376c] {\n    display: flex !important;\n}\n.home-last[data-v-f2b6376c] {\n    height: 660px;\n    padding: 30px 10% 0 10% !important;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.home-last .hl-sub[data-v-f2b6376c] {\n    font-size: 16px !important;\n    line-height: 25px !important;\n}\n.home-last .start[data-v-f2b6376c] {\n    left: 0;\n    width: 100%;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 210px;\n}\n.footer .footer-body .f-mid .fm-head[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c], .footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n    font-size: 12px;\n    line-height: 16px;\n}\n.footer .footer-body .f-right .fr-head[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.footer .footer-body .f-right .contacts .contact .label[data-v-f2b6376c] {\n    text-align: left;\n    font-style: normal;\n    font-weight: 600;\n    font-size: 12px;\n    line-height: 18px;\n    color: #4985FF;\n}\n.footer .footer-body .f-right .contacts .contact .value[data-v-f2b6376c] {\n    margin-top: 5px;\n    text-align: left;\n    font-style: normal;\n    font-weight: normal;\n    font-size: 12px;\n    line-height: 18px;\n    color: #999999;\n}\n}\n@media only screen and (max-width: 444px) {\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 570px;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 260px;\n}\n}\n@media only screen and (max-width: 339px) {\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 276px;\n}\n}", ""]);
+exports.push([module.i, ".contact-modal[data-v-f2b6376c] {\n  z-index: 998;\n  width: 100%;\n  position: fixed;\n  height: 100%;\n  padding: 150px 20%;\n  background: rgba(45, 76, 100, 0.7);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n  position: relative;\n  padding: 0;\n  border-radius: 12px;\n  height: 500px;\n  background: #FFFFFF;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n  position: relative;\n  width: 54%;\n  padding: 50px;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 20px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 20px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n  position: absolute;\n  cursor: pointer;\n  bottom: 50px;\n  width: calc(100% - 100px);\n  height: 50px;\n  border-radius: 6px;\n  padding-top: 14px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n  width: 46%;\n  height: 100%;\n  overflow: hidden;\n  border-bottom-right-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.contact-modal .modal-body .modal-right img[data-v-f2b6376c] {\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.contact-modal .modal-body .modal-exit[data-v-f2b6376c] {\n  z-index: 999;\n  cursor: pointer;\n  position: absolute;\n  top: 25px;\n  right: 25px;\n}\n.nav-bar[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n  height: 100px;\n  background: #FFFFFF;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.nav-bar .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  left: 18%;\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n  position: absolute;\n  height: 50px;\n  top: 25px;\n  left: calc(18% + 146px);\n  width: 260px;\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 200px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px + 120px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .contact-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 8px;\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 105px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .login-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 95px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .lang-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n  transition: all 1s ease 0s;\n  z-index: 999;\n  position: absolute;\n  cursor: pointer;\n  width: 95px;\n  top: 76px;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  border-radius: 6px;\n  overflow: hidden;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c] {\n  text-align: left;\n  cursor: pointer;\n  height: 34px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 11px;\n  line-height: 13px;\n  color: #4985FF;\n  padding: 10px 15px;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c]:hover {\n  background: #4985FF;\n  color: #FFFFFF;\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n  display: none;\n  cursor: pointer;\n  position: absolute;\n  width: 48px;\n  height: 42px;\n  top: 30px;\n  right: calc(10%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n}\n.main .layout[data-v-f2b6376c] {\n  background: #FFFFFF;\n  position: relative;\n  height: 720px;\n}\n.main .layout .layout-left[data-v-f2b6376c] {\n  position: relative;\n  width: 56%;\n  background-image: linear-gradient(rgba(196, 196, 196, 0.4), rgba(196, 196, 196, 0.4)), url(\"/images/layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .layout .layout-left .layout-text[data-v-f2b6376c] {\n  width: 460px;\n  position: relative;\n  top: 160px;\n  left: 32%;\n  color: #06397D;\n}\n.main .layout .layout-left .layout-text .header[data-v-f2b6376c] {\n  text-align: left;\n  font-weight: 800;\n  font-size: 42px;\n  line-height: 56px;\n}\n.main .layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n  margin-top: 30px;\n  text-align: left;\n  height: 77px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n}\n.main .layout .layout-left .layout-text .join[data-v-f2b6376c] {\n  cursor: pointer;\n  width: 250px;\n  margin-top: 54px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .layout .layout-left .layout-text .join .circle[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 6px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  margin-top: 14px;\n}\n.main .layout .layout-left .layout-text .login[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .layout .layout-left .layout-text .login .go-login[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 10px;\n  font-weight: 600;\n  -webkit-text-decoration-line: underline;\n          text-decoration-line: underline;\n  color: #4985FF;\n}\n.main .layout .layout-right[data-v-f2b6376c] {\n  background: #FFFFFF;\n}\n.main .layout .layout-right .layout-img[data-v-f2b6376c] {\n  width: 720px;\n  position: absolute;\n  left: 44%;\n  top: 114px;\n}\n.main .layout .layout-right .layout-img-in[data-v-f2b6376c] {\n  width: 555px;\n  position: absolute;\n  left: 44%;\n  top: 138px;\n}\n.service[data-v-f2b6376c] {\n  position: relative;\n  height: 700px;\n  background: #D6E6FF;\n  padding: 0 18%;\n}\n.service .service-header[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 80px;\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.service .service-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: left;\n  color: #06397D;\n}\n.service .service-list[data-v-f2b6376c] {\n  position: relative;\n  margin-top: 45px;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n  position: relative;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 10px;\n  padding: 0 30px;\n  height: 240px;\n  width: calc(50% - 15px);\n}\n.service .service-list .service-single div[data-v-f2b6376c] {\n  text-align: left;\n}\n.service .service-list .service-single .circle[data-v-f2b6376c] {\n  margin-top: 8px;\n  width: 50px;\n  height: 50px;\n  background: #4985FF;\n  opacity: 0.1;\n  border-radius: 50%;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n  position: absolute;\n  top: 45px;\n  left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n  margin-top: 25px;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 170%;\n  color: #06397D;\n}\n.service .service-list .service-single .head span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.service .service-list .service-single[data-v-f2b6376c]:last-of-type {\n  margin-left: 30px;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n  top: 38px;\n  left: 40px;\n}\n.service .service-list .service-single:last-of-type .head[data-v-f2b6376c] {\n  margin-top: 12px;\n}\n.description[data-v-f2b6376c] {\n  position: relative;\n  background: #FFFFFF;\n}\n.description .description-one[data-v-f2b6376c] {\n  position: relative;\n}\n.description .description-one .desc-left[data-v-f2b6376c] {\n  padding: 70px 20px 70px 18%;\n  width: 54%;\n  color: #06397D;\n}\n.description .description-one .desc-left div[data-v-f2b6376c] {\n  text-align: left;\n}\n.description .description-one .desc-left .head[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n}\n.description .description-one .desc-left .desc-list[data-v-f2b6376c] {\n  margin-top: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n  margin-top: 30px;\n}\n.description .description-one .desc-left .desc-list .desc-item .circle[data-v-f2b6376c] {\n  width: 50px;\n  height: 50px;\n  background: rgba(73, 133, 255, 0.1);\n  border-radius: 50%;\n  padding: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n  margin-left: 25px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 150%;\n  color: #06397D;\n}\n.description .description-one .desc-left .desc-list .desc-item div span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-one .desc-right[data-v-f2b6376c] {\n  position: relative;\n  margin-left: 6%;\n  width: 46%;\n  overflow: hidden;\n}\n.description .description-one .desc-right img[data-v-f2b6376c] {\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  min-height: 100%;\n  min-width: 100%;\n  transform: translate(-50%, -50%);\n}\n.description .description-two[data-v-f2b6376c] {\n  position: relative;\n  padding: 70px 18%;\n  background: #D6E6FF;\n}\n.description .description-two .dt-top .dt-header[data-v-f2b6376c] {\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n  color: #06397D;\n  width: 33%;\n}\n.description .description-two .dt-top .dt-sub[data-v-f2b6376c] {\n  width: calc(66% - 24px);\n  margin-left: 24px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 26px;\n  color: #06397D;\n  text-align: left;\n}\n.description .description-two .dt-list[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c] {\n  padding: 0 4px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  border-radius: 10px;\n  height: 100px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 24px;\n  align-items: center;\n  text-align: center;\n  color: #06397D;\n}\n.description .description-two .dt-list .dt-item span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module[data-v-f2b6376c] {\n  position: relative;\n  padding: 80px 18%;\n  background: #FCFCFC;\n}\n.module .module-header[data-v-f2b6376c] {\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 53px;\n  text-align: center;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.module .module-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: center;\n  color: #999999;\n}\n.module .module-list[data-v-f2b6376c] {\n  flex-wrap: wrap;\n  position: relative;\n  margin-top: 30px;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n  background: #FFFFFF;\n  padding: 20px;\n  height: 380px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  box-shadow: 0px 0px 15px #D8D8D8;\n  border-radius: 10px;\n}\n.module .module-list .module-single img[data-v-f2b6376c] {\n  height: 210px;\n  width: 100%;\n  background: rgba(233, 233, 233, 0.4);\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n  height: 120px;\n  margin-top: 30px;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 150%;\n  display: flex;\n  text-align: center;\n  justify-content: center;\n  align-items: center;\n  color: #06397D;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module .more-module[data-v-f2b6376c] {\n  display: none;\n  position: relative;\n  cursor: pointer;\n  width: 100%;\n  margin-top: 42px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.module .more-module span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.home-last[data-v-f2b6376c] {\n  position: relative;\n  height: 700px;\n  background: rgba(228, 233, 244, 0.2);\n  overflow: hidden;\n  padding: 80px 18% 0 18%;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #2D4C64;\n  margin-bottom: 15px;\n}\n.home-last .hl-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: center;\n  color: #2D4C64;\n}\n.home-last .start[data-v-f2b6376c] {\n  position: relative;\n  left: calc(50% - 125px);\n  cursor: pointer;\n  width: 250px;\n  margin-top: 40px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.home-last .start span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 42px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.home-last .start .circle[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 6px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  margin-top: 14px;\n}\n.home-last img[data-v-f2b6376c] {\n  margin-top: 100px;\n}\n.footer[data-v-f2b6376c] {\n  position: relative;\n  height: auto;\n  padding-bottom: 30px;\n  background: #FFFFFF;\n  padding-top: 40px;\n}\n.footer .footer-body[data-v-f2b6376c] {\n  position: relative;\n  width: 64%;\n  left: 18%;\n}\n.footer .footer-body .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  width: 160px;\n  height: 50px;\n  background: #F6F6F8;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n  width: 440px;\n  margin-left: 30px;\n}\n.footer .footer-body .f-mid .fm-head[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 15px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 22px;\n  color: #2D4C64;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c], .footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  display: flex;\n  color: #999999;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c] {\n  margin-top: 25px;\n}\n.footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n  margin-top: 40px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n  position: absolute;\n  right: 0;\n  width: 460px;\n}\n.footer .footer-body .f-right .fr-head[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 15px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 22px;\n  color: #2D4C64;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.footer .footer-body .f-right .contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.footer .footer-body .f-right .contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.footer .footer-body .f-right .contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n@media only screen and (max-width: 1480px) {\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    max-width: 420px;\n}\n}\n@media only screen and (min-width: 1520px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 760px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 585px;\n    right: 150px;\n}\n}\n@media only screen and (min-width: 1620px) {\n.module-list .module-single[data-v-f2b6376c] {\n    padding: 30px !important;\n    height: 380px;\n}\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 820px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 645px;\n}\n}\n@media only screen and (min-width: 1740px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 920px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 845px;\n}\n}\n@media only screen and (max-width: 1720px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    width: 410px;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n}\n@media only screen and (max-width: 1340px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 150px 12%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    padding: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 40px;\n    width: calc(100% - 80px);\n}\n.nav-bar .logo[data-v-f2b6376c] {\n    left: 10%;\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n    left: calc(10% + 146px);\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n    right: calc(10% + 110px + 120px);\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n    right: calc(10% + 110px);\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n    right: calc(10%);\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n    right: calc(10%);\n}\n.layout[data-v-f2b6376c] {\n    height: 560px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    top: 80px !important;\n    left: 18% !important;\n}\n.layout .layout-right .layout-img[data-v-f2b6376c] {\n    left: 46% !important;\n    top: 114px !important;\n    width: 520px !important;\n}\n.service[data-v-f2b6376c] {\n    height: 660px;\n    padding: 0 10%;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 20px 60px 10% !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.home-last[data-v-f2b6376c] {\n    height: 700px;\n    padding: 50px 10% 0 10% !important;\n}\n.footer[data-v-f2b6376c] {\n    padding-top: 30px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    width: 264px;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n    margin-top: 0;\n}\n}\n@media only screen and (max-width: 1120px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n.footer .footer-body .logo[data-v-f2b6376c] {\n    position: absolute;\n    left: 0;\n    top: 0;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-left: 20px;\n    margin-top: 50px;\n    width: 410px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    margin-top: 50px;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 25px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 40px;\n}\n}\n@media only screen and (max-width: 1020px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    width: 60%;\n    padding: 25px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 25px;\n    width: calc(100% - 50px);\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    width: 40%;\n}\n.side-menu[data-v-f2b6376c] {\n    position: fixed;\n    height: 100%;\n    z-index: 999;\n    width: 100%;\n}\n.side-menu .side-left[data-v-f2b6376c] {\n    padding-left: 12.5%;\n    padding-right: 12.5%;\n    height: 100%;\n    width: 80%;\n    background: #FFFFFF;\n    font-size: 16px;\n    line-height: 50px;\n    color: #06397D;\n    font-weight: 500;\n}\n.side-menu .side-left .side-top[data-v-f2b6376c] {\n    display: flex;\n    flex-direction: row;\n}\n.side-menu .side-left .side-top .logo[data-v-f2b6376c] {\n    cursor: pointer;\n    position: relative;\n    width: 160px;\n    height: 50px;\n    top: 25px;\n    background: #F6F6F8;\n}\n.side-menu .side-left .side-top .slogan[data-v-f2b6376c] {\n    position: relative;\n    height: 50px;\n    top: 25px;\n    left: calc(10%);\n    width: 260px;\n}\n.side-menu .side-left .side-slogan[data-v-f2b6376c] {\n    display: none;\n}\n.side-menu .side-left .side-head[data-v-f2b6376c] {\n    margin-top: 95px;\n    text-align: left;\n    font-weight: 600;\n    font-size: 18px;\n    line-height: 22px;\n    color: #2D4C64;\n}\n.side-menu .side-left .side-text[data-v-f2b6376c] {\n    text-align: left;\n    margin-top: 15px;\n    font-weight: normal;\n    font-size: 14px;\n    line-height: 158.47%;\n    color: #999999;\n}\n.side-menu .side-left .side-btns[data-v-f2b6376c] {\n    flex-wrap: wrap;\n    position: relative;\n    margin-top: 45px;\n}\n.side-menu .side-left .side-btns .contact-us[data-v-f2b6376c] {\n    margin-left: 12px;\n    cursor: pointer;\n    width: 200px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .contact-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 8px;\n}\n.side-menu .side-left .side-btns .login-us[data-v-f2b6376c] {\n    margin-left: 12px;\n    cursor: pointer;\n    width: 105px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .login-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 6px;\n}\n.side-menu .side-left .side-btns .lang-us[data-v-f2b6376c] {\n    z-index: 99;\n    cursor: pointer;\n    width: 95px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .lang-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 6px;\n}\n.side-menu .side-left .side-btns .lang-list[data-v-f2b6376c] {\n    position: absolute;\n    top: 46px;\n    transition: all 1s ease 0s;\n    z-index: 999;\n    cursor: pointer;\n    width: 95px;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    border-radius: 6px;\n    overflow: hidden;\n}\n.side-menu .side-left .side-btns .lang-list .lang-item[data-v-f2b6376c] {\n    text-align: left;\n    cursor: pointer;\n    height: 34px;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 11px;\n    line-height: 13px;\n    color: #4985FF;\n    padding: 10px 15px;\n}\n.side-menu .side-left .side-btns .lang-list .lang-item[data-v-f2b6376c]:hover {\n    background: #4985FF;\n    color: #FFFFFF;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    position: relative;\n    width: 20%;\n    height: 100%;\n    background: #2D4C64;\n    opacity: 0.7;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    position: absolute;\n    width: 48px;\n    height: 42px;\n    top: 39px;\n    right: calc(50%);\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n    display: block;\n}\n.nav-bar .contact-us[data-v-f2b6376c], .nav-bar .login-us[data-v-f2b6376c], .nav-bar .lang-us[data-v-f2b6376c] {\n    display: none;\n}\n.layout[data-v-f2b6376c] {\n    height: 480px !important;\n}\n.layout .layout-left[data-v-f2b6376c] {\n    width: 100% !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 60% !important;\n    top: 70px !important;\n    left: 20% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-weight: 700 !important;\n    font-size: 32px !important;\n    line-height: 52px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 25px !important;\n    height: 70px !important;\n    font-size: 16spx !important;\n    line-height: 23px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 36px !important;\n    height: 50px !important;\n}\n.layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n    font-size: 14px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 50px;\n}\n.service .service-list[data-v-f2b6376c] {\n    flex-direction: column !important;\n    margin-top: 25px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 30px;\n    height: 180px;\n    width: calc(100%);\n    margin-left: 0 !important;\n    margin-top: 20px;\n}\n.description-one[data-v-f2b6376c] {\n    flex-wrap: wrap;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    margin-left: 0 !important;\n    width: 100% !important;\n    height: 280px !important;\n}\n.description-two .dt-top[data-v-f2b6376c] {\n    flex-direction: column !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    text-align: left;\n    font-size: 32px;\n    line-height: 42px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    text-align: left;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 16px;\n    line-height: 26px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 24px;\n    margin-top: 24px;\n    width: calc(50% - 12px) !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 24px !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0 !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 32px !important;\n    margin-top: 32px !important;\n    width: calc(50% - 16px) !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 32px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0px !important;\n}\n}\n@media only screen and (max-width: 920px) {\n.service[data-v-f2b6376c] {\n    height: 700px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 200px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    left: 30px !important;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-left: 0;\n    width: 100%;\n    margin-top: 190px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    margin-top: 60px;\n    width: 100%;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n}\n@media only screen and (max-width: 836px) {\n.footer[data-v-f2b6376c] {\n    height: auto;\n    padding-bottom: 10px;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-left: 0;\n    width: 100%;\n    margin-top: 250px;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n    margin-top: 20px;\n}\n}\n@media only screen and (max-width: 770px) {\n.side-menu .side-left .side-btns .contact-us[data-v-f2b6376c] {\n    margin-left: 0;\n    margin-top: 15px;\n    width: 212px;\n}\n.side-menu .side-left .side-btns .contact-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 12px;\n}\n}\n@media only screen and (max-width: 640px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 550px;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    margin-top: 190px;\n    width: 100%;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n    margin-top: 16px;\n    font-size: 16px;\n    line-height: 130%;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n    margin-top: 10px;\n    margin-right: 20px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    position: absolute;\n    top: 0;\n    height: 190px;\n    width: 100%;\n}\n}\n@media only screen and (max-width: 620px) {\n.slogan[data-v-f2b6376c] {\n    display: none;\n}\n.side-menu .side-left[data-v-f2b6376c] {\n    width: 76%;\n}\n.side-menu .side-left .side-top .slogan[data-v-f2b6376c] {\n    height: 50px;\n    top: 25px;\n    left: calc(10%);\n    width: 260px;\n}\n.side-menu .side-left .side-slogan[data-v-f2b6376c] {\n    text-align: left;\n    display: block;\n    font-size: 16px;\n    line-height: 50px;\n    color: #06397D;\n    font-weight: 500;\n    height: 50px;\n    margin-top: 35px;\n    width: 260px;\n}\n.side-menu .side-left .side-head[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    width: 24%;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    top: 39px;\n    right: calc(20%);\n}\n.menu-btn[data-v-f2b6376c] {\n    right: calc(5%) !important;\n}\n.layout[data-v-f2b6376c] {\n    height: 440px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 80% !important;\n    top: 40px !important;\n    left: 10% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 42px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 15px !important;\n    height: 110px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 32px !important;\n}\n.layout .layout-left .layout-text .login[data-v-f2b6376c] {\n    margin-top: 10px !important;\n    flex-direction: column !important;\n}\n.layout .layout-left .layout-text .login span[data-v-f2b6376c], .layout .layout-left .layout-text .login div[data-v-f2b6376c] {\n    text-align: left !important;\n    margin-left: 0 !important;\n    margin-top: 10px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service[data-v-f2b6376c] {\n    height: 800px;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 40px;\n    font-size: 28px;\n}\n.service .service-sub[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 20px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 240px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    top: 45px;\n    left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n    margin-top: 25px;\n    font-size: 16px;\n    line-height: 140%;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n    margin-top: 16px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n    top: 30px !important;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-left .head[data-v-f2b6376c] {\n    font-weight: bold;\n    font-size: 28px !important;\n    line-height: 40px !important;\n}\n.description-one .desc-left .desc-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n    margin-top: 25px !important;\n}\n.description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n    margin-left: 20px !important;\n    font-size: 14px !important;\n    line-height: 140% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    height: 200px !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 14px;\n    line-height: 22px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 0 !important;\n    width: calc(100% ) !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.module .module-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.module .module-sub[data-v-f2b6376c] {\n    font-size: 16px;\n    line-height: 22px !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 0 !important;\n    margin-top: 32px !important;\n    width: calc(100%) !important;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n    height: 120px;\n    margin-top: 20px;\n    font-size: 16px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 0px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(-n+3) {\n    display: none !important;\n}\n.module .more-module[data-v-f2b6376c] {\n    display: flex !important;\n}\n.home-last[data-v-f2b6376c] {\n    height: 660px;\n    padding: 30px 10% 0 10% !important;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.home-last .hl-sub[data-v-f2b6376c] {\n    font-size: 16px !important;\n    line-height: 25px !important;\n}\n.home-last .start[data-v-f2b6376c] {\n    left: 0;\n    width: 100%;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 210px;\n}\n.footer .footer-body .f-mid .fm-head[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.footer .footer-body .f-mid .fm-sub[data-v-f2b6376c], .footer .footer-body .f-mid .fm-foot[data-v-f2b6376c] {\n    font-size: 12px;\n    line-height: 16px;\n}\n.footer .footer-body .f-right .fr-head[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.footer .footer-body .f-right .contacts .contact .label[data-v-f2b6376c] {\n    text-align: left;\n    font-style: normal;\n    font-weight: 600;\n    font-size: 12px;\n    line-height: 18px;\n    color: #4985FF;\n}\n.footer .footer-body .f-right .contacts .contact .value[data-v-f2b6376c] {\n    margin-top: 5px;\n    text-align: left;\n    font-style: normal;\n    font-weight: normal;\n    font-size: 12px;\n    line-height: 18px;\n    color: #999999;\n}\n}\n@media only screen and (max-width: 444px) {\n.side-menu .side-left[data-v-f2b6376c] {\n    padding-left: 5%;\n    padding-right: 5%;\n    width: 80%;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    width: 20%;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    right: calc(25%);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 570px;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 260px;\n}\n}\n@media only screen and (max-width: 339px) {\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 276px;\n}\n}", ""]);
 
 // exports
 
@@ -3102,6 +3459,44 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "@charset \"UTF-8\";\n.main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(14%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 680px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  height: 56px;\n  position: relative;\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 20px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form[data-v-97358ae4] {\n  margin-top: 12px;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form .err-text[data-v-97358ae4] {\n  line-height: 1.2;\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .register .reg-form .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 25px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form[data-v-97358ae4], .main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 15px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4], .main .register .reg-form .text-form-hide .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  display: none;\n  margin-top: 0;\n}\n.main .register .reg-form .info-extra[data-v-97358ae4] {\n  top: 214px;\n  width: 420px;\n  left: 470px;\n  position: absolute;\n  z-index: 100;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  /* активный элемент */\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n  border-radius: 10px;\n  padding: 20px 25px;\n}\n.main .register .reg-form .info-extra .exit-icon[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  right: 25px;\n  top: 20px;\n}\n.main .register .reg-form .info-extra .head-text[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra .sub-head-text[data-v-97358ae4] {\n  margin-top: 20px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 15px;\n  line-height: 170%;\n  display: flex;\n  align-items: center;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra ul[data-v-97358ae4] {\n  margin-top: 5px;\n  padding-left: 0;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4] {\n  list-style: none;\n  text-align: left;\n  margin-top: 10px;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4]:before {\n  margin-right: 15px;\n  content: \"\";\n  display: inline-block;\n  background: #4985FF;\n  height: 10px;\n  width: 10px;\n  border-radius: 50%;\n  padding-left: 0;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  cursor: pointer;\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .register .reg-form .info-mark[data-v-97358ae4] {\n  cursor: pointer;\n  padding: 8px;\n  position: absolute;\n  top: 38px;\n  z-index: 99;\n  left: calc(100% + 15px);\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n  background: #FFFFFF;\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n@media screen and (max-width: 1420px) {\n.register[data-v-97358ae4] {\n    height: 720px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 88px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    position: absolute;\n    right: auto;\n    left: 0;\n    top: 42px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1320px) {\n.logo[data-v-97358ae4] {\n    left: calc(8%) !important;\n}\n.register[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 425px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 425px;\n    height: 100%;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1120px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1020px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 14px !important;\n}\n.reg-form .flex-row[data-v-97358ae4] {\n    flex-wrap: wrap;\n}\n.reg-form .input-form[data-v-97358ae4] {\n    margin-top: 10px !important;\n    width: 100% !important;\n}\n.reg-form .row-last .input-form[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.reg-form .row-last .text-form[data-v-97358ae4] {\n    display: none;\n}\n.reg-form .row-last .text-form-hide[data-v-97358ae4] {\n    display: block !important;\n}\n.reg-form .row-last .text-form-hide label[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 558px !important;\n    width: 420px;\n    left: calc(100% - 440px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    font-size: 14px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 13px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 385px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 385px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 920px) {\n.confirm .left[data-v-97358ae4] {\n    max-width: 285px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 285px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 720px) {\n.logo[data-v-97358ae4] {\n    left: calc(20px) !important;\n}\n.register[data-v-97358ae4] {\n    height: 1060px !important;\n    width: calc(100% - 40px) !important;\n    margin: 0 20px;\n    padding: 15px 20px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    text-align: left !important;\n    height: 130px !important;\n    flex-direction: column !important;\n}\n.register .reg-top .header[data-v-97358ae4] {\n    text-align: left;\n    font-size: 26px !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    position: absolute;\n    top: 84px;\n}\n.register .dis-d .step[data-v-97358ae4] {\n    margin-left: 0 !important;\n    font-size: 22px !important;\n    line-height: 36px !important;\n}\n.register .dis-d .one[data-v-97358ae4], .register .dis-d .two[data-v-97358ae4] {\n    margin-left: 20px !important;\n    font-size: 20px !important;\n    line-height: 34px !important;\n    height: 34px !important;\n    width: 34px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 42px;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 580px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 240px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 240px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -90px;\n    padding: 15px 20px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 0 !important;\n    font-size: 26px !important;\n    line-height: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 14px !important;\n    font-size: 14px !important;\n    left: 20px !important;\n    line-height: 22px !important;\n}\n.confirm .right .sub-l[data-v-97358ae4] {\n    bottom: 85px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 20px !important;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 620px) {\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1090px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 164px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 52px;\n    flex-wrap: wrap;\n}\n.register .reg-top-r label[data-v-97358ae4], .register .reg-top-r span[data-v-97358ae4] {\n    text-align: left !important;\n    width: 100%;\n    line-height: 18px !important;\n    margin-left: 0 !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    top: 120px;\n}\n.input-form[data-v-97358ae4] {\n    margin-right: 0 !important;\n}\n#doc[data-v-97358ae4] {\n    margin-right: 50px !important;\n}\n.info-mark[data-v-97358ae4] {\n    left: calc(100% - 30px) !important;\n}\n.val[data-v-97358ae4] {\n    width: calc(100%) !important;\n    font-size: 14px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n}\n@media screen and (max-width: 520px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1120px !important;\n}\n.reg-top-r label[data-v-97358ae4], .reg-top-r span[data-v-97358ae4] {\n    font-size: 13px !important;\n    line-height: 18px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 11px !important;\n}\n.check-form input[data-v-97358ae4] {\n    /* IE */\n    /* FF */\n    /* Safari and Chrome */\n    /* Opera */\n    transform: scale(1.2) !important;\n}\n.check-form .label[data-v-97358ae4] {\n    margin-left: 15px !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n    width: 280px !important;\n    left: calc(100% - 270px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    width: calc(100% - 40px);\n    font-size: 12px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 11px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 10px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n.confirm .right .header[data-v-97358ae4] {\n    font-size: 22px !important;\n    line-height: 28px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 20px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".main[data-v-4af75674] {\n  position: relative;\n  width: 100%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .logo[data-v-4af75674] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(20%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  z-index: 99;\n}\n.main .contact-modal[data-v-4af75674] {\n  z-index: 998;\n  width: 100%;\n  position: fixed;\n  height: 100%;\n  padding: 100px 20%;\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .contact-modal .modal-body[data-v-4af75674] {\n  position: relative;\n  padding: 50px;\n  border-radius: 12px;\n  background: #FFFFFF;\n}\n.main .contact-modal .modal-body .head[data-v-4af75674] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n}\n.main .contact-modal .modal-body .welcome[data-v-4af75674] {\n  margin-top: 21px;\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.main .contact-modal .modal-body .text-top[data-v-4af75674] {\n  margin-top: 15px;\n  text-align: left;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.main .contact-modal .modal-body .reset-pwd[data-v-4af75674] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  width: 350px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .contact-modal .modal-body .text-bot[data-v-4af75674] {\n  margin-top: 40px;\n  text-align: left;\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.main .contact-modal .modal-body .line[data-v-4af75674] {\n  margin-top: 20px;\n  margin-bottom: 20px;\n  border: 1px solid #4985FF;\n}\n.main .contact-modal .modal-body .text-foot[data-v-4af75674] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n@media screen and (max-width: 1020px) {\n.modal-body[data-v-4af75674] {\n    padding: 40px !important;\n}\n.modal-body .head[data-v-4af75674] {\n    font-size: 28px !important;\n    line-height: 126.28% !important;\n}\n.modal-body .reset-pwd[data-v-4af75674] {\n    width: 280px !important;\n}\n}\n@media screen and (max-width: 720px) {\n.logo[data-v-4af75674] {\n    left: calc(12%) !important;\n}\n.contact-modal[data-v-4af75674] {\n    padding: 100px 12% !important;\n}\n.modal-body .welcome[data-v-4af75674] {\n    margin-top: 16px !important;\n}\n.modal-body .text-top[data-v-4af75674] {\n    margin-top: 12px !important;\n}\n.modal-body .reset-pwd[data-v-4af75674] {\n    width: 280px !important;\n    margin-top: 25px !important;\n}\n.modal-body .text-bot[data-v-4af75674] {\n    margin-top: 25px !important;\n}\n.modal-body .line[data-v-4af75674] {\n    margin-top: 15px !important;\n    margin-bottom: 15px !important;\n}\n}\n@media screen and (max-width: 520px) {\n.logo[data-v-4af75674] {\n    left: calc(6%) !important;\n}\n.contact-modal[data-v-4af75674] {\n    padding: 100px 6% !important;\n}\n.modal-body[data-v-4af75674] {\n    padding: 30px !important;\n}\n.modal-body .head[data-v-4af75674] {\n    font-size: 24px !important;\n}\n.modal-body .welcome[data-v-4af75674] {\n    font-size: 14px !important;\n}\n.modal-body .text-top[data-v-4af75674] {\n    font-size: 12px !important;\n}\n.modal-body .reset-pwd[data-v-4af75674] {\n    width: 200px !important;\n    font-size: 14px !important;\n}\n.modal-body .text-bot[data-v-4af75674] {\n    line-height: 140% !important;\n}\n.modal-body .text-foot[data-v-4af75674] {\n    line-height: 140% !important;\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".main[data-v-16f6efa3] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-16f6efa3] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(19%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  z-index: 99;\n}\n.main .login-left[data-v-16f6efa3] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-16f6efa3] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-16f6efa3] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 30px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .sub-head[data-v-16f6efa3] {\n  font-weight: normal;\n  font-size: 18px;\n  line-height: 170%;\n  text-align: left;\n  color: #06397D;\n}\n.main .login-left .login-text .input-form[data-v-16f6efa3] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-16f6efa3] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-16f6efa3] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-16f6efa3] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-16f6efa3] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-16f6efa3] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-16f6efa3] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-16f6efa3] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-16f6efa3] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-16f6efa3] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-16f6efa3] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .login-enter[data-v-16f6efa3] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-16f6efa3] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-16f6efa3], .main .login-left .login-text .login-last .right[data-v-16f6efa3] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-16f6efa3] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-16f6efa3] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/reset-pwd.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n@media screen and (max-width: 1420px) {\n.login-left[data-v-16f6efa3] {\n    width: 58% !important;\n}\n.login-left .login-text[data-v-16f6efa3] {\n    left: 33% !important;\n}\n.login-right[data-v-16f6efa3] {\n    width: 42% !important;\n}\n}\n@media screen and (max-width: 1020px) {\n.logo[data-v-16f6efa3] {\n    left: calc(50% - 160px) !important;\n}\n.login-left[data-v-16f6efa3] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-16f6efa3] {\n    margin: 0 auto;\n    left: auto !important;\n}\n.login-left .login-text .head[data-v-16f6efa3] {\n    font-size: 28px !important;\n}\n.login-left .login-text .sub-head[data-v-16f6efa3] {\n    font-size: 16px !important;\n}\n.login-left .login-text .input-form .label[data-v-16f6efa3] {\n    font-size: 15px !important;\n}\n.login-left .login-text .input-form input[data-v-16f6efa3] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .check-form .label[data-v-16f6efa3] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-enter[data-v-16f6efa3] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-last[data-v-16f6efa3] {\n    font-size: 15px !important;\n}\n.login-right[data-v-16f6efa3] {\n    width: 0 !important;\n}\n}\n@media screen and (max-width: 520px) {\n.logo[data-v-16f6efa3] {\n    left: calc(50% - 130px) !important;\n}\n.login-left[data-v-16f6efa3] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-16f6efa3] {\n    top: 140px !important;\n    left: auto !important;\n    width: 260px !important;\n}\n.login-left .login-text .head[data-v-16f6efa3] {\n    font-size: 24px !important;\n}\n.login-left .login-text .sub-head[data-v-16f6efa3] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .input-form .label[data-v-16f6efa3] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form input[data-v-16f6efa3] {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::-webkit-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::-moz-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] :-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-16f6efa3] ::placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .check-form[data-v-16f6efa3] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .check-form .label[data-v-16f6efa3] {\n    font-size: 12px !important;\n}\n.login-left .login-text .login-enter[data-v-16f6efa3] {\n    margin-top: 30px !important;\n    font-size: 12px !important;\n}\n.login-left .login-text .login-last[data-v-16f6efa3] {\n    font-size: 12px !important;\n}\n}", ""]);
 
 // exports
 
@@ -3618,6 +4013,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home.vue?vue&type=style&index=0&id=f2b6376c&lang=scss&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home.vue?vue&type=style&index=0&id=f2b6376c&lang=scss&scoped=true& ***!
@@ -3687,6 +4112,66 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Register.vue?vue&type=style&index=0&id=97358ae4&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Register.vue?vue&type=style&index=0&id=97358ae4&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -4337,6 +4822,156 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=template&id=573ad198&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forget.vue?vue&type=template&id=573ad198&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "main flex-row" }, [
+    _c(
+      "div",
+      {
+        staticClass: "logo",
+        on: {
+          click: function($event) {
+            return _vm.$router.push({ name: "home" })
+          }
+        }
+      },
+      [_vm._v("DARIS")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "login-left" }, [
+      _c("div", { staticClass: "login-text" }, [
+        _c("div", { staticClass: "head" }, [_vm._v("Восстановление пароля")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "sub-head" }, [
+          _vm._v(
+            "Введите свой регистрационный email.\n                Мы отправим вам письмо для восстановления пароля"
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-form flex-col" }, [
+          _c("label", { staticClass: "label" }, [
+            _vm._v("Ваш электронный адрес")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.email,
+                expression: "email"
+              }
+            ],
+            attrs: {
+              type: "text",
+              id: "email",
+              placeholder: "Ваш электронный адрес"
+            },
+            domProps: { value: _vm.email },
+            on: {
+              keyup: function($event) {
+                return _vm.validateForm($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "err", attrs: { id: "err-email" } }, [
+            _c(
+              "svg",
+              {
+                attrs: {
+                  width: "4",
+                  height: "13",
+                  viewBox: "0 0 4 13",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                    fill: "#E4002F"
+                  }
+                })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "login-enter",
+            on: {
+              click: function($event) {
+                return _vm.logIn()
+              }
+            }
+          },
+          [_vm._v("Восстановить пароль ")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "login-last flex-row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "left",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "register" })
+                }
+              }
+            },
+            [_vm._v("Регистрация")]
+          ),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "right",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "login" })
+                }
+              }
+            },
+            [_vm._v("Авторизация")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "login-right" })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home.vue?vue&type=template&id=f2b6376c&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home.vue?vue&type=template&id=f2b6376c&scoped=true& ***!
@@ -4428,6 +5063,358 @@ var render = function() {
             ]),
             _vm._v(" "),
             _vm._m(1)
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.sideMenu
+      ? _c("div", { staticClass: "side-menu flex-row" }, [
+          _c("div", { staticClass: "side-left flex-col" }, [
+            _c("div", { staticClass: "side-top flex-row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "logo",
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push({ name: "home" })
+                    }
+                  }
+                },
+                [_vm._v("DARIS")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "slogan" }, [
+                _vm._v("Экономим ваше время!")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "side-slogan" }, [
+              _vm._v("Экономим ваше время!")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "side-head" }, [_vm._v("О компании")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "side-text" }, [
+              _vm._v(
+                "Аутсорсинговая компания, оказывающая широкий спектр услуг по заключению Договоров и выполнению взаиморасчетов за оказанные Услуги. "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "side-btns flex-row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "lang-us flex-row",
+                  on: {
+                    click: function($event) {
+                      _vm.showCountry = true
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticStyle: { margin: "12px 0 auto 15px" },
+                      attrs: {
+                        width: "14",
+                        height: "14",
+                        viewBox: "0 0 14 14",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("g", { attrs: { "clip-path": "url(#clip0)" } }, [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M8.98866 10.0529C8.9334 9.98745 8.8511 9.94971 8.7645 9.94971H5.23601C5.14941 9.94971 5.0671 9.98745 5.01184 10.0529C4.95631 10.1183 4.9335 10.2045 4.94917 10.2881C5.36846 12.5178 6.17368 13.9585 7.00025 13.9585C7.82683 13.9585 8.63205 12.5178 9.05131 10.2881C9.06698 10.2045 9.0442 10.1183 8.98866 10.0529Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M13.6672 4.995C13.6288 4.87643 13.5166 4.7959 13.3895 4.7959H10.1052C10.0229 4.7959 9.94426 4.83002 9.88899 4.89012C9.83346 4.95025 9.80669 5.03049 9.81495 5.11102C9.88246 5.7687 9.91664 6.43366 9.91664 7.08658C9.91664 7.73951 9.88246 8.40447 9.81495 9.06215C9.80669 9.14268 9.83346 9.22294 9.88899 9.28305C9.94426 9.34318 10.0229 9.37727 10.1052 9.37727H13.3896C13.5166 9.37727 13.6288 9.29674 13.6673 9.17817C13.888 8.49955 13.9999 7.79602 13.9999 7.08661C13.9999 6.3772 13.888 5.67367 13.6672 4.995Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M9.66082 3.98433C9.68447 4.12217 9.8061 4.22313 9.94851 4.22313H12.8925C12.9953 4.22313 13.0908 4.16971 13.1435 4.08303C13.1959 3.99606 13.1979 3.88841 13.1486 3.79977C12.273 2.22462 10.7688 1.02477 9.02109 0.508017C8.90857 0.473899 8.78467 0.511641 8.70978 0.602536C8.63543 0.693698 8.6246 0.819812 8.68243 0.921578C9.10738 1.66929 9.44576 2.72824 9.66082 3.98433Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M8.93306 4.7959H5.06562C4.91665 4.7959 4.79161 4.90607 4.77566 5.05148C4.70304 5.71252 4.66602 6.39731 4.66602 7.08662C4.66602 7.77592 4.70304 8.46071 4.77566 9.12175C4.79161 9.26716 4.91665 9.37733 5.06562 9.37733H8.93306C9.08203 9.37733 9.20707 9.26716 9.22301 9.12175C9.29564 8.46071 9.33266 7.77592 9.33266 7.08662C9.33266 6.39731 9.29564 5.71252 9.22301 5.05148C9.20707 4.90607 9.08203 4.7959 8.93306 4.7959Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M1.10809 4.22321H4.05211C4.19452 4.22321 4.31614 4.12227 4.3398 3.9844C4.55485 2.72831 4.89323 1.66937 5.31818 0.92165C5.37601 0.819857 5.36519 0.693744 5.29084 0.602608C5.21622 0.512009 5.09287 0.473703 4.97953 0.50809C3.2318 1.02487 1.72759 2.22472 0.852017 3.79987C0.802744 3.88851 0.80474 3.99619 0.857158 4.08313C0.909849 4.16981 1.00525 4.22321 1.10809 4.22321Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M4.11097 9.28305C4.1665 9.22292 4.19327 9.14269 4.18502 9.06215C4.1175 8.40447 4.08332 7.73952 4.08332 7.08659C4.08332 6.43366 4.1175 5.7687 4.18502 5.11102C4.19327 5.03049 4.1665 4.95023 4.11097 4.89012C4.05571 4.82999 3.97709 4.7959 3.89479 4.7959H0.610395C0.483355 4.7959 0.371137 4.87643 0.332691 4.995C0.111945 5.67365 0 6.37718 0 7.08659C0 7.796 0.111945 8.49953 0.332691 9.1782C0.371137 9.29677 0.483355 9.3773 0.610395 9.3773H3.89479C3.97709 9.37728 4.05571 9.34319 4.11097 9.28305Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M4.33977 10.189C4.31612 10.0512 4.19449 9.9502 4.05208 9.9502H1.10809C1.00528 9.9502 0.909849 10.0036 0.857158 10.0903C0.80474 10.1773 0.802744 10.2849 0.852017 10.3736C1.72759 11.9487 3.23177 13.1486 4.9795 13.6653C5.00712 13.6737 5.03534 13.6776 5.06353 13.6776C5.1504 13.6776 5.23443 13.6393 5.29084 13.5708C5.36519 13.4796 5.37601 13.3535 5.31818 13.2518C4.89321 12.504 4.55483 11.4451 4.33977 10.189Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M12.8925 9.9502H9.94851C9.8061 9.9502 9.68447 10.0511 9.66082 10.189C9.44576 11.4451 9.10738 12.504 8.68243 13.2518C8.6246 13.3535 8.63543 13.4797 8.70978 13.5708C8.76619 13.6393 8.85019 13.6776 8.93709 13.6776C8.96501 13.6776 8.9935 13.6737 9.02112 13.6653C10.7688 13.1486 12.273 11.9487 13.1486 10.3736C13.1979 10.2849 13.1959 10.1772 13.1435 10.0903C13.0907 10.0036 12.9953 9.9502 12.8925 9.9502Z",
+                            fill: "#4985FF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M5.01182 4.1199C5.06708 4.18535 5.14939 4.22309 5.23598 4.22309H8.76447C8.85107 4.22309 8.93338 4.18535 8.98864 4.1199C9.04417 4.05446 9.06698 3.96834 9.05131 3.88475C8.63202 1.655 7.8268 0.214355 7.00023 0.214355C6.17365 0.214355 5.36844 1.655 4.94917 3.88472C4.93351 3.96834 4.95628 4.05446 5.01182 4.1199Z",
+                            fill: "#4985FF"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("defs", [
+                        _c("clipPath", { attrs: { id: "clip0" } }, [
+                          _c("rect", {
+                            attrs: {
+                              width: "14",
+                              height: "13.7442",
+                              fill: "white",
+                              transform: "translate(0 0.214355)"
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(_vm.selectedLang))]),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      staticStyle: {
+                        position: "relative",
+                        top: "14px",
+                        right: "0px"
+                      },
+                      attrs: {
+                        width: "10",
+                        height: "10",
+                        viewBox: "0 0 10 10",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("g", { attrs: { "clip-path": "url(#clip0)" } }, [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M4.50495 7.64518L0.20524 3.34534C-0.0684147 3.07182 -0.0684147 2.62835 0.20524 2.35496C0.478651 2.08155 0.922098 2.08155 1.19549 2.35496L5.00007 6.15966L8.80452 2.35507C9.07805 2.08166 9.52145 2.08166 9.79486 2.35507C10.0684 2.62848 10.0684 3.07193 9.79486 3.34545L5.49508 7.64529C5.35831 7.782 5.17925 7.85027 5.00009 7.85027C4.82085 7.85027 4.64165 7.78187 4.50495 7.64518Z",
+                            fill: "#4985FF"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("defs", [
+                        _c("clipPath", { attrs: { id: "clip0" } }, [
+                          _c("rect", {
+                            attrs: {
+                              width: "9.99998",
+                              height: "10",
+                              fill: "white",
+                              transform: "translate(10) rotate(90)"
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "login-us flex-row",
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push({ name: "login" })
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticStyle: { margin: "13px 0 auto 15px" },
+                      attrs: {
+                        width: "14",
+                        height: "14",
+                        viewBox: "0 0 14 14",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
+                          fill: "#4985FF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Войти")])
+                ]
+              ),
+              _vm._v(" "),
+              _vm.showCountry
+                ? _c(
+                    "div",
+                    { staticClass: "lang-list" },
+                    _vm._l(_vm.lang, function(lg) {
+                      return _c(
+                        "div",
+                        {
+                          key: lg.id,
+                          staticClass: "lang-item",
+                          on: {
+                            click: function($event) {
+                              return _vm.changeLang(lg)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(lg.name))]
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "contact-us flex-row",
+                  on: {
+                    click: function($event) {
+                      return _vm.showModal()
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticStyle: { margin: "13px 0 auto 15px" },
+                      attrs: {
+                        width: "14",
+                        height: "14",
+                        viewBox: "0 0 14 14",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("g", { attrs: { "clip-path": "url(#clip0)" } }, [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M7.50022 0.498047C3.91634 0.498047 1.00044 3.18945 1.00044 6.49783C1.00759 7.84784 1.49258 9.15168 2.36941 10.1782C2.1881 11.2786 1.40511 12.1845 0.342489 12.5231C0.0804382 12.6102 -0.0614121 12.8932 0.0256257 13.1552C0.0935627 13.3598 0.284952 13.4977 0.500482 13.4976C2.12655 13.555 3.7205 13.0353 5.00032 12.0306C5.79737 12.3402 6.64516 12.4986 7.50022 12.4976C11.0841 12.4976 14 9.8062 14 6.49783C14 3.18945 11.0841 0.498047 7.50022 0.498047Z",
+                            fill: "#4985FF"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("defs", [
+                        _c("clipPath", { attrs: { id: "clip0" } }, [
+                          _c("rect", {
+                            attrs: { width: "14", height: "14", fill: "white" }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Связаться с нами")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "side-right" }, [
+            _c(
+              "div",
+              {
+                staticClass: "side-exit",
+                on: {
+                  click: function($event) {
+                    _vm.sideMenu = false
+                  }
+                }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      width: "16",
+                      height: "16",
+                      viewBox: "0 0 16 16",
+                      fill: "none",
+                      xmlns: "http://www.w3.org/2000/svg"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M15.4587 3.15142L10.6108 7.99983L15.4587 12.848C16.1798 13.5694 16.1798 14.7379 15.4587 15.4593C15.0984 15.8196 14.626 15.9999 14.1538 15.9999C13.6809 15.9999 13.2085 15.8199 12.8485 15.4593L7.99952 10.6106L3.15094 15.4592C2.79068 15.8195 2.31826 15.9998 1.84571 15.9998C1.37329 15.9998 0.901187 15.8198 0.540613 15.4592C-0.180488 14.7382 -0.180488 13.5696 0.540613 12.848L5.38837 7.99978L0.540338 3.15142C-0.180764 2.43032 -0.180764 1.26151 0.540338 0.540412C1.2613 -0.180137 2.42942 -0.180137 3.15066 0.540412L7.99948 5.38882L12.8479 0.540412C13.5693 -0.180137 14.7376 -0.180137 15.4584 0.540412C16.1798 1.26151 16.1798 2.43032 15.4587 3.15142Z",
+                        fill: "white"
+                      }
+                    })
+                  ]
+                )
+              ]
+            )
           ])
         ])
       : _vm._e(),
@@ -4720,30 +5707,41 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "menu-btn" }, [
-        _c(
-          "svg",
-          {
-            staticStyle: { "margin-top": "-12px" },
-            attrs: {
-              width: "16",
-              height: "16",
-              viewBox: "0 0 16 16",
-              fill: "none",
-              xmlns: "http://www.w3.org/2000/svg"
+      _c(
+        "div",
+        {
+          staticClass: "menu-btn",
+          on: {
+            click: function($event) {
+              _vm.sideMenu = true
             }
-          },
-          [
-            _c("path", {
+          }
+        },
+        [
+          _c(
+            "svg",
+            {
+              staticStyle: { "margin-top": "-12px" },
               attrs: {
-                d:
-                  "M1.6 3.2H14.4C15.2832 3.2 16 2.484 16 1.6C16 0.716 15.284 0 14.4 0H1.6C0.716 0 0 0.716 0 1.6C0 2.484 0.716 3.2 1.6 3.2ZM14.4 6.4H1.6C0.716 6.4 0 7.116 0 8C0 8.88397 0.716 9.6 1.6 9.6H14.4C15.2832 9.6 16 8.88397 16 8C16 7.116 15.284 6.4 14.4 6.4ZM14.4 12.8H1.6C0.716 12.8 0 13.516 0 14.4C0 15.284 0.716 16 1.6 16H14.4C15.2832 16 16 15.284 16 14.4C16 13.516 15.284 12.8 14.4 12.8Z",
-                fill: "#4985FF"
+                width: "16",
+                height: "16",
+                viewBox: "0 0 16 16",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
               }
-            })
-          ]
-        )
-      ])
+            },
+            [
+              _c("path", {
+                attrs: {
+                  d:
+                    "M1.6 3.2H14.4C15.2832 3.2 16 2.484 16 1.6C16 0.716 15.284 0 14.4 0H1.6C0.716 0 0 0.716 0 1.6C0 2.484 0.716 3.2 1.6 3.2ZM14.4 6.4H1.6C0.716 6.4 0 7.116 0 8C0 8.88397 0.716 9.6 1.6 9.6H14.4C15.2832 9.6 16 8.88397 16 8C16 7.116 15.284 6.4 14.4 6.4ZM14.4 12.8H1.6C0.716 12.8 0 13.516 0 14.4C0 15.284 0.716 16 1.6 16H14.4C15.2832 16 16 15.284 16 14.4C16 13.516 15.284 12.8 14.4 12.8Z",
+                  fill: "#4985FF"
+                }
+              })
+            ]
+          )
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "layout flex-row" }, [
@@ -4765,7 +5763,7 @@ var render = function() {
             _c(
               "svg",
               {
-                staticStyle: { margin: "6px auto auto 4px" },
+                staticStyle: { margin: "12px auto auto 8px" },
                 attrs: {
                   width: "20",
                   height: "21",
@@ -5674,7 +6672,18 @@ var render = function() {
             [_vm._v("Регистрация")]
           ),
           _vm._v(" "),
-          _c("label", { staticClass: "right" }, [_vm._v("Вы забыли пароль?")])
+          _c(
+            "label",
+            {
+              staticClass: "right",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "forget" })
+                }
+              }
+            },
+            [_vm._v("Вы забыли пароль?")]
+          )
         ])
       ])
     ]),
@@ -7366,6 +8375,284 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=template&id=4af75674&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reset.vue?vue&type=template&id=4af75674&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "main flex-col" }, [
+    _c(
+      "div",
+      {
+        staticClass: "logo",
+        on: {
+          click: function($event) {
+            return _vm.$router.push({ name: "home" })
+          }
+        }
+      },
+      [_vm._v("DARIS")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "contact-modal" }, [
+      _c("div", { staticClass: "modal-body flex-col" }, [
+        _c("div", { staticClass: "head" }, [_vm._v("Восстановление пароля")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "welcome" }, [
+          _vm._v("Здравствуйте, “ Название компании”")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-top" }, [
+          _vm._v(
+            "Чтобы обновить пароль для доступа в Личный кабинет, нажмите на кнопку\n                и укажите новый пароль. Обращаем ваше внимание, что данная смена пароля \n                действительна в течение суток.\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "reset-pwd",
+            on: {
+              click: function($event) {
+                return _vm.$router.push({ name: "reset-pwd" })
+              }
+            }
+          },
+          [_vm._v("Восстановить пароль ")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-bot" }, [
+          _vm._v(
+            "Если вы не запрашивали смену пароля, просто проигнорируйте данное сообщение или\n                обратитесь в службу поддержки, если у Вас есть вопросы.\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "line" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-foot" }, [
+          _vm._v(
+            "Если у вас не работает кнопка “Восстановить пароль”, скопируйте данную ссылку\n                и откройте в браузере: ссылка ссылка ссылка\n            "
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "main flex-row" }, [
+    _c(
+      "div",
+      {
+        staticClass: "logo",
+        on: {
+          click: function($event) {
+            return _vm.$router.push({ name: "home" })
+          }
+        }
+      },
+      [_vm._v("DARIS")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "login-left" }, [
+      _c("div", { staticClass: "login-text" }, [
+        _c("div", { staticClass: "head" }, [_vm._v("Изменение пароля")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "sub-head" }, [
+          _vm._v("Задайте новый пароль для вашего аккаунта.")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-form flex-col" }, [
+          _c("label", { staticClass: "label" }, [_vm._v("Пароль")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.email,
+                expression: "email"
+              }
+            ],
+            attrs: { type: "text", id: "email", placeholder: "Введите пароль" },
+            domProps: { value: _vm.email },
+            on: {
+              keyup: function($event) {
+                return _vm.validateForm($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "err", attrs: { id: "err-email" } }, [
+            _c(
+              "svg",
+              {
+                attrs: {
+                  width: "4",
+                  height: "13",
+                  viewBox: "0 0 4 13",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                    fill: "#E4002F"
+                  }
+                })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-form flex-col" }, [
+          _c("label", { staticClass: "label" }, [_vm._v("Повторите пароль")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            attrs: {
+              type: "password",
+              id: "password",
+              placeholder: "Введите пароль еще раз"
+            },
+            domProps: { value: _vm.password },
+            on: {
+              keyup: function($event) {
+                return _vm.validateForm($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "err", attrs: { id: "err-password" } }, [
+            _c(
+              "svg",
+              {
+                attrs: {
+                  width: "4",
+                  height: "13",
+                  viewBox: "0 0 4 13",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                    fill: "#E4002F"
+                  }
+                })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "login-enter",
+            on: {
+              click: function($event) {
+                return _vm.logIn()
+              }
+            }
+          },
+          [_vm._v("Изменить пароль ")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "login-last flex-row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "left",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "register" })
+                }
+              }
+            },
+            [_vm._v("Регистрация")]
+          ),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "right",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "login" })
+                }
+              }
+            },
+            [_vm._v("Авторизация")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "login-right" })
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -22471,12 +23758,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
 /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue");
-/* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue");
+/* harmony import */ var _components_Forget__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Forget */ "./resources/js/components/Forget.vue");
+/* harmony import */ var _components_Reset__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Reset */ "./resources/js/components/Reset.vue");
+/* harmony import */ var _components_ResetPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ResetPage */ "./resources/js/components/ResetPage.vue");
+/* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_2___default.a);
+
+
+
 
 
 
@@ -22494,7 +23787,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/register',
     name: 'register',
-    component: _components_Register__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_Register__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }, {
+    path: '/forget-pwd',
+    name: 'forget',
+    component: _components_Forget__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }, {
+    path: '/reset',
+    name: 'reset',
+    component: _components_Reset__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }, {
+    path: '/reset-pwd',
+    name: 'reset-pwd',
+    component: _components_ResetPage__WEBPACK_IMPORTED_MODULE_8__["default"]
   }]
 });
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
@@ -22590,6 +23895,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Forget.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Forget.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Forget_vue_vue_type_template_id_573ad198_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Forget.vue?vue&type=template&id=573ad198&scoped=true& */ "./resources/js/components/Forget.vue?vue&type=template&id=573ad198&scoped=true&");
+/* harmony import */ var _Forget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Forget.vue?vue&type=script&lang=js& */ "./resources/js/components/Forget.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true& */ "./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Forget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Forget_vue_vue_type_template_id_573ad198_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Forget_vue_vue_type_template_id_573ad198_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "573ad198",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Forget.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Forget.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Forget.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Forget.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true& ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=style&index=0&id=573ad198&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_style_index_0_id_573ad198_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Forget.vue?vue&type=template&id=573ad198&scoped=true&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Forget.vue?vue&type=template&id=573ad198&scoped=true& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_template_id_573ad198_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Forget.vue?vue&type=template&id=573ad198&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forget.vue?vue&type=template&id=573ad198&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_template_id_573ad198_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Forget_vue_vue_type_template_id_573ad198_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -22851,6 +24243,180 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Register_vue_vue_type_template_id_97358ae4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Register_vue_vue_type_template_id_97358ae4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Reset.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Reset.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Reset_vue_vue_type_template_id_4af75674_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Reset.vue?vue&type=template&id=4af75674&scoped=true& */ "./resources/js/components/Reset.vue?vue&type=template&id=4af75674&scoped=true&");
+/* harmony import */ var _Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Reset.vue?vue&type=script&lang=js& */ "./resources/js/components/Reset.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true& */ "./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Reset_vue_vue_type_template_id_4af75674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Reset_vue_vue_type_template_id_4af75674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4af75674",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Reset.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Reset.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Reset.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Reset.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=style&index=0&id=4af75674&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_style_index_0_id_4af75674_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Reset.vue?vue&type=template&id=4af75674&scoped=true&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Reset.vue?vue&type=template&id=4af75674&scoped=true& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_template_id_4af75674_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Reset.vue?vue&type=template&id=4af75674&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reset.vue?vue&type=template&id=4af75674&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_template_id_4af75674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_template_id_4af75674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ResetPage.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/ResetPage.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ResetPage_vue_vue_type_template_id_16f6efa3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true& */ "./resources/js/components/ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true&");
+/* harmony import */ var _ResetPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPage.vue?vue&type=script&lang=js& */ "./resources/js/components/ResetPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true& */ "./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ResetPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ResetPage_vue_vue_type_template_id_16f6efa3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ResetPage_vue_vue_type_template_id_16f6efa3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "16f6efa3",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ResetPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ResetPage.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/ResetPage.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=style&index=0&id=16f6efa3&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_style_index_0_id_16f6efa3_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_template_id_16f6efa3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ResetPage.vue?vue&type=template&id=16f6efa3&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_template_id_16f6efa3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPage_vue_vue_type_template_id_16f6efa3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

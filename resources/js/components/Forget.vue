@@ -3,33 +3,22 @@
         <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
         <div class="login-left">
             <div class="login-text">
-                <div class="head">С Возвращением!</div>
+                <div class="head">Восстановление пароля</div>
+                <div class="sub-head">Введите свой регистрационный email.
+                    Мы отправим вам письмо для восстановления пароля</div>
                 <div class="input-form flex-col">
-                    <label class="label">Электронная почта</label>
-                    <input v-on:keyup="validateForm($event)" v-model="email" type="text" id="email" placeholder="Введите ваш электронный адрес">
+                    <label class="label">Ваш электронный адрес</label>
+                    <input v-on:keyup="validateForm($event)" v-model="email" type="text" id="email" placeholder="Ваш электронный адрес">
                     <div class="err" id="err-email">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
                     </div>
                 </div>
-                <div class="input-form flex-col">
-                    <label class="label">Пароль</label>
-                    <input v-on:keyup="validateForm($event)" v-model="password" type="password" id="password" placeholder="Введите пароль">
-                    <div class="err" id="err-password">
-                        <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="check-form flex-row">
-                    <input type="checkbox">
-                    <label class="label">Сохранить пароль</label>
-                </div>
-                <div @click="logIn()" class="login-enter">Войти</div>
+                <div @click="logIn()" class="login-enter">Восстановить пароль </div>
                 <div class="login-last flex-row">
                     <label @click="$router.push({ name: 'register' })" class="left">Регистрация</label>
-                    <label @click="$router.push({ name: 'forget' })" class="right">Вы забыли пароль?</label>
+                    <label @click="$router.push({ name: 'login' })" class="right">Авторизация</label>
                 </div>
             </div>
         </div>
@@ -45,8 +34,7 @@ export default {
     data(){
         return{
             email: '',
-            password: '',
-            errors: ''
+            password: ''
         }
     },
     methods: {
@@ -96,11 +84,6 @@ export default {
                     if(err.response.status === 402){
                         alert('Профиль проверяется модератором.')
                     }
-                    if(err.response.status === 401){
-                        alert('Не зарегистрирован.')
-                    }
-                    this.errors = Object.assign({}, err.response.data.error)
-                    console.log(this.errors)
                 console.log(err)
             })
         }
@@ -139,9 +122,16 @@ export default {
                 .head{
                     text-align: left;
                     font-weight: bold;
-                    font-size: 32px;
+                    font-size: 30px;
                     line-height: 146.28%;
                     margin-bottom: 10px;
+                }
+                .sub-head{
+                    font-weight: normal;
+                    font-size: 18px;
+                    line-height: 170%;
+                    text-align: left;
+                    color: #06397D;
                 }
                 .input-form{
                     position: relative;
@@ -196,27 +186,6 @@ export default {
 
                     }
                 }
-                .check-form{
-                    margin-top: 30px;
-                    input{
-                        cursor: pointer;
-                        margin-left: 3px;
-                        margin-top: 3px;
-                        -ms-transform: scale(1.5); /* IE */
-                        -moz-transform: scale(1.5); /* FF */
-                        -webkit-transform: scale(1.5); /* Safari and Chrome */
-                        -o-transform: scale(1.5); /* Opera */
-                        transform: scale(1.5);
-                        padding: 6px;
-                    }
-                    .label{
-                        margin-left: 9px;
-                        text-align: left;
-                        font-weight: 500;
-                        font-size: 16px;
-                        line-height: 20px;
-                    }
-                }
                 .login-enter{
                     cursor: pointer;
                     padding-top: 17px;
@@ -252,7 +221,7 @@ export default {
         .login-right{
             position: relative;
             width: 52%;     
-            background-image: linear-gradient( rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3) ), url('/images/login-layout.png');
+            background-image: linear-gradient( rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3) ), url('/images/forget.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -269,7 +238,7 @@ export default {
             width: 42% !important;     
         }
     }
-     @media screen and (max-width: 1020px) {
+    @media screen and (max-width: 1020px) {
         .logo{
             left: calc(50% - 160px) !important;
         }
@@ -281,6 +250,9 @@ export default {
                 left: auto !important;
                 .head{
                     font-size: 28px !important;
+                }
+                .sub-head{
+                    font-size: 16px !important;
                 }
                 .input-form{
                     .label{
@@ -323,6 +295,9 @@ export default {
                 width: 260px !important;
                 .head{
                     font-size: 24px !important;
+                }
+                .sub-head{
+                    font-size: 14px !important;
                 }
                 .input-form{
                     margin-top: 20px !important;

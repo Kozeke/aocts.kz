@@ -8,7 +8,12 @@ Vue.use(VueTheMask)
 import App from './components/App'
 import Home from './components/Home'
 import Login from './components/Login'
+import Forget from './components/Forget'
+import Reset from './components/Reset'
+import ResetPage from './components/ResetPage'
+
 import Register from './components/Register'
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -27,6 +32,21 @@ const router = new VueRouter({
             path: '/register',
             name: 'register',
             component: Register
+        },
+        {
+            path: '/forget-pwd',
+            name: 'forget',
+            component: Forget
+        },
+        {
+            path: '/reset',
+            name: 'reset',
+            component: Reset
+        },
+        {
+            path: '/reset-pwd',
+            name: 'reset-pwd',
+            component: ResetPage
         }
     ],
 })

@@ -38,6 +38,80 @@
                 </div>
             </div>
         </div>
+        <div v-if="sideMenu" class="side-menu flex-row">
+            <div class="side-left flex-col">
+                <div class="side-top flex-row">
+                    <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
+                    <div class="slogan">Экономим ваше время!</div>
+                </div>
+                <div class="side-slogan">Экономим ваше время!</div>
+                <div class="side-head">О компании</div>
+                <div class="side-text">Аутсорсинговая компания, оказывающая широкий спектр услуг по заключению Договоров и выполнению взаиморасчетов за оказанные Услуги. </div>
+                <div class="side-btns flex-row">
+                    <div class="lang-us flex-row" @click="showCountry = true">
+                        <svg style="margin: 12px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
+                        <path d="M8.98866 10.0529C8.9334 9.98745 8.8511 9.94971 8.7645 9.94971H5.23601C5.14941 9.94971 5.0671 9.98745 5.01184 10.0529C4.95631 10.1183 4.9335 10.2045 4.94917 10.2881C5.36846 12.5178 6.17368 13.9585 7.00025 13.9585C7.82683 13.9585 8.63205 12.5178 9.05131 10.2881C9.06698 10.2045 9.0442 10.1183 8.98866 10.0529Z" fill="#4985FF"/>
+                        <path d="M13.6672 4.995C13.6288 4.87643 13.5166 4.7959 13.3895 4.7959H10.1052C10.0229 4.7959 9.94426 4.83002 9.88899 4.89012C9.83346 4.95025 9.80669 5.03049 9.81495 5.11102C9.88246 5.7687 9.91664 6.43366 9.91664 7.08658C9.91664 7.73951 9.88246 8.40447 9.81495 9.06215C9.80669 9.14268 9.83346 9.22294 9.88899 9.28305C9.94426 9.34318 10.0229 9.37727 10.1052 9.37727H13.3896C13.5166 9.37727 13.6288 9.29674 13.6673 9.17817C13.888 8.49955 13.9999 7.79602 13.9999 7.08661C13.9999 6.3772 13.888 5.67367 13.6672 4.995Z" fill="#4985FF"/>
+                        <path d="M9.66082 3.98433C9.68447 4.12217 9.8061 4.22313 9.94851 4.22313H12.8925C12.9953 4.22313 13.0908 4.16971 13.1435 4.08303C13.1959 3.99606 13.1979 3.88841 13.1486 3.79977C12.273 2.22462 10.7688 1.02477 9.02109 0.508017C8.90857 0.473899 8.78467 0.511641 8.70978 0.602536C8.63543 0.693698 8.6246 0.819812 8.68243 0.921578C9.10738 1.66929 9.44576 2.72824 9.66082 3.98433Z" fill="#4985FF"/>
+                        <path d="M8.93306 4.7959H5.06562C4.91665 4.7959 4.79161 4.90607 4.77566 5.05148C4.70304 5.71252 4.66602 6.39731 4.66602 7.08662C4.66602 7.77592 4.70304 8.46071 4.77566 9.12175C4.79161 9.26716 4.91665 9.37733 5.06562 9.37733H8.93306C9.08203 9.37733 9.20707 9.26716 9.22301 9.12175C9.29564 8.46071 9.33266 7.77592 9.33266 7.08662C9.33266 6.39731 9.29564 5.71252 9.22301 5.05148C9.20707 4.90607 9.08203 4.7959 8.93306 4.7959Z" fill="#4985FF"/>
+                        <path d="M1.10809 4.22321H4.05211C4.19452 4.22321 4.31614 4.12227 4.3398 3.9844C4.55485 2.72831 4.89323 1.66937 5.31818 0.92165C5.37601 0.819857 5.36519 0.693744 5.29084 0.602608C5.21622 0.512009 5.09287 0.473703 4.97953 0.50809C3.2318 1.02487 1.72759 2.22472 0.852017 3.79987C0.802744 3.88851 0.80474 3.99619 0.857158 4.08313C0.909849 4.16981 1.00525 4.22321 1.10809 4.22321Z" fill="#4985FF"/>
+                        <path d="M4.11097 9.28305C4.1665 9.22292 4.19327 9.14269 4.18502 9.06215C4.1175 8.40447 4.08332 7.73952 4.08332 7.08659C4.08332 6.43366 4.1175 5.7687 4.18502 5.11102C4.19327 5.03049 4.1665 4.95023 4.11097 4.89012C4.05571 4.82999 3.97709 4.7959 3.89479 4.7959H0.610395C0.483355 4.7959 0.371137 4.87643 0.332691 4.995C0.111945 5.67365 0 6.37718 0 7.08659C0 7.796 0.111945 8.49953 0.332691 9.1782C0.371137 9.29677 0.483355 9.3773 0.610395 9.3773H3.89479C3.97709 9.37728 4.05571 9.34319 4.11097 9.28305Z" fill="#4985FF"/>
+                        <path d="M4.33977 10.189C4.31612 10.0512 4.19449 9.9502 4.05208 9.9502H1.10809C1.00528 9.9502 0.909849 10.0036 0.857158 10.0903C0.80474 10.1773 0.802744 10.2849 0.852017 10.3736C1.72759 11.9487 3.23177 13.1486 4.9795 13.6653C5.00712 13.6737 5.03534 13.6776 5.06353 13.6776C5.1504 13.6776 5.23443 13.6393 5.29084 13.5708C5.36519 13.4796 5.37601 13.3535 5.31818 13.2518C4.89321 12.504 4.55483 11.4451 4.33977 10.189Z" fill="#4985FF"/>
+                        <path d="M12.8925 9.9502H9.94851C9.8061 9.9502 9.68447 10.0511 9.66082 10.189C9.44576 11.4451 9.10738 12.504 8.68243 13.2518C8.6246 13.3535 8.63543 13.4797 8.70978 13.5708C8.76619 13.6393 8.85019 13.6776 8.93709 13.6776C8.96501 13.6776 8.9935 13.6737 9.02112 13.6653C10.7688 13.1486 12.273 11.9487 13.1486 10.3736C13.1979 10.2849 13.1959 10.1772 13.1435 10.0903C13.0907 10.0036 12.9953 9.9502 12.8925 9.9502Z" fill="#4985FF"/>
+                        <path d="M5.01182 4.1199C5.06708 4.18535 5.14939 4.22309 5.23598 4.22309H8.76447C8.85107 4.22309 8.93338 4.18535 8.98864 4.1199C9.04417 4.05446 9.06698 3.96834 9.05131 3.88475C8.63202 1.655 7.8268 0.214355 7.00023 0.214355C6.17365 0.214355 5.36844 1.655 4.94917 3.88472C4.93351 3.96834 4.95628 4.05446 5.01182 4.1199Z" fill="#4985FF"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0">
+                        <rect width="14" height="13.7442" fill="white" transform="translate(0 0.214355)"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+                        <span>{{ selectedLang }}</span>
+                        <svg style="position:relative; top: 14px;right: 0px;" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
+                        <path d="M4.50495 7.64518L0.20524 3.34534C-0.0684147 3.07182 -0.0684147 2.62835 0.20524 2.35496C0.478651 2.08155 0.922098 2.08155 1.19549 2.35496L5.00007 6.15966L8.80452 2.35507C9.07805 2.08166 9.52145 2.08166 9.79486 2.35507C10.0684 2.62848 10.0684 3.07193 9.79486 3.34545L5.49508 7.64529C5.35831 7.782 5.17925 7.85027 5.00009 7.85027C4.82085 7.85027 4.64165 7.78187 4.50495 7.64518Z" fill="#4985FF"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0">
+                        <rect width="9.99998" height="10" fill="white" transform="translate(10) rotate(90)"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+                    </div>
+                    <div class="login-us flex-row" @click="$router.push({ name: 'login' })">
+                        <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
+                        <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
+                        </svg>
+                        <span>Войти</span>
+                    </div>
+                    <div v-if="showCountry" class="lang-list">
+                        <div class="lang-item" v-for="lg in lang" :key="lg.id" @click="changeLang(lg)">{{ lg.name }}</div>
+                    </div>
+                    <div class="contact-us flex-row" @click="showModal()">
+                        <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
+                        <path d="M7.50022 0.498047C3.91634 0.498047 1.00044 3.18945 1.00044 6.49783C1.00759 7.84784 1.49258 9.15168 2.36941 10.1782C2.1881 11.2786 1.40511 12.1845 0.342489 12.5231C0.0804382 12.6102 -0.0614121 12.8932 0.0256257 13.1552C0.0935627 13.3598 0.284952 13.4977 0.500482 13.4976C2.12655 13.555 3.7205 13.0353 5.00032 12.0306C5.79737 12.3402 6.64516 12.4986 7.50022 12.4976C11.0841 12.4976 14 9.8062 14 6.49783C14 3.18945 11.0841 0.498047 7.50022 0.498047Z" fill="#4985FF"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0">
+                        <rect width="14" height="14" fill="white"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+                        <span>Связаться с нами</span>
+                    </div>
+                </div>
+            </div>
+            <div class="side-right">
+                <div @click="sideMenu = false" class="side-exit">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.4587 3.15142L10.6108 7.99983L15.4587 12.848C16.1798 13.5694 16.1798 14.7379 15.4587 15.4593C15.0984 15.8196 14.626 15.9999 14.1538 15.9999C13.6809 15.9999 13.2085 15.8199 12.8485 15.4593L7.99952 10.6106L3.15094 15.4592C2.79068 15.8195 2.31826 15.9998 1.84571 15.9998C1.37329 15.9998 0.901187 15.8198 0.540613 15.4592C-0.180488 14.7382 -0.180488 13.5696 0.540613 12.848L5.38837 7.99978L0.540338 3.15142C-0.180764 2.43032 -0.180764 1.26151 0.540338 0.540412C1.2613 -0.180137 2.42942 -0.180137 3.15066 0.540412L7.99948 5.38882L12.8479 0.540412C13.5693 -0.180137 14.7376 -0.180137 15.4584 0.540412C16.1798 1.26151 16.1798 2.43032 15.4587 3.15142Z" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
         <div class="nav-bar flex-row">
             <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
             <div class="slogan">Экономим ваше время!</div>
@@ -95,7 +169,7 @@
             <div v-if="showCountry" class="lang-list">
                 <div class="lang-item" v-for="lg in lang" :key="lg.id" @click="changeLang(lg)">{{ lg.name }}</div>
             </div>
-            <div class="menu-btn">
+            <div @click="sideMenu = true" class="menu-btn">
                 <svg style="margin-top: -12px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.6 3.2H14.4C15.2832 3.2 16 2.484 16 1.6C16 0.716 15.284 0 14.4 0H1.6C0.716 0 0 0.716 0 1.6C0 2.484 0.716 3.2 1.6 3.2ZM14.4 6.4H1.6C0.716 6.4 0 7.116 0 8C0 8.88397 0.716 9.6 1.6 9.6H14.4C15.2832 9.6 16 8.88397 16 8C16 7.116 15.284 6.4 14.4 6.4ZM14.4 12.8H1.6C0.716 12.8 0 13.516 0 14.4C0 15.284 0.716 16 1.6 16H14.4C15.2832 16 16 15.284 16 14.4C16 13.516 15.284 12.8 14.4 12.8Z" fill="#4985FF"/>
                 </svg>
@@ -109,7 +183,7 @@
                     <div class="sub">Компания Daris занимается заключением договоров, на оплату услуг передвижения и остановки грузов по всем железно дорожным путям Казахстана</div>
                     <div class="join flex-row">
                         <span>Присоединиться</span>
-                        <svg style="margin: 6px auto auto 4px;" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg style="margin: 12px auto auto 8px;" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                         <path d="M5.08743 6.24219L3.35471 6.37361C2.87257 6.41019 2.44315 6.65827 2.17652 7.05421L0.178211 10.0213C-0.0240135 10.3216 -0.0561617 10.6973 0.0921575 11.0265C0.240516 11.3557 0.545396 11.5851 0.907698 11.6402L2.49421 11.8814C2.86534 9.9479 3.75377 8.01913 5.08743 6.24219Z" fill="white"/>
                         <path d="M8.85449 18.1249L9.10023 19.6824C9.15636 20.0381 9.39003 20.3374 9.7253 20.483C9.8648 20.5436 10.0125 20.5735 10.1594 20.5735C10.3657 20.5735 10.5706 20.5145 10.7493 20.3986L13.7717 18.4368C14.175 18.175 14.4277 17.7534 14.4649 17.2802L14.5987 15.5791C12.7887 16.8884 10.824 17.7606 8.85449 18.1249Z" fill="white"/>
@@ -326,6 +400,7 @@
             return {
                 showCountry: false,
                 modalDisplay: false,
+                sideMenu: false,
                 selectedLang: 'RU',
                 lang: [
                     {
@@ -1264,11 +1339,155 @@
                 }
             }
         }
+        .side-menu{
+            position: fixed;
+            height: 100%;
+            z-index: 999;
+            width: 100%;
+            .side-left{
+                padding-left: 12.5%;
+                padding-right: 12.5%;
+                height: 100%;
+                width: 80%;
+                background: #FFFFFF;
+                font-size: 16px;
+                line-height: 50px;
+                color: #06397D;
+                font-weight: 500;
+                .side-top{
+                    display: flex;
+                    flex-direction: row;
+                    .logo{
+                        cursor: pointer;
+                        position: relative;
+                        // left: 12.5%;
+                        width: 160px;
+                        height: 50px;
+                        top: 25px;
+                        background: #F6F6F8;            
+                    }
+                    .slogan{
+                        position: relative;
+                        height: 50px;
+                        top: 25px;
+                        left: calc(10%);
+                        width: 260px;
+                    }
+                }
+                .side-slogan{
+                    display: none;
+                }
+                .side-head{
+                    margin-top: 95px;
+                    text-align: left;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: #2D4C64;
+                }
+                .side-text{
+                    text-align: left;
+                    margin-top: 15px;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 158.47%;
+                    color: #999999;
+                }
+                .side-btns{
+                    flex-wrap: wrap;
+                    position: relative;
+                    margin-top: 45px;
+                    .contact-us{
+                        margin-left: 12px;
+                        cursor: pointer;
+                        width: 200px;
+                        color: #4985FF;
+                        border: 1px solid #4985FF;
+                        box-sizing: border-box;
+                        height: 40px;
+                        border-radius: 6px;
+                        span{
+                            cursor: pointer;
+                            margin: -5px 6px 5px 8px;
+                        }
+                    }
+                    .login-us{
+                        margin-left: 12px;
+                        cursor: pointer;
+                        width: 105px;
+                        color: #4985FF;
+                        border: 1px solid #4985FF;
+                        box-sizing: border-box;
+                        height: 40px;
+                        border-radius: 6px;
+                        span{
+                            cursor: pointer;
+                            margin: -5px 6px 5px 6px;
+                        }
+                    }
+                    .lang-us{
+                        z-index: 99;
+                        cursor: pointer;
+                        width: 95px;
+                        color: #4985FF;
+                        border: 1px solid #4985FF;
+                        box-sizing: border-box;
+                        height: 40px;
+                        border-radius: 6px;
+                        span{
+                            cursor: pointer;
+                            margin: -5px 6px 5px 6px;
+                        }
+                    }
+                    .lang-list{
+                        position: absolute;
+                        top: 46px;
+                        transition: all 1s ease 0s;
+                        z-index: 999;
+                        cursor: pointer;
+                        width: 95px;
+                        border: 1px solid #4985FF;
+                        box-sizing: border-box;
+                        border-radius: 6px;
+                        overflow: hidden;
+                        .lang-item{
+                            text-align: left;
+                            cursor: pointer;
+                            height: 34px;
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 11px;
+                            line-height: 13px;
+                            color: #4985FF;
+                            padding: 10px 15px;
+                        }
+                        .lang-item:hover{
+                            background: #4985FF;
+                            color: #FFFFFF;
+                        }
+                    }
+                }
+            }
+            .side-right{
+                position: relative;
+                width: 20%;
+                height: 100%;
+                background: #2D4C64;
+                opacity: 0.7;
+                .side-exit{
+                    position: absolute;
+                    width: 48px;
+                    height: 42px;
+                    top: 39px;
+                    right: calc(50%);
+                }
+            }
+        }
         .nav-bar{
             .menu-btn{
                 display: block;
             }
-            .slogan,   .contact-us, .login-us, .lang-us{
+            .contact-us, .login-us, .lang-us{
                 display: none;
             }
         }
@@ -1438,6 +1657,23 @@
             }
         }
     }
+    @media only screen and (max-width: 770px){
+        .side-menu{
+            .side-left{
+                .side-btns{
+                    .contact-us{
+                        margin-left: 0;
+                        margin-top: 15px;
+                        width: 212px;
+                        span{
+                            cursor: pointer;
+                            margin: -5px 6px 5px 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
     @media only screen and (max-width: 640px){
         .contact-modal{
             padding: 120px 8%;
@@ -1480,6 +1716,46 @@
         }
     }
     @media only screen and (max-width: 620px){
+        .slogan{
+            display: none;
+        }
+        .side-menu{
+            .side-left{
+                width: 76%;
+                .side-top{
+                    .slogan{
+                        height: 50px;
+                        top: 25px;
+                        left: calc(10%);
+                        width: 260px;
+                    }
+                }
+                .side-slogan{
+                    text-align: left;
+                    display: block;
+                    font-size: 16px;
+                    line-height: 50px;
+                    color: #06397D;
+                    font-weight: 500;
+                    height: 50px;
+                    margin-top: 35px;
+                    width: 260px;
+                }
+                .side-head{
+                    margin-top: 30px;
+                }
+            }
+            .side-right{
+                width: 24%;
+                .side-exit{
+                    top: 39px;
+                    right: calc(20%);
+                }
+            }
+        }
+        .menu-btn{
+            right: calc(5%) !important;
+        }
         .layout{
             height: 440px !important;
             .layout-left{
@@ -1693,6 +1969,19 @@
         }
     }
     @media only screen and (max-width: 444px){
+        .side-menu{
+            .side-left{
+                padding-left: 5%;
+                padding-right: 5%;
+                width: 80%;
+            }
+            .side-right{
+                width: 20%;
+                .side-exit{
+                    right: calc(25%);
+                }
+            }
+        }
         .contact-modal{
             .modal-body{
                 height: 570px;
