@@ -97,7 +97,7 @@ export default {
                         alert('Профиль проверяется модератором.')
                     }
                     if(err.response.status === 401){
-                        alert('Не зарегистрирован.')
+                        alert('Почта или логин не правильно.')
                     }
                     this.errors = Object.assign({}, err.response.data.error)
                     console.log(this.errors)

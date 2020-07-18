@@ -48,7 +48,7 @@
                 <div class="side-head">О компании</div>
                 <div class="side-text">Аутсорсинговая компания, оказывающая широкий спектр услуг по заключению Договоров и выполнению взаиморасчетов за оказанные Услуги. </div>
                 <div class="side-btns flex-row">
-                    <div class="lang-us flex-row" @click="showCountry = true">
+                    <div id="lang-us-sm" class="lang-us flex-row" @click="showCountrySmall = showCountrySmall ? false : true">
                         <svg style="margin: 12px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                         <path d="M8.98866 10.0529C8.9334 9.98745 8.8511 9.94971 8.7645 9.94971H5.23601C5.14941 9.94971 5.0671 9.98745 5.01184 10.0529C4.95631 10.1183 4.9335 10.2045 4.94917 10.2881C5.36846 12.5178 6.17368 13.9585 7.00025 13.9585C7.82683 13.9585 8.63205 12.5178 9.05131 10.2881C9.06698 10.2045 9.0442 10.1183 8.98866 10.0529Z" fill="#4985FF"/>
@@ -86,10 +86,10 @@
                         </svg>
                         <span>Войти</span>
                     </div>
-                    <div v-if="showCountry" class="lang-list">
+                    <div v-on-clickaway="toggleDropdownSmall" v-if="showCountrySmall" class="lang-list">
                         <div class="lang-item" v-for="lg in lang" :key="lg.id" @click="changeLang(lg)">{{ lg.name }}</div>
                     </div>
-                    <div class="contact-us flex-row" @click="showModal()">
+                    <div class="contact-us flex-row" @click="modalDisplay = true; sideMenu = false">
                         <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                         <path d="M7.50022 0.498047C3.91634 0.498047 1.00044 3.18945 1.00044 6.49783C1.00759 7.84784 1.49258 9.15168 2.36941 10.1782C2.1881 11.2786 1.40511 12.1845 0.342489 12.5231C0.0804382 12.6102 -0.0614121 12.8932 0.0256257 13.1552C0.0935627 13.3598 0.284952 13.4977 0.500482 13.4976C2.12655 13.555 3.7205 13.0353 5.00032 12.0306C5.79737 12.3402 6.64516 12.4986 7.50022 12.4976C11.0841 12.4976 14 9.8062 14 6.49783C14 3.18945 11.0841 0.498047 7.50022 0.498047Z" fill="#4985FF"/>
@@ -115,7 +115,7 @@
         <div class="nav-bar flex-row">
             <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
             <div class="slogan">Экономим ваше время!</div>
-            <div class="contact-us flex-row" @click="showModal()">
+            <div class="contact-us flex-row" @click="modalDisplay = true;">
                 <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
                 <path d="M7.50022 0.498047C3.91634 0.498047 1.00044 3.18945 1.00044 6.49783C1.00759 7.84784 1.49258 9.15168 2.36941 10.1782C2.1881 11.2786 1.40511 12.1845 0.342489 12.5231C0.0804382 12.6102 -0.0614121 12.8932 0.0256257 13.1552C0.0935627 13.3598 0.284952 13.4977 0.500482 13.4976C2.12655 13.555 3.7205 13.0353 5.00032 12.0306C5.79737 12.3402 6.64516 12.4986 7.50022 12.4976C11.0841 12.4976 14 9.8062 14 6.49783C14 3.18945 11.0841 0.498047 7.50022 0.498047Z" fill="#4985FF"/>
@@ -135,7 +135,7 @@
                 </svg>
                 <span>Войти</span>
             </div>
-            <div class="lang-us flex-row" @click="showCountry = true">
+            <div id="lang-us" class="lang-us flex-row" @click="showCountry = showCountry ? false : true">
                 <svg style="margin: 12px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
                 <path d="M8.98866 10.0529C8.9334 9.98745 8.8511 9.94971 8.7645 9.94971H5.23601C5.14941 9.94971 5.0671 9.98745 5.01184 10.0529C4.95631 10.1183 4.9335 10.2045 4.94917 10.2881C5.36846 12.5178 6.17368 13.9585 7.00025 13.9585C7.82683 13.9585 8.63205 12.5178 9.05131 10.2881C9.06698 10.2045 9.0442 10.1183 8.98866 10.0529Z" fill="#4985FF"/>
@@ -166,7 +166,7 @@
                 </defs>
                 </svg>
             </div>
-            <div v-if="showCountry" class="lang-list">
+            <div v-on-clickaway="toggleDropdown" v-show="showCountry" id="lang-list" class="lang-list">
                 <div class="lang-item" v-for="lg in lang" :key="lg.id" @click="changeLang(lg)">{{ lg.name }}</div>
             </div>
             <div @click="sideMenu = true" class="menu-btn">
@@ -395,10 +395,14 @@
     </div>
 </template>
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
+
     export default {
+        mixins: [ clickaway ],
         data(){
             return {
                 showCountry: false,
+                showCountrySmall: false,
                 modalDisplay: false,
                 sideMenu: false,
                 selectedLang: 'RU',
@@ -422,15 +426,24 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+
         },
         methods:{
+            toggleDropdown(e) {
+                let langUs = document.getElementById("lang-us")
+                if(!langUs.contains(e.target)){
+                    this.showCountry = false
+                }
+            },
+            toggleDropdownSmall(e) {
+                let langUsSm = document.getElementById("lang-us-sm")
+                if(!langUsSm.contains(e.target)){
+                    this.showCountrySmall = false
+                }
+            },
             changeLang(val){
                 this.selectedLang = val.attr
                 this.showCountry = false
-            },
-            showModal(){
-                this.modalDisplay = true
             }
         }
     }
@@ -446,7 +459,7 @@
         .modal-body{
             position: relative;
             padding: 0;
-            border-radius: 12px;
+            border-radius: 12px !important;
             height: 500px;
             background: #FFFFFF;
             .modal-left{
@@ -615,6 +628,7 @@
             top: 76px;
             right: calc(18%);
             border: 1px solid #4985FF;
+            background: #FFFFFF;
             box-sizing: border-box;
             border-radius: 6px;
             overflow: hidden;
@@ -1342,7 +1356,7 @@
         .side-menu{
             position: fixed;
             height: 100%;
-            z-index: 999;
+            z-index: 10;
             width: 100%;
             .side-left{
                 padding-left: 12.5%;
@@ -1443,13 +1457,14 @@
                         position: absolute;
                         top: 46px;
                         transition: all 1s ease 0s;
-                        z-index: 999;
+                        z-index: 999 !important;
                         cursor: pointer;
                         width: 95px;
                         border: 1px solid #4985FF;
                         box-sizing: border-box;
                         border-radius: 6px;
                         overflow: hidden;
+                        background: #FFFFFF;
                         .lang-item{
                             text-align: left;
                             cursor: pointer;
@@ -1711,6 +1726,8 @@
                     top: 0;
                     height: 190px;
                     width: 100%;
+                    border-top-left-radius: 12px;
+                    border-top-right-radius: 12px;
                 }
             }
         }
