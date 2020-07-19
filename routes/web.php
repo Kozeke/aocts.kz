@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('reset_password/{email}/{code}','ForgotPasswordController@reset');
+Route::post('reset_password/{email}/{code}', 'ForgotPasswordController@resetPassword');
 Route::get('/{any}', function(){
         return view('app');
 })->where('any', '.*');

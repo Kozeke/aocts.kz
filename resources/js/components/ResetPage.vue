@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="login-right">
-            
+
         </div>
     </div>
 </template>
@@ -111,12 +111,12 @@ export default {
             width: 160px;
             height: 50px;
             top: 25px;
-            background: #F6F6F8;   
+            background: #F6F6F8;
             font-size: 16px;
             line-height: 50px;
             color: #06397D;
-            font-weight: 500; 
-            z-index: 99;        
+            font-weight: 500;
+            z-index: 99;
         }
         .login-left{
             position: relative;
@@ -228,7 +228,7 @@ export default {
         }
         .login-right{
             position: relative;
-            width: 52%;     
+            width: 52%;
             background-image: linear-gradient( rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3) ), url('/images/reset-pwd.png');
             background-repeat: no-repeat;
             background-position: center;
@@ -237,13 +237,13 @@ export default {
     }
     @media screen and (max-width: 1420px) {
         .login-left{
-            width: 58% !important;     
+            width: 58% !important;
             .login-text{
                 left: 33% !important;
             }
         }
         .login-right{
-            width: 42% !important;     
+            width: 42% !important;
         }
     }
     @media screen and (max-width: 1020px) {
@@ -251,8 +251,8 @@ export default {
             left: calc(50% - 160px) !important;
         }
         .login-left{
-            width: 100% !important;    
-            margin: 0 auto; 
+            width: 100% !important;
+            margin: 0 auto;
             .login-text{
                 margin: 0 auto;
                 left: auto !important;
@@ -287,7 +287,7 @@ export default {
             }
         }
         .login-right{
-            width: 0 !important;     
+            width: 0 !important;
         }
     }
      @media screen and (max-width: 520px) {
@@ -295,8 +295,8 @@ export default {
             left: calc(50% - 130px) !important;
         }
         .login-left{
-            width: 100% !important;    
-            margin: 0 auto; 
+            width: 100% !important;
+            margin: 0 auto;
             .login-text{
                 top: 140px !important;
                 left: auto !important;
