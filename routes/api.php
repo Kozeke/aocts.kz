@@ -22,3 +22,5 @@ Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
 Route::get('regions','RegionController@all');
 Route::post('upload/user/document', 'UserDocumentController@uploadDocument');
+Route::post('forgot/password', 'ForgotPasswordController@forgot');
+

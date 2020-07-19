@@ -2000,23 +2000,23 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     logIn: function logIn() {
-      if (this.email === '') {
-        document.getElementById('err-email').style.visibility = 'visible';
-        document.getElementById('email').classList.add('error');
-        return;
-      }
-
-      if (this.password === '') {
-        document.getElementById('err-password').style.visibility = 'visible';
-        document.getElementById('password').classList.add('error');
-        return;
-      }
-
-      var data = {
-        email: this.email,
-        password: this.password
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', data).then(function (res) {
+      // if(this.email === ''){
+      //     document.getElementById('err-email').style.visibility = 'visible'
+      //     document.getElementById('email').classList.add('error')
+      //     return
+      // }
+      // if(this.password === ''){
+      //     document.getElementById('err-password').style.visibility = 'visible'
+      //     document.getElementById('password').classList.add('error')
+      //     return
+      // }
+      // var data = {
+      //     email: this.email,
+      //     password: this.password
+      // }
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/forgot/password', {
+        email: this.email
+      }).then(function (res) {
         alert('Профиль успешно прошел валидацию.');
         console.log(res);
       })["catch"](function (err) {
@@ -2540,51 +2540,79 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      email: '',
-      password: '',
-      errors: ''
+      email: "",
+      password: "",
+      errors: ""
     };
   },
   methods: {
     validateForm: function validateForm(e) {
       var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      if (e.target.id === 'email') {
+      if (e.target.id === "email") {
         if (!pattern.test(String(e.target.value).toLowerCase())) {
-          document.getElementById('err-email').style.visibility = 'visible';
-          e.srcElement.classList.add('error');
+          document.getElementById("err-email").style.visibility = "visible";
+          e.srcElement.classList.add("error");
         } else {
-          document.getElementById('err-email').style.visibility = 'hidden';
-          e.srcElement.classList.remove('error');
+          document.getElementById("err-email").style.visibility = "hidden";
+          e.srcElement.classList.remove("error");
         }
       }
 
-      if (e.target.id === 'password') {
+      if (e.target.id === "password") {
         if (String(e.target.value).length === 0) {
-          document.getElementById('err-password').style.visibility = 'visible';
-          e.srcElement.classList.add('error');
+          document.getElementById("err-password").style.visibility = "visible";
+          e.srcElement.classList.add("error");
         } else {
-          document.getElementById('err-password').style.visibility = 'hidden';
-          e.srcElement.classList.remove('error');
+          document.getElementById("err-password").style.visibility = "hidden";
+          e.srcElement.classList.remove("error");
         }
       }
     },
     logIn: function logIn() {
       var _this = this;
 
-      if (this.email === '') {
-        document.getElementById('err-email').style.visibility = 'visible';
-        document.getElementById('email').classList.add('error');
+      if (this.email === "") {
+        document.getElementById("err-email").style.visibility = "visible";
+        document.getElementById("email").classList.add("error");
         return;
       }
 
-      if (this.password === '') {
-        document.getElementById('err-password').style.visibility = 'visible';
-        document.getElementById('password').classList.add('error');
+      if (this.password === "") {
+        document.getElementById("err-password").style.visibility = "visible";
+        document.getElementById("password").classList.add("error");
         return;
       }
 
@@ -2592,16 +2620,16 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email,
         password: this.password
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', data).then(function (res) {
-        alert('Профиль успешно прошел валидацию.');
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/login", data).then(function (res) {
+        alert("Профиль успешно прошел валидацию.");
         console.log(res);
       })["catch"](function (err) {
         if (err.response.status === 402) {
-          alert('Профиль проверяется модератором.');
+          alert("Профиль проверяется модератором.");
         }
 
         if (err.response.status === 401) {
-          alert('Почта или логин не правильно.');
+          alert("Почта или логин не правильно.");
         }
 
         _this.errors = Object.assign({}, err.response.data.error);
@@ -3453,7 +3481,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-6bdc8b8e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 900px;\n}\n.main .logo[data-v-6bdc8b8e] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(19%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n  z-index: 99;\n}\n.main .login-left[data-v-6bdc8b8e] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-6bdc8b8e] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397D;\n}\n.main .login-left .login-text .head[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-6bdc8b8e] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-6bdc8b8e] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-6bdc8b8e] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-6bdc8b8e] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .check-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\n.main .login-left .login-text .check-form input[data-v-6bdc8b8e] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .login-enter[data-v-6bdc8b8e] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #FFFFFF;\n}\n.main .login-left .login-text .login-last[data-v-6bdc8b8e] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985FF;\n}\n.main .login-left .login-text .login-last .left[data-v-6bdc8b8e], .main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-6bdc8b8e] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n@media screen and (max-width: 1420px) {\n.login-left[data-v-6bdc8b8e] {\n    width: 58% !important;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    left: 33% !important;\n}\n.login-right[data-v-6bdc8b8e] {\n    width: 42% !important;\n}\n}\n@media screen and (max-width: 1020px) {\n.logo[data-v-6bdc8b8e] {\n    left: calc(50% - 160px) !important;\n}\n.login-left[data-v-6bdc8b8e] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    margin: 0 auto;\n    left: auto !important;\n}\n.login-left .login-text .head[data-v-6bdc8b8e] {\n    font-size: 28px !important;\n}\n.login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .input-form input[data-v-6bdc8b8e] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-enter[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-last[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-right[data-v-6bdc8b8e] {\n    width: 0 !important;\n}\n}\n@media screen and (max-width: 520px) {\n.logo[data-v-6bdc8b8e] {\n    left: calc(50% - 130px) !important;\n}\n.login-left[data-v-6bdc8b8e] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    top: 140px !important;\n    left: auto !important;\n    width: 260px !important;\n}\n.login-left .login-text .head[data-v-6bdc8b8e] {\n    font-size: 24px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form input[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .check-form[data-v-6bdc8b8e] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n.login-left .login-text .login-enter[data-v-6bdc8b8e] {\n    margin-top: 30px !important;\n    font-size: 12px !important;\n}\n.login-left .login-text .login-last[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n}", ""]);
+exports.push([module.i, ".main[data-v-6bdc8b8e] {\n  position: relative;\n  width: 100%;\n  background: #ffffff;\n  height: 900px;\n}\n.main .logo[data-v-6bdc8b8e] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(19%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #f6f6f8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397d;\n  font-weight: 500;\n  z-index: 99;\n}\n.main .login-left[data-v-6bdc8b8e] {\n  position: relative;\n  width: 48%;\n}\n.main .login-left .login-text[data-v-6bdc8b8e] {\n  width: 320px;\n  position: relative;\n  top: 200px;\n  left: 40%;\n  color: #06397d;\n}\n.main .login-left .login-text .head[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  margin-bottom: 10px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] {\n  position: relative;\n  margin-top: 30px;\n  height: 86px;\n}\n.main .login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .input-form input[data-v-6bdc8b8e] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #ffffff;\n  border: 1px solid #e6eaf3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .login-left .login-text .input-form .error[data-v-6bdc8b8e] {\n  border: 1px solid #e4002f !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .login-left .login-text .input-form .err[data-v-6bdc8b8e] {\n  visibility: hidden;\n  position: absolute;\n  top: 50px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #ffffff;\n  border: 1px solid #e4002f;\n  box-sizing: border-box;\n}\n.main .login-left .login-text .input-form .err svg[data-v-6bdc8b8e] {\n  margin-top: -8px;\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .login-left .login-text .check-form[data-v-6bdc8b8e] {\n  margin-top: 30px;\n}\n.main .login-left .login-text .check-form input[data-v-6bdc8b8e] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .login-left .login-text .login-enter[data-v-6bdc8b8e] {\n  cursor: pointer;\n  padding-top: 17px;\n  height: 55px;\n  margin-top: 40px;\n  background: #4985ff;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  text-align: center;\n  color: #ffffff;\n}\n.main .login-left .login-text .login-last[data-v-6bdc8b8e] {\n  text-align: left;\n  position: relative;\n  margin-top: 30px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 20px;\n  /* identical to box height */\n  color: #4985ff;\n}\n.main .login-left .login-text .login-last .left[data-v-6bdc8b8e],\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  cursor: pointer;\n}\n.main .login-left .login-text .login-last .right[data-v-6bdc8b8e] {\n  margin-left: 40px;\n}\n.main .login-right[data-v-6bdc8b8e] {\n  position: relative;\n  width: 52%;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.3), rgba(214, 230, 255, 0.3)), url(\"/images/login-layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n@media screen and (max-width: 1420px) {\n.login-left[data-v-6bdc8b8e] {\n    width: 58% !important;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    left: 33% !important;\n}\n.login-right[data-v-6bdc8b8e] {\n    width: 42% !important;\n}\n}\n@media screen and (max-width: 1020px) {\n.logo[data-v-6bdc8b8e] {\n    left: calc(50% - 160px) !important;\n}\n.login-left[data-v-6bdc8b8e] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    margin: 0 auto;\n    left: auto !important;\n}\n.login-left .login-text .head[data-v-6bdc8b8e] {\n    font-size: 28px !important;\n}\n.login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .input-form input[data-v-6bdc8b8e] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n    font-size: 14px !important;\n}\n.login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-enter[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-left .login-text .login-last[data-v-6bdc8b8e] {\n    font-size: 15px !important;\n}\n.login-right[data-v-6bdc8b8e] {\n    width: 0 !important;\n}\n}\n@media screen and (max-width: 520px) {\n.logo[data-v-6bdc8b8e] {\n    left: calc(50% - 130px) !important;\n}\n.login-left[data-v-6bdc8b8e] {\n    width: 100% !important;\n    margin: 0 auto;\n}\n.login-left .login-text[data-v-6bdc8b8e] {\n    top: 140px !important;\n    left: auto !important;\n    width: 260px !important;\n}\n.login-left .login-text .head[data-v-6bdc8b8e] {\n    font-size: 24px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .input-form .label[data-v-6bdc8b8e] {\n    font-size: 14px !important;\n}\n.login-left .login-text .input-form input[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-webkit-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-moz-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] :-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::-ms-input-placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .input-form[data-v-6bdc8b8e] ::placeholder {\n    font-size: 12px !important;\n}\n.login-left .login-text .check-form[data-v-6bdc8b8e] {\n    margin-top: 20px !important;\n}\n.login-left .login-text .check-form .label[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n.login-left .login-text .login-enter[data-v-6bdc8b8e] {\n    margin-top: 30px !important;\n    font-size: 12px !important;\n}\n.login-left .login-text .login-last[data-v-6bdc8b8e] {\n    font-size: 12px !important;\n}\n}", ""]);
 
 // exports
 
@@ -24576,8 +24604,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\website\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\website\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
