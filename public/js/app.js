@@ -1988,40 +1988,22 @@ __webpack_require__.r(__webpack_exports__);
           e.srcElement.classList.remove('error');
         }
       }
-
-      if (e.target.id === 'password') {
-        if (String(e.target.value).length === 0) {
-          document.getElementById('err-password').style.visibility = 'visible';
-          e.srcElement.classList.add('error');
-        } else {
-          document.getElementById('err-password').style.visibility = 'hidden';
-          e.srcElement.classList.remove('error');
-        }
-      }
     },
-    logIn: function logIn() {
-      // if(this.email === ''){
-      //     document.getElementById('err-email').style.visibility = 'visible'
-      //     document.getElementById('email').classList.add('error')
-      //     return
-      // }
-      // if(this.password === ''){
-      //     document.getElementById('err-password').style.visibility = 'visible'
-      //     document.getElementById('password').classList.add('error')
-      //     return
-      // }
-      // var data = {
-      //     email: this.email,
-      //     password: this.password
-      // }
+    getPwdLink: function getPwdLink() {
+      if (this.email === '') {
+        document.getElementById('err-email').style.visibility = 'visible';
+        document.getElementById('email').classList.add('error');
+        return;
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/forgot/password', {
         email: this.email
       }).then(function (res) {
-        alert('Профиль успешно прошел валидацию.');
+        alert('Ссылка для востановления пароля отправлен на вашу почту.');
         console.log(res);
       })["catch"](function (err) {
         if (err.response.status === 402) {
-          alert('Профиль проверяется модератором.');
+          alert('Указанный почта не зарегистрирован.');
         }
 
         console.log(err);
@@ -5061,7 +5043,7 @@ var render = function() {
             staticClass: "login-enter",
             on: {
               click: function($event) {
-                return _vm.logIn()
+                return _vm.getPwdLink()
               }
             }
           },
@@ -24604,8 +24586,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\website\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\website\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

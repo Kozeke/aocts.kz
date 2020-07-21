@@ -7,8 +7,8 @@
                 <div class="sub-head">Задайте новый пароль для вашего аккаунта.</div>
                 <div class="input-form flex-col">
                     <label class="label">Пароль</label>
-                    <input v-on:keyup="validateForm($event)" v-model="email" type="text" id="email" placeholder="Введите пароль">
-                    <div class="err" id="err-email">
+                    <input v-on:keyup="validateForm($event)" v-model="password" type="text" id="password" placeholder="Введите пароль">
+                    <div class="password" id="err-password">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
@@ -16,14 +16,14 @@
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Повторите пароль</label>
-                    <input v-on:keyup="validateForm($event)" v-model="password" type="password" id="password" placeholder="Введите пароль еще раз">
-                    <div class="err" id="err-password">
+                    <input v-on:keyup="validateForm($event)" v-model="password_confirmation" type="password_confirmation" id="password" placeholder="Введите пароль еще раз">
+                    <div class="err" id="err-password_confirmation">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
                     </div>
                 </div>
-                <div @click="logIn()" class="login-enter">Изменить пароль </div>
+                <div @click="changePwd()" class="login-enter">Изменить пароль </div>
                 <div class="login-last flex-row">
                     <label @click="$router.push({ name: 'register' })" class="left">Регистрация</label>
                     <label @click="$router.push({ name: 'login' })" class="right">Авторизация</label>
@@ -41,24 +41,15 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            email: '',
+            password_confirmation: '',
             password: ''
         }
     },
     methods: {
         validateForm(e){
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if(e.target.id === 'email'){
-                if( !pattern.test(String(e.target.value).toLowerCase()) ){
-                    document.getElementById('err-email').style.visibility = 'visible'
-                    e.srcElement.classList.add('error')
-                } else {
-                    document.getElementById('err-email').style.visibility = 'hidden'
-                    e.srcElement.classList.remove('error')
-                }
-            }
             if(e.target.id === 'password'){
-                 if(String(e.target.value).length === 0 ){
+                if( !pattern.test(String(e.target.value).toLowerCase()) ){
                     document.getElementById('err-password').style.visibility = 'visible'
                     e.srcElement.classList.add('error')
                 } else {
@@ -66,31 +57,41 @@ export default {
                     e.srcElement.classList.remove('error')
                 }
             }
-        },
-        logIn(){
-            if(this.email === ''){
-                document.getElementById('err-email').style.visibility = 'visible'
-                document.getElementById('email').classList.add('error')
-                return
+            if(e.target.id === 'password_confirmation'){
+                 if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-password_confirmation').style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-password_confirmation').style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
             }
+        },
+        changePwd(){
             if(this.password === ''){
                 document.getElementById('err-password').style.visibility = 'visible'
                 document.getElementById('password').classList.add('error')
                 return
             }
+            if(this.password_confirmation === '' || this.password_confirmation !== this.password ){
+                document.getElementById('err-password_confirmation').style.visibility = 'visible'
+                document.getElementById('password_confirmation').classList.add('error')
+                return
+            }
             var data = {
-                email: this.email,
-                password: this.password
+                password: this.password,
+                password_confirmation: this.password_confirmation,
+                code: this.$route.query.code //code="val"
             }
 
-            axios.post('/api/login', data)
+            axios.post('/api/reset_password', data)
                 .then(res => {
-                    alert('Профиль успешно прошел валидацию.')
-                    console.log(res)
+                    alert('Пароль успешно изменен.')
+                    this.$router.push({ name: 'login' })
                 })
                 .catch(err => {
                     if(err.response.status === 402){
-                        alert('Профиль проверяется модератором.')
+                        alert('Что то пошло не так.')
                     }
                 console.log(err)
             })

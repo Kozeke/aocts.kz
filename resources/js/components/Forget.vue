@@ -15,7 +15,7 @@
                         </svg>
                     </div>
                 </div>
-                <div @click="logIn()" class="login-enter">Восстановить пароль </div>
+                <div @click="getPwdLink()" class="login-enter">Восстановить пароль </div>
                 <div class="login-last flex-row">
                     <label @click="$router.push({ name: 'register' })" class="left">Регистрация</label>
                     <label @click="$router.push({ name: 'login' })" class="right">Авторизация</label>
@@ -49,42 +49,24 @@ export default {
                     e.srcElement.classList.remove('error')
                 }
             }
-            if(e.target.id === 'password'){
-                 if(String(e.target.value).length === 0 ){
-                    document.getElementById('err-password').style.visibility = 'visible'
-                    e.srcElement.classList.add('error')
-                } else {
-                    document.getElementById('err-password').style.visibility = 'hidden'
-                    e.srcElement.classList.remove('error')
-                }
-            }
         },
-        logIn(){
-            // if(this.email === ''){
-            //     document.getElementById('err-email').style.visibility = 'visible'
-            //     document.getElementById('email').classList.add('error')
-            //     return
-            // }
-            // if(this.password === ''){
-            //     document.getElementById('err-password').style.visibility = 'visible'
-            //     document.getElementById('password').classList.add('error')
-            //     return
-            // }
-            // var data = {
-            //     email: this.email,
-            //     password: this.password
-            // }
+        getPwdLink(){
+            if(this.email === ''){
+                document.getElementById('err-email').style.visibility = 'visible'
+                document.getElementById('email').classList.add('error')
+                return
+            }
 
             axios.post('/api/forgot/password', {
                 email:this.email}
                 )
                 .then(res => {
-                    alert('Профиль успешно прошел валидацию.')
+                    alert('Ссылка для востановления пароля отправлен на вашу почту.')
                     console.log(res)
                 })
                 .catch(err => {
                     if(err.response.status === 402){
-                        alert('Профиль проверяется модератором.')
+                        alert('Указанный почта не зарегистрирован.')
                     }
                 console.log(err)
             })
