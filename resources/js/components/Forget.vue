@@ -58,8 +58,8 @@ export default {
             }
 
             axios.post('/api/forgot/password', {
-                email:this.email}
-                )
+                    email:this.email,
+                })
                 .then(res => {
                     alert('Ссылка для востановления пароля отправлен на вашу почту.')
                     console.log(res)
