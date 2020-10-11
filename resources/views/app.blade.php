@@ -8,7 +8,7 @@
     <title>Laravel</title>
     <link href=" {{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background: #ffffff">
     <div id="app">
         <!-- <app></app> -->
         <router-view></router-view>
