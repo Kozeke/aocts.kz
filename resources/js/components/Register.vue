@@ -525,7 +525,7 @@ export default {
                     })
                     .then(res => {
                         this.userRegistration = false
-                        console.log(res)
+                        this.$router.push({ name : 'profile' })
                     }).catch(err => {
                         if (err.response.status == 422){
                             this.errors = Object.assign({}, err.response.data.error)

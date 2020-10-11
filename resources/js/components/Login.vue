@@ -118,8 +118,7 @@ export default {
       axios
         .post("/api/login", data)
         .then(res => {
-          alert("Профиль успешно прошел валидацию.");
-          console.log(res);
+          this.$router.push({ name : 'profile' })
         })
         .catch(err => {
           if (err.response.status === 402) {
