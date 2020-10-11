@@ -12,7 +12,7 @@
             </div>
             <div class="divider"></div>
             <div class="user-name">Some company.</div>
-            <div class="user-img">
+            <div @click="$router.push({ name: 'profile' })" class="user-img">
                 <img src="/images/m-header.png" alt="">
             </div>
         </div>

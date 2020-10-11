@@ -9,24 +9,19 @@
                     <UserProfileRouteMenu></UserProfileRouteMenu>
                     <div class="field-list flex-row">
                         <div class="item flex-col">
-                            <div class="label">ФИО первого руководителя</div>
-                            <input v-if="editMode" type="text" placeholder="Somename Somesurname" >
-                            <input v-else type="text" value="Somename Somesurname" readonly>
+                            <div class="label">Банк оплаты</div>
+                            <input v-if="editMode" type="text" placeholder="Выберите банк" >
+                            <input v-else type="text" value="Выберите банк" readonly>
                         </div>
                         <div class="item flex-col">
-                            <div class="label">ФИО исполнителя</div>
-                            <input v-if="editMode" type="text" placeholder="Somename Somesurname">
-                            <input v-else type="text" value="Somename Somesurname" readonly>
+                            <div class="label">БИК</div>
+                            <input v-if="editMode" type="text" placeholder="000 000 000">
+                            <input v-else type="text" value="000 000 000" readonly>
                         </div>
                         <div class="item flex-col">
-                            <div class="label">Контактный номер</div>
-                            <input v-if="editMode" type="text" placeholder="+7 700 000 00 00">
-                            <input v-else type="text" value="+7 700 000 00 00" readonly>
-                        </div>
-                        <div class="item flex-col">
-                            <div class="label">Электронная почта</div>
-                            <input v-if="editMode" type="text" placeholder="manager@company.kz">
-                            <input v-else type="text" value="manager@company.kz" readonly>
+                            <div class="label">ИИК</div>
+                            <input v-if="editMode" type="text" placeholder="KZ 1000 0000 0000 0000">
+                            <input v-else type="text" value="KZ 1000 0000 0000 0000" readonly>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
@@ -38,8 +33,8 @@
     </div>
 </template>
 <script>
-import UserSide from './UserSide'
-import UserNav from './UserNav'
+import UserSide from '../UserSide'
+import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
 

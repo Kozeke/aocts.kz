@@ -9,23 +9,38 @@
                     <UserProfileRouteMenu></UserProfileRouteMenu>
                     <div class="field-list flex-row">
                         <div class="item flex-col">
-                            <div class="label">Банк оплаты</div>
-                            <input v-if="editMode" type="text" placeholder="Выберите банк" >
-                            <input v-else type="text" value="Выберите банк" readonly>
+                            <div class="label">БИН/ИНН</div>
+                            <input v-if="editMode" type="text" placeholder="100 000 000 000" >
+                            <input v-else type="text" value="100 000 000 000" readonly>
                         </div>
                         <div class="item flex-col">
-                            <div class="label">БИК</div>
-                            <input v-if="editMode" type="text" placeholder="000 000 000">
-                            <input v-else type="text" value="000 000 000" readonly>
+                            <div class="label">Название компании</div>
+                            <input v-if="editMode" type="text" placeholder="Some company.">
+                            <input v-else type="text" value="Some company." readonly>
                         </div>
                         <div class="item flex-col">
-                            <div class="label">ИИК</div>
-                            <input v-if="editMode" type="text" placeholder="KZ 1000 0000 0000 0000">
-                            <input v-else type="text" value="KZ 1000 0000 0000 0000" readonly>
+                            <div class="label">Вид деятельности</div>
+                            <input v-if="editMode" type="text" placeholder="Информационные Технологии">
+                            <input v-else type="text" value="Информационные Технологии" readonly>
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Электронная почта компании</div>
+                            <input v-if="editMode" type="text" placeholder="email@company.kz">
+                            <input v-else type="text" value="email@company.kz" readonly>
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Фактический адрес компании</div>
+                            <input v-if="editMode" type="text" placeholder="г. Караганда, ул. Шахтеров">
+                            <input v-else type="text" value="г. Караганда, ул. Шахтеров" readonly>
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Юридический адрес компании</div>
+                            <input v-if="editMode" type="text" placeholder="г. Нур-Султан, ул. Достык">
+                            <input v-else type="text" value="г. Нур-Султан, ул. Достык" readonly>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
-                    <div @click="editMode = !editMode" v-if="editMode" class="send-btn">Сохранить изменения</div>
+                    <div @click="editMode = !editMode" v-if="editMode" class="send-btn">Отправить запрос на изменение данных</div>
                     <div @click="editMode = !editMode" v-if="!editMode" class="edit-btn">Изменить настройки</div>
                 </div>
             </div>
@@ -33,8 +48,8 @@
     </div>
 </template>
 <script>
-import UserSide from './UserSide'
-import UserNav from './UserNav'
+import UserSide from '../UserSide'
+import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
 
@@ -128,7 +143,12 @@ export default {
                         border-radius: 6px;
                     }
                     .cancel-btn{
-                        right: 300px;
+                        right: 320px;
+                    }
+                    .send-btn{
+                        padding: 10px 28px;
+                        line-height: 18px;
+                        margin-left: 24px;
                     }
                 }
             }

@@ -62,8 +62,8 @@
     </div>
 </template>
 <script>
-import UserSide from './UserSide'
-import UserNav from './UserNav'
+import UserSide from '../UserSide'
+import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
 

@@ -2,7 +2,7 @@
     <div class="list-item flex-row">
         <div @click="$router.push({ name: 'profile' })" class="item" :class="{ active: $route.name === 'profile' }">Основное</div>
         <div @click="$router.push({ name: 'contacts' })" class="item" :class="{ active: $route.name === 'contacts' }">Контакты</div>
-        <div @click="$router.push({ name: 'documents' })" class="item" :class="{ active: $route.name === 'documents' }">Документы</div>
+        <div @click="$router.push({ name: 'document' })" class="item" :class="{ active: $route.name === 'document' }">Документы</div>
         <div @click="$router.push({ name: 'payment' })" class="item" :class="{ active: $route.name === 'payment' }">Оплата</div>
         <div @click="$router.push({ name: 'password' })" class="item" :class="{ active: $route.name === 'password' }">Пароль</div>
     </div>
