@@ -7,6 +7,7 @@ use Sentinel;
 use Reminder;
 use App\User;
 use Mail;
+use Illuminate\Support\Facades\Auth;
 
 
 class ForgotPasswordController extends Controller
@@ -40,7 +41,11 @@ class ForgotPasswordController extends Controller
         }
         $user = Sentinel::findById($user->id);
 
-        $reminder = Reminder::where('user_id',$user->id)->pluck('code');
+        $reminder = Reminder::where([
+            ['completed',0],['user_id',$user->id]
+            ])->pluck('code');
+        // dd($reminder);
+
         if($reminder) {
             if ($code == $reminder[0]) {
 //                $success['user'] =  $user;
@@ -67,6 +72,7 @@ class ForgotPasswordController extends Controller
         $user = Sentinel::findById($user->id);
 
         $reminder = Reminder::where('user_id',$user->id)->pluck('code');
+        // dd($reminder);
         if($reminder) {
             if ($code == $reminder[0]) {
                 Reminder::complete($user, $code, $request->password);
@@ -81,5 +87,5 @@ class ForgotPasswordController extends Controller
             echo 'time expired';
         }
     }
-
+    
 }

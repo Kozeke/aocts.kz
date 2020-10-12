@@ -20,7 +20,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
+Route::get('user/data', 'UserController@userData');
+Route::post('user/change/password', 'UserController@changePassword');
+Route::delete('user/delete/document', 'UserDocumentController@deleteDocument');
+
+
+Route::post('user/edit/main','UserController@updateMain');
+Route::post('user/edit/contacts','UserController@updateContacts');
+
+
+
 Route::get('regions','RegionController@all');
-Route::post('upload/user/document', 'UserDocumentController@uploadDocument');
 Route::post('forgot/password', 'ForgotPasswordController@forgot');
+Route::get('forgot/password/get/code','ForgotPasswordController@getCode');
+Route::post('send/file','UserDocumentController@saveContract');
+
 
