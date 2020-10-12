@@ -101,7 +101,7 @@ class UserController extends Controller
         ]);
         UserDocument::create([
             'user_id' => $user->id,
-            'title' => $text
+            'path' => $text
         ]);
 //            }else{
 //                return response()->json(['image'], 422);
