@@ -55,7 +55,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="send-btn">Добавить документ</div>
+                    <div @click="modalAddDoc = true" class="send-btn">Добавить документ</div>
+                </div>
+            </div>
+        </div>
+         <div v-if="modalAddDoc" class="modal">
+            <div class="modal-content">
+                <div @click="modalAddDoc = false" class="close">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
+                    </svg>
+                </div>
+                <div class="upload flex-col">
+                    <svg width="89" height="102" viewBox="0 0 89 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M78.7308 32.7854H61.6154C59.7248 32.7854 58.1923 34.4163 58.1923 36.4283C58.1923 38.4403 59.7248 40.0713 61.6154 40.0713H78.7308C80.6213 40.0713 82.1539 41.7023 82.1539 43.7142V91.0718C82.1539 93.0838 80.6213 94.7148 78.7308 94.7148H10.2692C8.37865 94.7148 6.84609 93.0838 6.84609 91.0718V43.714C6.84609 41.702 8.37865 40.0711 10.2692 40.0711H27.3846C29.2752 40.0711 30.8077 38.4401 30.8077 36.4281C30.8077 34.4161 29.2752 32.7852 27.3846 32.7852H10.2692C4.59769 32.7852 0 37.6781 0 43.7138V91.0714C0 97.1071 4.59769 102 10.2692 102H78.7308C84.4023 102 89 97.1071 89 91.0714V43.714C89 37.6783 84.4023 32.7854 78.7308 32.7854Z" fill="#4985FF"/>
+                        <path d="M64.0353 19.281L46.92 1.06666C45.5834 -0.355555 43.4164 -0.355555 42.0798 1.06666L24.9643 19.281C23.6509 20.7282 23.6886 23.0343 25.0485 24.432C26.3751 25.7955 28.4781 25.7955 29.8047 24.432L41.077 12.4359V72.857C41.077 74.869 42.6095 76.5 44.5001 76.5C46.3907 76.5 47.9232 74.869 47.9232 72.857V12.4361L59.1955 24.4322C60.5554 25.8299 62.7224 25.7898 64.0357 24.3426C65.3166 22.9308 65.3166 20.6928 64.0353 19.281Z" fill="#4985FF"/>
+                    </svg>
+                    <div class="label">
+                        <p>
+                        Перетащите файлы сюда<br>
+                        или <span>выберите (прикрепить файл)</span></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,7 +96,7 @@ export default {
     },
     data(){
         return {
-            
+            modalAddDoc: false
         }
     },
     methods:{
@@ -225,6 +245,55 @@ export default {
                         background: #4985FF;
                         box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
                         border-radius: 6px;
+                    }
+                }
+            }
+        }
+        .modal {
+            display: flex;
+            position: fixed; /* Stay in place */
+            z-index: 99; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background: rgba(45, 76, 100, 0.7);
+            .modal-content {
+                background-color: #fefefe;
+                background: #FFFFFF;
+                border-radius: 6px;
+                margin: 140px auto auto auto;
+                padding: 72px 96px;
+                width: auto;
+                .close{
+                    position: absolute;
+                    top: 30px;
+                    right: 30px;
+                }
+                .upload{
+                    border: 1px dashed #4985FF;
+                    border-radius: 6px;
+                    padding: 64px 180px;
+                    svg{
+                        text-align: center;
+                        margin: 0 auto;
+                    }
+                    .label{
+                        margin: 42px auto 0 auto;
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 20px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        color: #252733;
+                        p{
+                            margin: 0;
+                        }
+                        span{
+                            color: #4985FF;
+                        }
                     }
                 }
             }

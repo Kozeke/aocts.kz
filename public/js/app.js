@@ -3702,6 +3702,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3710,7 +3755,9 @@ __webpack_require__.r(__webpack_exports__);
     UserNav: _UserNav__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      modalNewDeal: false
+    };
   },
   methods: {
     showAccordian: function showAccordian(index) {
@@ -4046,6 +4093,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4211,6 +4279,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4223,7 +4311,9 @@ __webpack_require__.r(__webpack_exports__);
     UserProfileRouteMenu: _UserProfileRouteMenu__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      modalAddDoc: false
+    };
   },
   methods: {
     showOption: function showOption(index) {
@@ -4424,6 +4514,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4437,7 +4585,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      editMode: false
+      editMode: false,
+      modalActualAddress: false,
+      modalLegalAddress: false
     };
   }
 });
@@ -4688,7 +4838,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-2e43c481] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-2e43c481] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-2e43c481] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-2e43c481] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-2e43c481] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-2e43c481] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  width: 18%;\n}\n.main .main-info .containe .content .field-list .item-list[data-v-2e43c481] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .item-list .item[data-v-2e43c481] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .day[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481] {\n  width: 20%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  padding: 0;\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .item-list .item .date .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until .time[data-v-2e43c481] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481] {\n  width: 14%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #4985FF;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .extra[data-v-2e43c481] {\n  display: none;\n  text-align: left;\n  margin-left: 8%;\n}\n.main .main-info .containe .content .field-list .item-list .extra .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin-bottom: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .extra .docs[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin: 2px 0;\n}\n.main .main-info .containe .content .send-btn[data-v-2e43c481] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-2e43c481] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-2e43c481] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-2e43c481] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-2e43c481] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-2e43c481] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-2e43c481] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  width: 18%;\n}\n.main .main-info .containe .content .field-list .item-list[data-v-2e43c481] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .item-list .item[data-v-2e43c481] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .day[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481] {\n  width: 20%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  padding: 0;\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .item-list .item .date .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until .time[data-v-2e43c481] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481] {\n  width: 14%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #4985FF;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .extra[data-v-2e43c481] {\n  display: none;\n  text-align: left;\n  margin-left: 8%;\n}\n.main .main-info .containe .content .field-list .item-list .extra .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin-bottom: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .extra .docs[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin: 2px 0;\n}\n.main .main-info .containe .content .send-btn[data-v-2e43c481] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-2e43c481] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-2e43c481] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 140px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-2e43c481] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-2e43c481] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-2e43c481] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-2e43c481] {\n  width: 134px;\n  cursor: pointer;\n  margin: 40px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
 
 // exports
 
@@ -4783,7 +4933,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-dc2bbcd8] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-dc2bbcd8] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-dc2bbcd8] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-dc2bbcd8] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-dc2bbcd8] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-dc2bbcd8] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-dc2bbcd8] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-dc2bbcd8] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-dc2bbcd8] {\n  padding: 36px 28px 100px 28px;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-dc2bbcd8] {\n  margin-top: 0px;\n  width: 100%;\n  background: #FFFFFF;\n  position: relative;\n}\n.main .main-info .containe .content .content-info .field-list .head[data-v-dc2bbcd8] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-dc2bbcd8] {\n  height: 376px;\n  margin-top: 28px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label[data-v-dc2bbcd8] {\n  padding: 10px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .name[data-v-dc2bbcd8], .main .main-info .containe .content .content-info .field-list .item-list .item-label .date[data-v-dc2bbcd8] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .name[data-v-dc2bbcd8] {\n  width: 42%;\n  margin-right: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .date[data-v-dc2bbcd8] {\n  width: 56%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-scroll[data-v-dc2bbcd8] {\n  overflow-y: scroll;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-dc2bbcd8] {\n  position: relative;\n  padding: 25px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-dc2bbcd8], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-dc2bbcd8] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-dc2bbcd8] {\n  width: 42%;\n  margin-right: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-dc2bbcd8] {\n  width: 56%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-dc2bbcd8] {\n  position: absolute;\n  top: 21px;\n  right: 0;\n  cursor: pointer;\n  text-align: right;\n}\n.main .main-info .containe .content .content-info[data-v-dc2bbcd8] ::-webkit-scrollbar {\n  width: 3px;\n}\n.main .main-info .containe .content .content-info[data-v-dc2bbcd8] ::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.main .main-info .containe .content .content-info[data-v-dc2bbcd8] ::-webkit-scrollbar-thumb {\n  background: #4985FF;\n}\n.main .main-info .containe .content .content-info[data-v-dc2bbcd8] ::-webkit-scrollbar-thumb:hover {\n  background: #4985FF;\n}", ""]);
 
 // exports
 
@@ -4821,7 +4971,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-f3eace56] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-f3eace56] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-f3eace56] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-f3eace56] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-f3eace56] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-f3eace56] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .statis[data-v-f3eace56] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56] {\n  width: 40%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56] {\n  width: 24%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-f3eace56] {\n  width: 30%;\n}\n.main .main-info .containe .content .field-list .item[data-v-f3eace56] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n  height: 60px;\n  position: relative;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56], .main .main-info .containe .content .field-list .item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .item .time[data-v-f3eace56], .main .main-info .containe .content .field-list .item .day[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56] {\n  width: 40%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item .date[data-v-f3eace56] {\n  margin-left: 2%;\n  width: 24%;\n}\n.main .main-info .containe .content .field-list .item .date .time[data-v-f3eace56] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item .status[data-v-f3eace56] {\n  width: 22%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #29CC97;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item .setting:focus ~ .options[data-v-f3eace56] {\n  display: flex;\n}\n.main .main-info .containe .content .field-list .item .options[data-v-f3eace56] {\n  display: none;\n  position: absolute;\n  background: #ffffff;\n  right: -40px;\n  z-index: 99;\n  padding: 0 8px;\n}\n.main .main-info .containe .content .field-list .item .options .option[data-v-f3eace56] {\n  cursor: pointer;\n  padding: 8px 0;\n}\n.main .main-info .containe .content .field-list .item .options .option .label[data-v-f3eace56] {\n  cursor: pointer;\n  margin-left: 10px;\n  text-align: left;\n  font-weight: 600;\n  font-size: 10px;\n  line-height: 16px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .send-btn[data-v-f3eace56] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-f3eace56] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-f3eace56] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-f3eace56] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-f3eace56] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-f3eace56] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-f3eace56] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .statis[data-v-f3eace56] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56] {\n  width: 40%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56] {\n  width: 24%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-f3eace56] {\n  width: 30%;\n}\n.main .main-info .containe .content .field-list .item[data-v-f3eace56] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n  height: 60px;\n  position: relative;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56], .main .main-info .containe .content .field-list .item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .item .time[data-v-f3eace56], .main .main-info .containe .content .field-list .item .day[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56] {\n  width: 40%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item .date[data-v-f3eace56] {\n  margin-left: 2%;\n  width: 24%;\n}\n.main .main-info .containe .content .field-list .item .date .time[data-v-f3eace56] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item .status[data-v-f3eace56] {\n  width: 22%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #29CC97;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item .setting:focus ~ .options[data-v-f3eace56] {\n  display: flex;\n}\n.main .main-info .containe .content .field-list .item .options[data-v-f3eace56] {\n  display: none;\n  position: absolute;\n  background: #ffffff;\n  right: -40px;\n  z-index: 99;\n  padding: 0 8px;\n}\n.main .main-info .containe .content .field-list .item .options .option[data-v-f3eace56] {\n  cursor: pointer;\n  padding: 8px 0;\n}\n.main .main-info .containe .content .field-list .item .options .option .label[data-v-f3eace56] {\n  cursor: pointer;\n  margin-left: 10px;\n  text-align: left;\n  font-weight: 600;\n  font-size: 10px;\n  line-height: 16px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .send-btn[data-v-f3eace56] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-f3eace56] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-f3eace56] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 140px auto auto auto;\n  padding: 72px 96px;\n  width: auto;\n}\n.main .modal .modal-content .close[data-v-f3eace56] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .upload[data-v-f3eace56] {\n  border: 1px dashed #4985FF;\n  border-radius: 6px;\n  padding: 64px 180px;\n}\n.main .modal .modal-content .upload svg[data-v-f3eace56] {\n  text-align: center;\n  margin: 0 auto;\n}\n.main .modal .modal-content .upload .label[data-v-f3eace56] {\n  margin: 42px auto 0 auto;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  color: #252733;\n}\n.main .modal .modal-content .upload .label p[data-v-f3eace56] {\n  margin: 0;\n}\n.main .modal .modal-content .upload .label span[data-v-f3eace56] {\n  color: #4985FF;\n}", ""]);
 
 // exports
 
@@ -4878,7 +5028,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-71476e42] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-71476e42] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-71476e42] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-71476e42] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  height: 580px;\n}\n.main .main-info .containe .content .field-list[data-v-71476e42] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] {\n  width: 49%;\n  margin-bottom: 28px;\n}\n.main .main-info .containe .content .field-list .item .label[data-v-71476e42] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42]:nth-of-type(2n) {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .cancel-btn[data-v-71476e42], .main .main-info .containe .content .send-btn[data-v-71476e42], .main .main-info .containe .content .edit-btn[data-v-71476e42] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .main-info .containe .content .cancel-btn[data-v-71476e42] {\n  right: 320px;\n}\n.main .main-info .containe .content .send-btn[data-v-71476e42] {\n  padding: 10px 28px;\n  line-height: 18px;\n  margin-left: 24px;\n}", ""]);
+exports.push([module.i, ".main[data-v-71476e42] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-71476e42] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-71476e42] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-71476e42] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  height: 580px;\n}\n.main .main-info .containe .content .field-list[data-v-71476e42] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] {\n  width: 49%;\n  margin-bottom: 28px;\n}\n.main .main-info .containe .content .field-list .item .label[data-v-71476e42] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item input[data-v-71476e42]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42] ::placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-71476e42]:nth-of-type(2n) {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .cancel-btn[data-v-71476e42], .main .main-info .containe .content .send-btn[data-v-71476e42], .main .main-info .containe .content .edit-btn[data-v-71476e42] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .main-info .containe .content .cancel-btn[data-v-71476e42] {\n  right: 320px;\n}\n.main .main-info .containe .content .send-btn[data-v-71476e42] {\n  padding: 10px 28px;\n  line-height: 18px;\n  margin-left: 24px;\n}\n.main .modal[data-v-71476e42] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-71476e42] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 140px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-71476e42] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-71476e42] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-71476e42] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42] {\n  width: 46%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-71476e42] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-71476e42] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-71476e42]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-71476e42]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-71476e42]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-71476e42]:nth-of-type(2n) {\n  margin-left: 8%;\n}\n.main .modal .modal-content .done-btn[data-v-71476e42] {\n  margin-top: 100px;\n  width: 134px;\n  cursor: pointer;\n  margin: 80px auto 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
 
 // exports
 
@@ -11713,14 +11863,81 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "send-btn" }, [
-                _vm._v("Отправить заявку на договор")
-              ])
+              _c(
+                "div",
+                {
+                  staticClass: "send-btn",
+                  on: {
+                    click: function($event) {
+                      _vm.modalNewDeal = true
+                    }
+                  }
+                },
+                [_vm._v("Отправить заявку на договор")]
+              )
             ])
           ])
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.modalNewDeal
+        ? _c("div", { staticClass: "modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "close",
+                  on: {
+                    click: function($event) {
+                      _vm.modalNewDeal = false
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "15",
+                        height: "15",
+                        viewBox: "0 0 15 15",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "done-btn",
+                  on: {
+                    click: function($event) {
+                      _vm.modalActualAddress = false
+                    }
+                  }
+                },
+                [_vm._v("Вперёд")]
+              )
+            ])
+          ])
+        : _vm._e()
     ],
     1
   )
@@ -11744,6 +11961,94 @@ var staticRenderFns = [
       _c("div", { staticClass: "day" }, [_vm._v("Август 31 , 2020")]),
       _vm._v(" "),
       _c("div", { staticClass: "time" }, [_vm._v("19:23")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "title" }, [
+      _vm._v("Договор на оказание услуг по"),
+      _c("br"),
+      _vm._v(" предоставлению подъездного пути")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-list flex-row" }, [
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [
+          _vm._v("Полное наименование ветвепользователя")
+        ]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Some company." } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Исполнитель")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "text", placeholder: "Name Surname Middlename" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Станция")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Введите станцию" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Подъездной путь")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "text", placeholder: "Введите подъездной путь" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Тупик")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "text", placeholder: "Введите место тупика" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [
+          _vm._v("Дата предоставления подъездного пути")
+        ]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "DD.MM.YYYY" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [
+          _vm._v("Планируемый вагонооборот в месяц")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "text",
+            placeholder: "Введите планируемый вагонооборот в месяц"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [
+          _vm._v("Планируемый вагонооборот в год")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "text",
+            placeholder: "Введите планируемый вагонооборот в год"
+          }
+        })
+      ])
     ])
   }
 ]
@@ -12541,7 +12846,62 @@ var render = function() {
               [
                 _c("UserDocumentsRouter"),
                 _vm._v(" "),
-                _c("div", { staticClass: "content-info" })
+                _c("div", { staticClass: "content-info" }, [
+                  _c("div", { staticClass: "field-list flex-col" }, [
+                    _c("div", { staticClass: "head" }, [
+                      _vm._v("Выберите договор и введите количество вагонов:")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item-list flex-col" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "item-scroll" },
+                        _vm._l(8, function(i) {
+                          return _c(
+                            "div",
+                            { key: i, staticClass: "item flex-row" },
+                            [
+                              _c("div", { staticClass: "name" }, [
+                                _vm._v("№ЦТС-2020-14")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "date" }, [
+                                _vm._v("01.07.2020 - 04.08.2020")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "setting" }, [
+                                _c(
+                                  "svg",
+                                  {
+                                    attrs: {
+                                      width: "4",
+                                      height: "16",
+                                      viewBox: "0 0 4 16",
+                                      fill: "none",
+                                      xmlns: "http://www.w3.org/2000/svg"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z",
+                                        fill: "#C5C5C5"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                ])
               ],
               1
             )
@@ -12553,7 +12913,18 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-label flex-row" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Номер договора")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "date" }, [_vm._v("Период сверки")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -12987,9 +13358,18 @@ var render = function() {
                     2
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "send-btn" }, [
-                    _vm._v("Добавить документ")
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "send-btn",
+                      on: {
+                        click: function($event) {
+                          _vm.modalAddDoc = true
+                        }
+                      }
+                    },
+                    [_vm._v("Добавить документ")]
+                  )
                 ],
                 1
               )
@@ -12998,7 +13378,82 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.modalAddDoc
+        ? _c("div", { staticClass: "modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "close",
+                  on: {
+                    click: function($event) {
+                      _vm.modalAddDoc = false
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "15",
+                        height: "15",
+                        viewBox: "0 0 15 15",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "upload flex-col" }, [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      width: "89",
+                      height: "102",
+                      viewBox: "0 0 89 102",
+                      fill: "none",
+                      xmlns: "http://www.w3.org/2000/svg"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M78.7308 32.7854H61.6154C59.7248 32.7854 58.1923 34.4163 58.1923 36.4283C58.1923 38.4403 59.7248 40.0713 61.6154 40.0713H78.7308C80.6213 40.0713 82.1539 41.7023 82.1539 43.7142V91.0718C82.1539 93.0838 80.6213 94.7148 78.7308 94.7148H10.2692C8.37865 94.7148 6.84609 93.0838 6.84609 91.0718V43.714C6.84609 41.702 8.37865 40.0711 10.2692 40.0711H27.3846C29.2752 40.0711 30.8077 38.4401 30.8077 36.4281C30.8077 34.4161 29.2752 32.7852 27.3846 32.7852H10.2692C4.59769 32.7852 0 37.6781 0 43.7138V91.0714C0 97.1071 4.59769 102 10.2692 102H78.7308C84.4023 102 89 97.1071 89 91.0714V43.714C89 37.6783 84.4023 32.7854 78.7308 32.7854Z",
+                        fill: "#4985FF"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M64.0353 19.281L46.92 1.06666C45.5834 -0.355555 43.4164 -0.355555 42.0798 1.06666L24.9643 19.281C23.6509 20.7282 23.6886 23.0343 25.0485 24.432C26.3751 25.7955 28.4781 25.7955 29.8047 24.432L41.077 12.4359V72.857C41.077 74.869 42.6095 76.5 44.5001 76.5C46.3907 76.5 47.9232 74.869 47.9232 72.857V12.4361L59.1955 24.4322C60.5554 25.8299 62.7224 25.7898 64.0357 24.3426C65.3166 22.9308 65.3166 20.6928 64.0353 19.281Z",
+                        fill: "#4985FF"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ])
+          ])
+        : _vm._e()
     ],
     1
   )
@@ -13024,6 +13479,19 @@ var staticRenderFns = [
       _c("div", { staticClass: "day" }, [_vm._v("Июнь 1, 2020")]),
       _vm._v(" "),
       _c("div", { staticClass: "time" }, [_vm._v("19:23")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "label" }, [
+      _c("p", [
+        _vm._v("\n                    Перетащите файлы сюда"),
+        _c("br"),
+        _vm._v("\n                    или "),
+        _c("span", [_vm._v("выберите (прикрепить файл)")])
+      ])
     ])
   }
 ]
@@ -13417,6 +13885,11 @@ var render = function() {
                             attrs: {
                               type: "text",
                               placeholder: "г. Караганда, ул. Шахтеров"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.modalActualAddress = true
+                              }
                             }
                           })
                         : _c("input", {
@@ -13438,6 +13911,11 @@ var render = function() {
                             attrs: {
                               type: "text",
                               placeholder: "г. Нур-Султан, ул. Достык"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.modalLegalAddress = true
+                              }
                             }
                           })
                         : _c("input", {
@@ -13502,12 +13980,197 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.modalActualAddress
+        ? _c("div", { staticClass: "modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "title" }, [
+                _vm._v("Фактический адрес компании")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "close",
+                  on: {
+                    click: function($event) {
+                      _vm.modalActualAddress = false
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "15",
+                        height: "15",
+                        viewBox: "0 0 15 15",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "done-btn",
+                  on: {
+                    click: function($event) {
+                      _vm.modalActualAddress = false
+                    }
+                  }
+                },
+                [_vm._v("Готово")]
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.modalLegalAddress
+        ? _c("div", { staticClass: "modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "title" }, [
+                _vm._v("Юридический адрес компании")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "close",
+                  on: {
+                    click: function($event) {
+                      _vm.modalLegalAddress = false
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "15",
+                        height: "15",
+                        viewBox: "0 0 15 15",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "done-btn",
+                  on: {
+                    click: function($event) {
+                      _vm.modalLegalAddress = false
+                    }
+                  }
+                },
+                [_vm._v("Готово")]
+              )
+            ])
+          ])
+        : _vm._e()
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-list flex-row" }, [
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Страна")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Выберите страну" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Регион")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Выберите регион" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Город")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Выберите город" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Адрес")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "text", placeholder: "Введите адрес (офис, каб)" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-list flex-row" }, [
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Страна")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Выберите страну" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Регион")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Выберите регион" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Город")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "text", placeholder: "Выберите город" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "item flex-col" }, [
+        _c("div", { staticClass: "label" }, [_vm._v("Адрес")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "text", placeholder: "Введите адрес (офис, каб)" }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
