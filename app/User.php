@@ -2,11 +2,12 @@
 
 namespace App;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -31,6 +32,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function documents(){
+        return $this->hasMany('App\UserDocument');
+    }
+
+    public function applications(){
+        return $this->hasMany('App\Application');
+    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -39,7 +47,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function documents(){
-        return $this->hasMany('App\UserDocument');
+
+    public function getJWTIdentifier()
+    {
+        // TODO: Implement getJWTIdentifier() method.
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        // TODO: Implement getJWTCustomClaims() method.
+        return [];
     }
 }

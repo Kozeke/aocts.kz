@@ -1,14 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Validator;
 use App\Application;
 
-class ApplicationsController extends Controller
+class ApplicationController extends Controller
 {
+    public function self()
+    {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
+            return response()->json(['error'=> $e->getMessage()]);
+        }
+        return $user->applications;
+    }
+
     public function createApplication(Request $request){
         $input = $request->all();
 
@@ -23,6 +33,11 @@ class ApplicationsController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
+        }
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
+            return response()->json(['error'=> $e->getMessage()]);
         }
         Application::create([
             'user_id' => $request['user_id'],

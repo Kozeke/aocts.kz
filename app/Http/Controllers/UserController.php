@@ -110,73 +110,9 @@ class UserController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
 
-    public function login(Request $request)
-    {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $user = Auth::user();
-            //$success['token'] =  $user->createToken('MyApp')-> accessToken;
-            $success['user'] = $user;
-//            if ($user['approved'] == 1) {
-            return response()->json(['success' => $success], $this->successStatus);
 
-//            } else {
-//                return response()->json(['error' => 'Not validated'], 402);
-//
-//            }
-        } else {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-    }
 
-    public function updateMain(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'locality_id' => 'required',
-            'address' => 'required',
-            'BIN' => 'required  ',
-            'company_email' => 'required|email|unique:users',
-            'id' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
-        $user = User::findOrFail($request['id']);
-        $user->BIN = $request['BIN'];
-        $user->address = $request['address'];
-        $user->locality_id = $request['locality_id'];
-        $user->company_email = $request['company_email'];
-        $user->save();
-        return response()->json(['success', 200]);
 
-    }
-
-    public function updateContacts(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-            'manager_name' => 'required',
-            'phone' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'name' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
-        $user = User::findOrFail($request['id']);
-
-        $user->name = $request['name'];
-        $user->phone = $request['phone'];
-        $user->manager_name = $request['manager_name'];
-        $user->email = $request['email'];
-        $user->save();
-        return response()->json(['success', 200]);
-
-    }
-
-    public function userData(Request $request)
-    {
-        return User::where('id', $request['id'])->with('documents')->get();
-    }
 
     public function changePassword(Request $request)
     {
