@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,13 @@ class LoginController extends Controller
     }
     public function me()
     {
-        return response()->json(auth()->user());
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
+            return response()->json(['error'=> $e->getMessage()]);
+        }
+        $me = User::where('id', auth()->user()->id)->with(['documents','agreements'])->get();
+        return response()->json(['user'=>$me]);
     }
 
 

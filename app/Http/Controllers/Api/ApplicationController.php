@@ -20,7 +20,6 @@ class ApplicationController extends Controller
     }
 
     public function createApplication(Request $request){
-        $input = $request->all();
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',

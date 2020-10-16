@@ -18,7 +18,6 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $input = $request->all();
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -106,7 +105,10 @@ class UserController extends Controller
 //            }else{
 //                return response()->json(['image'], 422);
 //            }
+        $creds = $request->only(['email', 'password']);
+        $token = auth()->attempt($creds);
         $success['user'] = $user;
+        $success['token'] = $token;
         return response()->json(['success' => $success], $this->successStatus);
     }
 
