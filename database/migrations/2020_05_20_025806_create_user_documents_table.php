@@ -19,7 +19,7 @@ class CreateUserDocumentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('path');
             $table->string('name')->nullable();
-            $table->integer('status')->unsigned();
+            $table->integer('status')->default(0);
 
         });
     }
