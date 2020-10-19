@@ -18,21 +18,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'UserController@login');
+Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('register', 'UserController@register');
-Route::get('user/data', 'UserController@userData');
+Route::get('user/data', 'Api\Auth\LoginController@me');
 Route::post('user/change/password', 'UserController@changePassword');
-Route::delete('user/delete/document', 'UserDocumentController@deleteDocument');
+Route::delete('user/delete/document', 'Api\UserDocumentController@deleteDocument');
 
-
-Route::post('user/edit/main','UserController@updateMain');
-Route::post('user/edit/contacts','UserController@updateContacts');
+//edit personal information
+Route::post('user/edit/main','Api\UserController@updateMain');
+Route::post('user/edit/contacts','Api\UserController@updateContacts');
+Route::post('user/edit/bank/requisites','Api\BankRequisitesController@update');
 
 
 
 Route::get('regions','RegionController@all');
 Route::post('forgot/password', 'ForgotPasswordController@forgot');
 Route::get('forgot/password/get/code','ForgotPasswordController@getCode');
-Route::post('send/file','UserDocumentController@saveContract');
+Route::post('send/file','Api\UserDocumentController@saveContract');
 
+//application
+Route::post('create/application','Api\ApplicationController@createApplication');
+Route::get('application/self','Api\ApplicationController@self');
+
+//agreement
+Route::post('create/agreement','Api\AgreementController@create');
 
