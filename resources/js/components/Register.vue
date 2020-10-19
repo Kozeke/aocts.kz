@@ -19,49 +19,94 @@
             <div v-if="firstPage" class="reg-form flex-col">
                 <div class="flex-row">
                     <div class="input-form flex-col">
-                        <label class="label">ФИО первого руководителя</label>
-                        <input v-bind:class="{ 'error' : errors.name }" v-on:keyup="validateForm($event)" v-model="name" name="name" type="text" placeholder="Введите ФИО руководителя">
-                        <span v-if="errors.name" id="err-text-name" class="err-text">{{ errors.name[0] }}</span>
+                        <label class="label">Название компании</label>
+                        <input v-bind:class="{ 'error' : errors.name }" v-on:keyup="validateForm($event)" v-model="name" name="name" type="text" placeholder="Введите название компании">
+                        <!-- <span v-if="errors.name" id="err-text-name" class="err-text">{{ errors.name[0] }}</span>
                         <div :style="{ 'visibility' : errors.name ? 'visible' : 'hidden' }" class="err" id="err-name">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="input-form flex-col">
-                        <label class="label">БИН</label>
-                        <input v-bind:class="{ 'error' : errors.BIN }" v-on:keyup="validateForm($event)" v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'############'" placeholder="Введите 12 значный код">
-                        <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
+                        <label class="label">ФИО первого руководителя</label>
+                        <input v-bind:class="{ 'error' : errors.FIOname }" v-on:keyup="validateForm($event)" v-model="FIOname" name="name" type="text" placeholder="Введите ФИО руководителя">
+                        <!-- <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
                         <div :style="{ 'visibility' : errors.BIN ? 'visible' : 'hidden' }" class="err" id="err-BIN">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="flex-row">
                     <div class="input-form flex-col">
-                        <label class="label">Электронная почта</label>
+                        <label class="label">Резидент РК</label>
+                        <input v-bind:class="{ 'error' : errors.name }" v-on:keyup="validateForm($event)" v-model="name" name="name" type="text" placeholder="Введите ФИО руководителя">
+                        <!-- <span v-if="errors.name" id="err-text-name" class="err-text">{{ errors.name[0] }}</span>
+                        <div :style="{ 'visibility' : errors.name ? 'visible' : 'hidden' }" class="err" id="err-name">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
+                    </div>
+                    <div class="input-form flex-col">
+                        <label class="label">Электронная почта компании</label>
                         <input v-bind:class="{ 'error' : errors.email }" v-on:keyup="validateForm($event)" v-model="email" name="email" type="text" placeholder="Введите email">
-                        <span v-if="errors.email" id="err-text-email" class="err-text">{{ errors.email[0] }}</span>
+                        <!-- <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
+                        <div :style="{ 'visibility' : errors.BIN ? 'visible' : 'hidden' }" class="err" id="err-BIN">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <div class="input-form flex-col">
+                        <label class="label">БИН/ИНН</label>
+                        <input v-bind:class="{ 'error' : errors.BIN }" v-on:keyup="validateForm($event)" v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'############'" placeholder="Введите 12 значный код">
+                        <!-- <span v-if="errors.email" id="err-text-email" class="err-text">{{ errors.email[0] }}</span>
                         <div :style="{ 'visibility' : errors.email ? 'visible' : 'hidden' }" class="err" id="err-email">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="input-form flex-col">
-                        <label class="label">Ваш телефонный номер</label>
-                        <input v-bind:class="{ 'error' : errors.phone }" v-on:keyup="validateForm($event)" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="Введите номер телефона">
-                        <span v-if="errors.phone" id="err-text-phone" class="err-text">{{ errors.phone[0] }}</span>
+                        <label class="label">Пароль</label>
+                        <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password" name="password" type="password" placeholder="Введите пароль">
+                        <!-- <span v-if="errors.phone" id="err-text-phone" class="err-text">{{ errors.phone[0] }}</span>
                         <div :style="{ 'visibility' : errors.phone ? 'visible' : 'hidden' }" class="err" id="err-phone">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="flex-row">
+                    <div class="input-form flex-col">
+                        <label class="label">Повторите пароль</label>
+                        <input v-bind:class="{ 'error' : errors.password_repeat }" v-on:keyup="validateForm($event)" v-model="password_repeat" name="password" type="password" placeholder="Введите пароль ещё раз">
+                        <!-- <span v-if="errors.password_repeat" id="err-text-email" class="err-text">{{ errors.password_repeat[0] }}</span>
+                        <div :style="{ 'visibility' : errors.password_repeat ? 'visible' : 'hidden' }" class="err" id="err-email">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
+                    </div>
+                    <div class="input-form flex-col">
+                        <label class="label">Кодовое слово</label>
+                        <!-- <input v-bind:class="{ 'error' : errors.phone }" v-on:keyup="validateForm($event)" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="Придумайте кодовое слово"> -->
+                        <input v-bind:class="{ 'error' : errors.code_str }" v-on:keyup="validateForm($event)" v-model="code_str" name="email" type="text" placeholder="Придумайте кодовое слово">
+                        <!-- <span v-if="errors.code_str" id="err-text-phone" class="err-text">{{ errors.code_str[0] }}</span>
+                        <div :style="{ 'visibility' : errors.code_str ? 'visible' : 'hidden' }" class="err" id="err-phone">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">Пароль</label>
                         <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password" name="password" type="password" placeholder="Введите пароль">
@@ -103,7 +148,7 @@
                             <li>Банковские реквизиты</li>
                             <li>Реквизиты организации (адрес,Юр-Факт; контакты)</li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- <div class="input-form flex-col">
                         <label class="label">Повторите пароль</label>
                         <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password_repeat" name="password_repeat" type="password" placeholder="Введите пароль еще раз">
@@ -114,7 +159,7 @@
                             </svg>
                         </div>
                     </div>   -->
-                </div>
+                <!-- </div> -->
                 <div class="flex-col row-last">
                     <div class="check-form flex-row">
                         <input v-model="agreement" type="checkbox">
@@ -258,7 +303,9 @@
 </template>
 <script>
 import axios from 'axios'
+import VueRecaptcha from 'vue-recaptcha';
 export default {
+    components: { VueRecaptcha },
     data(){
         return{
             userRegistration: true,
@@ -270,9 +317,11 @@ export default {
             selected_locality: 'Выберите',
             doc: '',
             name: '',
+            FIOname: '',
             email: '',
             phone: '',
             BIN: '',
+            code_str: '',
             manager_name: '',
             manager_phone: '',
             company_email: '',
@@ -547,7 +596,7 @@ export default {
         position: relative;
         width: 100%;
         background: #FFFFFF;
-        height: 900px;
+        height: 1020px;
         background-image: linear-gradient( rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4) ), url('/images/register-layout.svg');
         background-repeat: no-repeat;
         background-position: center;
@@ -572,7 +621,7 @@ export default {
             margin: 0 auto;
             background: #FFFFFF;
             border-radius: 6px;
-            height: 680px;
+            height: 780px;
             padding: 26px 60px;
             color: #06397D;
             .reg-top{
@@ -920,7 +969,7 @@ export default {
     }
     @media screen and (max-width: 1420px) {
         .register{
-            height: 720px !important;
+            height: 820px !important;
             .reg-top{
                 height: 88px !important;
             }
