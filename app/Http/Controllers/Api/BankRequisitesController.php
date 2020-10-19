@@ -31,6 +31,7 @@ class BankRequisitesController extends Controller
         $bank_requisites->Bank_name = $request['bank_name'];
         $bank_requisites->BIC = $request['BIC'];
         $bank_requisites->user_id = $request['user_id'];
+        $bank_requisites->CB = $request['CB'];
         $bank_requisites->save();
         return response()->json(['success', 200]);
 
