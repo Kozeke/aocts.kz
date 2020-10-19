@@ -10,19 +10,19 @@
                     <div class="field-list flex-col">
                         <div class="item flex-col">
                             <div class="label">Текущий пароль</div>
-                            <input type="text" placeholder="" >
+                            <input v-model="current_password" type="password" placeholder="" >
                         </div>
                         <div class="item flex-col">
                             <div class="label">Новый пароль</div>
-                            <input type="text" placeholder="" >
+                            <input v-model="new_password" type="password" placeholder="" >
                         </div>
                         <div class="item flex-col">
                             <div class="label">Повторите новый пароль</div>
-                            <input type="text" placeholder="" >
+                            <input v-model="new_password_re" type="password" placeholder="" >
                         </div>
                     </div>
-                    <div class="cancel-btn">Отмена</div>
-                    <div class="send-btn">Сохранить изменения</div>
+                    <div @click="current_password = '', new_password = '', new_password_re = ''" class="cancel-btn">Отмена</div>
+                    <div @click="changePwd()" class="send-btn">Сохранить изменения</div>
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
+import axios from "axios"
 
 export default {
     components: {
@@ -43,7 +44,25 @@ export default {
     },
     data(){
         return {
-            
+            current_password: '',
+            new_password: '',
+            new_password_re: ''
+        }
+    },
+    methods:{
+        changePwd(){
+            axios.post('api/user/change/password?current_password=' + this.current_password + '&new_password=' + 
+                this.new_password + '&id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id )
+            .then(res => {
+                alert('Вы успешно сменили пароль')
+                location.reload()
+                console.log(res.data)
+            })
+            .catch(err => {
+                alert('Неизвестная ошибка')
+                location.reload()
+                console.log(err.data)
+            });
         }
     }
 }

@@ -2603,6 +2603,8 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/login", data).then(function (res) {
+        localStorage.setItem('xyzSessionAo', JSON.stringify(res.data));
+
         _this.$router.push({
           name: 'profile'
         });
@@ -3498,7 +3500,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      user: ''
+    };
+  },
+  mounted: function mounted() {
+    this.user = JSON.parse(localStorage.getItem('xyzSessionAoUser'));
   }
 });
 
@@ -3695,6 +3702,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserSide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UserSide */ "./resources/js/components/user/UserSide.vue");
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -3809,6 +3818,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3818,8 +3836,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      modalNewDeal: false
+      modalNewDeal: false,
+      modalPage: 1,
+      name: '',
+      performer: '',
+      station: '',
+      access_road: '',
+      dead_end: '',
+      wagon_turnover_per_year: null,
+      wagon_turnover_per_month: null,
+      access_road_grant_date: '',
+      BIN: ''
     };
+  },
+  mounted: function mounted() {
+    this.name = JSON.parse(localStorage.getItem('xyzSessionAoUser')).name;
   },
   methods: {
     showAccordian: function showAccordian(index) {
@@ -3830,6 +3861,32 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         el.style.display = 'flex';
       }
+    },
+    postDeal: function postDeal() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/create/application', null, {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+        },
+        params: {
+          user_id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+          performer: this.performer,
+          station: this.station,
+          access_road: this.access_road,
+          dead_end: this.dead_end,
+          wagon_turnover_per_year: this.wagon_turnover_per_year,
+          wagon_turnover_per_month: this.wagon_turnover_per_month,
+          access_road_grant_date: this.access_road_grant_date
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        alert('Ваша заявка успешно отрпалена');
+        _this.modalPage = 1;
+        _this.modalNewDeal = false;
+      })["catch"](function (err) {
+        console.log(err.data);
+      });
     }
   }
 });
@@ -4037,6 +4094,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserSide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UserSide */ "./resources/js/components/user/UserSide.vue");
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserDocumentsRoute */ "./resources/js/components/user/documents/UserDocumentsRoute.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -4176,6 +4235,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4187,11 +4247,59 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      modalNewDoc: !false,
-      modalPage: 2
+      modalNewDoc: false,
+      modalPage: 1,
+      agreement_check: false,
+      business_index: null,
+      address: '',
+      access_road: '',
+      amount_of_carriage_on_loading: null,
+      amount_of_carriage_on_unloading: null,
+      size_of_the_simultaneous_supply_of_wagons: null,
+      carriage_address: '',
+      agreement_dates: '',
+      agreement_start_date: '',
+      agreement_end_date: '',
+      performer: '',
+      BIN: ''
     };
   },
-  methods: {}
+  mounted: function mounted() {
+    this.BIN = JSON.parse(localStorage.getItem('xyzSessionAoUser')).BIN;
+  },
+  methods: {
+    postAgeement: function postAgeement() {
+      var _this = this;
+
+      this.agreement_start_date = this.agreement_dates.substring(0, 10);
+      this.agreement_end_date = this.agreement_dates.substring(13, 23);
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/create/agreement', null, {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+        },
+        params: {
+          user_id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+          business_index: this.business_index,
+          address: this.address,
+          access_road: this.access_road,
+          amount_of_carriage_on_loading: this.amount_of_carriage_on_loading,
+          amount_of_carriage_on_unloading: this.amount_of_carriage_on_unloading,
+          size_of_the_simultaneous_supply_of_wagons: this.size_of_the_simultaneous_supply_of_wagons,
+          carriage_address: this.carriage_address,
+          agreement_start_date: this.agreement_start_date,
+          agreement_end_date: this.agreement_end_date,
+          performer: this.performer
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        alert('Ваша заявка успешно отрпалена');
+        _this.modalPage = 1;
+        _this.modalNewDoc = false;
+      })["catch"](function (err) {
+        console.log(err.data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -4487,6 +4595,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserProfileImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserProfileImg */ "./resources/js/components/user/profile/UserProfileImg.vue");
 /* harmony import */ var _UserProfileRouteMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserProfileRouteMenu */ "./resources/js/components/user/profile/UserProfileRouteMenu.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -4517,6 +4627,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4529,7 +4640,24 @@ __webpack_require__.r(__webpack_exports__);
     UserProfileRouteMenu: _UserProfileRouteMenu__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      current_password: '',
+      new_password: '',
+      new_password_re: ''
+    };
+  },
+  methods: {
+    changePwd: function changePwd() {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('api/user/change/password?current_password=' + this.current_password + '&new_password=' + this.new_password + '&id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id).then(function (res) {
+        alert('Вы успешно сменили пароль');
+        location.reload();
+        console.log(res.data);
+      })["catch"](function (err) {
+        alert('Неизвестная ошибка');
+        location.reload();
+        console.log(err.data);
+      });
+    }
   }
 });
 
@@ -4548,6 +4676,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserProfileImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserProfileImg */ "./resources/js/components/user/profile/UserProfileImg.vue");
 /* harmony import */ var _UserProfileRouteMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserProfileRouteMenu */ "./resources/js/components/user/profile/UserProfileRouteMenu.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -4582,6 +4712,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -4595,8 +4731,28 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      editMode: false
+      editMode: false,
+      bank_name: '',
+      BIC: '',
+      IBAN: '',
+      CB: ''
     };
+  },
+  methods: {
+    postBankReq: function postBankReq() {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/user/edit/bank/requisites?bank_name=' + this.bank_name + '&BIC=' + this.BIC + '&IBAN=' + this.IBAN + '&CB=' + this.CB + '&user_id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+        }
+      }).then(function (res) {
+        alert('Вы успешно сменили реквизите');
+        location.reload();
+        console.log(res.data);
+      })["catch"](function (err) {
+        alert('Неизвестная ошибка');
+        console.log(err.data);
+      });
+    }
   }
 });
 
@@ -4740,26 +4896,31 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editMode: false,
       modalActualAddress: false,
-      modalLegalAddress: false
+      modalLegalAddress: false,
+      userToken: '',
+      userData: ''
     };
   },
-  mounted: {},
-  methods: function methods() {// axios.post('/api/register', data, {
-    //     headers: { 
-    //             'Content-Type' : 'multipart/form-data'
-    //         }
-    //     })
-    //     .then(res => {
-    //         this.userRegistration = false
-    //         this.$router.push({ name : 'profile' })
-    //     }).catch(err => {
-    //         if (err.response.status == 422){
-    //             this.errors = Object.assign({}, err.response.data.error)
-    //             console.log(this.errors)
-    //         }
-    //         alert('Что-то пошло не так. Проверьте данные еще раз.')
-    //     console.log(err)
-    // })
+  mounted: function mounted() {
+    this.userToken = JSON.parse(localStorage.getItem('xyzSessionAo')).token;
+    this.init();
+  },
+  methods: {
+    init: function init() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/user/data', {
+        headers: {
+          'Authorization': 'Bearer ' + this.userToken
+        }
+      }).then(function (res) {
+        _this.userData = res.data.user[0];
+        console.log(_this.userData);
+        localStorage.setItem('xyzSessionAoUser', JSON.stringify(_this.userData));
+      })["catch"](function (err) {
+        console.log(err.data);
+      });
+    }
   }
 });
 
@@ -4781,7 +4942,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: ''
+    };
+  },
+  mounted: function mounted() {
+    this.user = JSON.parse(localStorage.getItem('xyzSessionAoUser'));
+  }
+});
 
 /***/ }),
 
@@ -5009,7 +5179,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-2e43c481] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-2e43c481] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-2e43c481] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-2e43c481] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-2e43c481] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-2e43c481] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  width: 18%;\n}\n.main .main-info .containe .content .field-list .item-list[data-v-2e43c481] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .item-list .item[data-v-2e43c481] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .day[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481] {\n  width: 20%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  padding: 0;\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .item-list .item .date .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until .time[data-v-2e43c481] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481] {\n  width: 14%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #4985FF;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .extra[data-v-2e43c481] {\n  display: none;\n  text-align: left;\n  margin-left: 8%;\n}\n.main .main-info .containe .content .field-list .item-list .extra .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin-bottom: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .extra .docs[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin: 2px 0;\n}\n.main .main-info .containe .content .send-btn[data-v-2e43c481] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-2e43c481] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-2e43c481] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 140px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-2e43c481] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-2e43c481] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-2e43c481] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-2e43c481] {\n  width: 134px;\n  cursor: pointer;\n  margin: 40px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-2e43c481] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-2e43c481] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-2e43c481] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-2e43c481] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-2e43c481] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-2e43c481] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  width: 18%;\n}\n.main .main-info .containe .content .field-list .item-list[data-v-2e43c481] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .item-list .item[data-v-2e43c481] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .day[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481] {\n  width: 20%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  padding: 0;\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .item-list .item .date .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until .time[data-v-2e43c481] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481] {\n  width: 14%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #4985FF;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .extra[data-v-2e43c481] {\n  display: none;\n  text-align: left;\n  margin-left: 8%;\n}\n.main .main-info .containe .content .field-list .item-list .extra .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin-bottom: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .extra .docs[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin: 2px 0;\n}\n.main .main-info .containe .content .send-btn[data-v-2e43c481] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-2e43c481] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-2e43c481] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 30px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-2e43c481] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-2e43c481] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-2e43c481] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-2e43c481] {\n  width: 144px;\n  cursor: pointer;\n  margin: 40px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .back-btn[data-v-2e43c481] {\n  position: absolute;\n  left: 89px;\n  bottom: 69px;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #4985FF;\n}", ""]);
 
 // exports
 
@@ -10781,7 +10951,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "divider" }),
       _vm._v(" "),
-      _c("div", { staticClass: "user-name" }, [_vm._v("Some company.")]),
+      _c("div", { staticClass: "user-name" }, [_vm._v(_vm._s(_vm.user.name))]),
       _vm._v(" "),
       _c(
         "div",
@@ -11809,20 +11979,323 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(3),
+              _vm.modalPage === 1
+                ? _c("div", { staticClass: "field-list flex-row" }, [
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Полное наименование ветвепользователя")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.name,
+                            expression: "name"
+                          }
+                        ],
+                        attrs: { type: "text", placeholder: "Some company." },
+                        domProps: { value: _vm.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.name = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Исполнитель")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.performer,
+                            expression: "performer"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          placeholder: "Name Surname Middlename"
+                        },
+                        domProps: { value: _vm.performer },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.performer = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [_vm._v("Станция")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.station,
+                            expression: "station"
+                          }
+                        ],
+                        attrs: { type: "text", placeholder: "Введите станцию" },
+                        domProps: { value: _vm.station },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.station = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Подъездной путь")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.access_road,
+                            expression: "access_road"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          placeholder: "Введите подъездной путь"
+                        },
+                        domProps: { value: _vm.access_road },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.access_road = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [_vm._v("Тупик")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.dead_end,
+                            expression: "dead_end"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          placeholder: "Введите место тупика"
+                        },
+                        domProps: { value: _vm.dead_end },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.dead_end = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Дата предоставления подъездного пути")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.access_road_grant_date,
+                            expression: "access_road_grant_date"
+                          }
+                        ],
+                        attrs: { type: "text", placeholder: "YYYY-MM-DD" },
+                        domProps: { value: _vm.access_road_grant_date },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.access_road_grant_date = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Планируемый вагонооборот в месяц")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.wagon_turnover_per_month,
+                            expression: "wagon_turnover_per_month"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          placeholder:
+                            "Введите планируемый вагонооборот в месяц"
+                        },
+                        domProps: { value: _vm.wagon_turnover_per_month },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.wagon_turnover_per_month = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Планируемый вагонооборот в год")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.wagon_turnover_per_year,
+                            expression: "wagon_turnover_per_year"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          placeholder: "Введите планируемый вагонооборот в год"
+                        },
+                        domProps: { value: _vm.wagon_turnover_per_year },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.wagon_turnover_per_year = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "done-btn",
-                  on: {
-                    click: function($event) {
-                      _vm.modalActualAddress = false
-                    }
-                  }
-                },
-                [_vm._v("Вперёд")]
-              )
+              _vm.modalPage === 2
+                ? _c("div", { staticClass: "field-list flex-row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "item flex-col",
+                        staticStyle: { "margin-bottom": "200px" }
+                      },
+                      [
+                        _c("div", { staticClass: "label" }, [
+                          _vm._v("БИН/ИНН")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.BIN,
+                              expression: "BIN"
+                            }
+                          ],
+                          attrs: {
+                            type: "text",
+                            placeholder: "000 000 000 000"
+                          },
+                          domProps: { value: _vm.BIN },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.BIN = $event.target.value
+                            }
+                          }
+                        })
+                      ]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.modalPage === 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "done-btn",
+                      on: {
+                        click: function($event) {
+                          _vm.modalPage = 2
+                        }
+                      }
+                    },
+                    [_vm._v("Вперёд")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.modalPage === 2
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "back-btn",
+                      on: {
+                        click: function($event) {
+                          _vm.modalPage = 1
+                        }
+                      }
+                    },
+                    [_vm._v("Назад")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.modalPage === 2
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "done-btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.postDeal()
+                        }
+                      }
+                    },
+                    [_vm._v("Отправить")]
+                  )
+                : _vm._e()
             ])
           ])
         : _vm._e()
@@ -11859,84 +12332,6 @@ var staticRenderFns = [
       _vm._v("Договор на оказание услуг по"),
       _c("br"),
       _vm._v(" предоставлению подъездного пути")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field-list flex-row" }, [
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [
-          _vm._v("Полное наименование ветвепользователя")
-        ]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", placeholder: "Some company." } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Исполнитель")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "text", placeholder: "Name Surname Middlename" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Станция")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", placeholder: "Введите станцию" } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Подъездной путь")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "text", placeholder: "Введите подъездной путь" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Тупик")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "text", placeholder: "Введите место тупика" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [
-          _vm._v("Дата предоставления подъездного пути")
-        ]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", placeholder: "DD.MM.YYYY" } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [
-          _vm._v("Планируемый вагонооборот в месяц")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "text",
-            placeholder: "Введите планируемый вагонооборот в месяц"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [
-          _vm._v("Планируемый вагонооборот в год")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "text",
-            placeholder: "Введите планируемый вагонооборот в год"
-          }
-        })
-      ])
     ])
   }
 ]
@@ -12647,7 +13042,322 @@ var render = function() {
                   _vm._v(" "),
                   _vm.modalPage === 1
                     ? _c("div", { staticClass: "field-list flex-row" }, [
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Предприятие")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.performer,
+                                expression: "performer"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Some company."
+                            },
+                            domProps: { value: _vm.performer },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.performer = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
                         _vm._m(2),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Адрес пребывания вагонов")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.carriage_address,
+                                expression: "carriage_address"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Введите адрес пребывания вагонов"
+                            },
+                            domProps: { value: _vm.carriage_address },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.carriage_address = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Подъездной путь")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.access_road,
+                                expression: "access_road"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Введите подъездной путь"
+                            },
+                            domProps: { value: _vm.access_road },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.access_road = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Число вагонов при погрузке")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.amount_of_carriage_on_loading,
+                                expression: "amount_of_carriage_on_loading"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Введите число вагонов при погрузке"
+                            },
+                            domProps: {
+                              value: _vm.amount_of_carriage_on_loading
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.amount_of_carriage_on_loading =
+                                  $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Число вагонов при выгрузке")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.amount_of_carriage_on_unloading,
+                                expression: "amount_of_carriage_on_unloading"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Введите число вагонов при выгрузке"
+                            },
+                            domProps: {
+                              value: _vm.amount_of_carriage_on_unloading
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.amount_of_carriage_on_unloading =
+                                  $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Размер одновременной подачи вагонов")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.size_of_the_simultaneous_supply_of_wagons,
+                                expression:
+                                  "size_of_the_simultaneous_supply_of_wagons"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder:
+                                "Введите размер одновременной подачи вагонов"
+                            },
+                            domProps: {
+                              value:
+                                _vm.size_of_the_simultaneous_supply_of_wagons
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.size_of_the_simultaneous_supply_of_wagons =
+                                  $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Срок соглашения")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.agreement_dates,
+                                expression: "agreement_dates"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "YYYY-MM-DD - YYYY-MM-DD"
+                            },
+                            domProps: { value: _vm.agreement_dates },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.agreement_dates = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.modalPage === 2
+                    ? _c("div", { staticClass: "field-list flex-row" }, [
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Индекс предприятия")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.business_index,
+                                expression: "business_index"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Введите индекс предприятия"
+                            },
+                            domProps: { value: _vm.business_index },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.business_index = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Адрес")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.address,
+                                expression: "address"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Somestreet, 1, Somecity"
+                            },
+                            domProps: { value: _vm.address },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.address = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [_vm._v("БИН")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.BIN,
+                                expression: "BIN"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "000 000 000 000"
+                            },
+                            domProps: { value: _vm.BIN },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.BIN = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
                         _vm._v(" "),
                         _vm._m(3),
                         _vm._v(" "),
@@ -12657,30 +13367,6 @@ var render = function() {
                         _vm._v(" "),
                         _vm._m(6),
                         _vm._v(" "),
-                        _vm._m(7),
-                        _vm._v(" "),
-                        _vm._m(8),
-                        _vm._v(" "),
-                        _vm._m(9)
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.modalPage === 2
-                    ? _c("div", { staticClass: "field-list flex-row" }, [
-                        _vm._m(10),
-                        _vm._v(" "),
-                        _vm._m(11),
-                        _vm._v(" "),
-                        _vm._m(12),
-                        _vm._v(" "),
-                        _vm._m(13),
-                        _vm._v(" "),
-                        _vm._m(14),
-                        _vm._v(" "),
-                        _vm._m(15),
-                        _vm._v(" "),
-                        _vm._m(16),
-                        _vm._v(" "),
                         _c("div", { staticClass: "item flex-col" }),
                         _vm._v(" "),
                         _c("div", { staticClass: "item check-form flex-row" }, [
@@ -12689,19 +13375,19 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.agreement,
-                                expression: "agreement"
+                                value: _vm.agreement_check,
+                                expression: "agreement_check"
                               }
                             ],
                             attrs: { type: "checkbox" },
                             domProps: {
-                              checked: Array.isArray(_vm.agreement)
-                                ? _vm._i(_vm.agreement, null) > -1
-                                : _vm.agreement
+                              checked: Array.isArray(_vm.agreement_check)
+                                ? _vm._i(_vm.agreement_check, null) > -1
+                                : _vm.agreement_check
                             },
                             on: {
                               change: function($event) {
-                                var $$a = _vm.agreement,
+                                var $$a = _vm.agreement_check,
                                   $$el = $event.target,
                                   $$c = $$el.checked ? true : false
                                 if (Array.isArray($$a)) {
@@ -12709,21 +13395,21 @@ var render = function() {
                                     $$i = _vm._i($$a, $$v)
                                   if ($$el.checked) {
                                     $$i < 0 &&
-                                      (_vm.agreement = $$a.concat([$$v]))
+                                      (_vm.agreement_check = $$a.concat([$$v]))
                                   } else {
                                     $$i > -1 &&
-                                      (_vm.agreement = $$a
+                                      (_vm.agreement_check = $$a
                                         .slice(0, $$i)
                                         .concat($$a.slice($$i + 1)))
                                   }
                                 } else {
-                                  _vm.agreement = $$c
+                                  _vm.agreement_check = $$c
                                 }
                               }
                             }
                           }),
                           _vm._v(" "),
-                          _vm._m(17)
+                          _vm._m(7)
                         ])
                       ])
                     : _vm._e(),
@@ -12765,7 +13451,7 @@ var render = function() {
                           staticClass: "done-btn",
                           on: {
                             click: function($event) {
-                              _vm.modalPage = 3
+                              return _vm.postAgeement()
                             }
                           }
                         },
@@ -12808,142 +13494,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Предприятие")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", placeholder: "Some company." } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
       _c("div", { staticClass: "label" }, [_vm._v("Исполнитель")]),
       _vm._v(" "),
       _c("input", {
         attrs: { type: "text", placeholder: "Name Surname Middlename" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Адрес пребывания вагонов")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "Введите адрес пребывания вагонов" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Подъездной путь")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "Введите подъездной путь" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [
-        _vm._v("Число вагонов при погрузке")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "text",
-          placeholder: "Введите число вагонов при погрузке"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [
-        _vm._v("Число вагонов при выгрузке")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "text",
-          placeholder: "Введите число вагонов при выгрузке"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [
-        _vm._v("Размер одновременной подачи вагонов")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "text",
-          placeholder: "Введите размер одновременной подачи вагонов"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Срок соглашения")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "DD.MM.YYYY - DD.MM.YYYY" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Индекс предприятия")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "Введите индекс предприятия" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Адрес")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "Somestreet, 1, Somecity" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("БИН")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", placeholder: "000 000 000 000" } })
     ])
   },
   function() {
@@ -13812,13 +14367,116 @@ var render = function() {
                 [
                   _c("UserProfileRouteMenu"),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _c("div", { staticClass: "field-list flex-col" }, [
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Текущий пароль")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.current_password,
+                            expression: "current_password"
+                          }
+                        ],
+                        attrs: { type: "password", placeholder: "" },
+                        domProps: { value: _vm.current_password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.current_password = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Новый пароль")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.new_password,
+                            expression: "new_password"
+                          }
+                        ],
+                        attrs: { type: "password", placeholder: "" },
+                        domProps: { value: _vm.new_password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.new_password = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [
+                        _vm._v("Повторите новый пароль")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.new_password_re,
+                            expression: "new_password_re"
+                          }
+                        ],
+                        attrs: { type: "password", placeholder: "" },
+                        domProps: { value: _vm.new_password_re },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.new_password_re = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "cancel-btn" }, [_vm._v("Отмена")]),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "cancel-btn",
+                      on: {
+                        click: function($event) {
+                          ;(_vm.current_password = ""),
+                            (_vm.new_password = ""),
+                            (_vm.new_password_re = "")
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "send-btn" }, [
-                    _vm._v("Сохранить изменения")
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "send-btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.changePwd()
+                        }
+                      }
+                    },
+                    [_vm._v("Сохранить изменения")]
+                  )
                 ],
                 1
               )
@@ -13832,32 +14490,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field-list flex-col" }, [
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Текущий пароль")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", placeholder: "" } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Новый пароль")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", placeholder: "" } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item flex-col" }, [
-        _c("div", { staticClass: "label" }, [_vm._v("Повторите новый пароль")]),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "text", placeholder: "" } })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -13911,16 +14544,34 @@ var render = function() {
                       _vm._v(" "),
                       _vm.editMode
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.bank_name,
+                                expression: "bank_name"
+                              }
+                            ],
                             attrs: {
                               type: "text",
                               placeholder: "Выберите банк"
+                            },
+                            domProps: { value: _vm.bank_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.bank_name = $event.target.value
+                              }
                             }
                           })
                         : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "Выберите банк",
-                              readonly: ""
+                            attrs: { type: "text", readonly: "" },
+                            domProps: {
+                              value: _vm.bank_name
+                                ? _vm.bank_name
+                                : "не заполнено"
                             }
                           })
                     ]),
@@ -13930,13 +14581,29 @@ var render = function() {
                       _vm._v(" "),
                       _vm.editMode
                         ? _c("input", {
-                            attrs: { type: "text", placeholder: "000 000 000" }
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.BIC,
+                                expression: "BIC"
+                              }
+                            ],
+                            attrs: { type: "text", placeholder: "000 000 000" },
+                            domProps: { value: _vm.BIC },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.BIC = $event.target.value
+                              }
+                            }
                           })
                         : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "000 000 000",
-                              readonly: ""
+                            attrs: { type: "text", readonly: "" },
+                            domProps: {
+                              value: _vm.BIC ? _vm.BIC : "не заполнено"
                             }
                           })
                     ]),
@@ -13946,16 +14613,64 @@ var render = function() {
                       _vm._v(" "),
                       _vm.editMode
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.IBAN,
+                                expression: "IBAN"
+                              }
+                            ],
                             attrs: {
                               type: "text",
                               placeholder: "KZ 1000 0000 0000 0000"
+                            },
+                            domProps: { value: _vm.IBAN },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.IBAN = $event.target.value
+                              }
                             }
                           })
                         : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "KZ 1000 0000 0000 0000",
-                              readonly: ""
+                            attrs: { type: "text", readonly: "" },
+                            domProps: {
+                              value: _vm.IBAN ? _vm.IBAN : "не заполнено"
+                            }
+                          })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "item flex-col" }, [
+                      _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
+                      _vm._v(" "),
+                      _vm.editMode
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.CB,
+                                expression: "CB "
+                              }
+                            ],
+                            attrs: { type: "text", placeholder: "template ?" },
+                            domProps: { value: _vm.CB },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.CB = $event.target.value
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            attrs: { type: "text", readonly: "" },
+                            domProps: {
+                              value: _vm.CB ? _vm.CB : "не заполнено"
                             }
                           })
                     ])
@@ -13983,7 +14698,7 @@ var render = function() {
                           staticClass: "send-btn",
                           on: {
                             click: function($event) {
-                              _vm.editMode = !_vm.editMode
+                              return _vm.postBankReq()
                             }
                           }
                         },
@@ -14046,213 +14761,285 @@ var render = function() {
     [
       _c("UserSide"),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main-info flex-col" },
-        [
-          _c("UserNav"),
-          _vm._v(" "),
-          _c(
+      _vm.userData
+        ? _c(
             "div",
-            { staticClass: "containe flex-row" },
+            { staticClass: "main-info flex-col" },
             [
-              _c("UserProfileImg"),
+              _c("UserNav"),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "content flex-col" },
+                { staticClass: "containe flex-row" },
                 [
-                  _c("UserProfileRouteMenu"),
+                  _c("UserProfileImg", { attrs: { user: _vm.userData } }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "field-list flex-row" }, [
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [_vm._v("БИН/ИНН")]),
+                  _c(
+                    "div",
+                    { staticClass: "content flex-col" },
+                    [
+                      _c("UserProfileRouteMenu"),
                       _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "100 000 000 000"
-                            }
-                          })
-                        : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "100 000 000 000",
-                              readonly: ""
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Название компании")
+                      _c("div", { staticClass: "field-list flex-row" }, [
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("БИН/ИНН")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.userData.BIN,
+                                    expression: "userData.BIN"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "100 000 000 000"
+                                },
+                                domProps: { value: _vm.userData.BIN },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.userData,
+                                      "BIN",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: { value: _vm.userData.BIN }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Название компании")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Some company."
+                                }
+                              })
+                            : _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  value: "Some company.",
+                                  readonly: ""
+                                }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Вид деятельности")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Информационные Технологии"
+                                }
+                              })
+                            : _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  value: "Информационные Технологии",
+                                  readonly: ""
+                                }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Электронная почта компании")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.userData.company_email,
+                                    expression: "userData.company_email"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "email@company.kz"
+                                },
+                                domProps: { value: _vm.userData.company_email },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.userData,
+                                      "company_email",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: { value: _vm.userData.company_email }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Фактический адрес компании")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.userData.address,
+                                    expression: "userData.address"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "г. Караганда, ул. Шахтеров"
+                                },
+                                domProps: { value: _vm.userData.address },
+                                on: {
+                                  click: function($event) {
+                                    _vm.modalActualAddress = true
+                                  },
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.userData,
+                                      "address",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: { value: _vm.userData.address }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Юридический адрес компании")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.userData.address,
+                                    expression: "userData.address"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "г. Нур-Султан, ул. Достык"
+                                },
+                                domProps: { value: _vm.userData.address },
+                                on: {
+                                  click: function($event) {
+                                    _vm.modalLegalAddress = true
+                                  },
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.userData,
+                                      "address",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: { value: _vm.userData.address }
+                              })
+                        ])
                       ]),
                       _vm._v(" "),
                       _vm.editMode
-                        ? _c("input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "Some company."
-                            }
-                          })
-                        : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "Some company.",
-                              readonly: ""
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Вид деятельности")
-                      ]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "Информационные Технологии"
-                            }
-                          })
-                        : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "Информационные Технологии",
-                              readonly: ""
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Электронная почта компании")
-                      ]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "email@company.kz"
-                            }
-                          })
-                        : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "email@company.kz",
-                              readonly: ""
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Фактический адрес компании")
-                      ]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "г. Караганда, ул. Шахтеров"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.modalActualAddress = true
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "cancel-btn",
+                              on: {
+                                click: function($event) {
+                                  _vm.editMode = !_vm.editMode
+                                }
                               }
-                            }
-                          })
-                        : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "г. Караганда, ул. Шахтеров",
-                              readonly: ""
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Юридический адрес компании")
-                      ]),
+                            },
+                            [_vm._v("Отмена")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _vm.editMode
-                        ? _c("input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "г. Нур-Султан, ул. Достык"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.modalLegalAddress = true
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "send-btn",
+                              on: {
+                                click: function($event) {
+                                  _vm.editMode = !_vm.editMode
+                                }
                               }
-                            }
-                          })
-                        : _c("input", {
-                            attrs: {
-                              type: "text",
-                              value: "г. Нур-Султан, ул. Достык",
-                              readonly: ""
-                            }
-                          })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm.editMode
-                    ? _c(
-                        "div",
-                        {
-                          staticClass: "cancel-btn",
-                          on: {
-                            click: function($event) {
-                              _vm.editMode = !_vm.editMode
-                            }
-                          }
-                        },
-                        [_vm._v("Отмена")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.editMode
-                    ? _c(
-                        "div",
-                        {
-                          staticClass: "send-btn",
-                          on: {
-                            click: function($event) {
-                              _vm.editMode = !_vm.editMode
-                            }
-                          }
-                        },
-                        [_vm._v("Отправить запрос на изменение данных")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.editMode
-                    ? _c(
-                        "div",
-                        {
-                          staticClass: "edit-btn",
-                          on: {
-                            click: function($event) {
-                              _vm.editMode = !_vm.editMode
-                            }
-                          }
-                        },
-                        [_vm._v("Изменить настройки")]
-                      )
-                    : _vm._e()
+                            },
+                            [_vm._v("Отправить запрос на изменение данных")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.editMode
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "edit-btn",
+                              on: {
+                                click: function($event) {
+                                  _vm.editMode = !_vm.editMode
+                                }
+                              }
+                            },
+                            [_vm._v("Изменить настройки")]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
                 ],
                 1
               )
             ],
             1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
       _vm.modalActualAddress
         ? _c("div", { staticClass: "modal" }, [
@@ -14464,22 +15251,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.user
+    ? _c("div", { staticClass: "outer flex-col" }, [
+        _c("img", { attrs: { src: "/images/Profile-picture.png", alt: "" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "name" }, [_vm._v(_vm._s(_vm.user.name))]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mail" }, [_vm._v(_vm._s(_vm.user.email))])
+      ])
+    : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "outer flex-col" }, [
-      _c("img", { attrs: { src: "/images/Profile-picture.png", alt: "" } }),
-      _vm._v(" "),
-      _c("div", { staticClass: "name" }, [_vm._v("Some company.")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "mail" }, [_vm._v("email@company.kz")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

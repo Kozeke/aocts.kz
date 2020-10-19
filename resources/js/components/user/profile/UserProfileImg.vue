@@ -1,13 +1,20 @@
 <template>
-    <div class="outer flex-col">
+    <div v-if="user" class="outer flex-col">
         <img src="/images/Profile-picture.png" alt="">
-        <div class="name">Some company.</div>
-        <div class="mail">email@company.kz</div>
+        <div class="name">{{ user.name }}</div>
+        <div class="mail">{{ user.email }}</div>
     </div>
 </template>
 <script>
 export default {
-    
+    data(){
+        return {
+            user: ''
+        }
+    },
+    mounted(){
+        this.user = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+    }
 }
 </script>
 <style lang="scss" scoped>

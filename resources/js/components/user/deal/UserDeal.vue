@@ -73,41 +73,49 @@
                         <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
                     </svg>
                 </div>
-                <div class="field-list flex-row">
+                <div v-if="modalPage === 1" class="field-list flex-row">
                     <div class="item flex-col">
                         <div class="label">Полное наименование ветвепользователя</div>
-                        <input type="text" placeholder="Some company." >
+                        <input v-model="name" type="text" placeholder="Some company." >
                     </div>
                     <div class="item flex-col">
                         <div class="label">Исполнитель</div>
-                        <input type="text" placeholder="Name Surname Middlename">
+                        <input v-model="performer" type="text" placeholder="Name Surname Middlename">
                     </div>
                     <div class="item flex-col">
                         <div class="label">Станция</div>
-                        <input type="text" placeholder="Введите станцию">
+                        <input v-model="station" type="text" placeholder="Введите станцию">
                     </div>
                     <div class="item flex-col">
                         <div class="label">Подъездной путь</div>
-                        <input type="text" placeholder="Введите подъездной путь">
+                        <input v-model="access_road" type="text" placeholder="Введите подъездной путь">
                     </div>
                     <div class="item flex-col">
                         <div class="label">Тупик</div>
-                        <input type="text" placeholder="Введите место тупика">
+                        <input v-model="dead_end" type="text" placeholder="Введите место тупика">
                     </div>
                     <div class="item flex-col">
                         <div class="label">Дата предоставления подъездного пути</div>
-                        <input type="text" placeholder="DD.MM.YYYY">
+                        <input v-model="access_road_grant_date" type="text" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="item flex-col">
                         <div class="label">Планируемый вагонооборот в месяц</div>
-                        <input type="text" placeholder="Введите планируемый вагонооборот в месяц">
+                        <input v-model="wagon_turnover_per_month" type="text" placeholder="Введите планируемый вагонооборот в месяц">
                     </div>
                     <div class="item flex-col">
                         <div class="label">Планируемый вагонооборот в год</div>
-                        <input type="text" placeholder="Введите планируемый вагонооборот в год">
+                        <input v-model="wagon_turnover_per_year" type="text" placeholder="Введите планируемый вагонооборот в год">
                     </div>
                 </div>
-                <div @click="modalActualAddress = false" class="done-btn">Вперёд</div>
+                <div v-if="modalPage === 2" class="field-list flex-row">
+                    <div style="margin-bottom: 200px" class="item flex-col">
+                        <div class="label">БИН/ИНН</div>
+                        <input v-model="BIN" type="text" placeholder="000 000 000 000" >
+                    </div>
+                </div>
+                <div v-if="modalPage === 1" @click="modalPage = 2" class="done-btn">Вперёд</div>
+                <div v-if="modalPage === 2" @click="modalPage = 1" class="back-btn">Назад</div>
+                <div v-if="modalPage === 2" @click="postDeal()" class="done-btn">Отправить</div>
             </div>
         </div>
     </div>
@@ -115,6 +123,7 @@
 <script>
 import UserSide from '../UserSide'
 import UserNav from '../UserNav'
+import axios from 'axios'
 
 export default {
     components: {
@@ -123,8 +132,21 @@ export default {
     },
     data(){
         return {
-            modalNewDeal: false
+            modalNewDeal: false,
+            modalPage: 1,
+            name: '',
+            performer: '',
+            station: '',
+            access_road: '',
+            dead_end: '',
+            wagon_turnover_per_year: null,
+            wagon_turnover_per_month: null,
+            access_road_grant_date: '',
+            BIN: ''
         }
+    },
+    mounted(){
+        this.name = JSON.parse(localStorage.getItem('xyzSessionAoUser')).name
     },
     methods: {
         showAccordian( index ){
@@ -134,6 +156,31 @@ export default {
             } else {
                 el.style.display = 'flex'
             }
+        },
+        postDeal(){
+            axios.post('/api/create/application', null, {
+                headers: { 
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params: {
+                    user_id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+                    performer: this.performer,
+                    station: this.station,
+                    access_road: this.access_road,
+                    dead_end: this.dead_end,
+                    wagon_turnover_per_year: this.wagon_turnover_per_year,
+                    wagon_turnover_per_month: this.wagon_turnover_per_month,
+                    access_road_grant_date: this.access_road_grant_date
+                }
+                })
+                .then(res => {
+                    console.log(res.data)
+                    alert('Ваша заявка успешно отрпалена')
+                    this.modalPage = 1
+                    this.modalNewDeal = false
+                }).catch(err => {
+                    console.log(err.data)
+            })
         }
     }
 }
@@ -307,7 +354,7 @@ export default {
                 background-color: #fefefe;
                 background: #FFFFFF;
                 border-radius: 6px;
-                margin: 140px auto auto auto;
+                margin: 30px auto auto auto;
                 padding: 50px 89px;
                 width: 952px;
                 .title{
@@ -363,7 +410,7 @@ export default {
                     }
                 }
                 .done-btn{
-                    width: 134px;
+                    width: 144px;
                     cursor: pointer;
                     margin: 40px 0 0 auto;
                     padding: 18px 28px;
@@ -374,6 +421,16 @@ export default {
                     background: #4985FF;
                     box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
                     border-radius: 6px;
+                }
+                .back-btn{
+                    position: absolute;
+                    left: 89px;
+                    bottom: 69px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #4985FF;
                 }
             }
         }

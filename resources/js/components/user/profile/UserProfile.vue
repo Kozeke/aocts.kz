@@ -1,17 +1,17 @@
 <template>
     <div class="main">
         <UserSide></UserSide>
-        <div class="main-info flex-col">
+        <div v-if="userData" class="main-info flex-col">
             <UserNav></UserNav>
             <div class="containe flex-row">
-                <UserProfileImg></UserProfileImg>
+                <UserProfileImg :user="userData"></UserProfileImg>
                 <div class="content flex-col">
                     <UserProfileRouteMenu></UserProfileRouteMenu>
                     <div class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">БИН/ИНН</div>
-                            <input v-if="editMode" type="text" placeholder="100 000 000 000" >
-                            <input v-else type="text" value="100 000 000 000" readonly>
+                            <input v-model="userData.BIN" v-if="editMode" type="text" placeholder="100 000 000 000" >
+                            <input v-else type="text" :value="userData.BIN" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Название компании</div>
@@ -25,18 +25,18 @@
                         </div>
                         <div class="item flex-col">
                             <div class="label">Электронная почта компании</div>
-                            <input v-if="editMode" type="text" placeholder="email@company.kz">
-                            <input v-else type="text" value="email@company.kz" readonly>
+                            <input v-model="userData.company_email" v-if="editMode" type="text" placeholder="email@company.kz">
+                            <input v-else type="text" :value="userData.company_email" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Фактический адрес компании</div>
-                            <input @click="modalActualAddress = true" v-if="editMode" type="text" placeholder="г. Караганда, ул. Шахтеров">
-                            <input v-else type="text" value="г. Караганда, ул. Шахтеров" readonly>
+                            <input v-model="userData.address" @click="modalActualAddress = true" v-if="editMode" type="text" placeholder="г. Караганда, ул. Шахтеров">
+                            <input v-else type="text" :value="userData.address" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Юридический адрес компании</div>
-                            <input @click="modalLegalAddress = true" v-if="editMode" type="text" placeholder="г. Нур-Султан, ул. Достык">
-                            <input v-else type="text" value="г. Нур-Султан, ул. Достык" readonly>
+                            <input v-model="userData.address" @click="modalLegalAddress = true" v-if="editMode" type="text" placeholder="г. Нур-Султан, ул. Достык">
+                            <input v-else type="text" :value="userData.address" readonly>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
@@ -123,30 +123,30 @@ export default {
         return {
             editMode: false,
             modalActualAddress: false,
-            modalLegalAddress: false
+            modalLegalAddress: false,
+            userToken: '',
+            userData: ''
         }
     },
-    mounted:{
-
+    mounted(){
+        this.userToken = JSON.parse(localStorage.getItem('xyzSessionAo')).token
+        this.init()
     },
-    methods(){
-        // axios.post('/api/register', data, {
-        //     headers: { 
-        //             'Content-Type' : 'multipart/form-data'
-        //         }
-        //     })
-        //     .then(res => {
-        //         this.userRegistration = false
-        //         this.$router.push({ name : 'profile' })
-        //     }).catch(err => {
-        //         if (err.response.status == 422){
-        //             this.errors = Object.assign({}, err.response.data.error)
-        //             console.log(this.errors)
-        //         }
-                
-        //         alert('Что-то пошло не так. Проверьте данные еще раз.')
-        //     console.log(err)
-        // })
+    methods:{
+        init(){
+            axios.get('/api/user/data', {
+                headers: { 
+                        'Authorization' : 'Bearer ' + this.userToken
+                    }
+                })
+                .then(res => {
+                    this.userData = res.data.user[0]
+                    console.log(this.userData)
+                    localStorage.setItem('xyzSessionAoUser', JSON.stringify( this.userData));
+                }).catch(err => {
+                    console.log(err.data)
+            })
+        }
     }
 }
 </script>

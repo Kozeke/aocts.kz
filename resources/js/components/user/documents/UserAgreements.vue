@@ -60,7 +60,7 @@
                     <div v-if="modalPage === 1" class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">Предприятие</div>
-                            <input type="text" placeholder="Some company." >
+                            <input v-model="performer" type="text" placeholder="Some company." >
                         </div>
                         <div class="item flex-col">
                             <div class="label">Исполнитель</div>
@@ -68,41 +68,41 @@
                         </div>
                         <div class="item flex-col">
                             <div class="label">Адрес пребывания вагонов</div>
-                            <input type="text" placeholder="Введите адрес пребывания вагонов">
+                            <input v-model="carriage_address" type="text" placeholder="Введите адрес пребывания вагонов">
                         </div>
                         <div class="item flex-col">
                             <div class="label">Подъездной путь</div>
-                            <input type="text" placeholder="Введите подъездной путь">
+                            <input v-model="access_road" type="text" placeholder="Введите подъездной путь">
                         </div>
                         <div class="item flex-col">
                             <div class="label">Число вагонов при погрузке</div>
-                            <input type="text" placeholder="Введите число вагонов при погрузке">
+                            <input v-model="amount_of_carriage_on_loading" type="text" placeholder="Введите число вагонов при погрузке">
                         </div>
                         <div class="item flex-col">
                             <div class="label">Число вагонов при выгрузке</div>
-                            <input type="text" placeholder="Введите число вагонов при выгрузке">
+                            <input v-model="amount_of_carriage_on_unloading" type="text" placeholder="Введите число вагонов при выгрузке">
                         </div>
                         <div class="item flex-col">
                             <div class="label">Размер одновременной подачи вагонов</div>
-                            <input type="text" placeholder="Введите размер одновременной подачи вагонов">
+                            <input v-model="size_of_the_simultaneous_supply_of_wagons" type="text" placeholder="Введите размер одновременной подачи вагонов">
                         </div>
                         <div class="item flex-col">
                             <div class="label">Срок соглашения</div>
-                            <input type="text" placeholder="DD.MM.YYYY - DD.MM.YYYY">
+                            <input v-model="agreement_dates" type="text" placeholder="YYYY-MM-DD - YYYY-MM-DD">
                         </div>
                     </div>
                     <div v-if="modalPage === 2" class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">Индекс предприятия</div>
-                            <input type="text" placeholder="Введите индекс предприятия" >
+                            <input v-model="business_index" type="text" placeholder="Введите индекс предприятия" >
                         </div>
                         <div class="item flex-col">
                             <div class="label">Адрес</div>
-                            <input type="text" placeholder="Somestreet, 1, Somecity">
+                            <input v-model="address" type="text" placeholder="Somestreet, 1, Somecity">
                         </div>
                         <div class="item flex-col">
                             <div class="label">БИН</div>
-                            <input type="text" placeholder="000 000 000 000">
+                            <input v-model="BIN" type="text" placeholder="000 000 000 000">
                         </div>
                         <div class="item flex-col">
                             <div class="label">ИИК</div>
@@ -125,13 +125,13 @@
                             <input type="text" placeholder="DD.MM.YYYY - DD.MM.YYYY"> -->
                         </div>
                         <div class="item check-form flex-row">
-                            <input v-model="agreement" type="checkbox">
+                            <input v-model="agreement_check" type="checkbox">
                             <label class="label">Согласиться с <span>правилами пользователя</span></label>
                         </div>
                     </div>
                     <div v-if="modalPage === 1" @click="modalPage = 2" class="done-btn">Вперёд</div>
                     <div v-if="modalPage === 2" @click="modalPage = 1" class="back-btn">Назад</div>
-                    <div v-if="modalPage === 2" @click="modalPage = 3" class="done-btn">Отправить</div>
+                    <div v-if="modalPage === 2" @click="postAgeement()" class="done-btn">Отправить</div>
                 </div>
             </div>
         </div>
@@ -141,6 +141,7 @@
 import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserDocumentsRouter from './UserDocumentsRoute'
+import axios from 'axios'
 
 export default {
     components: {
@@ -150,12 +151,57 @@ export default {
     },
     data(){
         return {
-            modalNewDoc: !false,
-            modalPage: 2
+            modalNewDoc: false,
+            modalPage: 1,
+            agreement_check: false,
+            business_index: null,
+            address: '',
+            access_road: '',
+            amount_of_carriage_on_loading: null,
+            amount_of_carriage_on_unloading: null,
+            size_of_the_simultaneous_supply_of_wagons: null,
+            carriage_address: '',
+            agreement_dates: '',
+            agreement_start_date: '',
+            agreement_end_date: '',
+            performer: '',
+            BIN: ''
         }
     },
+    mounted(){
+        this.BIN = JSON.parse(localStorage.getItem('xyzSessionAoUser')).BIN
+    },
     methods: {
-        
+        postAgeement(){
+            this.agreement_start_date = this.agreement_dates.substring(0,10)
+            this.agreement_end_date = this.agreement_dates.substring(13,23)
+            axios.post('/api/create/agreement', null, {
+                headers: { 
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params: {
+                    user_id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+                    business_index: this.business_index,
+                    address: this.address,
+                    access_road: this.access_road,
+                    amount_of_carriage_on_loading: this.amount_of_carriage_on_loading,
+                    amount_of_carriage_on_unloading: this.amount_of_carriage_on_unloading,
+                    size_of_the_simultaneous_supply_of_wagons: this.size_of_the_simultaneous_supply_of_wagons, 
+                    carriage_address: this.carriage_address,
+                    agreement_start_date: this.agreement_start_date, 
+                    agreement_end_date: this.agreement_end_date, 
+                    performer: this.performer
+                }
+                })
+                .then(res => {
+                    console.log(res.data)
+                    alert('Ваша заявка успешно отрпалена')
+                    this.modalPage = 1
+                    this.modalNewDoc = false
+                }).catch(err => {
+                    console.log(err.data)
+            })
+        }
     }
 }
 </script>

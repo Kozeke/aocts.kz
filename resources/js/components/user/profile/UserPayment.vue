@@ -10,22 +10,27 @@
                     <div class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">Банк оплаты</div>
-                            <input v-if="editMode" type="text" placeholder="Выберите банк" >
-                            <input v-else type="text" value="Выберите банк" readonly>
+                            <input v-if="editMode" v-model="bank_name" type="text" placeholder="Выберите банк" >
+                            <input v-else type="text" :value="bank_name ? bank_name : 'не заполнено'" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">БИК</div>
-                            <input v-if="editMode" type="text" placeholder="000 000 000">
-                            <input v-else type="text" value="000 000 000" readonly>
+                            <input v-if="editMode" v-model="BIC" type="text" placeholder="000 000 000">
+                            <input v-else type="text" :value="BIC ? BIC : 'не заполнено'" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">ИИК</div>
-                            <input v-if="editMode" type="text" placeholder="KZ 1000 0000 0000 0000">
-                            <input v-else type="text" value="KZ 1000 0000 0000 0000" readonly>
+                            <input v-if="editMode" v-model="IBAN" type="text" placeholder="KZ 1000 0000 0000 0000">
+                            <input v-else type="text" :value="IBAN ? IBAN : 'не заполнено'" readonly>
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">ИИК</div>
+                            <input v-if="editMode" v-model="CB " type="text" placeholder="template ?">
+                            <input v-else type="text" :value="CB  ? CB  : 'не заполнено'" readonly>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
-                    <div @click="editMode = !editMode" v-if="editMode" class="send-btn">Сохранить изменения</div>
+                    <div @click="postBankReq()" v-if="editMode" class="send-btn">Сохранить изменения</div>
                     <div @click="editMode = !editMode" v-if="!editMode" class="edit-btn">Изменить настройки</div>
                 </div>
             </div>
@@ -37,6 +42,7 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
+import axios from "axios"
 
 export default {
     components: {
@@ -47,7 +53,30 @@ export default {
     },
     data(){
         return {
-            editMode: false
+            editMode: false,
+            bank_name: '',
+            BIC: '',
+            IBAN: '',
+            CB: ''
+        }
+    },
+    methods: {
+        postBankReq(){
+            axios.post('/api/user/edit/bank/requisites?bank_name=' + this.bank_name + '&BIC=' + 
+                this.BIC + '&IBAN=' + this.IBAN + '&CB=' + this.CB + '&user_id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
+                headers: { 
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                })
+            .then(res => {
+                alert('Вы успешно сменили реквизите')
+                location.reload()
+                console.log(res.data)
+            })
+            .catch(err => {
+                alert('Неизвестная ошибка')
+                console.log(err.data)
+            });
         }
     }
 }

@@ -67,7 +67,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
   data() {
@@ -118,6 +118,7 @@ export default {
       axios
         .post("/api/login", data)
         .then(res => {
+          localStorage.setItem('xyzSessionAo', JSON.stringify(res.data));
           this.$router.push({ name : 'profile' })
         })
         .catch(err => {

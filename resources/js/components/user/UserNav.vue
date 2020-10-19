@@ -11,7 +11,7 @@
                 <div class="label"></div>
             </div>
             <div class="divider"></div>
-            <div class="user-name">Some company.</div>
+            <div class="user-name">{{ user.name }}</div>
             <div @click="$router.push({ name: 'profile' })" class="user-img">
                 <img src="/images/m-header.png" alt="">
             </div>
@@ -22,8 +22,11 @@
 export default {
     data(){
         return {
-
+            user: ''
         }
+    },
+    mounted(){
+        this.user = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
     }
 }
 </script>
