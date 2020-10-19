@@ -110,6 +110,7 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
+import axios from 'axios'
 
 export default {
     components: {
@@ -124,6 +125,28 @@ export default {
             modalActualAddress: false,
             modalLegalAddress: false
         }
+    },
+    mounted:{
+
+    },
+    methods(){
+        // axios.post('/api/register', data, {
+        //     headers: { 
+        //             'Content-Type' : 'multipart/form-data'
+        //         }
+        //     })
+        //     .then(res => {
+        //         this.userRegistration = false
+        //         this.$router.push({ name : 'profile' })
+        //     }).catch(err => {
+        //         if (err.response.status == 422){
+        //             this.errors = Object.assign({}, err.response.data.error)
+        //             console.log(this.errors)
+        //         }
+                
+        //         alert('Что-то пошло не так. Проверьте данные еще раз.')
+        //     console.log(err)
+        // })
     }
 }
 </script>
