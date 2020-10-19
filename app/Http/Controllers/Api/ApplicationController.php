@@ -46,6 +46,7 @@ class ApplicationController extends Controller
             'wagon_turnover_per_year' => $request['wagon_turnover_per_year'],
             'wagon_turnover_per_month' => $request['wagon_turnover_per_month'],
             'access_road_grant_date' => $request['access_road_grant_date'],
+            'performer' => $request['performer'],
             'status' =>0
         ]);
         return response()->json(['success', 200]);

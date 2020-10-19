@@ -20,6 +20,7 @@ class CreateApplicationsTable extends Migration
             $table->string('station');
             $table->string('access_road');
             $table->string('dead_end');
+            $table->string('performer');
             $table->unsignedBigInteger('wagon_turnover_per_month');
             $table->unsignedBigInteger('wagon_turnover_per_year');
             $table->date('access_road_grant_date');
