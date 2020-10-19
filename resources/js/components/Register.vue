@@ -42,7 +42,17 @@
                 <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">Резидент РК</label>
-                        <input v-bind:class="{ 'error' : errors.name }" v-on:keyup="validateForm($event)" v-model="name" name="name" type="text" placeholder="Введите ФИО руководителя">
+                        <div class="radio-field flex-col">
+                            <div class="flex-row">
+                                <input type="radio" value="Tom" v-model="user">
+                                <label class="radio-label">Да, я являюсь резидентом РК</label>
+                            </div>
+                            <div class="flex-row">
+                                <input type="radio" value="Bob" v-model="user">
+                                <label class="radio-label" >Нет, я резидент другой страны</label>
+                            </div>
+                        </div>
+                        <!-- <input v-bind:class="{ 'error' : errors.name }" v-on:keyup="validateForm($event)" v-model="name" name="name" type="text" placeholder="Введите ФИО руководителя"> -->
                         <!-- <span v-if="errors.name" id="err-text-name" class="err-text">{{ errors.name[0] }}</span>
                         <div :style="{ 'visibility' : errors.name ? 'visible' : 'hidden' }" class="err" id="err-name">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -725,6 +735,23 @@ export default {
                         border: 1px solid #E6EAF3;
                         box-sizing: border-box;
                         border-radius: 6px;
+                    }
+                    .radio-field{
+                        width: 100%;
+                        .flex-row{
+                            margin-top: 8px;
+                            width: 100%;
+                        }
+                        .radio-label{
+                            margin: 0 auto 0 0;
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: #4985FF;
+                        }
+                        input {
+                            margin: 0 12px 0 0;
+                            height: 24px;
+                        }
                     }
                     .error{
                         border: 1px solid #E4002F !important;
