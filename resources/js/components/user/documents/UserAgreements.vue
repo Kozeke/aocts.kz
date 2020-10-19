@@ -45,8 +45,93 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="send-btn">Отправить заявку на соглашение</div>
+                        <div @click="modalNewDoc = true" class="send-btn">Отправить заявку на соглашение</div>
                     </div>
+                </div>
+            </div>
+            <div v-if="modalNewDoc" class="modal">
+                <div class="modal-content">
+                    <div class="title">Соглашение на подачу и <br>уборку вагонов</div>
+                    <div @click="modalNewDoc = false" class="close">
+                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
+                        </svg>
+                    </div>
+                    <div v-if="modalPage === 1" class="field-list flex-row">
+                        <div class="item flex-col">
+                            <div class="label">Предприятие</div>
+                            <input type="text" placeholder="Some company." >
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Исполнитель</div>
+                            <input type="text" placeholder="Name Surname Middlename">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Адрес пребывания вагонов</div>
+                            <input type="text" placeholder="Введите адрес пребывания вагонов">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Подъездной путь</div>
+                            <input type="text" placeholder="Введите подъездной путь">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Число вагонов при погрузке</div>
+                            <input type="text" placeholder="Введите число вагонов при погрузке">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Число вагонов при выгрузке</div>
+                            <input type="text" placeholder="Введите число вагонов при выгрузке">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Размер одновременной подачи вагонов</div>
+                            <input type="text" placeholder="Введите размер одновременной подачи вагонов">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Срок соглашения</div>
+                            <input type="text" placeholder="DD.MM.YYYY - DD.MM.YYYY">
+                        </div>
+                    </div>
+                    <div v-if="modalPage === 2" class="field-list flex-row">
+                        <div class="item flex-col">
+                            <div class="label">Индекс предприятия</div>
+                            <input type="text" placeholder="Введите индекс предприятия" >
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Адрес</div>
+                            <input type="text" placeholder="Somestreet, 1, Somecity">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">БИН</div>
+                            <input type="text" placeholder="000 000 000 000">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">ИИК</div>
+                            <input type="text" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">БИК</div>
+                            <input type="text" placeholder="987 654 321">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">КБЕ</div>
+                            <input type="text" placeholder="Введите КБЕ">
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Наименование банка</div>
+                            <input type="text" placeholder="Bank name">
+                        </div>
+                        <div class="item flex-col">
+                            <!-- <div class="label">Срок соглашения</div>
+                            <input type="text" placeholder="DD.MM.YYYY - DD.MM.YYYY"> -->
+                        </div>
+                        <div class="item check-form flex-row">
+                            <input v-model="agreement" type="checkbox">
+                            <label class="label">Согласиться с <span>правилами пользователя</span></label>
+                        </div>
+                    </div>
+                    <div v-if="modalPage === 1" @click="modalPage = 2" class="done-btn">Вперёд</div>
+                    <div v-if="modalPage === 2" @click="modalPage = 1" class="back-btn">Назад</div>
+                    <div v-if="modalPage === 2" @click="modalPage = 3" class="done-btn">Отправить</div>
                 </div>
             </div>
         </div>
@@ -65,7 +150,8 @@ export default {
     },
     data(){
         return {
-            
+            modalNewDoc: !false,
+            modalPage: 2
         }
     },
     methods: {
@@ -200,6 +286,125 @@ export default {
                             border-radius: 6px;
                         }
                     }    
+                }
+            }
+        }
+        .modal {
+            display: flex;
+            position: fixed; /* Stay in place */
+            z-index: 99; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background: rgba(45, 76, 100, 0.7);
+            .modal-content {
+                background-color: #fefefe;
+                background: #FFFFFF;
+                border-radius: 6px;
+                margin: 30px auto auto auto;
+                padding: 50px 89px;
+                width: 952px;
+                .title{
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 22px;
+                    text-align: center;
+                    color: #2D4C64;
+                }
+                .close{
+                    position: absolute;
+                    top: 30px;
+                    right: 30px;
+                }
+                .field-list{
+                    flex-wrap: wrap;
+                    .item{
+                        width: 48%;
+                        margin-top: 36px;
+                        .label{
+                            text-align: left;
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 20px;
+                            color: #06397D;
+                        }
+                        input{
+                            margin-top: 8px;
+                            text-align: left;
+                            background: #FDFDFD;
+                            border: 1px solid #DFE0EB;
+                            box-sizing: border-box;
+                            border-radius: 6px;
+                            padding: 18px 22px;
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 17px;
+                        }
+                        input:focus{
+                            box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);
+                        }
+                        input:read-only{
+                            padding: 18px 0px;
+                            border: 1px solid #FDFDFD;
+                            color: #787878;
+                        }
+                        ::placeholder{
+                            color: #C5C5C5;
+                        }
+                    }
+                    .item:nth-of-type(2n){
+                        margin-left: 4%;
+                    }
+                    .check-form{
+                        margin-top: 25px;
+                        input{
+                            cursor: pointer;
+                            margin-left: 3px;
+                            margin-top: 3px;
+                            -ms-transform: scale(1.2) !important; /* IE */
+                            -moz-transform: scale(1.2) !important; /* FF */
+                            -webkit-transform: scale(1.2) !important; /* Safari and Chrome */
+                            -o-transform: scale(1.2) !important; /* Opera */
+                            transform: scale(1.2) !important;
+                            padding: 6px;
+                        }
+                        .label{
+                            margin-left: 8px !important;
+                            text-align: left;
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 20px;
+                        }
+                        span{
+                            font-weight: bold;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .done-btn{
+                    width: 144px;
+                    cursor: pointer;
+                    margin: 30px 0 0 auto;
+                    padding: 18px 28px;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #FFFFFF;
+                    background: #4985FF;
+                    box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
+                    border-radius: 6px;
+                }
+                .back-btn{
+                    position: absolute;
+                    left: 89px;
+                    bottom: 69px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #4985FF;
                 }
             }
         }

@@ -4091,6 +4091,91 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4101,7 +4186,10 @@ __webpack_require__.r(__webpack_exports__);
     UserDocumentsRouter: _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      modalNewDoc: !false,
+      modalPage: 2
+    };
   },
   methods: {}
 });
@@ -4527,6 +4615,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserProfileImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserProfileImg */ "./resources/js/components/user/profile/UserProfileImg.vue");
 /* harmony import */ var _UserProfileRouteMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserProfileRouteMenu */ "./resources/js/components/user/profile/UserProfileRouteMenu.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -4634,6 +4724,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4651,6 +4742,24 @@ __webpack_require__.r(__webpack_exports__);
       modalActualAddress: false,
       modalLegalAddress: false
     };
+  },
+  mounted: {},
+  methods: function methods() {// axios.post('/api/register', data, {
+    //     headers: { 
+    //             'Content-Type' : 'multipart/form-data'
+    //         }
+    //     })
+    //     .then(res => {
+    //         this.userRegistration = false
+    //         this.$router.push({ name : 'profile' })
+    //     }).catch(err => {
+    //         if (err.response.status == 422){
+    //             this.errors = Object.assign({}, err.response.data.error)
+    //             console.log(this.errors)
+    //         }
+    //         alert('Что-то пошло не так. Проверьте данные еще раз.')
+    //     console.log(err)
+    // })
   }
 });
 
@@ -4957,7 +5066,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-6391be34] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-6391be34] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-6391be34] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-6391be34] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-6391be34] {\n  padding: 36px 28px 120px 28px;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-6391be34] {\n  padding: 0;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .content-info .field-list .label-item[data-v-6391be34] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .label-item div[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .index[data-v-6391be34] {\n  width: 6%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34] {\n  width: 30%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34] {\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  width: 22%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-6391be34] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-6391be34] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .time[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .day[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34] {\n  margin-left: 0;\n  width: 6%;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34] {\n  width: 30%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34] {\n  padding: 0;\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date .time[data-v-6391be34] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34] {\n  width: 18%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  background: #4985FF;\n  text-align: center;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .content-info .send-btn[data-v-6391be34] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-6391be34] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-6391be34] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-6391be34] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-6391be34] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-6391be34] {\n  padding: 36px 28px 120px 28px;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-6391be34] {\n  padding: 0;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .content-info .field-list .label-item[data-v-6391be34] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .label-item div[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .index[data-v-6391be34] {\n  width: 6%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34] {\n  width: 30%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34] {\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  width: 22%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-6391be34] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-6391be34] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .time[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .day[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34] {\n  margin-left: 0;\n  width: 6%;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34] {\n  width: 30%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34] {\n  padding: 0;\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date .time[data-v-6391be34] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34] {\n  width: 18%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  background: #4985FF;\n  text-align: center;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .content-info .send-btn[data-v-6391be34] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-6391be34] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-6391be34] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 30px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-6391be34] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-6391be34] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-6391be34] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .field-list .check-form[data-v-6391be34] {\n  margin-top: 25px;\n}\n.main .modal .modal-content .field-list .check-form input[data-v-6391be34] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.2) !important;\n  padding: 6px;\n}\n.main .modal .modal-content .field-list .check-form .label[data-v-6391be34] {\n  margin-left: 8px !important;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .modal .modal-content .field-list .check-form span[data-v-6391be34] {\n  font-weight: bold;\n  text-decoration: underline;\n}\n.main .modal .modal-content .done-btn[data-v-6391be34] {\n  width: 144px;\n  cursor: pointer;\n  margin: 30px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .back-btn[data-v-6391be34] {\n  position: absolute;\n  left: 89px;\n  bottom: 69px;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #4985FF;\n}", ""]);
 
 // exports
 
@@ -12478,14 +12587,194 @@ var render = function() {
                     2
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "send-btn" }, [
-                    _vm._v("Отправить заявку на соглашение")
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "send-btn",
+                      on: {
+                        click: function($event) {
+                          _vm.modalNewDoc = true
+                        }
+                      }
+                    },
+                    [_vm._v("Отправить заявку на соглашение")]
+                  )
                 ])
               ],
               1
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _vm.modalNewDoc
+            ? _c("div", { staticClass: "modal" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "close",
+                      on: {
+                        click: function($event) {
+                          _vm.modalNewDoc = false
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "15",
+                            height: "15",
+                            viewBox: "0 0 15 15",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                              fill: "#4985FF"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.modalPage === 1
+                    ? _c("div", { staticClass: "field-list flex-row" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _vm._m(9)
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.modalPage === 2
+                    ? _c("div", { staticClass: "field-list flex-row" }, [
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _vm._m(11),
+                        _vm._v(" "),
+                        _vm._m(12),
+                        _vm._v(" "),
+                        _vm._m(13),
+                        _vm._v(" "),
+                        _vm._m(14),
+                        _vm._v(" "),
+                        _vm._m(15),
+                        _vm._v(" "),
+                        _vm._m(16),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item check-form flex-row" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.agreement,
+                                expression: "agreement"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.agreement)
+                                ? _vm._i(_vm.agreement, null) > -1
+                                : _vm.agreement
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.agreement,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.agreement = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.agreement = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.agreement = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(17)
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.modalPage === 1
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "done-btn",
+                          on: {
+                            click: function($event) {
+                              _vm.modalPage = 2
+                            }
+                          }
+                        },
+                        [_vm._v("Вперёд")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.modalPage === 2
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "back-btn",
+                          on: {
+                            click: function($event) {
+                              _vm.modalPage = 1
+                            }
+                          }
+                        },
+                        [_vm._v("Назад")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.modalPage === 2
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "done-btn",
+                          on: {
+                            click: function($event) {
+                              _vm.modalPage = 3
+                            }
+                          }
+                        },
+                        [_vm._v("Отправить")]
+                      )
+                    : _vm._e()
+                ])
+              ])
+            : _vm._e()
         ],
         1
       )
@@ -12502,6 +12791,210 @@ var staticRenderFns = [
       _c("div", { staticClass: "day" }, [_vm._v("Июнь 1, 2020")]),
       _vm._v(" "),
       _c("div", { staticClass: "time" }, [_vm._v("19:23")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "title" }, [
+      _vm._v("Соглашение на подачу и "),
+      _c("br"),
+      _vm._v("уборку вагонов")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Предприятие")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", placeholder: "Some company." } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Исполнитель")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "Name Surname Middlename" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Адрес пребывания вагонов")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "Введите адрес пребывания вагонов" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Подъездной путь")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "Введите подъездной путь" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [
+        _vm._v("Число вагонов при погрузке")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "text",
+          placeholder: "Введите число вагонов при погрузке"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [
+        _vm._v("Число вагонов при выгрузке")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "text",
+          placeholder: "Введите число вагонов при выгрузке"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [
+        _vm._v("Размер одновременной подачи вагонов")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "text",
+          placeholder: "Введите размер одновременной подачи вагонов"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Срок соглашения")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "DD.MM.YYYY - DD.MM.YYYY" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Индекс предприятия")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "Введите индекс предприятия" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Адрес")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "Somestreet, 1, Somecity" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("БИН")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", placeholder: "000 000 000 000" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text", placeholder: "0000 0000 0000 0000" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("БИК")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", placeholder: "987 654 321" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("КБЕ")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", placeholder: "Введите КБЕ" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item flex-col" }, [
+      _c("div", { staticClass: "label" }, [_vm._v("Наименование банка")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", placeholder: "Bank name" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "label" }, [
+      _vm._v("Согласиться с "),
+      _c("span", [_vm._v("правилами пользователя")])
     ])
   }
 ]
@@ -31598,8 +32091,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/aocts.kz/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/aocts.kz/aocts.kz/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
