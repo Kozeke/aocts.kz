@@ -52,7 +52,11 @@ export default {
     methods:{
         changePwd(){
             axios.post('api/user/change/password?current_password=' + this.current_password + '&new_password=' + 
-                this.new_password + '&id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id )
+                this.new_password + '&id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
+                    headers: { 
+                        'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                    }
+                })
             .then(res => {
                 alert('Вы успешно сменили пароль')
                 location.reload()

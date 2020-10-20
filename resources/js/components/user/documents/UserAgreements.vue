@@ -26,9 +26,9 @@
                                 </div>
                                 <div class="status">Статус</div>
                             </div>
-                            <div v-for="i in 5" :key="i" class="item-list">
+                            <div v-for="i in deals[0].agreements" :key="i.id" class="item-list">
                                 <div class="item flex-row">
-                                    <div class="index">{{ i }}</div>
+                                    <div class="index">{{ i.id }}</div>
                                     <div class="name flex-row">
                                         №ЦТС-2019/02-41
                                     </div>
@@ -60,11 +60,11 @@
                     <div v-if="modalPage === 1" class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">Предприятие</div>
-                            <input v-model="performer" type="text" placeholder="Some company." >
+                            <input v-model="company_name" type="text" placeholder="Some company." >
                         </div>
                         <div class="item flex-col">
                             <div class="label">Исполнитель</div>
-                            <input type="text" placeholder="Name Surname Middlename">
+                            <input v-model="performer" type="text" placeholder="Name Surname Middlename">
                         </div>
                         <div class="item flex-col">
                             <div class="label">Адрес пребывания вагонов</div>
@@ -92,6 +92,15 @@
                         </div>
                     </div>
                     <div v-if="modalPage === 2" class="field-list flex-row">
+                        <div class="item flex-col">
+                            <div class="label">Выберите регион</div>
+                            <select name="selected_region" class="input-form" v-model="application_id">
+                                <option :value="'Выберите'" disabled>Выберите</option>
+                                <option v-for="deal in deals" :value="deal.id" :key="deal.id">
+                                    {{ deal.id }}
+                                </option>
+                            </select>
+                        </div>
                         <div class="item flex-col">
                             <div class="label">Индекс предприятия</div>
                             <input v-model="business_index" type="text" placeholder="Введите индекс предприятия" >
@@ -154,8 +163,11 @@ export default {
             modalNewDoc: false,
             modalPage: 1,
             agreement_check: false,
+            deals: [],
+            application_id: '',
             business_index: null,
             address: '',
+            company_name: '',
             access_road: '',
             amount_of_carriage_on_loading: null,
             amount_of_carriage_on_unloading: null,
@@ -170,6 +182,7 @@ export default {
     },
     mounted(){
         this.BIN = JSON.parse(localStorage.getItem('xyzSessionAoUser')).BIN
+        this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
     },
     methods: {
         postAgeement(){
@@ -181,6 +194,7 @@ export default {
                 },
                 params: {
                     user_id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+                    application_id: this.application_id,
                     business_index: this.business_index,
                     address: this.address,
                     access_road: this.access_road,
@@ -190,16 +204,24 @@ export default {
                     carriage_address: this.carriage_address,
                     agreement_start_date: this.agreement_start_date, 
                     agreement_end_date: this.agreement_end_date, 
-                    performer: this.performer
+                    performer: this.performer,
+                    company_name: this.company_name
                 }
-                })
-                .then(res => {
-                    console.log(res.data)
-                    alert('Ваша заявка успешно отрпалена')
-                    this.modalPage = 1
-                    this.modalNewDoc = false
-                }).catch(err => {
-                    console.log(err.data)
+            })
+            .then(res => {
+                console.log(res.data)
+                alert('Ваша заявка успешно отрпалена')
+                // let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                // localStorage.removeItem('xyzSessionAoUser');
+                // userSt.applications.forEach( item => {
+                //     if( item.id === this.application_id ){
+                //         item.agreements.append( res.data[1] )
+                //     }
+                // })
+                // localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+                location.reload()
+            }).catch(err => {
+                console.log(err.data)
             })
         }
     }
@@ -376,7 +398,7 @@ export default {
                             line-height: 20px;
                             color: #06397D;
                         }
-                        input{
+                        input, select{
                             margin-top: 8px;
                             text-align: left;
                             background: #FDFDFD;
@@ -388,7 +410,7 @@ export default {
                             font-size: 14px;
                             line-height: 17px;
                         }
-                        input:focus{
+                        input:focus, select:focus{
                             box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);
                         }
                         input:read-only{

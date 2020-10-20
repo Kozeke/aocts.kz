@@ -1,7 +1,7 @@
 <template>
     <div v-if="user" class="outer flex-col">
         <img src="/images/Profile-picture.png" alt="">
-        <div class="name">{{ user.name }}</div>
+        <div class="name">{{ user.manager_name }}</div>
         <div class="mail">{{ user.email }}</div>
     </div>
 </template>

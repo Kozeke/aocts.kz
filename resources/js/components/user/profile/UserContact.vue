@@ -10,27 +10,27 @@
                     <div class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">ФИО первого руководителя</div>
-                            <input v-if="editMode" type="text" placeholder="Somename Somesurname" >
-                            <input v-else type="text" value="Somename Somesurname" readonly>
+                            <input v-if="editMode" v-model="manager_name" type="text" placeholder="Somename Somesurname" >
+                            <input v-else type="text" :value="manager_name" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">ФИО исполнителя</div>
-                            <input v-if="editMode" type="text" placeholder="Somename Somesurname">
-                            <input v-else type="text" value="Somename Somesurname" readonly>
+                            <input v-if="editMode" v-model="performer_name" type="text" placeholder="Somename Somesurname">
+                            <input v-else type="text" :value="performer_name" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Контактный номер</div>
-                            <input v-if="editMode" type="text" placeholder="+7 700 000 00 00">
-                            <input v-else type="text" value="+7 700 000 00 00" readonly>
+                            <input v-if="editMode" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="+7 700 000 00 00">
+                            <input v-else type="text" :value="phone" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Электронная почта</div>
-                            <input v-if="editMode" type="text" placeholder="manager@company.kz">
-                            <input v-else type="text" value="manager@company.kz" readonly>
+                            <input v-if="editMode" v-model="email" type="text" placeholder="email@company.kz">
+                            <input v-else type="text" :value="email" readonly>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
-                    <div @click="editMode = !editMode" v-if="editMode" class="send-btn">Сохранить изменения</div>
+                    <div @click="postUserContact()" v-if="editMode" class="send-btn">Сохранить изменения</div>
                     <div @click="editMode = !editMode" v-if="!editMode" class="edit-btn">Изменить настройки</div>
                 </div>
             </div>
@@ -42,6 +42,7 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
+import axios from "axios"
 
 export default {
     components: {
@@ -52,7 +53,45 @@ export default {
     },
     data(){
         return {
-            editMode: false
+            editMode: false,
+            manager_name: '',
+            performer_name: '',
+            phone: '',
+            email: ''
+        }
+    },
+    mounted(){
+        const user = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+        this.manager_name = user.manager_name
+        this.performer_name = user.performer_name
+        this.phone = user.phone
+        this.email = user.email
+    },
+    methods:{
+        postUserContact(){
+            axios.post('/api/user/edit/contacts', null, {
+                headers: { 
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params: {
+                    id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+                    manager_name: this.manager_name,
+                    performer_name: this.performer_name,
+                    phone: this.phone,
+                    email: this.email
+                }
+            })
+                .then(res => {
+                console.log(res.data)
+                // alert('Ваша заявка успешно от отправлена')
+                // let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                // localStorage.removeItem('xyzSessionAoUser');
+                // userSt.applications = res.data[1]
+                // localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+                // location.reload()
+            }).catch(err => {
+                console.log(err.data)
+            })
         }
     }
 }
