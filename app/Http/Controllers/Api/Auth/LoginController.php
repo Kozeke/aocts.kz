@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $creds = $request->only(['email', 'password']);
+        $creds = $request->only(['BIN', 'password']);
 
         if($token = auth()->attempt($creds)){
             return response()->json(['token' => $token]);
