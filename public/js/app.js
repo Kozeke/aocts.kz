@@ -4717,6 +4717,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4732,26 +4741,43 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editMode: false,
+      allAccordion: [],
+      chosenAccordion: '',
       bank_name: '',
       BIC: '',
       IBAN: '',
       CB: ''
     };
   },
+  mounted: function mounted() {
+    this.allAccordion = JSON.parse(localStorage.getItem('xyzSessionAoUser')).bank_requisites;
+    console.log(this.allAccordion);
+    this.chosenAccordion = this.allAccordion[0];
+  },
   methods: {
+    toggle: function toggle() {
+      this.contentVisible = !this.contentVisible;
+    },
     postBankReq: function postBankReq() {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/user/edit/bank/requisites?bank_name=' + this.bank_name + '&BIC=' + this.BIC + '&IBAN=' + this.IBAN + '&CB=' + this.CB + '&user_id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/user/edit/bank/requisites?bank_name=' + this.chosenAccordion.bank_name + '&BIC=' + this.chosenAccordion.BIC + '&IBAN=' + this.chosenAccordion.IBAN + '&CB=' + this.chosenAccordion.CB + '&user_id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
         headers: {
           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
         }
       }).then(function (res) {
-        alert('Вы успешно сменили реквизите');
+        alert('Вы успешно сменили/добавили реквизите');
+        var userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'));
+        localStorage.removeItem('xyzSessionAoUser');
+        userSt.bank_requisites = res.data[1];
+        localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
         location.reload();
-        console.log(res.data);
       })["catch"](function (err) {
         alert('Неизвестная ошибка');
         console.log(err.data);
       });
+    },
+    addBankReq: function addBankReq() {
+      this.chosenAccordion = {};
+      this.editMode = true;
     }
   }
 });
@@ -5350,7 +5376,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-60f47abc] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-60f47abc] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-60f47abc] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-60f47abc] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  height: 580px;\n}\n.main .main-info .containe .content .field-list[data-v-60f47abc] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] {\n  width: 49%;\n  margin-bottom: 28px;\n}\n.main .main-info .containe .content .field-list .item .label[data-v-60f47abc] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc]:nth-of-type(2n) {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .cancel-btn[data-v-60f47abc], .main .main-info .containe .content .send-btn[data-v-60f47abc], .main .main-info .containe .content .edit-btn[data-v-60f47abc] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .main-info .containe .content .cancel-btn[data-v-60f47abc] {\n  right: 300px;\n}", ""]);
+exports.push([module.i, ".main[data-v-60f47abc] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-60f47abc] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-60f47abc] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-60f47abc] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  height: 580px;\n}\n.main .main-info .containe .content .accordion[data-v-60f47abc] {\n  padding: 24px;\n}\n.main .main-info .containe .content .accordion .accordion-title[data-v-60f47abc] {\n  border-top-left-radius: 10px;\n  border-top-right-radius: 10px;\n  border: 1px solid #e6e6e6;\n  background: #FDFDFD;\n  overflow: hidden;\n}\n.main .main-info .containe .content .accordion .accordion-title a[data-v-60f47abc] {\n  text-align: center;\n  border-right: 1px solid #e6e6e6;\n  cursor: pointer;\n  color: #06397D;\n  padding: 6px 18px;\n}\n.main .main-info .containe .content .accordion .accordion-title a[data-v-60f47abc]:last-of-type {\n  border-right: none;\n}\n.main .main-info .containe .content .accordion .accordion-title a.active[data-v-60f47abc] {\n  background: #06397D;\n  color: #FDFDFD;\n}\n.main .main-info .containe .content .field-list[data-v-60f47abc] {\n  padding: 24px;\n  flex-wrap: wrap;\n  border-bottom-left-radius: 10px;\n  border-bottom-right-radius: 10px;\n  border: 1px solid #e6e6e6;\n  border-top: none;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] {\n  width: 49%;\n  margin-bottom: 28px;\n}\n.main .main-info .containe .content .field-list .item .label[data-v-60f47abc] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item input[data-v-60f47abc]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc] ::placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item[data-v-60f47abc]:nth-of-type(2n) {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .cancel-btn[data-v-60f47abc], .main .main-info .containe .content .send-btn[data-v-60f47abc], .main .main-info .containe .content .edit-btn[data-v-60f47abc], .main .main-info .containe .content .new-btn[data-v-60f47abc] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .main-info .containe .content .cancel-btn[data-v-60f47abc], .main .main-info .containe .content .new-btn[data-v-60f47abc] {\n  right: 300px;\n}", ""]);
 
 // exports
 
@@ -14536,143 +14562,207 @@ var render = function() {
                 [
                   _c("UserProfileRouteMenu"),
                   _vm._v(" "),
-                  _c("div", { staticClass: "field-list flex-row" }, [
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Банк оплаты")
-                      ]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.bank_name,
-                                expression: "bank_name"
-                              }
-                            ],
-                            attrs: {
-                              type: "text",
-                              placeholder: "Выберите банк"
+                  _c("div", { staticClass: "accordion" }, [
+                    _c(
+                      "div",
+                      { staticClass: "accordion-title flex-row" },
+                      _vm._l(_vm.allAccordion, function(bank_req) {
+                        return _c(
+                          "a",
+                          {
+                            key: bank_req.id,
+                            class: {
+                              active:
+                                bank_req.bank_name + bank_req.id ===
+                                _vm.chosenAccordion.bank_name +
+                                  _vm.chosenAccordion.id
                             },
-                            domProps: { value: _vm.bank_name },
                             on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.bank_name = $event.target.value
+                              click: function($event) {
+                                _vm.chosenAccordion = bank_req
                               }
                             }
-                          })
-                        : _c("input", {
-                            attrs: { type: "text", readonly: "" },
-                            domProps: {
-                              value: _vm.bank_name
-                                ? _vm.bank_name
-                                : "не заполнено"
-                            }
-                          })
-                    ]),
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(bank_req.bank_name + " " + bank_req.id)
+                            )
+                          ]
+                        )
+                      }),
+                      0
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [_vm._v("БИК")]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.BIC,
-                                expression: "BIC"
-                              }
-                            ],
-                            attrs: { type: "text", placeholder: "000 000 000" },
-                            domProps: { value: _vm.BIC },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                    _c("div", { staticClass: "accordion-items" }, [
+                      _c("div", { staticClass: "field-list flex-row" }, [
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Банк оплаты")
+                          ]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.chosenAccordion.bank_name,
+                                    expression: "chosenAccordion.bank_name"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Выберите банк"
+                                },
+                                domProps: {
+                                  value: _vm.chosenAccordion.bank_name
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.chosenAccordion,
+                                      "bank_name",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
-                                _vm.BIC = $event.target.value
-                              }
-                            }
-                          })
-                        : _c("input", {
-                            attrs: { type: "text", readonly: "" },
-                            domProps: {
-                              value: _vm.BIC ? _vm.BIC : "не заполнено"
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.IBAN,
-                                expression: "IBAN"
-                              }
-                            ],
-                            attrs: {
-                              type: "text",
-                              placeholder: "KZ 1000 0000 0000 0000"
-                            },
-                            domProps: { value: _vm.IBAN },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: _vm.chosenAccordion.bank_name
+                                    ? _vm.chosenAccordion.bank_name
+                                    : "не заполнено"
                                 }
-                                _vm.IBAN = $event.target.value
-                              }
-                            }
-                          })
-                        : _c("input", {
-                            attrs: { type: "text", readonly: "" },
-                            domProps: {
-                              value: _vm.IBAN ? _vm.IBAN : "не заполнено"
-                            }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
-                      _vm._v(" "),
-                      _vm.editMode
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.CB,
-                                expression: "CB "
-                              }
-                            ],
-                            attrs: { type: "text", placeholder: "template ?" },
-                            domProps: { value: _vm.CB },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [_vm._v("БИК")]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.chosenAccordion.BIC,
+                                    expression: "chosenAccordion.BIC"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "000 000 000"
+                                },
+                                domProps: { value: _vm.chosenAccordion.BIC },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.chosenAccordion,
+                                      "BIC",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
-                                _vm.CB = $event.target.value
-                              }
-                            }
-                          })
-                        : _c("input", {
-                            attrs: { type: "text", readonly: "" },
-                            domProps: {
-                              value: _vm.CB ? _vm.CB : "не заполнено"
-                            }
-                          })
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: _vm.chosenAccordion.BIC
+                                    ? _vm.chosenAccordion.BIC
+                                    : "не заполнено"
+                                }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.chosenAccordion.IBAN,
+                                    expression: "chosenAccordion.IBAN"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "KZ 1000 0000 0000 0000"
+                                },
+                                domProps: { value: _vm.chosenAccordion.IBAN },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.chosenAccordion,
+                                      "IBAN",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: _vm.chosenAccordion.IBAN
+                                    ? _vm.chosenAccordion.IBAN
+                                    : "не заполнено"
+                                }
+                              })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [_vm._v("CB")]),
+                          _vm._v(" "),
+                          _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.chosenAccordion.CB,
+                                    expression: "chosenAccordion.CB "
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "template ?"
+                                },
+                                domProps: { value: _vm.chosenAccordion.CB },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.chosenAccordion,
+                                      "CB",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _c("input", {
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: _vm.chosenAccordion.CB
+                                    ? _vm.chosenAccordion.CB
+                                    : "не заполнено"
+                                }
+                              })
+                        ])
+                      ])
                     ])
                   ]),
                   _vm._v(" "),
@@ -14718,6 +14808,21 @@ var render = function() {
                           }
                         },
                         [_vm._v("Изменить настройки")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.editMode
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "new-btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.addBankReq()
+                            }
+                          }
+                        },
+                        [_vm._v("Добавить реквизиты")]
                       )
                     : _vm._e()
                 ],
@@ -15337,7 +15442,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Оплата")]
+      [_vm._v("Банковские реквизиты")]
     ),
     _vm._v(" "),
     _c(
