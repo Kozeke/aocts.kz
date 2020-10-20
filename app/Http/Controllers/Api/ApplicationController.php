@@ -49,7 +49,7 @@ class ApplicationController extends Controller
             'performer' => $request['performer'],
             'status' =>0
         ]);
-        return response()->json(['success', 200]);
+        return response()->json(['applications', $user->applications], 200);
 
     }
 

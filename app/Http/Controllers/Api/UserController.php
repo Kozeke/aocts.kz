@@ -37,7 +37,9 @@ class UserController extends Controller
         $user->locality_id = $request['locality_id'];
         $user->company_email = $request['company_email'];
         $user->save();
-        return response()->json(['success', 200]);
+        $me = User::where('id', auth()->user()->id)->with(['documents','agreements','bank_requisites','applications'])->get();
+
+        return response()->json(['user', $me], 200);
 
     }
 
@@ -65,7 +67,10 @@ class UserController extends Controller
         $user->manager_name = $request['manager_name'];
         $user->email = $request['email'];
         $user->save();
-        return response()->json(['success', 200]);
+        $me = User::where('id', auth()->user()->id)->with(['documents','agreements','bank_requisites','applications'])->get();
+
+        return response()->json(['user', $me], 200);
+
 
     }
 

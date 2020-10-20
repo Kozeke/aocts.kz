@@ -47,6 +47,6 @@ class AgreementController extends Controller
             'agreement_end_date' => $request['agreement_end_date'],
             'performer' => $request['performer'],
         ]);
-        return response()->json(['success', 200]);
+        return response()->json(['aggrements', $user->agreements], 200);
     }
 }
