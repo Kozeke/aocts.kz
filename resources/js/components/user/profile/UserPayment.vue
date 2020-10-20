@@ -7,31 +7,40 @@
                 <UserProfileImg></UserProfileImg>
                 <div class="content flex-col">
                     <UserProfileRouteMenu></UserProfileRouteMenu>
-                    <div class="field-list flex-row">
-                        <div class="item flex-col">
-                            <div class="label">Банк оплаты</div>
-                            <input v-if="editMode" v-model="bank_name" type="text" placeholder="Выберите банк" >
-                            <input v-else type="text" :value="bank_name ? bank_name : 'не заполнено'" readonly>
+                    <div class="accordion">
+                        <div class="accordion-title flex-row">
+                            <a @click="chosenAccordion = bank_req" v-for="bank_req in allAccordion" :key="bank_req.id" :class="{ 'active' : bank_req.bank_name + bank_req.id === chosenAccordion.bank_name + chosenAccordion.id }">{{ bank_req.bank_name + ' ' + bank_req.id }}</a>
                         </div>
-                        <div class="item flex-col">
-                            <div class="label">БИК</div>
-                            <input v-if="editMode" v-model="BIC" type="text" placeholder="000 000 000">
-                            <input v-else type="text" :value="BIC ? BIC : 'не заполнено'" readonly>
-                        </div>
-                        <div class="item flex-col">
-                            <div class="label">ИИК</div>
-                            <input v-if="editMode" v-model="IBAN" type="text" placeholder="KZ 1000 0000 0000 0000">
-                            <input v-else type="text" :value="IBAN ? IBAN : 'не заполнено'" readonly>
-                        </div>
-                        <div class="item flex-col">
-                            <div class="label">ИИК</div>
-                            <input v-if="editMode" v-model="CB " type="text" placeholder="template ?">
-                            <input v-else type="text" :value="CB  ? CB  : 'не заполнено'" readonly>
-                        </div>
+                        <div class="accordion-items">
+                            <div class="field-list flex-row">
+                                <div class="item flex-col">
+                                    <div class="label">Банк оплаты</div>
+                                    <input v-if="editMode" v-model="chosenAccordion.bank_name" type="text" placeholder="Выберите банк" >
+                                    <input v-else type="text" :value="chosenAccordion.bank_name ? chosenAccordion.bank_name : 'не заполнено'" readonly>
+                                </div>
+                                <div class="item flex-col">
+                                    <div class="label">БИК</div>
+                                    <input v-if="editMode" v-model="chosenAccordion.BIC" type="text" placeholder="000 000 000">
+                                    <input v-else type="text" :value="chosenAccordion.BIC ? chosenAccordion.BIC : 'не заполнено'" readonly>
+                                </div>
+                                <div class="item flex-col">
+                                    <div class="label">ИИК</div>
+                                    <input v-if="editMode" v-model="chosenAccordion.IBAN" type="text" placeholder="KZ 1000 0000 0000 0000">
+                                    <input v-else type="text" :value="chosenAccordion.IBAN ? chosenAccordion.IBAN : 'не заполнено'" readonly>
+                                </div>
+                                <div class="item flex-col">
+                                    <div class="label">CB</div>
+                                    <input v-if="editMode" v-model="chosenAccordion.CB " type="text" placeholder="template ?">
+                                    <input v-else type="text" :value="chosenAccordion.CB  ? chosenAccordion.CB  : 'не заполнено'" readonly>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
+
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
                     <div @click="postBankReq()" v-if="editMode" class="send-btn">Сохранить изменения</div>
                     <div @click="editMode = !editMode" v-if="!editMode" class="edit-btn">Изменить настройки</div>
+                    <div @click="addBankReq()" v-if="!editMode" class="new-btn">Добавить реквизиты</div>
                 </div>
             </div>
         </div>
@@ -54,29 +63,46 @@ export default {
     data(){
         return {
             editMode: false,
+            allAccordion: [],
+            chosenAccordion: '',
             bank_name: '',
             BIC: '',
             IBAN: '',
             CB: ''
         }
     },
+    mounted(){
+        this.allAccordion = JSON.parse(localStorage.getItem('xyzSessionAoUser')).bank_requisites
+        console.log(this.allAccordion)
+        this.chosenAccordion = this.allAccordion[0]
+    },
     methods: {
+        toggle(){
+            this.contentVisible = !this.contentVisible
+        },
         postBankReq(){
-            axios.post('/api/user/edit/bank/requisites?bank_name=' + this.bank_name + '&BIC=' + 
-                this.BIC + '&IBAN=' + this.IBAN + '&CB=' + this.CB + '&user_id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
+            axios.post('/api/user/edit/bank/requisites?bank_name=' + this.chosenAccordion.bank_name + '&BIC=' + 
+                this.chosenAccordion.BIC + '&IBAN=' + this.chosenAccordion.IBAN + '&CB=' + this.chosenAccordion.CB + '&user_id=' + JSON.parse(localStorage.getItem('xyzSessionAoUser')).id, null, {
                 headers: { 
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
                 },
-                })
+            })
             .then(res => {
-                alert('Вы успешно сменили реквизите')
+                alert('Вы успешно сменили/добавили реквизите')
+                let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                localStorage.removeItem('xyzSessionAoUser');
+                userSt.bank_requisites = res.data[1]
+                localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
                 location.reload()
-                console.log(res.data)
             })
             .catch(err => {
                 alert('Неизвестная ошибка')
                 console.log(err.data)
             });
+        },
+        addBankReq(){
+            this.chosenAccordion = {}
+            this.editMode = true
         }
     }
 }
@@ -99,9 +125,38 @@ export default {
                     border: 1px solid #DFE0EB;
                     border-radius: 6px;
                     height: 580px;
+                    .accordion{
+                        padding: 24px;
+                        .accordion-title{
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                            border: 1px solid #e6e6e6;
+                            background: #FDFDFD;
+                            overflow: hidden;
+                            a{
+                                // margin: 0 auto;
+                                text-align: center;
+                                border-right: 1px solid #e6e6e6;
+                                cursor: pointer;
+                                color: #06397D;
+                                padding: 6px 18px;
+                            }
+                            a:last-of-type{
+                                border-right: none;
+                            }
+                            a.active{
+                                background: #06397D;
+                                color: #FDFDFD;
+                            }
+                        }
+                    }
                     .field-list{
-                        padding: 32px 32px;
+                        padding: 24px;
                         flex-wrap: wrap;
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        border: 1px solid #e6e6e6;
+                        border-top: none;
                         .item{
                             width: 49%;
                             margin-bottom: 28px;
@@ -140,7 +195,7 @@ export default {
                             margin-left: 2%;
                         }
                     }
-                    .cancel-btn, .send-btn, .edit-btn{
+                    .cancel-btn, .send-btn, .edit-btn, .new-btn{
                         position: absolute;
                         bottom: 32px;
                         right: 32px;
@@ -156,7 +211,7 @@ export default {
                         box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
                         border-radius: 6px;
                     }
-                    .cancel-btn{
+                    .cancel-btn, .new-btn{
                         right: 300px;
                     }
                 }
