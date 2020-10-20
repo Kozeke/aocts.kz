@@ -14,7 +14,7 @@ class AgreementController extends Controller
         $input = $request->all();
 
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+            'application_id' => 'required',
             'business_index' => 'required',
             'address' => 'required',
             'access_road' => 'required',

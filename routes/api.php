@@ -32,6 +32,8 @@ Route::post('user/edit/bank/requisites','Api\BankRequisitesController@update');
 
 
 Route::get('regions','RegionController@all');
+Route::get('get/organization/type','TypeOfOrganizationController@all');
+
 Route::post('forgot/password', 'ForgotPasswordController@forgot');
 Route::get('forgot/password/get/code','ForgotPasswordController@getCode');
 Route::post('send/file','Api\UserDocumentController@saveContract');

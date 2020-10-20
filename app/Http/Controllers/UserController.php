@@ -19,17 +19,22 @@ class UserController extends Controller
     {
         $input = $request->all();
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|unique:users',
+            'name_of_company' => 'required',
+            'resident_of_RK' => 'required',
             'BIN' => 'required|unique:users',
             'manager_name' => 'required',
-            'manager_phone' => 'required|unique:users',
             'company_email' => 'required|email|unique:users',
-            'locality_id' => 'required',
-            'address' => 'required',
             'password' => 'required',
-            'document' => 'required',
+            'code' => 'required',
+            'country' => 'required',
+            'type_of_organization_id' => 'required',
+            'real_locality_id' => 'required',
+            'juridical_locality_id' => 'required',
+            'real_address' => 'required',
+            'juridical_address' => 'required',
+            'performer_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required|unique:users',
 
         ]);
         if ($validator->fails()) {
@@ -86,26 +91,34 @@ class UserController extends Controller
 //            if($exploded2[1]==='pdf'){
         $input['password'] = bcrypt($input['password']);
         $user = User::create([
-            "address" => $input["address"],
-            "manager_name" => $input["manager_name"],
-            "manager_phone" => $input["manager_phone"],
-            "company_email" => $input["company_email"],
+            "name_of_company" => $input["name_of_company"],
+            "resident_of_RK" => $input["resident_of_RK"],
             "BIN" => $input["BIN"],
-            "name" => $input["name"],
-            "phone" => $input["phone"],
+            "manager_name" => $input["manager_name"],
+            "company_email" => $input["company_email"],
             "password" => $input["password"],
+            "code" => $input["code"],
+            "country" => $input["country"],
+            "type_of_organization_id" => $input["type_of_organization_id"],
+            "real_locality_id" => $input["real_locality_id"],
+            "juridical_locality_id" => $input["juridical_locality_id"],
+            "real_address" => $input["real_address"],
+            "juridical_address" => $input["juridical_address"],
+            "performer_name" => $input["performer_name"],
             "email" => $input["email"],
-            "locality_id" => $input["locality_id"],
-            "role_id" => 2//role of user
+            "phone" => $input["phone"],
+            "approved" => 0, //false
         ]);
         UserDocument::create([
             'user_id' => $user->id,
-            'path' => $text
+            'path' => $text,
+            'title' =>$input['title'],
+            'status' => 0
         ]);
 //            }else{
 //                return response()->json(['image'], 422);
 //            }
-        $creds = $request->only(['email', 'password']);
+        $creds = $request->only(['BIN', 'password']);
         $token = auth()->attempt($creds);
         $success['user'] = $user;
         $success['token'] = $token;

@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(RolesSeeder::class);
         $this->call(RegionDistrictLocalitySeeder::class);
-      //  $this->call(AdminSeeder::class);
+        //$this->call(OrganizationType::class);
+
+        //  $this->call(AdminSeeder::class);
     }
 }
