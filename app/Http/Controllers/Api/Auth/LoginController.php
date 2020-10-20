@@ -28,7 +28,7 @@ class LoginController extends Controller
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
             return response()->json(['error'=> $e->getMessage()]);
         }
-        $me = User::where('id', auth()->user()->id)->with(['documents','agreements','bank_requisites','applications'])->get();
+        $me = User::where('id', auth()->user()->id)->with(['documents','bank_requisites','applications.agreements'])->get();
         return response()->json(['user'=>$me]);
     }
 
