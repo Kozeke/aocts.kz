@@ -35,7 +35,7 @@ class AgreementController extends Controller
             return response()->json(['error'=> $e->getMessage()]);
         }
         Agreement::create([
-            'user_id' => $request['user_id'],
+            'application_id' => $request['application_id'],
             'business_index' => $request['business_index'],
             'address' => $request['address'],
             'access_road' => $request['access_road'],
@@ -46,7 +46,8 @@ class AgreementController extends Controller
             'agreement_start_date' => $request['agreement_start_date'],
             'agreement_end_date' => $request['agreement_end_date'],
             'performer' => $request['performer'],
+            'company_name' => $request['company_name'],
         ]);
-        return response()->json(['aggrements', $user->agreements], 200);
+        return response()->json(['agreements', $user->agreements], 200);
     }
 }

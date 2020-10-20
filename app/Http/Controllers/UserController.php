@@ -116,21 +116,5 @@ class UserController extends Controller
 
 
 
-    public function changePassword(Request $request)
-    {
 
-        $current_password = User::where('id',$request['id'])->pluck('password');
-        if (Hash::check($request['current_password'], $current_password[0])) {
-            $user_id = $request['id'];
-            $obj_user = User::find($user_id);
-            $obj_user->password = bcrypt($request->get('new_password'));
-            $obj_user->save();
-            return response()->json(['success', 200]);
-        } else {
-            $error = array('current_password' => 'Please enter correct current password');
-            return response()->json(array('error' => $error), 400);
-
-
-        }
-    }
 }

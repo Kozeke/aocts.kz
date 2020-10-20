@@ -10,4 +10,7 @@ class Application extends Model
         'user_id', 'station', 'access_road','dead_end','wagon_turnover_per_year','wagon_turnover_per_month',
         'access_road_grant_date','status','performer'
     ];
+    public function agreements(){
+        return $this->hasMany('App\Agreement');
+    }
 }

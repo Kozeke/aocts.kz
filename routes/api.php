@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('register', 'UserController@register');
 Route::get('user/data', 'Api\Auth\LoginController@me');
-Route::post('user/change/password', 'UserController@changePassword');
+Route::post('user/change/password', 'Api\Auth\LoginController@changePassword');
 Route::delete('user/delete/document', 'Api\UserDocumentController@deleteDocument');
 
 //edit personal information

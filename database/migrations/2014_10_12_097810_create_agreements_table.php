@@ -15,8 +15,8 @@ class CreateAgreementsTable extends Migration
     {
         Schema::create('agreements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('application_id')->unsigned();
+            $table->foreign('application_id')->references('id')->on('applications')->onDelete('cascade');
             $table->string('business_index');
             $table->string('address');
             $table->string('access_road');
@@ -27,6 +27,7 @@ class CreateAgreementsTable extends Migration
             $table->date('agreement_start_date');
             $table->date('agreement_end_date');
             $table->string('performer')->nullable();
+            $table->string('company_name')->nullable();
             $table->timestamps();
         });
     }
