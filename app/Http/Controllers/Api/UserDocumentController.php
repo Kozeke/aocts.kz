@@ -35,21 +35,18 @@ class UserDocumentController extends Controller
         if ($file->getClientOriginalExtension() === "pdf") {
             $url = Storage::putFile('public/user_documents', new File($file));
             $text = url('/') . '/storage/app/public/' . substr($url, 7);
-            return response()->json(['success'], 200);
 
         } else {
             return response()->json(['document'], 422);
         }
-        UserDocument::create([
-            'user_id' => $user->id,
-            'path' => $text,
-            'title' =>$input['title'],
-            'status' => 0
-        ]);
+
         $document = UserDocument::find($request['id']);
         $document->path = $text;
         $document->title = $request['title'];
         $document->status = 0;
+        $document->save();
+        return response()->json(['success', 'document'=>$document], 200);
+
     }
 
     public function saveContract(Request $request){
