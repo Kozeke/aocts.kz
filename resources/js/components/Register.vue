@@ -780,7 +780,8 @@ export default {
             console.log(data)
             axios.post('/api/register', data, {
                 headers: { 
-                    'Content-Type' : 'multipart/form-data'
+                    'Content-Type' : 'multipart/form-data',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             })
             .then(res => {

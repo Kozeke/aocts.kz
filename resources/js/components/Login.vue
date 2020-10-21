@@ -118,7 +118,11 @@ export default {
       };
 
       axios
-        .post("/api/login", data)
+        .post("/api/login", data, {
+          headers: { 
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        })
         .then(res => {
           localStorage.setItem('xyzSessionAo', JSON.stringify(res.data));
           this.$router.push({ name : 'profile' })
