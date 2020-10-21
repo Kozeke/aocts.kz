@@ -5,15 +5,16 @@
       <div class="login-text">
         <div class="head">С Возвращением!</div>
         <div class="input-form flex-col">
-          <label class="label">Электронная почта</label>
+          <label class="label">БИН/ИНН</label>
           <input
             v-on:keyup="validateForm($event)"
-            v-model="email"
-            type="text"
-            id="email"
-            placeholder="Введите ваш электронный адрес"
+            v-model="BIN"
+            name="BIN" 
+            oninput="validity.valid||(value='');" 
+            v-mask="'############'" 
+            placeholder="Введите 12 значный код"
           />
-          <div class="err" id="err-email">
+          <div class="err" id="err-BIN">
             <svg
               width="4"
               height="13"
@@ -72,20 +73,21 @@ import axios from "axios"
 export default {
   data() {
     return {
-      email: "",
+      BIN: "",
       password: "",
       errors: ""
     };
   },
   methods: {
     validateForm(e) {
-      const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (e.target.id === "email") {
-        if (!pattern.test(String(e.target.value).toLowerCase())) {
-          document.getElementById("err-email").style.visibility = "visible";
+      // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (e.target.id === "BIN") {
+        // if (!pattern.test(String(e.target.value).toLowerCase())) {
+          if (String(e.target.value).length === 0) {
+          document.getElementById("err-BIN").style.visibility = "visible";
           e.srcElement.classList.add("error");
         } else {
-          document.getElementById("err-email").style.visibility = "hidden";
+          document.getElementById("err-BIN").style.visibility = "hidden";
           e.srcElement.classList.remove("error");
         }
       }
@@ -100,9 +102,9 @@ export default {
       }
     },
     logIn() {
-      if (this.email === "") {
-        document.getElementById("err-email").style.visibility = "visible";
-        document.getElementById("email").classList.add("error");
+      if (this.BIN === "") {
+        document.getElementById("err-BIN").style.visibility = "visible";
+        document.getElementById("BIN").classList.add("error");
         return;
       }
       if (this.password === "") {
@@ -111,7 +113,7 @@ export default {
         return;
       }
       var data = {
-        email: this.email,
+        BIN: this.BIN,
         password: this.password
       };
 

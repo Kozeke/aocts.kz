@@ -31,9 +31,9 @@
                             </div>
                             <div class="status">Статус</div>
                         </div>
-                        <div v-for="i in 5" :key="i" class="item-list">
+                        <div v-for="i in deals" :key="i.id" class="item-list">
                             <div class="item flex-row">
-                                <div class="index">{{ i }}</div>
+                                <div class="index">{{ i.id }}</div>
                                 <div @click="showAccordian(i)" class="name flex-row">
                                     №ЦТС-2019/02-41 
                                     <svg style="margin: 6px 0 0 4px" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,7 @@
                 <div v-if="modalPage === 2" class="field-list flex-row">
                     <div style="margin-bottom: 200px" class="item flex-col">
                         <div class="label">БИН/ИНН</div>
-                        <input v-model="BIN" type="text" placeholder="000 000 000 000" >
+                        <input v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'############'"  placeholder="000 000 000 000" >
                     </div>
                 </div>
                 <div v-if="modalPage === 1" @click="modalPage = 2" class="done-btn">Вперёд</div>
@@ -134,6 +134,7 @@ export default {
         return {
             modalNewDeal: false,
             modalPage: 1,
+            deals: [],
             name: '',
             performer: '',
             station: '',
@@ -147,6 +148,7 @@ export default {
     },
     mounted(){
         this.name = JSON.parse(localStorage.getItem('xyzSessionAoUser')).name
+        this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
     },
     methods: {
         showAccordian( index ){
@@ -175,9 +177,12 @@ export default {
                 })
                 .then(res => {
                     console.log(res.data)
-                    alert('Ваша заявка успешно отрпалена')
-                    this.modalPage = 1
-                    this.modalNewDeal = false
+                    alert('Ваша заявка успешно от отправлена')
+                    let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                    localStorage.removeItem('xyzSessionAoUser');
+                    userSt.applications = res.data[1]
+                    localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+                    location.reload()
                 }).catch(err => {
                     console.log(err.data)
             })
