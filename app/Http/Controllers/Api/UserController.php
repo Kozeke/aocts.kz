@@ -25,7 +25,7 @@ class UserController extends Controller
             'company_email' => 'required|email|unique:users,company_email,'.$request['id'],
             'id' => 'required',
             'name_of_company' => 'required',
-            'type_of_organization_id' => 'required'
+            'type_of_agency' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
@@ -36,7 +36,7 @@ class UserController extends Controller
             return response()->json(['error'=> $e->getMessage()]);
         }
         $user = User::findOrFail($request['id']);
-        $user->type_of_organization_id = $request['type_of_organization_id'];
+        $user->type_of_agency = $request['type_of_agency'];
         $user->BIN = $request['BIN'];
         $user->name_of_company = $request['name_of_company'];
         $user->juridical_locality_id = $request['juridical_locality_id'];

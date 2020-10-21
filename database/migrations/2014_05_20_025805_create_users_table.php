@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->foreign('juridical_locality_id')->references('id')->on('localities');
             $table->string('real_address')->nullable();
             $table->string('juridical_address')->nullable();
+            $table->string('type_of_agency')->nullable();
             $table->string('performer_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
