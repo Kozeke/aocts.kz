@@ -53,7 +53,6 @@ class UserController extends Controller
 
     public function updateContacts(Request $request)
     {
-        $validated = $request->validated();
 
         $validator = Validator::make($request->all(), [
             'id' => 'required',
