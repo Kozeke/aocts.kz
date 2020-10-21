@@ -25,6 +25,7 @@ Route::post('user/change/password', 'Api\Auth\LoginController@changePassword');
 //document
 Route::delete('user/delete/document', 'Api\UserDocumentController@deleteDocument');
 Route::post('user/update/document', 'Api\UserDocumentController@updateDocument');
+Route::post('user/add/document', 'Api\UserDocumentController@addDocument');
 
 //edit personal information
 Route::post('user/edit/main','Api\UserController@updateMain');

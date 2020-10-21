@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Storage;
 use Illuminate\Http\File;
 use App\UserDocument;
+use Validator;
 
 class UserDocumentController extends Controller
 {
@@ -46,6 +47,38 @@ class UserDocumentController extends Controller
         $document->status = 0;
         $document->save();
         return response()->json(['success', 'document'=>$document], 200);
+
+    }
+    public function addDocument(Request $request){
+        $validator = Validator::make($request->all(), [
+            'document' => 'required',
+            'title' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
+            return response()->json(['error'=> $e->getMessage()]);
+        }
+
+        $file = $request->file('document');
+        if ($file->getClientOriginalExtension() === "pdf") {
+            $url = Storage::putFile('public/user_documents', new File($file));
+            $text = url('/') . '/storage/app/public/' . substr($url, 7);
+
+        } else {
+            return response()->json(['document'], 422);
+        }
+        $document = UserDocument::create([
+            'user_id' => $user->id,
+            'path' => $text,
+            'title' =>$request['title'],
+            'status' => 0
+        ]);
+
+        return response()->json(['document'=>$document], 200);
 
     }
 
