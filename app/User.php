@@ -44,6 +44,12 @@ class User extends Authenticatable implements JWTSubject
     public function bank_requisites(){
         return $this->hasMany('App\BankRequisites');
     }
+    public function juridical_locality(){
+        return $this->belongsTo('App\Locality','juridical_locality_id');
+    }
+    public function real_locality(){
+        return $this->belongsTo('App\Locality','real_locality_id');
+    }
     /**
      * The attributes that should be cast to native types.
      *
