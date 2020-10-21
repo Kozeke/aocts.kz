@@ -21,8 +21,8 @@ class UserController extends Controller
             'real_locality_id' => 'required',
             'real_address' => 'required',
             'juridical_address' => 'required',
-            'BIN' => 'required  ',
-            'company_email' => 'required|email|unique:users',
+            'BIN' => 'required|unique:users,BIN,'.$request['id'],
+            'company_email' => 'required|email|unique:users,company_email,'.$request['id'],
             'id' => 'required',
             'name_of_company' => 'required',
             'type_of_organization_id' => 'required'
@@ -53,11 +53,13 @@ class UserController extends Controller
 
     public function updateContacts(Request $request)
     {
+        $validated = $request->validated();
+
         $validator = Validator::make($request->all(), [
             'id' => 'required',
             'manager_name' => 'required',
-            'phone' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
+            'phone' => 'required|unique:users,phone,'.$request['id'],
+            'email' => 'required|email|unique:users,email,'.$request['id'],
             'performer_name' => 'required'
         ]);
         if ($validator->fails()) {

@@ -25,6 +25,8 @@ class CreateApplicationsTable extends Migration
             $table->unsignedBigInteger('wagon_turnover_per_year');
             $table->date('access_road_grant_date');
             $table->unsignedBigInteger('status');
+            $table->unsignedBigInteger('payment')->nullable();
+            $table->unsignedBigInteger('payment_balance')->nullable();
             $table->timestamps();
         });
     }
