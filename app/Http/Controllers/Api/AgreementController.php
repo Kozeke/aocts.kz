@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Agreement;
@@ -34,7 +35,7 @@ class AgreementController extends Controller
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
             return response()->json(['error'=> $e->getMessage()]);
         }
-        Agreement::create([
+        $agreement = Agreement::create([
             'application_id' => $request['application_id'],
             'business_index' => $request['business_index'],
             'address' => $request['address'],
@@ -48,6 +49,6 @@ class AgreementController extends Controller
             'performer' => $request['performer'],
             'company_name' => $request['company_name'],
         ]);
-        return response()->json(['agreements', $user->agreements], 200);
+        return response()->json(['agreements', $agreement], 200);
     }
 }
