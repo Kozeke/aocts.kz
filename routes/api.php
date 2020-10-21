@@ -22,7 +22,9 @@ Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('register', 'UserController@register');
 Route::get('user/data', 'Api\Auth\LoginController@me');
 Route::post('user/change/password', 'Api\Auth\LoginController@changePassword');
+//document
 Route::delete('user/delete/document', 'Api\UserDocumentController@deleteDocument');
+Route::post('user/update/document', 'Api\UserDocumentController@updateDocument');
 
 //edit personal information
 Route::post('user/edit/main','Api\UserController@updateMain');

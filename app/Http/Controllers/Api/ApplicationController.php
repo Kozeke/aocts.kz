@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Validator;
 use App\Application;
 
@@ -49,7 +50,8 @@ class ApplicationController extends Controller
             'performer' => $request['performer'],
             'status' =>0
         ]);
-        return response()->json(['applications', $user->applications], 200);
+        $applications = Application::where('user_id',$request['user_id'])->with('agreements')->get();
+        return response()->json(['applications', $applications], 200);
 
     }
 
