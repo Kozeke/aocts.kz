@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('company_email')->unique();
             $table->string('password');
             $table->string('code');
-            $table->string('country');
+            $table->string('country')->nullable();
             $table->unsignedBigInteger('type_of_organization_id')->nullable();
             $table->foreign('type_of_organization_id')->references('id')->on('type_of_organizations');
             $table->unsignedBigInteger('real_locality_id')->nullable();

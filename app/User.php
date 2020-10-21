@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
         'name_of_company', 'resident_of_RK','BIN', 'manager_name','company_email','password','code',
         'country','type_of_organization_id','real_locality_id','juridical_locality_id',
         'real_address','juridical_address','performer_name','email',
-        'phone','approved'
+        'phone','approved','type_of_agency'
     ];
 
     /**
@@ -52,6 +52,7 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function getJWTIdentifier()
     {

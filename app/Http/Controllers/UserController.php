@@ -33,6 +33,7 @@ class UserController extends Controller
             'real_address' => 'required',
             'juridical_address' => 'required',
             'performer_name' => 'required',
+            'type_of_agency' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users',
 
@@ -107,6 +108,7 @@ class UserController extends Controller
             "performer_name" => $input["performer_name"],
             "email" => $input["email"],
             "phone" => $input["phone"],
+            "type_of_agency" => $input["type_of_agency"],
             "approved" => 0, //false
         ]);
         UserDocument::create([
