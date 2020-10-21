@@ -96,7 +96,8 @@
                     </div>
                     <div class="item flex-col">
                         <div class="label">Дата предоставления подъездного пути</div>
-                        <input v-model="access_road_grant_date" type="text" placeholder="YYYY-MM-DD">
+                        <datepicker v-model="access_road_grant_date" :disabledDates="{ to: new Date(Date.now() - 8640000) }" :placeholder="'2020-01-01'" :language="ru" format="yyyy-MM-dd"></datepicker> 
+                        <!-- <input v-model="access_road_grant_date" type="text" placeholder="YYYY-MM-DD"> -->
                     </div>
                     <div class="item flex-col">
                         <div class="label">Планируемый вагонооборот в месяц</div>
@@ -123,12 +124,15 @@
 <script>
 import UserSide from '../UserSide'
 import UserNav from '../UserNav'
+import Datepicker from 'vuejs-datepicker';
+import {ru} from 'vuejs-datepicker/dist/locale'
 import axios from 'axios'
 
 export default {
     components: {
         UserSide,
-        UserNav
+        UserNav,
+        Datepicker
     },
     data(){
         return {
@@ -160,6 +164,16 @@ export default {
             }
         },
         postDeal(){
+            let now =  this.access_road_grant_date
+            let month  = String(Number(now.getMonth() + 1));
+            let date = String(now.getDate())
+            if(month.length === 1){
+                month = '0' + month
+            }
+            if(date.length === 1){
+                date = '0' + date
+            }
+            this.access_road_grant_date = now.getFullYear() + '-' + month + '-' + date
             axios.post('/api/create/application', null, {
                 headers: { 
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token

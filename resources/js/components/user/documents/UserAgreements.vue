@@ -89,8 +89,14 @@
                             <input v-model="size_of_the_simultaneous_supply_of_wagons" type="text" placeholder="Введите размер одновременной подачи вагонов">
                         </div>
                         <div class="item flex-col">
-                            <div class="label">Срок соглашения</div>
-                            <input v-model="agreement_dates" type="text" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                            <div class="label">Срок начало соглашения</div>
+                            <datepicker v-model="agreement_start_date" :disabledDates="{ to: new Date(Date.now() - 8640000) }" :placeholder="'2020-01-01'" :language="ru" format="yyyy-MM-dd"></datepicker> 
+                            <!-- <input v-model="agreement_dates" type="text" placeholder="YYYY-MM-DD"> -->
+                        </div>
+                        <div class="item flex-col">
+                            <div class="label">Срок окончания соглашения</div>
+                            <datepicker v-model="agreement_end_date" :disabledDates="{ to: new Date(Date.now() - 8640000) }" :placeholder="'2020-01-01'" :language="ru" format="yyyy-MM-dd"></datepicker> 
+                            <!-- <input v-model="agreement_dates" type="text" placeholder="YYYY-MM-DD"> -->
                         </div>
                     </div>
                     <div v-if="modalPage === 2" class="field-list flex-row">
@@ -152,13 +158,16 @@
 import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserDocumentsRouter from './UserDocumentsRoute'
+import Datepicker from 'vuejs-datepicker';
+import {ru} from 'vuejs-datepicker/dist/locale'
 import axios from 'axios'
 
 export default {
     components: {
         UserSide,
         UserNav,
-        UserDocumentsRouter
+        UserDocumentsRouter,
+        Datepicker
     },
     data(){
         return {
@@ -196,8 +205,27 @@ export default {
     },
     methods: {
         postAgeement(){
-            this.agreement_start_date = this.agreement_dates.substring(0,10)
-            this.agreement_end_date = this.agreement_dates.substring(13,23)
+            let now =  this.agreement_start_date
+            let month  = String(Number(now.getMonth() + 1));
+            let date = String(now.getDate())
+            if(month.length === 1){
+                month = '0' + month
+            }
+            if(date.length === 1){
+                date = '0' + date
+            }
+            this.agreement_start_date = now.getFullYear() + '-' + month + '-' + date
+            now =  this.agreement_end_date
+            month  = String(Number(now.getMonth() + 1));
+            date = String(now.getDate())
+            if(month.length === 1){
+                month = '0' + month
+            }
+            if(date.length === 1){
+                date = '0' + date
+            }
+            this.agreement_end_date = now.getFullYear() + '-' + month + '-' + date
+
             axios.post('/api/create/agreement', null, {
                 headers: { 
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token

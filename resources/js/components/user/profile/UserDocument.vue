@@ -72,12 +72,14 @@
                         <path d="M64.0353 19.281L46.92 1.06666C45.5834 -0.355555 43.4164 -0.355555 42.0798 1.06666L24.9643 19.281C23.6509 20.7282 23.6886 23.0343 25.0485 24.432C26.3751 25.7955 28.4781 25.7955 29.8047 24.432L41.077 12.4359V72.857C41.077 74.869 42.6095 76.5 44.5001 76.5C46.3907 76.5 47.9232 74.869 47.9232 72.857V12.4361L59.1955 24.4322C60.5554 25.8299 62.7224 25.7898 64.0357 24.3426C65.3166 22.9308 65.3166 20.6928 64.0353 19.281Z" fill="#4985FF"/>
                     </svg>
                     <div class="label">
-                        <p>
+                        <p v-if="fileData">{{ fileData }}</p>
+                        <p v-else>
                         Перетащите файлы сюда<br>
-                        или <span>выберите (прикрепить файл)</span></p>
+                        или <span>выберите (прикрепить файл)</span>
+                        </p>
                     </div>
                 </div>
-                <input type="file" class="input-file">
+                <input @change="onFileChange()" type="file" class="input-file">
             </div>
         </div>
     </div>
@@ -99,7 +101,8 @@ export default {
     data(){
         return {
             modalAddDoc: false,
-            documents: ''
+            documents: '',
+            fileData: ''
         }
     },
     mounted(){
@@ -109,6 +112,33 @@ export default {
     methods:{
         showOption(index){
             document.getElementById('option-' + index).style.display = "flex";
+        },
+        onFileChange(){
+            var fileData =  event.target.files[0];
+            this.fileData=fileData.name;
+            let data = new FormData();
+                
+            data.append("title", fileData.name)
+            data.append("document", event.target.files[0])
+            
+            axios.post('/api/user/add/document', data, {
+                    headers: { 
+                        'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                    }
+                })
+            .then(res => {
+                alert('Вы успешно добавили файл')
+                let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                localStorage.removeItem('xyzSessionAoUser');
+                userSt.documents.push( res.data.document )
+                localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+                location.reload()
+            })
+            .catch(err => {
+                alert('Неизвестная ошибка')
+                // location.reload()
+                console.log(err.data)
+            });
         }
     }
 }
@@ -282,6 +312,8 @@ export default {
                     border: 1px dashed #4985FF;
                     border-radius: 6px;
                     padding: 64px 180px;
+                    height: 314px;
+                    width: 643px;
                     svg{
                         text-align: center;
                         margin: 0 auto;
@@ -305,8 +337,8 @@ export default {
                 }
                 .input-file{
                     position: absolute;
-                    background: red;
                     z-index: 99;
+                    opacity: 0;
                     height: 314px;
                     width: 643px;
                 }
