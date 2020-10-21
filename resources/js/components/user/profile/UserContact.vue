@@ -83,12 +83,10 @@ export default {
             })
                 .then(res => {
                 console.log(res.data)
-                // alert('Ваша заявка успешно от отправлена')
-                // let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
-                // localStorage.removeItem('xyzSessionAoUser');
-                // userSt.applications = res.data[1]
-                // localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
-                // location.reload()
+                alert('Ваши данные успешно сохранены')
+                localStorage.removeItem('xyzSessionAoUser');
+                localStorage.setItem('xyzSessionAoUser', JSON.stringify(res.data[1][0]));
+                location.reload()
             }).catch(err => {
                 console.log(err.data)
             })

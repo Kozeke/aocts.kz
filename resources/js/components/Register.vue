@@ -229,7 +229,7 @@
                     </div>
                 <div class="input-form flex-col">
                     <label class="label">Вид деятельности</label>
-                    <input v-bind:class="{ 'error' : errors.title }" v-on:keyup="validateForm($event)" v-model="title" name="title" type="text" placeholder="Введите ваш вид деятельности">
+                    <input v-bind:class="{ 'error' : errors.type_of_agency }" v-on:keyup="validateForm($event)" v-model="type_of_agency" name="type_of_agency" type="text" placeholder="Введите ваш вид деятельности">
                     <!-- <span v-if="errors.address" id="err-text-address" class="err-text">{{ errors.address[0] }}</span>
                     <div :style="{ 'visibility' : errors.address ? 'visible' : 'hidden' }" class="err" id="err-address">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -507,6 +507,7 @@ export default {
             code: '',
             type_of_organization_id: 'Выберите тип организации',
             title: '',
+            type_of_agency: '',
             document: '',
             docs: [],
             performer_name: '',
@@ -751,7 +752,8 @@ export default {
             data.append("type_of_organization_id", this.type_of_organization_id)
             data.append("performer_name", this.performer_name)
             data.append("phone", this.phone)
-            data.append("title", this.title)
+            data.append("type_of_agency", this.type_of_agency)
+            data.append("title", 'title')
             data.append("email", this.email)
             data.append("real_locality_id", real_city.id)
             data.append("juridical_locality_id", juridical_city.id)

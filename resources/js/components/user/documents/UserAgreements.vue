@@ -26,21 +26,23 @@
                                 </div>
                                 <div class="status">Статус</div>
                             </div>
-                            <div v-for="i in deals[0].agreements" :key="i.id" class="item-list">
-                                <div class="item flex-row">
-                                    <div class="index">{{ i.id }}</div>
-                                    <div class="name flex-row">
-                                        №ЦТС-2019/02-41
-                                    </div>
-                                    <div class="date flex-col">
-                                        <div class="day">Июнь 1, 2020</div>
-                                        <div class="time">19:23</div>
-                                    </div>
-                                     <div class="status">ОДОБРЕНО</div>
-                                    <div class="setting">
-                                        <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
-                                        </svg>
+                            <div v-if="allAgreements">
+                                <div v-for="i in allAgreements" :key="i.id" class="item-list">
+                                    <div class="item flex-row">
+                                        <div class="index">{{ i.id }}</div>
+                                        <div class="name flex-row">
+                                            №ЦТС-2019/02-41
+                                        </div>
+                                        <div class="date flex-col">
+                                            <div class="day">Июнь 1, 2020</div>
+                                            <div class="time">19:23</div>
+                                        </div>
+                                        <div class="status">ОДОБРЕНО</div>
+                                        <div class="setting">
+                                            <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -163,6 +165,7 @@ export default {
             modalNewDoc: false,
             modalPage: 1,
             agreement_check: false,
+            allAgreements: [],
             deals: [],
             application_id: '',
             business_index: null,
@@ -183,6 +186,13 @@ export default {
     mounted(){
         this.BIN = JSON.parse(localStorage.getItem('xyzSessionAoUser')).BIN
         this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
+        this.deals.forEach( deal => {
+            if( deal.agreements ){
+                deal.agreements.forEach( item => {
+                    this.allAgreements.push(item)
+                })
+            }
+        })
     },
     methods: {
         postAgeement(){
@@ -211,14 +221,14 @@ export default {
             .then(res => {
                 console.log(res.data)
                 alert('Ваша заявка успешно отрпалена')
-                // let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
-                // localStorage.removeItem('xyzSessionAoUser');
-                // userSt.applications.forEach( item => {
-                //     if( item.id === this.application_id ){
-                //         item.agreements.append( res.data[1] )
-                //     }
-                // })
-                // localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+                let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                localStorage.removeItem('xyzSessionAoUser');
+                userSt.applications.forEach( item => {
+                    if( item.id === this.application_id ){
+                        item.agreements.push( res.data[1] )
+                    }
+                })
+                localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
                 location.reload()
             }).catch(err => {
                 console.log(err.data)

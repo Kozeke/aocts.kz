@@ -73,7 +73,6 @@ export default {
     },
     mounted(){
         this.allAccordion = JSON.parse(localStorage.getItem('xyzSessionAoUser')).bank_requisites
-        console.log(this.allAccordion)
         this.chosenAccordion = this.allAccordion[0]
     },
     methods: {

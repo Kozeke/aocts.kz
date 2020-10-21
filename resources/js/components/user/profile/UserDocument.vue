@@ -13,19 +13,19 @@
                             <div class="date">Дата изменения</div>
                             <div class="status">Статус</div>
                         </div>
-                        <div v-for="i in 5" :key="i" class="item flex-row">
+                        <div v-for="doc in documents" :key="doc.id" class="item flex-row">
                             <div class="name">Свидетельство гос. Регистрации.pdf</div>
                             <div class="date flex-col">
                                 <div class="day">Июнь 1, 2020</div>
                                 <div class="time">19:23</div>
                             </div>
                             <div class="status">подтвержден</div>
-                            <div @click="showOption(i)" class="setting">
+                            <div @click="showOption(doc.id)" class="setting">
                                 <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
                                 </svg>
                             </div>
-                            <div :id="'option-' + i" class="options flex-col">
+                            <div :id="'option-' + doc.id" class="options flex-col">
                                 <div class="option flex-row">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 9.50035V12H2.49965L9.87196 4.62769L7.37231 2.12804L0 9.50035ZM11.805 2.69463C12.065 2.43466 12.065 2.01472 11.805 1.75476L10.2452 0.194973C9.98528 -0.064991 9.56534 -0.064991 9.30537 0.194973L8.08554 1.4148L10.5852 3.91446L11.805 2.69463Z" fill="#4985FF"/>
@@ -77,6 +77,7 @@
                         или <span>выберите (прикрепить файл)</span></p>
                     </div>
                 </div>
+                <input type="file" class="input-file">
             </div>
         </div>
     </div>
@@ -86,6 +87,7 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
+import axios from "axios"
 
 export default {
     components: {
@@ -96,8 +98,13 @@ export default {
     },
     data(){
         return {
-            modalAddDoc: false
+            modalAddDoc: false,
+            documents: ''
         }
+    },
+    mounted(){
+        this.documents = JSON.parse(localStorage.getItem('xyzSessionAoUser')).documents
+        console.log(this.documents)
     },
     methods:{
         showOption(index){
@@ -144,10 +151,10 @@ export default {
                                 margin-left: 2%;
                             }
                             .name{
-                                width: 40%;
+                                width: 36%;
                             }
                             .date{
-                                width: 24%;
+                                width: 28%;
                             }
                             .status{
                                 width: 30%;
@@ -171,14 +178,14 @@ export default {
                                 margin-left: 2%;
                             }
                             .name{
-                                width: 40%;
+                                width: 36%;
                                 text-overflow: ellipsis;
                                 overflow: hidden; 
                                 white-space: nowrap;
                             }
                             .date{
                                 margin-left: 2%;
-                                width: 24%;
+                                width: 28%;
                                 .time{
                                     font-weight: normal;
                                     font-size: 12px;
@@ -295,6 +302,13 @@ export default {
                             color: #4985FF;
                         }
                     }
+                }
+                .input-file{
+                    position: absolute;
+                    background: red;
+                    z-index: 99;
+                    height: 314px;
+                    width: 643px;
                 }
             }
         }

@@ -15,13 +15,13 @@
                         </div>
                         <div class="item flex-col">
                             <div class="label">Название компании</div>
-                            <input v-if="editMode" type="text" placeholder="Some company.">
-                            <input v-else type="text" value="Some company." readonly>
+                            <input v-if="editMode" v-model="userData.name_of_company" type="text" placeholder="Some company.">
+                            <input v-else type="text" :value="userData.name_of_company" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Вид деятельности</div>
-                            <input v-if="editMode" type="text" placeholder="Информационные Технологии">
-                            <input v-else type="text" value="Информационные Технологии" readonly>
+                            <input v-if="editMode" v-model="userData.type_of_agency" type="text" placeholder="Информационные Технологии">
+                            <input v-else type="text" :value="userData.type_of_agency" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Электронная почта компании</div>
@@ -30,17 +30,17 @@
                         </div>
                         <div class="item flex-col">
                             <div class="label">Фактический адрес компании</div>
-                            <input v-model="userData.address" @click="modalActualAddress = true" v-if="editMode" type="text" placeholder="г. Караганда, ул. Шахтеров">
-                            <input v-else type="text" :value="userData.address" readonly>
+                            <input v-model="real_address" @click="modalActualAddress = true" v-if="editMode" type="text" placeholder="г. Караганда, ул. Шахтеров" readonly>
+                            <input v-else type="text" :value="real_address" readonly>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Юридический адрес компании</div>
-                            <input v-model="userData.address" @click="modalLegalAddress = true" v-if="editMode" type="text" placeholder="г. Нур-Султан, ул. Достык">
-                            <input v-else type="text" :value="userData.address" readonly>
+                            <input v-model="juridical_address" @click="modalLegalAddress = true" v-if="editMode" type="text" placeholder="г. Нур-Султан, ул. Достык" readonly>
+                            <input v-else type="text" :value="juridical_address" readonly>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
-                    <div @click="editMode = !editMode" v-if="editMode" class="send-btn">Отправить запрос на изменение данных</div>
+                    <div @click="postProfileChange()" v-if="editMode" class="send-btn">Отправить запрос на изменение данных</div>
                     <div @click="editMode = !editMode" v-if="!editMode" class="edit-btn">Изменить настройки</div>
                 </div>
             </div>
@@ -54,21 +54,66 @@
                     </svg>
                 </div>
                 <div class="field-list flex-row">
-                    <div class="item flex-col">
-                        <div class="label">Страна</div>
-                        <input type="text" placeholder="Выберите страну" >
+                    <div class="input-form flex-col">
+                        <label class="label">Выберите регион</label>
+                        <select @change="validateForm($event)" name="real_selected_region" class="input-form" v-model="real_selected_region">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions" :value="region.id" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_region">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
-                    <div class="item flex-col">
-                        <div class="label">Регион</div>
-                        <input type="text" placeholder="Выберите регион">
+                    <div class="input-form flex-col">
+                        <label class="label">Выберите город</label>
+                        <select @change="validateForm($event)" name="real_selected_district" v-if="real_selected_region !== 'Выберите'" class="input-form" v-model="real_selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions.find(x => x.id === real_selected_region).localities" :value="region" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                            <option v-for="region in regions.find(x => x.id === real_selected_region).districts" :value="region" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <select v-else class="input-form not-selected" v-model="real_selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                        </select>
+                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_district">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
-                    <div class="item flex-col">
-                        <div class="label">Город</div>
-                        <input type="text" placeholder="Выберите город">
+                    <div v-if="real_selected_district.is_city !== 1" class="input-form flex-col">
+                        <label class="label">Выберите район</label>
+                        <select @change="validateForm($event)" name="selected_locality" v-if="real_selected_district !== 'Выберите' || real_selected_district.is_city === 0" class="input-form" v-model="real_selected_locality">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions.find(x => x.id === real_selected_region).districts.find(x => x.id === real_selected_district.id).localities" :value="region" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <select v-else class="input-form not-selected" v-model="real_selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                        </select>
+                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_locality">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
-                    <div class="item flex-col">
-                        <div class="label">Адрес</div>
-                        <input type="text" placeholder="Введите адрес (офис, каб)">
+                    <div class="input-form flex-col">
+                        <label class="label">Адрес</label>
+                        <input v-on:keyup="validateForm($event)" v-model="real_address" name="real_address" type="text" placeholder="Введите адрес (офис, каб)">
+                        <!-- <span v-if="errors.address" id="err-text-address" class="err-text">{{ errors.address[0] }}</span>
+                        <div :style="{ 'visibility' : errors.address ? 'visible' : 'hidden' }" class="err" id="err-address">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
                 </div>
                 <div @click="modalActualAddress = false" class="done-btn">Готово</div>
@@ -83,24 +128,69 @@
                     </svg>
                 </div>
                 <div class="field-list flex-row">
-                    <div class="item flex-col">
-                        <div class="label">Страна</div>
-                        <input type="text" placeholder="Выберите страну" >
+                    <div class="input-form flex-col">
+                        <label class="label">Выберите регион</label>
+                        <select @change="validateForm($event)" name="juridical_selected_region" class="input-form" v-model="juridical_selected_region">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions" :value="region.id" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_region">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
-                    <div class="item flex-col">
-                        <div class="label">Регион</div>
-                        <input type="text" placeholder="Выберите регион">
+                    <div class="input-form flex-col">
+                        <label class="label">Выберите город</label>
+                        <select @change="validateForm($event)" name="juridical_selected_district" v-if="juridical_selected_region !== 'Выберите'" class="input-form" v-model="juridical_selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions.find(x => x.id === juridical_selected_region).localities" :value="region" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                            <option v-for="region in regions.find(x => x.id === juridical_selected_region).districts" :value="region" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <select v-else class="input-form not-selected" v-model="juridical_selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                        </select>
+                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_district">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
-                    <div class="item flex-col">
-                        <div class="label">Город</div>
-                        <input type="text" placeholder="Выберите город">
+                    <div v-if="juridical_selected_district.is_city !== 1" class="input-form flex-col">
+                        <label class="label">Выберите район</label>
+                        <select @change="validateForm($event)" name="selected_locality" v-if="juridical_selected_district !== 'Выберите' || juridical_selected_district.is_city === 0" class="input-form" v-model="juridical_selected_locality">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="region in regions.find(x => x.id === juridical_selected_region).districts.find(x => x.id === juridical_selected_district.id).localities" :value="region" :key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                        <select v-else class="input-form not-selected" v-model="juridical_selected_district">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                        </select>
+                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_locality">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
-                    <div class="item flex-col">
-                        <div class="label">Адрес</div>
-                        <input type="text" placeholder="Введите адрес (офис, каб)">
+                    <div class="input-form flex-col">
+                        <label class="label">Адрес</label>
+                        <input v-on:keyup="validateForm($event)" v-model="juridical_address" name="juridical_address" type="text" placeholder="Введите адрес (офис, каб)">
+                        <!-- <span v-if="errors.address" id="err-text-address" class="err-text">{{ errors.address[0] }}</span>
+                        <div :style="{ 'visibility' : errors.address ? 'visible' : 'hidden' }" class="err" id="err-address">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div> -->
                     </div>
                 </div>
-                <div @click="modalLegalAddress = false"  class="done-btn">Готово</div>
+                <div @click="modalLegalAddress = false" class="done-btn">Готово</div>
             </div>
         </div>
     </div>
@@ -124,15 +214,39 @@ export default {
             editMode: false,
             modalActualAddress: false,
             modalLegalAddress: false,
+            regions: '',
             userToken: '',
-            userData: ''
+            userData: '',
+            real_locality_id: '',
+            juridical_locality_id: '',
+            real_address: '',
+            juridical_address: '',
+
+            real_selected_region: 'Выберите',
+            real_selected_district: 'Выберите',
+            real_selected_locality: 'Выберите',
+
+            juridical_selected_region: 'Выберите',
+            juridical_selected_district: 'Выберите',
+            juridical_selected_locality: 'Выберите',
         }
     },
     mounted(){
         this.userToken = JSON.parse(localStorage.getItem('xyzSessionAo')).token
         this.init()
+        this.getRegions()
     },
     methods:{
+        getRegions(){
+            axios.get('/api/regions')
+            .then(res => {
+                // console.log(res.data)
+                this.regions = res.data
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
         init(){
             axios.get('/api/user/data', {
                 headers: { 
@@ -143,8 +257,56 @@ export default {
                     this.userData = res.data.user[0]
                     console.log(this.userData)
                     localStorage.setItem('xyzSessionAoUser', JSON.stringify( this.userData));
+                    this.real_address = this.userData.real_address
+                    this.juridical_address = this.userData.juridical_address
+                    this.real_locality_id = this.userData.real_locality_id
+                    this.juridical_locality_id = this.userData.juridical_locality_id
                 }).catch(err => {
                     console.log(err.data)
+            })
+        },
+        postProfileChange(){
+            var real_city = this.real_selected_locality
+            if(this.real_selected_district.is_city === 1){
+                real_city = this.real_selected_district
+            } 
+            var juridical_city = this.juridical_selected_locality
+            if(this.juridical_selected_district.is_city === 1){
+                juridical_city = this.juridical_selected_district
+            } 
+
+            if(real_city === 'Выберите'){
+                real_city = {
+                    id: this.userData.real_locality_id
+                }
+            }
+            if(juridical_city === 'Выберите'){
+                juridical_city = {
+                    id: this.userData.juridical_locality_id
+                }
+            }
+            axios.post('/api/user/edit/main', null, {
+                headers: { 
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params: {
+                    id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+                    name_of_company: this.userData.name_of_company,
+                    BIN: this.userData.BIN,
+                    type_of_agency: this.userData.type_of_agency,
+                    company_email: this.userData.company_email,
+                    real_locality_id: real_city.id,
+                    juridical_locality_id: juridical_city.id,
+                    real_address: this.real_address,
+                    juridical_address: this.juridical_address
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                alert('Ваши данные успешно сохранены')
+                location.reload()
+            }).catch(err => {
+                console.log(err.data)
             })
         }
     }
@@ -250,7 +412,7 @@ export default {
                 background-color: #fefefe;
                 background: #FFFFFF;
                 border-radius: 6px;
-                margin: 140px auto auto auto;
+                margin: 120px auto auto auto;
                 padding: 50px 89px;
                 width: 952px;
                 .title{
@@ -267,49 +429,88 @@ export default {
                 }
                 .field-list{
                     flex-wrap: wrap;
-                    .item{
-                        width: 46%;
-                        margin-top: 36px;
+                    .input-form{
+                        width: 48%;
+                        position: relative;
+                        margin-top: 18px;
+                        height: 98px;
                         .label{
                             text-align: left;
                             font-weight: 500;
                             font-size: 16px;
                             line-height: 20px;
-                            color: #06397D;
                         }
-                        input{
-                            margin-top: 8px;
+                        input, select{
+                            width: 100%;
+                            cursor: initial;
+                            padding-left: 18px;
                             text-align: left;
-                            background: #FDFDFD;
-                            border: 1px solid #DFE0EB;
+                            margin-top: 5px;
+                            height: 50px;
+                            font-weight: normal;
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: #000000;
+                            background: #FFFFFF;
+                            border: 1px solid #E6EAF3;
                             box-sizing: border-box;
                             border-radius: 6px;
-                            padding: 18px 22px;
-                            font-weight: 500;
-                            font-size: 14px;
-                            line-height: 17px;
                         }
-                        input:focus{
-                            box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);
+                        .error{
+                            border: 1px solid #E4002F !important;
+                            box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;
                         }
-                        input:read-only{
-                            padding: 18px 0px;
-                            border: 1px solid #FDFDFD;
-                            color: #787878;
+                        .err{
+                            visibility: hidden;
+                            position: absolute;
+                            top: 46px;
+                            right: 18px;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+
+                            background: #FFFFFF;
+                            border: 1px solid #E4002F;
+                            box-sizing: border-box;
+                            svg{
+                                margin-top: -8px;
+                            }
+                        }
+                        .err-text{
+                            line-height: 1.2;
+                            position: absolute;
+                            bottom: 0;
+                            text-align: left;
+                            color: #E4002F;
+                            font-size: 12px
+                        }
+                        select{
+                            padding: 18px auto;
+                            -webkit-appearance: none;
+                            -moz-appearance : none;
+                            color: #000000;
+                            option{
+                                color: #000000;
+                            }
+                        }
+                        .not-selected{
+                            color: rgba(111, 111, 111, 0.25);
                         }
                         ::placeholder{
-                            color: #C5C5C5;
+                            font-weight: normal;
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: rgba(111, 111, 111, 0.25);
                         }
                     }
-                    .item:nth-of-type(2n){
-                        margin-left: 8%;
+                    .input-form:nth-of-type(2n){
+                        margin-left: 4%;
                     }
                 }
                 .done-btn{
-                    margin-top: 100px;
-                    width: 134px;
+                    width: 144px;
                     cursor: pointer;
-                    margin: 80px auto 0 auto;
+                    margin: 40px auto 0 auto;
                     padding: 18px 28px;
                     font-weight: bold;
                     font-size: 16px;
