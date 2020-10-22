@@ -8,6 +8,8 @@ use Storage;
 use Illuminate\Http\File;
 use App\UserDocument;
 use Validator;
+use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
 
 class UserDocumentController extends Controller
 {
@@ -97,5 +99,19 @@ class UserDocumentController extends Controller
         } else {
             return response()->json(['document'], 422);
         }
+    }
+
+    public function getDownload(Request $request)
+    {
+        $input = $request->all();
+
+        //PDF file is stored under project/public/download/info.pdf
+        $file= $input['path'];
+
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return response()->download($file);
+
     }
 }
