@@ -12580,9 +12580,18 @@ var render = function() {
                 _vm._v("Информация о балансе")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "go-transition" }, [
-                _vm._v("Произвести перевод")
-              ]),
+              _c(
+                "div",
+                {
+                  staticClass: "go-transition",
+                  on: {
+                    click: function($event) {
+                      _vm.dealModal = true
+                    }
+                  }
+                },
+                [_vm._v("Произвести перевод")]
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -12840,7 +12849,7 @@ var render = function() {
                   staticClass: "done-btn",
                   on: {
                     click: function($event) {
-                      return _vm.postTransfer()
+                      _vm.succModal = true
                     }
                   }
                 },

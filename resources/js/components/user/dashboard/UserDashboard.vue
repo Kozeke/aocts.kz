@@ -64,7 +64,7 @@
                 </div>
                 <div class="balance-info flex-col">
                     <div class="head">Информация о балансе</div>
-                    <div class="go-transition">Произвести перевод</div>
+                    <div @click="dealModal = true" class="go-transition">Произвести перевод</div>
                     <div class="item-list flex-col">
                         <div class="item-label flex-row">
                             <div class="name">Номер договора</div>
@@ -118,7 +118,7 @@
                         <input v-model="amount" min="0" type="number" placeholder="Введите сумму">
                     </div>
                 </div>
-                <div @click="postTransfer()" class="done-btn">Произвести перевод</div>
+                <div @click="succModal = true" class="done-btn">Произвести перевод</div>
             </div>
         </div>
         <div v-if="succModal" class="modal">
