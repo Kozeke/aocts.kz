@@ -124,7 +124,7 @@
 <script>
 import UserSide from '../UserSide'
 import UserNav from '../UserNav'
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from 'vuejs-datepicker'
 import {ru} from 'vuejs-datepicker/dist/locale'
 import axios from 'axios'
 

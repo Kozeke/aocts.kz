@@ -81,7 +81,14 @@
                         </defs>
                         </svg>
                     </div>
-                    <div class="login-us flex-row" @click="$router.push({ name: 'login' })">
+                    <div v-if="userActive" style="width: 195px" class="login-us flex-row" @click="$router.push({ name: 'profile' })">
+                        <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
+                        <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
+                        </svg>
+                        <span>Личный кабинет</span>
+                    </div>
+                    <div v-else class="login-us flex-row" @click="$router.push({ name: 'login' })">
                         <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
                         <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
@@ -119,7 +126,7 @@
                 <img src="/images/logo.png"/>
             </div>
             <div class="slogan">Экономим ваше время!</div>
-            <div class="contact-us flex-row" @click="modalDisplay = true;">
+            <div :class="{ 'contact-us-active' : !userActive }" class="contact-us flex-row" @click="modalDisplay = true;">
                 <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
                 <path d="M7.50022 0.498047C3.91634 0.498047 1.00044 3.18945 1.00044 6.49783C1.00759 7.84784 1.49258 9.15168 2.36941 10.1782C2.1881 11.2786 1.40511 12.1845 0.342489 12.5231C0.0804382 12.6102 -0.0614121 12.8932 0.0256257 13.1552C0.0935627 13.3598 0.284952 13.4977 0.500482 13.4976C2.12655 13.555 3.7205 13.0353 5.00032 12.0306C5.79737 12.3402 6.64516 12.4986 7.50022 12.4976C11.0841 12.4976 14 9.8062 14 6.49783C14 3.18945 11.0841 0.498047 7.50022 0.498047Z" fill="#4985FF"/>
@@ -132,7 +139,14 @@
                 </svg>
                 <span>Связаться с нами</span>
             </div>
-            <div class="login-us flex-row" @click="$router.push({ name: 'login' })">
+            <div v-if="userActive" class="login-us flex-row" @click="$router.push({ name: 'profile' })">
+                <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
+                <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
+                </svg>
+                <span>Личный кабинет</span>
+            </div>
+            <div v-else style="width: 105px" class="login-us flex-row" @click="$router.push({ name: 'login' })">
                 <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
                 <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
@@ -187,23 +201,7 @@
                     <div class="sub">Компания Daris занимается заключением договоров, на оплату услуг передвижения и остановки грузов по всем железно дорожным путям Казахстана</div>
                     <div class="join flex-row">
                         <span>Присоединиться</span>
-                        <svg style="margin: 12px auto auto 8px;" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0)">
-                        <path d="M5.08743 6.24219L3.35471 6.37361C2.87257 6.41019 2.44315 6.65827 2.17652 7.05421L0.178211 10.0213C-0.0240135 10.3216 -0.0561617 10.6973 0.0921575 11.0265C0.240516 11.3557 0.545396 11.5851 0.907698 11.6402L2.49421 11.8814C2.86534 9.9479 3.75377 8.01913 5.08743 6.24219Z" fill="white"/>
-                        <path d="M8.85449 18.1249L9.10023 19.6824C9.15636 20.0381 9.39003 20.3374 9.7253 20.483C9.8648 20.5436 10.0125 20.5735 10.1594 20.5735C10.3657 20.5735 10.5706 20.5145 10.7493 20.3986L13.7717 18.4368C14.175 18.175 14.4277 17.7534 14.4649 17.2802L14.5987 15.5791C12.7887 16.8884 10.824 17.7606 8.85449 18.1249Z" fill="white"/>
-                        <path d="M8.25789 17.046C8.31297 17.046 8.36836 17.0416 8.42364 17.0325C9.24879 16.8971 10.0441 16.6689 10.8028 16.3702L4.28211 9.96875C3.97789 10.7135 3.74547 11.4943 3.6075 12.3044C3.55313 12.6237 3.66223 12.949 3.89539 13.178L7.5338 16.7499C7.72739 16.9399 7.98868 17.046 8.25789 17.046Z" fill="white"/>
-                        <path d="M18.4058 9.64465C20.0014 6.61613 20.0605 3.41572 19.9771 1.91477C19.9486 1.40048 19.5309 0.990456 19.007 0.962424C18.7581 0.949079 18.463 0.939453 18.1305 0.939453C16.4209 0.939453 13.7158 1.19366 11.1332 2.50506C9.08083 3.54726 6.38956 5.84206 4.80176 8.85786C4.82051 8.87224 4.83883 8.8875 4.85609 8.90445L11.8873 15.8072C11.9046 15.8241 11.9201 15.8421 11.9347 15.8605C15.0066 14.3016 17.3442 11.6596 18.4058 9.64465ZM11.6292 5.09028C12.7715 3.96894 14.6301 3.96882 15.7724 5.09028C16.3257 5.63349 16.6305 6.35578 16.6305 7.12401C16.6305 7.89224 16.3257 8.61454 15.7724 9.15774C15.2013 9.71836 14.4509 9.99872 13.7008 9.9988C12.9505 9.99884 12.2005 9.71851 11.6292 9.15774C11.0759 8.61454 10.7711 7.89224 10.7711 7.12401C10.7711 6.35578 11.0759 5.63349 11.6292 5.09028Z" fill="white"/>
-                        <path d="M12.4572 8.34452C13.1426 9.01734 14.2578 9.01738 14.9432 8.34452C15.2752 8.01855 15.458 7.58521 15.458 7.12426C15.458 6.66331 15.2752 6.22997 14.9432 5.90404C14.6005 5.56761 14.1504 5.39941 13.7002 5.39941C13.2501 5.39941 12.7999 5.56761 12.4573 5.90404C12.1253 6.22997 11.9424 6.66331 11.9424 7.12426C11.9424 7.58521 12.1252 8.01859 12.4572 8.34452Z" fill="white"/>
-                        <path d="M0.597676 17.1203C0.747637 17.1203 0.897598 17.0642 1.01197 16.9518L2.92498 15.0738C3.15381 14.8491 3.15381 14.4849 2.92498 14.2603C2.69619 14.0356 2.32518 14.0356 2.09635 14.2603L0.18334 16.1383C-0.0454883 16.363 -0.0454883 16.7272 0.18334 16.9518C0.297754 17.0641 0.447715 17.1203 0.597676 17.1203Z" fill="white"/>
-                        <path d="M4.67818 15.981C4.44939 15.7563 4.07838 15.7563 3.84955 15.981L0.171621 19.5917C-0.057207 19.8164 -0.057207 20.1806 0.171621 20.4052C0.286035 20.5175 0.435996 20.5737 0.585957 20.5737C0.735918 20.5737 0.885879 20.5175 1.00025 20.4052L4.67814 16.7945C4.90701 16.5698 4.90701 16.2056 4.67818 15.981Z" fill="white"/>
-                        <path d="M5.60217 17.7027L3.6892 19.5807C3.46037 19.8054 3.46037 20.1696 3.6892 20.3942C3.80361 20.5065 3.95357 20.5627 4.1035 20.5627C4.25342 20.5627 4.40342 20.5066 4.51779 20.3942L6.4308 18.5162C6.65963 18.2915 6.65963 17.9273 6.4308 17.7027C6.20201 17.478 5.83099 17.478 5.60217 17.7027Z" fill="white"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0">
-                        <rect width="20" height="19.6345" fill="white" transform="translate(0 0.939453)"/>
-                        </clipPath>
-                        </defs>
-                        </svg>
+                        <img src="/images/btn-shuttle.png" alt="">
                     </div>
                     <div class="login flex-row">
                         <span>У Вас уже есть аккаунт?</span>
@@ -401,11 +399,14 @@ import { mixin as clickaway } from 'vue-clickaway';
                         name: 'English',
                         attr: 'EN'
                     }
-                ]
+                ],
+                userActive: false
             }
         },
         mounted() {
-
+            if( JSON.parse(localStorage.getItem('xyzSessionAoUser')) ){
+                this.userActive = true
+            }
         },
         methods:{
             toggleDropdown(e) {
@@ -549,7 +550,7 @@ import { mixin as clickaway } from 'vue-clickaway';
             position: absolute;
             height: 50px;
             top: 25px;
-            left: calc(18% + 146px);
+            left: calc(18% + 106px);
             width: 260px;
         }
         .contact-us{
@@ -558,7 +559,7 @@ import { mixin as clickaway } from 'vue-clickaway';
             width: 200px;
             top: 30px;
             color: #4985FF;
-            right: calc(18% + 110px + 120px);
+            right: calc(18% + 320px);
             border: 1px solid #4985FF;
             box-sizing: border-box;
             height: 40px;
@@ -568,10 +569,13 @@ import { mixin as clickaway } from 'vue-clickaway';
                 margin: -5px 6px 5px 8px;
             }
         }
+        .contact-us-active{
+            right: calc(18% + 230px);
+        }
         .login-us{
             cursor: pointer;
             position: absolute;
-            width: 105px;
+            width: 195px;
             top: 30px;
             color: #4985FF;
             right: calc(18% + 110px);
@@ -689,19 +693,15 @@ import { mixin as clickaway } from 'vue-clickaway';
                         span{
                             color: #FFFFFF;
                             cursor: pointer;
-                            margin: 14px 10px auto 30px;
+                            margin: 14px 20px auto 30px;
                             font-weight: bold;
                             font-size: 16px;
                             line-height: 20px;
                         }
-                        .circle{
-                            cursor: pointer;
-                            margin-left: 6px;
+                        img{
+                            margin-top: 12px;
                             width: 20px;
                             height: 20px;
-                            border-radius: 50%;
-                            background: #FFFFFF;
-                            margin-top: 14px;
                         }
                     }
                     .login{
@@ -1169,22 +1169,25 @@ import { mixin as clickaway } from 'vue-clickaway';
         }
         .nav-bar{
             .logo{
-                left: 10%;          
+                left: 8%;          
             }
             .slogan{
-                left: calc(10% + 146px);
+                left: calc(8% + 106px);
             }
             .contact-us{
-                right: calc(10% + 110px + 120px);
+                right: calc(8% + 320px);
+            }
+            .contact-us-active{
+                right: calc(8% + 230px);
             }
             .login-us{
-                right: calc(10% + 110px);
+                right: calc(8% + 110px);
             }
             .lang-us{
-                right: calc(10%);
+                right: calc(8%);
             }
             .lang-list{
-                right: calc(10%);
+                right: calc(8%);
             }
         }
         .layout{
@@ -1317,9 +1320,10 @@ import { mixin as clickaway } from 'vue-clickaway';
                 .side-btns{
                     flex-wrap: wrap;
                     position: relative;
-                    margin-top: 45px;
+                    margin-top: 25px;
                     .contact-us{
-                        margin-left: 12px;
+                        margin-top: 20px;
+                        margin-right: 12px;
                         cursor: pointer;
                         width: 200px;
                         color: #4985FF;
@@ -1333,7 +1337,8 @@ import { mixin as clickaway } from 'vue-clickaway';
                         }
                     }
                     .login-us{
-                        margin-left: 12px;
+                        margin-top: 20px;
+                        margin-right: 12px;
                         cursor: pointer;
                         width: 105px;
                         color: #4985FF;
@@ -1347,6 +1352,8 @@ import { mixin as clickaway } from 'vue-clickaway';
                         }
                     }
                     .lang-us{
+                        margin-top: 20px;
+                        margin-right: 12px;
                         z-index: 99;
                         cursor: pointer;
                         width: 95px;
@@ -1562,23 +1569,6 @@ import { mixin as clickaway } from 'vue-clickaway';
                 .fm-foot{
                     top: 220px;
                     padding-bottom: 20px;
-                }
-            }
-        }
-    }
-    @media only screen and (max-width: 770px){
-        .side-menu{
-            .side-left{
-                .side-btns{
-                    .contact-us{
-                        margin-left: 0;
-                        margin-top: 15px;
-                        width: 212px;
-                        span{
-                            cursor: pointer;
-                            margin: -5px 6px 5px 12px;
-                        }
-                    }
                 }
             }
         }
