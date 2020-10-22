@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Storage;
 use Hash;
+use GuzzleHttp\Client;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -17,14 +19,15 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
+
         $input = $request->all();
         $validator = Validator::make($request->all(), [
             'name_of_company' => 'required',
             'resident_of_RK' => 'required',
             'BIN' => 'required|unique:users',
             'manager_name' => 'required',
-            'company_email' => 'required|email|unique:users',
-            'password' => 'required',
+            'company_email' => 'required|email|unique:users|max:255',
+            'password' => 'required|string|max:32|min:6',
             'code' => 'required',
             'country' => 'required',
             'type_of_organization_id' => 'required',
@@ -36,10 +39,16 @@ class UserController extends Controller
             'type_of_agency' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users',
+            'recaptcha_token' => 'string'
 
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
+        }
+        if (config('recaptcha.enabled') && !$this->checkRecaptcha($request->recaptcha_token, $request->ip())) {
+            return response()->json([
+                'error' => 'Captcha is invalid.',
+            ], Response::HTTP_BAD_REQUEST);
         }
         $file = $request->file('document');
         if ($file->getClientOriginalExtension() === "pdf") {
@@ -127,7 +136,18 @@ class UserController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
 
-
+    protected function checkRecaptcha($token, $ip)
+    {
+        $response = (new Client)->post('https://www.google.com/recaptcha/api/siteverify', [
+            'form_params' => [
+                'secret'   => config('recaptcha.secret'),
+                'response' => $token,
+                'remoteip' => $ip,
+            ],
+        ]);
+        $response = json_decode((string)$response->getBody(), true);
+        return $response['success'];
+    }
 
 
 
