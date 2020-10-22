@@ -13,6 +13,7 @@
             oninput="validity.valid||(value='');"
             v-mask="'############'"
             placeholder="Введите 12 значный код"
+            @keyup.enter="logIn()"
           />
           <div class="err" id="err-BIN">
             <svg
@@ -37,6 +38,7 @@
             type="password"
             id="password"
             placeholder="Введите пароль"
+            @keyup.enter="logIn()"
           />
           <div class="err" id="err-password">
             <svg
