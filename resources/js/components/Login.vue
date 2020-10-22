@@ -9,9 +9,9 @@
           <input
             v-on:keyup="validateForm($event)"
             v-model="BIN"
-            name="BIN" 
-            oninput="validity.valid||(value='');" 
-            v-mask="'############'" 
+            name="BIN"
+            oninput="validity.valid||(value='');"
+            v-mask="'############'"
             placeholder="Введите 12 значный код"
           />
           <div class="err" id="err-BIN">
@@ -118,11 +118,7 @@ export default {
       };
 
       axios
-        .post("/api/login", data, {
-          headers: { 
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        })
+        .post("/api/login", data)
         .then(res => {
           localStorage.setItem('xyzSessionAo', JSON.stringify(res.data));
           this.$router.push({ name : 'profile' })

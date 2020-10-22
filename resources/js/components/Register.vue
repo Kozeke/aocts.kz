@@ -14,7 +14,7 @@
                     <span @click="$router.push({ name: 'login' })">Войти в систему</span>
                 </div>
             </div>
-            <div v-if="firstPage" class="top-sub-one">Пожалуйста заполните все необходимые данные,</div> 
+            <div v-if="firstPage" class="top-sub-one">Пожалуйста заполните все необходимые данные,</div>
             <div v-if="firstPage" class="top-sub-last">Мы ответственно подходим к работе с каждым клиентом.</div>
             <div v-if="firstPage" class="reg-form flex-row">
                 <div class="input-form flex-col">
@@ -120,7 +120,7 @@
                         </svg>
                     </div> -->
                 </div>
-       
+
                 <!-- <div class="flex-row">
                     <div class="input-form flex-col">
                         <label class="label">Пароль</label>
@@ -498,7 +498,7 @@ export default {
             name_of_company: '',
             manager_name: '',
             resident_of_RK: '',
-            
+
             country: '',
             company_email: '',
             BIN: '',
@@ -719,14 +719,16 @@ export default {
             })
         },
         postUser(){
+            console.log("YAHOOO");
+
             var real_city = this.real_selected_locality
             if(this.real_selected_district.is_city === 1){
                 real_city = this.real_selected_district
-            } 
+            }
             var juridical_city = this.juridical_selected_locality
             if(this.juridical_selected_district.is_city === 1){
                 juridical_city = this.juridical_selected_district
-            } 
+            }
 
             // if(document.getElementsByClassName('error').length !== 0){
             //     alert('Заполните все поля правильно.')
@@ -740,7 +742,7 @@ export default {
             // }
 
             let data = new FormData();
-                
+
             data.append("name_of_company", this.name_of_company)
             data.append("manager_name", this.manager_name)
             data.append("resident_of_RK", Number(this.resident_of_RK))
@@ -778,14 +780,9 @@ export default {
             }
 
             console.log(data)
-            axios.post('/api/register', data, {
-                headers: { 
-                    'Content-Type' : 'multipart/form-data',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            })
+            axios.post('/api/register', data)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 this.userRegistration = false
                 // localStorage.setItem('xyzSessionAo', JSON.stringify(res.data.success.token));
                 // this.$router.push({ name : 'profile' })
@@ -795,7 +792,7 @@ export default {
                     this.errors = Object.assign({}, err.response.data.error)
                     console.log(this.errors)
                 }
-                
+
                 alert('Что-то пошло не так. Проверьте данные еще раз.')
                 console.log(err)
             })
@@ -823,11 +820,11 @@ export default {
             width: 160px;
             height: 50px;
             top: 25px;
-            background: #F6F6F8;   
+            background: #F6F6F8;
             font-size: 16px;
             line-height: 50px;
             color: #06397D;
-            font-weight: 500;         
+            font-weight: 500;
         }
         .register{
             position: relative;
@@ -1356,7 +1353,7 @@ export default {
     }
     @media screen and (max-width: 1320px) {
         .logo{
-            left: calc(8%) !important;      
+            left: calc(8%) !important;
         }
         .register{
             width: 84% !important;
@@ -1507,7 +1504,7 @@ export default {
     }
     @media screen and (max-width: 720px) {
         .logo{
-            left: calc(20px) !important;      
+            left: calc(20px) !important;
         }
         .register{
             height: 1060px !important;
@@ -1726,6 +1723,6 @@ export default {
             }
          }
     }
-    
+
 </style>
 
