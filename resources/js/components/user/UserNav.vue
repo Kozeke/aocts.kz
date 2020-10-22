@@ -4,11 +4,26 @@
             {{ $route.meta.title }}
         </div>
         <div class="nav-user flex-row">
-            <div class="notify">
-                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.00002 16C8.10377 16 8.99908 15.1047 8.99908 14H5.00096C5.00096 15.1047 5.89627 16 7.00002 16ZM13.731 11.3216C13.1272 10.6728 11.9975 9.69687 11.9975 6.5C11.9975 4.07188 10.295 2.12812 7.9994 1.65125V1C7.9994 0.447812 7.5519 0 7.00002 0C6.44815 0 6.00065 0.447812 6.00065 1V1.65125C3.70502 2.12812 2.00252 4.07188 2.00252 6.5C2.00252 9.69687 0.872834 10.6728 0.269084 11.3216C0.0815841 11.5231 -0.00154089 11.7641 2.16059e-05 12C0.00345911 12.5125 0.405647 13 1.00315 13H12.9969C13.5944 13 13.9969 12.5125 14 12C14.0016 11.7641 13.9185 11.5228 13.731 11.3216Z" fill="#788899" fill-opacity="0.6"/>
-                </svg>
-                <div class="label"></div>
+            <div class="dropdwn">
+                <div class="notify">
+                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.00002 16C8.10377 16 8.99908 15.1047 8.99908 14H5.00096C5.00096 15.1047 5.89627 16 7.00002 16ZM13.731 11.3216C13.1272 10.6728 11.9975 9.69687 11.9975 6.5C11.9975 4.07188 10.295 2.12812 7.9994 1.65125V1C7.9994 0.447812 7.5519 0 7.00002 0C6.44815 0 6.00065 0.447812 6.00065 1V1.65125C3.70502 2.12812 2.00252 4.07188 2.00252 6.5C2.00252 9.69687 0.872834 10.6728 0.269084 11.3216C0.0815841 11.5231 -0.00154089 11.7641 2.16059e-05 12C0.00345911 12.5125 0.405647 13 1.00315 13H12.9969C13.5944 13 13.9969 12.5125 14 12C14.0016 11.7641 13.9185 11.5228 13.731 11.3216Z" fill="#788899" fill-opacity="0.6"/>
+                    </svg>
+                    <div class="label"></div>
+                </div>
+                <div class="notify-menu flex-col">
+                    <div class="notify-title">Уведомления</div>
+                    <div class="notify-items flex-col">
+                        <div v-for="i in 4" :key="i" class="item flex-row">
+                            <div class="circle"></div>
+                            <div class="middle flex-col">
+                                <div class="status">Заявка одобрена</div>
+                                <div class="name">№ЦТС-2019/02-41</div>
+                            </div>
+                            <div class="date">Июнь 7, 2020</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="divider"></div>
             <div @click="showUserMenu = true" class="user-name">{{ user.manager_name }}</div>
@@ -72,8 +87,10 @@ export default {
             right: 58px;
             top: 62px;
             .notify{
+                cursor: pointer;
                 position: relative;
                 .label{
+                    cursor: pointer;
                     position: absolute;
                     top: 3px;
                     right: 0;
@@ -81,6 +98,9 @@ export default {
                     height: 6px;
                     border-radius: 50%;
                     background: #4985FF;
+                }
+                svg{
+                    cursor: pointer;
                 }
             }
             .divider{
@@ -139,6 +159,78 @@ export default {
                     border-top: 0.5px solid #DFE0EB;
                 }
             }
+            .notify-menu{
+                position: absolute;
+                display: none;
+                top: 30px;
+                right: 150px;
+                z-index: 99;
+                padding: 16px;
+                background: #FDFDFD;
+                box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);
+                border-radius: 10px;
+                .notify-title{
+                    text-align: left;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #06397D;
+                }
+                .notify-items{
+                    margin-top: 12px;
+                    .item{
+                        cursor: pointer;
+                        margin-top: 10px;
+                        .circle{
+                            cursor: pointer;
+                            margin-top: 2px;
+                            border: 2px solid #29CC97;
+                            border-radius: 50%;
+                            height: 12px;
+                            width: 12px;
+                        }
+                        .middle{
+                            cursor: pointer;
+                            margin-left: 9px;
+                            .status{
+                                cursor: pointer;
+                                text-align: left;
+                                width: 120px;
+                                font-size: 11px;
+                                line-height: 12px;
+                                color: #252733;
+                                -webkit-line-clamp: 1; /* no of lines */
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden !important;
+                            }
+                            .name{
+                                cursor: pointer;
+                                text-align: left;
+                                margin-top: 2px;
+                                width: 120px;
+                                font-size: 11px;
+                                line-height: 18px;
+                                white-space: nowrap;
+                                color: #787878;
+                                -webkit-line-clamp: 1; /* no of lines */
+                                text-overflow: ellipsis;
+                                overflow: hidden !important;
+                            }
+                        }
+                        .date{
+                            cursor: pointer;
+                            text-align: left;
+                            font-size: 9px;
+                            line-height: 10px;
+                            letter-spacing: 0.2px;
+                            color: #C5C5C5;
+                            width: 42px;
+                        }
+                    }
+                }
+            }
+            .dropdwn:hover .notify-menu {display: flex;}
         }
     }
 </style>

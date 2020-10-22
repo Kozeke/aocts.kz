@@ -2398,8 +2398,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [vue_clickaway__WEBPACK_IMPORTED_MODULE_0__["mixin"]],
@@ -2422,10 +2420,15 @@ __webpack_require__.r(__webpack_exports__);
         id: 3,
         name: 'English',
         attr: 'EN'
-      }]
+      }],
+      userActive: false
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    if (JSON.parse(localStorage.getItem('xyzSessionAoUser'))) {
+      this.userActive = true;
+    }
+  },
   methods: {
     toggleDropdown: function toggleDropdown(e) {
       var langUs = document.getElementById("lang-us");
@@ -3686,6 +3689,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4126,6 +4144,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserSide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UserSide */ "./resources/js/components/user/UserSide.vue");
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserDocumentsRoute */ "./resources/js/components/user/documents/UserDocumentsRoute.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuejs-datepicker/dist/locale */ "./node_modules/vuejs-datepicker/dist/locale/index.js");
+/* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -4207,6 +4228,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 
 
 
@@ -4214,7 +4237,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     UserSide: _UserSide__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserNav: _UserNav__WEBPACK_IMPORTED_MODULE_1__["default"],
-    UserDocumentsRouter: _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__["default"]
+    UserDocumentsRouter: _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {};
@@ -4236,6 +4260,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserSide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UserSide */ "./resources/js/components/user/UserSide.vue");
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserDocumentsRoute */ "./resources/js/components/user/documents/UserDocumentsRoute.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuejs-datepicker/dist/locale */ "./node_modules/vuejs-datepicker/dist/locale/index.js");
+/* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -4286,6 +4313,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -4293,10 +4330,16 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     UserSide: _UserSide__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserNav: _UserNav__WEBPACK_IMPORTED_MODULE_1__["default"],
-    UserDocumentsRouter: _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__["default"]
+    UserDocumentsRouter: _UserDocumentsRoute__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      deals: ''
+    };
+  },
+  mounted: function mounted() {
+    this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications;
   },
   methods: {}
 });
@@ -5584,7 +5627,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contact-modal[data-v-f2b6376c] {\n  z-index: 998;\n  width: 100%;\n  position: fixed;\n  height: 100%;\n  padding: 150px 20%;\n  background: rgba(45, 76, 100, 0.7);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n  position: relative;\n  padding: 0;\n  border-radius: 12px !important;\n  height: 500px;\n  background: #FFFFFF;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n  position: relative;\n  width: 54%;\n  padding: 50px;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 20px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 20px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n  position: absolute;\n  cursor: pointer;\n  bottom: 50px;\n  width: calc(100% - 100px);\n  height: 50px;\n  border-radius: 6px;\n  padding-top: 14px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n  width: 46%;\n  height: 100%;\n  overflow: hidden;\n  border-bottom-right-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.contact-modal .modal-body .modal-right img[data-v-f2b6376c] {\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.contact-modal .modal-body .modal-exit[data-v-f2b6376c] {\n  z-index: 999;\n  cursor: pointer;\n  position: absolute;\n  top: 25px;\n  right: 25px;\n}\n.nav-bar[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n  height: 100px;\n  background: #FFFFFF;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.nav-bar .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  left: 18%;\n  top: 25px;\n}\n.nav-bar .logo img[data-v-f2b6376c] {\n  width: 25%;\n  transform: translateX(-150%) translateY(-35%);\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n  position: absolute;\n  height: 50px;\n  top: 25px;\n  left: calc(18% + 146px);\n  width: 260px;\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 200px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px + 120px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .contact-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 8px;\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 105px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .login-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 95px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .lang-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n  transition: all 1s ease 0s;\n  z-index: 999;\n  position: absolute;\n  cursor: pointer;\n  width: 95px;\n  top: 76px;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  background: #FFFFFF;\n  box-sizing: border-box;\n  border-radius: 6px;\n  overflow: hidden;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c] {\n  text-align: left;\n  cursor: pointer;\n  height: 34px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 11px;\n  line-height: 13px;\n  color: #4985FF;\n  padding: 10px 15px;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c]:hover {\n  background: #4985FF;\n  color: #FFFFFF;\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n  display: none;\n  cursor: pointer;\n  position: absolute;\n  width: 48px;\n  height: 42px;\n  top: 30px;\n  right: calc(10%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n}\n.main .layout[data-v-f2b6376c] {\n  background: #FFFFFF;\n  position: relative;\n  height: 720px;\n  background-image: linear-gradient(rgba(196, 196, 196, 0.4), rgba(196, 196, 196, 0.4)), url(\"/images/layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .layout .layout-left[data-v-f2b6376c] {\n  position: relative;\n  width: 56%;\n}\n.main .layout .layout-left .layout-text[data-v-f2b6376c] {\n  width: 460px;\n  position: relative;\n  top: 160px;\n  left: 32%;\n  color: #06397D;\n}\n.main .layout .layout-left .layout-text .header[data-v-f2b6376c] {\n  text-align: left;\n  font-weight: 800;\n  font-size: 42px;\n  line-height: 56px;\n}\n.main .layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n  margin-top: 30px;\n  text-align: left;\n  height: 77px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n}\n.main .layout .layout-left .layout-text .join[data-v-f2b6376c] {\n  cursor: pointer;\n  width: 250px;\n  margin-top: 54px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .layout .layout-left .layout-text .join .circle[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 6px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  margin-top: 14px;\n}\n.main .layout .layout-left .layout-text .login[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .layout .layout-left .layout-text .login .go-login[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 10px;\n  font-weight: 600;\n  -webkit-text-decoration-line: underline;\n          text-decoration-line: underline;\n  color: #4985FF;\n}\n.main .layout .layout-right[data-v-f2b6376c] {\n  background: #FFFFFF;\n}\n.main .layout .layout-right .layout-img[data-v-f2b6376c] {\n  width: 560px;\n  position: absolute;\n  right: 10%;\n  top: 184px;\n}\n.main .layout .layout-right .layout-img-in[data-v-f2b6376c] {\n  width: 555px;\n  position: absolute;\n  left: 44%;\n  top: 138px;\n}\n.service[data-v-f2b6376c] {\n  position: relative;\n  height: 700px;\n  background: #D6E6FF;\n  padding: 0 18%;\n}\n.service .service-header[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 80px;\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.service .service-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: left;\n  color: #06397D;\n}\n.service .service-list[data-v-f2b6376c] {\n  position: relative;\n  margin-top: 45px;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n  position: relative;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 10px;\n  padding: 0 30px;\n  height: 240px;\n  width: calc(50% - 15px);\n}\n.service .service-list .service-single div[data-v-f2b6376c] {\n  text-align: left;\n}\n.service .service-list .service-single .circle[data-v-f2b6376c] {\n  margin-top: 8px;\n  width: 50px;\n  height: 50px;\n  background: #4985FF;\n  opacity: 0.1;\n  border-radius: 50%;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n  position: absolute;\n  top: 45px;\n  left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n  margin-top: 25px;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 170%;\n  color: #06397D;\n}\n.service .service-list .service-single .head span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.service .service-list .service-single[data-v-f2b6376c]:last-of-type {\n  margin-left: 30px;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n  top: 38px;\n  left: 40px;\n}\n.service .service-list .service-single:last-of-type .head[data-v-f2b6376c] {\n  margin-top: 12px;\n}\n.description[data-v-f2b6376c] {\n  position: relative;\n  background: #FFFFFF;\n}\n.description .description-one[data-v-f2b6376c] {\n  position: relative;\n}\n.description .description-one .desc-left[data-v-f2b6376c] {\n  padding: 70px 20px 70px 18%;\n  width: 54%;\n  color: #06397D;\n}\n.description .description-one .desc-left div[data-v-f2b6376c] {\n  text-align: left;\n}\n.description .description-one .desc-left .head[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n}\n.description .description-one .desc-left .desc-list[data-v-f2b6376c] {\n  margin-top: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n  margin-top: 30px;\n}\n.description .description-one .desc-left .desc-list .desc-item .circle[data-v-f2b6376c] {\n  width: 50px;\n  height: 50px;\n  background: rgba(73, 133, 255, 0.1);\n  border-radius: 50%;\n  padding: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n  margin-left: 25px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 150%;\n  color: #06397D;\n}\n.description .description-one .desc-left .desc-list .desc-item div span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-one .desc-right[data-v-f2b6376c] {\n  position: relative;\n  margin-left: 6%;\n  width: 46%;\n  overflow: hidden;\n}\n.description .description-one .desc-right img[data-v-f2b6376c] {\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  min-height: 100%;\n  min-width: 100%;\n  transform: translate(-50%, -50%);\n}\n.description .description-two[data-v-f2b6376c] {\n  position: relative;\n  padding: 70px 18%;\n  background: #D6E6FF;\n}\n.description .description-two .dt-top .dt-header[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n  color: #06397D;\n  width: 100%;\n}\n.description .description-two .dt-top .dt-sub[data-v-f2b6376c] {\n  width: calc(66% - 24px);\n  margin-left: 24px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 26px;\n  color: #06397D;\n  text-align: left;\n}\n.description .description-two .dt-list[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c] {\n  padding: 0 4px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  border-radius: 10px;\n  height: 100px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 24px;\n  align-items: center;\n  text-align: center;\n  color: #06397D;\n}\n.description .description-two .dt-list .dt-item span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module[data-v-f2b6376c] {\n  position: relative;\n  padding: 80px 18%;\n  background: #FCFCFC;\n}\n.module .module-header[data-v-f2b6376c] {\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 53px;\n  text-align: center;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.module .module-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: center;\n  color: #999999;\n}\n.module .module-list[data-v-f2b6376c] {\n  flex-wrap: wrap;\n  position: relative;\n  margin-top: 50px;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n  background: #FFFFFF;\n  padding: 20px;\n  height: 380px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  box-shadow: 0px 0px 15px #D8D8D8;\n  border-radius: 10px;\n}\n.module .module-list .module-single img[data-v-f2b6376c] {\n  height: 210px;\n  width: 100%;\n  background: rgba(233, 233, 233, 0.4);\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n  height: 120px;\n  margin-top: 30px;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 150%;\n  display: flex;\n  text-align: center;\n  justify-content: center;\n  align-items: center;\n  color: #06397D;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module .more-module[data-v-f2b6376c] {\n  display: none;\n  position: relative;\n  cursor: pointer;\n  width: 100%;\n  margin-top: 42px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.module .more-module span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.home-last[data-v-f2b6376c] {\n  position: relative;\n  height: auto;\n  background: #D6E6FF;\n  overflow: hidden;\n  padding: 80px 18% 80px 18%;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #2D4C64;\n  margin-bottom: 15px;\n}\n.footer[data-v-f2b6376c] {\n  position: relative;\n  height: auto;\n  padding-bottom: 30px;\n  background: #FFFFFF;\n  padding-top: 40px;\n}\n.footer .footer-body[data-v-f2b6376c] {\n  position: relative;\n  width: 64%;\n  left: 18%;\n}\n.footer .footer-body .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.footer .footer-body .logo img[data-v-f2b6376c] {\n  width: 120px;\n  transform: translateY(-35%);\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n  top: 90px;\n  padding-bottom: 20px;\n  position: absolute;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n  position: absolute;\n  right: 0;\n  width: 520px;\n}\n.footer .footer-body .f-right .fr-head[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 15px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 22px;\n  color: #2D4C64;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.footer .footer-body .f-right .contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.footer .footer-body .f-right .contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.footer .footer-body .f-right .contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n@media only screen and (max-width: 1480px) {\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    max-width: 420px;\n}\n}\n@media only screen and (min-width: 1520px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 500px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 585px;\n    right: 150px;\n}\n}\n@media only screen and (min-width: 1620px) {\n.module-list .module-single[data-v-f2b6376c] {\n    padding: 30px !important;\n    height: 380px;\n}\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 660px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 645px;\n}\n}\n@media only screen and (min-width: 1740px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 680px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 845px;\n}\n}\n@media only screen and (max-width: 1720px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    width: 410px;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n}\n@media only screen and (max-width: 1340px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 150px 12%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    padding: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 40px;\n    width: calc(100% - 80px);\n}\n.nav-bar .logo[data-v-f2b6376c] {\n    left: 10%;\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n    left: calc(10% + 146px);\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n    right: calc(10% + 110px + 120px);\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n    right: calc(10% + 110px);\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n    right: calc(10%);\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n    right: calc(10%);\n}\n.layout[data-v-f2b6376c] {\n    height: 560px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    top: 80px !important;\n    left: 18% !important;\n}\n.layout .layout-right .layout-img[data-v-f2b6376c] {\n    right: 8% !important;\n    width: 440px !important;\n}\n.service[data-v-f2b6376c] {\n    height: 660px;\n    padding: 0 10%;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 20px 60px 10% !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.home-last[data-v-f2b6376c] {\n    padding: 30px 10% 30px 10% !important;\n}\n.footer[data-v-f2b6376c] {\n    padding-top: 50px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    width: 460px;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n    margin-top: 0;\n}\n}\n@media only screen and (max-width: 1120px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n}\n@media only screen and (max-width: 1020px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    width: 60%;\n    padding: 25px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 25px;\n    width: calc(100% - 50px);\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    width: 40%;\n}\n.side-menu[data-v-f2b6376c] {\n    position: fixed;\n    height: 100%;\n    z-index: 10;\n    width: 100%;\n}\n.side-menu .side-left[data-v-f2b6376c] {\n    padding-left: 12.5%;\n    padding-right: 12.5%;\n    height: 100%;\n    width: 80%;\n    background: #FFFFFF;\n    font-size: 16px;\n    line-height: 50px;\n    color: #06397D;\n    font-weight: 500;\n}\n.side-menu .side-left .side-top[data-v-f2b6376c] {\n    display: flex;\n    flex-direction: row;\n}\n.side-menu .side-left .side-top .logo[data-v-f2b6376c] {\n    cursor: pointer;\n    position: relative;\n    top: 25px;\n}\n.side-menu .side-left .side-top .logo img[data-v-f2b6376c] {\n    width: 120px;\n    transform: translateY(-35%);\n}\n.side-menu .side-left .side-top .slogan[data-v-f2b6376c] {\n    position: absolute;\n    height: 50px;\n    top: 25px;\n    left: calc(30%);\n    width: 260px;\n}\n.side-menu .side-left .side-slogan[data-v-f2b6376c] {\n    display: none;\n}\n.side-menu .side-left .side-head[data-v-f2b6376c] {\n    margin-top: 95px;\n    text-align: left;\n    font-weight: 600;\n    font-size: 18px;\n    line-height: 22px;\n    color: #2D4C64;\n}\n.side-menu .side-left .side-text[data-v-f2b6376c] {\n    text-align: left;\n    margin-top: 15px;\n    font-weight: normal;\n    font-size: 14px;\n    line-height: 158.47%;\n    color: #999999;\n}\n.side-menu .side-left .side-btns[data-v-f2b6376c] {\n    flex-wrap: wrap;\n    position: relative;\n    margin-top: 45px;\n}\n.side-menu .side-left .side-btns .contact-us[data-v-f2b6376c] {\n    margin-left: 12px;\n    cursor: pointer;\n    width: 200px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .contact-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 8px;\n}\n.side-menu .side-left .side-btns .login-us[data-v-f2b6376c] {\n    margin-left: 12px;\n    cursor: pointer;\n    width: 105px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .login-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 6px;\n}\n.side-menu .side-left .side-btns .lang-us[data-v-f2b6376c] {\n    z-index: 99;\n    cursor: pointer;\n    width: 95px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .lang-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 6px;\n}\n.side-menu .side-left .side-btns .lang-list[data-v-f2b6376c] {\n    position: absolute;\n    top: 46px;\n    transition: all 1s ease 0s;\n    z-index: 999 !important;\n    cursor: pointer;\n    width: 95px;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    border-radius: 6px;\n    overflow: hidden;\n    background: #FFFFFF;\n}\n.side-menu .side-left .side-btns .lang-list .lang-item[data-v-f2b6376c] {\n    text-align: left;\n    cursor: pointer;\n    height: 34px;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 11px;\n    line-height: 13px;\n    color: #4985FF;\n    padding: 10px 15px;\n}\n.side-menu .side-left .side-btns .lang-list .lang-item[data-v-f2b6376c]:hover {\n    background: #4985FF;\n    color: #FFFFFF;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    position: relative;\n    width: 20%;\n    height: 100%;\n    background: #2D4C64;\n    opacity: 0.7;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    position: absolute;\n    width: 48px;\n    height: 42px;\n    top: 39px;\n    right: calc(50%);\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n    display: block;\n}\n.nav-bar .contact-us[data-v-f2b6376c], .nav-bar .login-us[data-v-f2b6376c], .nav-bar .lang-us[data-v-f2b6376c] {\n    display: none;\n}\n.layout[data-v-f2b6376c] {\n    height: 480px !important;\n}\n.layout .layout-left[data-v-f2b6376c] {\n    width: 100% !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 60% !important;\n    top: 70px !important;\n    left: 20% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-weight: 700 !important;\n    font-size: 32px !important;\n    line-height: 52px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 25px !important;\n    height: 70px !important;\n    font-size: 16spx !important;\n    line-height: 23px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 36px !important;\n    height: 50px !important;\n}\n.layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n    font-size: 14px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 50px;\n}\n.service .service-list[data-v-f2b6376c] {\n    flex-direction: column !important;\n    margin-top: 25px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 30px;\n    height: 180px;\n    width: calc(100%);\n    margin-left: 0 !important;\n    margin-top: 20px;\n}\n.description-one[data-v-f2b6376c] {\n    flex-wrap: wrap;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    margin-left: 0 !important;\n    width: 100% !important;\n    height: 280px !important;\n}\n.description-two .dt-top[data-v-f2b6376c] {\n    flex-direction: column !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    text-align: left;\n    font-size: 32px;\n    line-height: 42px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    text-align: left;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 16px;\n    line-height: 26px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 24px;\n    margin-top: 24px;\n    width: calc(50% - 12px) !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 24px !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0 !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 32px !important;\n    margin-top: 32px !important;\n    width: calc(50% - 16px) !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 32px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0px !important;\n}\n}\n@media only screen and (max-width: 920px) {\n.service[data-v-f2b6376c] {\n    height: 700px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 200px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    left: 30px !important;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    top: 180px;\n    padding-bottom: 20px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    margin-top: 60px;\n    width: 100%;\n}\n}\n@media only screen and (max-width: 836px) {\n.footer[data-v-f2b6376c] {\n    height: auto;\n    padding-bottom: 10px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    top: 220px;\n    padding-bottom: 20px;\n}\n}\n@media only screen and (max-width: 770px) {\n.side-menu .side-left .side-btns .contact-us[data-v-f2b6376c] {\n    margin-left: 0;\n    margin-top: 15px;\n    width: 212px;\n}\n.side-menu .side-left .side-btns .contact-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 12px;\n}\n}\n@media only screen and (max-width: 640px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 550px;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    margin-top: 190px;\n    width: 100%;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n    margin-top: 16px;\n    font-size: 16px;\n    line-height: 130%;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n    margin-top: 10px;\n    margin-right: 20px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    position: absolute;\n    top: 0;\n    height: 190px;\n    width: 100%;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n}\n}\n@media only screen and (max-width: 620px) {\n.slogan[data-v-f2b6376c] {\n    display: none;\n}\n.side-menu .side-left[data-v-f2b6376c] {\n    width: 76%;\n}\n.side-menu .side-left .side-top .slogan[data-v-f2b6376c] {\n    height: 50px;\n    top: 25px;\n    left: calc(10%);\n    width: 260px;\n}\n.side-menu .side-left .side-slogan[data-v-f2b6376c] {\n    text-align: left;\n    display: block;\n    font-size: 16px;\n    line-height: 50px;\n    color: #06397D;\n    font-weight: 500;\n    height: 50px;\n    margin-top: 35px;\n    width: 260px;\n}\n.side-menu .side-left .side-head[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    width: 24%;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    top: 39px;\n    right: calc(20%);\n}\n.menu-btn[data-v-f2b6376c] {\n    right: calc(5%) !important;\n}\n.layout[data-v-f2b6376c] {\n    height: 440px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 80% !important;\n    top: 40px !important;\n    left: 10% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 42px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 15px !important;\n    height: 110px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 32px !important;\n}\n.layout .layout-left .layout-text .login[data-v-f2b6376c] {\n    margin-top: 10px !important;\n    flex-direction: column !important;\n}\n.layout .layout-left .layout-text .login span[data-v-f2b6376c], .layout .layout-left .layout-text .login div[data-v-f2b6376c] {\n    text-align: left !important;\n    margin-left: 0 !important;\n    margin-top: 10px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service[data-v-f2b6376c] {\n    height: 800px;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 40px;\n    font-size: 28px;\n}\n.service .service-sub[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 20px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 240px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    top: 45px;\n    left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n    margin-top: 25px;\n    font-size: 16px;\n    line-height: 140%;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n    margin-top: 16px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n    top: 30px !important;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-left .head[data-v-f2b6376c] {\n    font-weight: bold;\n    font-size: 28px !important;\n    line-height: 40px !important;\n}\n.description-one .desc-left .desc-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n    margin-top: 25px !important;\n}\n.description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n    margin-left: 20px !important;\n    font-size: 14px !important;\n    line-height: 140% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    height: 200px !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 14px;\n    line-height: 22px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 0 !important;\n    width: calc(100% ) !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.module .module-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.module .module-sub[data-v-f2b6376c] {\n    font-size: 16px;\n    line-height: 22px !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 0 !important;\n    margin-top: 32px !important;\n    width: calc(100%) !important;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n    height: 120px;\n    margin-top: 20px;\n    font-size: 16px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 0px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(-n+3) {\n    display: none !important;\n}\n.module .more-module[data-v-f2b6376c] {\n    display: flex !important;\n}\n.home-last[data-v-f2b6376c] {\n    padding: 30px 10% 30px 10% !important;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    top: 300px;\n}\n}\n@media only screen and (max-width: 444px) {\n.side-menu .side-left[data-v-f2b6376c] {\n    padding-left: 5%;\n    padding-right: 5%;\n    width: 80%;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    width: 20%;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    right: calc(25%);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 570px;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 260px;\n}\n}\n@media only screen and (max-width: 339px) {\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 276px;\n}\n}", ""]);
+exports.push([module.i, ".contact-modal[data-v-f2b6376c] {\n  z-index: 998;\n  width: 100%;\n  position: fixed;\n  height: 100%;\n  padding: 150px 20%;\n  background: rgba(45, 76, 100, 0.7);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n  position: relative;\n  padding: 0;\n  border-radius: 12px !important;\n  height: 500px;\n  background: #FFFFFF;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n  position: relative;\n  width: 54%;\n  padding: 50px;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 146.28%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 20px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 20px;\n  line-height: 150%;\n  color: #2D4C64;\n}\n.contact-modal .modal-body .modal-left .ml-contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n  position: absolute;\n  cursor: pointer;\n  bottom: 50px;\n  width: calc(100% - 100px);\n  height: 50px;\n  border-radius: 6px;\n  padding-top: 14px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n  width: 46%;\n  height: 100%;\n  overflow: hidden;\n  border-bottom-right-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.contact-modal .modal-body .modal-right img[data-v-f2b6376c] {\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.contact-modal .modal-body .modal-exit[data-v-f2b6376c] {\n  z-index: 999;\n  cursor: pointer;\n  position: absolute;\n  top: 25px;\n  right: 25px;\n}\n.nav-bar[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n  height: 100px;\n  background: #FFFFFF;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.nav-bar .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  left: 18%;\n  top: 25px;\n}\n.nav-bar .logo img[data-v-f2b6376c] {\n  width: 25%;\n  transform: translateX(-150%) translateY(-35%);\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n  position: absolute;\n  height: 50px;\n  top: 25px;\n  left: calc(18% + 106px);\n  width: 260px;\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 200px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 320px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .contact-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 8px;\n}\n.nav-bar .contact-us-active[data-v-f2b6376c] {\n  right: calc(18% + 230px);\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 195px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18% + 110px);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .login-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n  cursor: pointer;\n  position: absolute;\n  width: 95px;\n  top: 30px;\n  color: #4985FF;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  height: 40px;\n  border-radius: 6px;\n}\n.nav-bar .lang-us span[data-v-f2b6376c] {\n  cursor: pointer;\n  margin: -5px 6px 5px 6px;\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n  transition: all 1s ease 0s;\n  z-index: 999;\n  position: absolute;\n  cursor: pointer;\n  width: 95px;\n  top: 76px;\n  right: calc(18%);\n  border: 1px solid #4985FF;\n  background: #FFFFFF;\n  box-sizing: border-box;\n  border-radius: 6px;\n  overflow: hidden;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c] {\n  text-align: left;\n  cursor: pointer;\n  height: 34px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 11px;\n  line-height: 13px;\n  color: #4985FF;\n  padding: 10px 15px;\n}\n.nav-bar .lang-list .lang-item[data-v-f2b6376c]:hover {\n  background: #4985FF;\n  color: #FFFFFF;\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n  display: none;\n  cursor: pointer;\n  position: absolute;\n  width: 48px;\n  height: 42px;\n  top: 30px;\n  right: calc(10%);\n  border: 1px solid #4985FF;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main[data-v-f2b6376c] {\n  position: relative;\n  width: 100%;\n}\n.main .layout[data-v-f2b6376c] {\n  background: #FFFFFF;\n  position: relative;\n  height: 720px;\n  background-image: linear-gradient(rgba(196, 196, 196, 0.4), rgba(196, 196, 196, 0.4)), url(\"/images/layout.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .layout .layout-left[data-v-f2b6376c] {\n  position: relative;\n  width: 56%;\n}\n.main .layout .layout-left .layout-text[data-v-f2b6376c] {\n  width: 460px;\n  position: relative;\n  top: 160px;\n  left: 32%;\n  color: #06397D;\n}\n.main .layout .layout-left .layout-text .header[data-v-f2b6376c] {\n  text-align: left;\n  font-weight: 800;\n  font-size: 42px;\n  line-height: 56px;\n}\n.main .layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n  margin-top: 30px;\n  text-align: left;\n  height: 77px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n}\n.main .layout .layout-left .layout-text .join[data-v-f2b6376c] {\n  cursor: pointer;\n  width: 250px;\n  margin-top: 54px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 20px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .layout .layout-left .layout-text .join img[data-v-f2b6376c] {\n  margin-top: 12px;\n  width: 20px;\n  height: 20px;\n}\n.main .layout .layout-left .layout-text .login[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .layout .layout-left .layout-text .login .go-login[data-v-f2b6376c] {\n  cursor: pointer;\n  margin-left: 10px;\n  font-weight: 600;\n  -webkit-text-decoration-line: underline;\n          text-decoration-line: underline;\n  color: #4985FF;\n}\n.main .layout .layout-right[data-v-f2b6376c] {\n  background: #FFFFFF;\n}\n.main .layout .layout-right .layout-img[data-v-f2b6376c] {\n  width: 560px;\n  position: absolute;\n  right: 10%;\n  top: 184px;\n}\n.main .layout .layout-right .layout-img-in[data-v-f2b6376c] {\n  width: 555px;\n  position: absolute;\n  left: 44%;\n  top: 138px;\n}\n.service[data-v-f2b6376c] {\n  position: relative;\n  height: 700px;\n  background: #D6E6FF;\n  padding: 0 18%;\n}\n.service .service-header[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 80px;\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.service .service-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: left;\n  color: #06397D;\n}\n.service .service-list[data-v-f2b6376c] {\n  position: relative;\n  margin-top: 45px;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n  position: relative;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 10px;\n  padding: 0 30px;\n  height: 240px;\n  width: calc(50% - 15px);\n}\n.service .service-list .service-single div[data-v-f2b6376c] {\n  text-align: left;\n}\n.service .service-list .service-single .circle[data-v-f2b6376c] {\n  margin-top: 8px;\n  width: 50px;\n  height: 50px;\n  background: #4985FF;\n  opacity: 0.1;\n  border-radius: 50%;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n  position: absolute;\n  top: 45px;\n  left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n  margin-top: 25px;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 170%;\n  color: #06397D;\n}\n.service .service-list .service-single .head span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.service .service-list .service-single[data-v-f2b6376c]:last-of-type {\n  margin-left: 30px;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n  margin-top: 26px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n  top: 38px;\n  left: 40px;\n}\n.service .service-list .service-single:last-of-type .head[data-v-f2b6376c] {\n  margin-top: 12px;\n}\n.description[data-v-f2b6376c] {\n  position: relative;\n  background: #FFFFFF;\n}\n.description .description-one[data-v-f2b6376c] {\n  position: relative;\n}\n.description .description-one .desc-left[data-v-f2b6376c] {\n  padding: 70px 20px 70px 18%;\n  width: 54%;\n  color: #06397D;\n}\n.description .description-one .desc-left div[data-v-f2b6376c] {\n  text-align: left;\n}\n.description .description-one .desc-left .head[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n}\n.description .description-one .desc-left .desc-list[data-v-f2b6376c] {\n  margin-top: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n  margin-top: 30px;\n}\n.description .description-one .desc-left .desc-list .desc-item .circle[data-v-f2b6376c] {\n  width: 50px;\n  height: 50px;\n  background: rgba(73, 133, 255, 0.1);\n  border-radius: 50%;\n  padding: 10px;\n}\n.description .description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n  margin-left: 25px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 150%;\n  color: #06397D;\n}\n.description .description-one .desc-left .desc-list .desc-item div span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-one .desc-right[data-v-f2b6376c] {\n  position: relative;\n  margin-left: 6%;\n  width: 46%;\n  overflow: hidden;\n}\n.description .description-one .desc-right img[data-v-f2b6376c] {\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  min-height: 100%;\n  min-width: 100%;\n  transform: translate(-50%, -50%);\n}\n.description .description-two[data-v-f2b6376c] {\n  position: relative;\n  padding: 70px 18%;\n  background: #D6E6FF;\n}\n.description .description-two .dt-top .dt-header[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 42px;\n  color: #06397D;\n  width: 100%;\n}\n.description .description-two .dt-top .dt-sub[data-v-f2b6376c] {\n  width: calc(66% - 24px);\n  margin-left: 24px;\n  font-style: normal;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 26px;\n  color: #06397D;\n  text-align: left;\n}\n.description .description-two .dt-list[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c] {\n  padding: 0 4px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  border-radius: 10px;\n  height: 100px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 24px;\n  align-items: center;\n  text-align: center;\n  color: #06397D;\n}\n.description .description-two .dt-list .dt-item span[data-v-f2b6376c] {\n  font-weight: normal;\n}\n.description .description-two .dt-list .dt-item[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module[data-v-f2b6376c] {\n  position: relative;\n  padding: 80px 18%;\n  background: #FCFCFC;\n}\n.module .module-header[data-v-f2b6376c] {\n  font-style: normal;\n  font-weight: bold;\n  font-size: 32px;\n  line-height: 53px;\n  text-align: center;\n  color: #06397D;\n  margin-bottom: 15px;\n}\n.module .module-sub[data-v-f2b6376c] {\n  font-size: 16px;\n  line-height: 25px;\n  text-align: center;\n  color: #999999;\n}\n.module .module-list[data-v-f2b6376c] {\n  flex-wrap: wrap;\n  position: relative;\n  margin-top: 50px;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n  background: #FFFFFF;\n  padding: 20px;\n  height: 380px;\n  margin-right: 24px;\n  margin-top: 24px;\n  width: calc(33% - 16px);\n  background: #FCFCFC;\n  box-shadow: 0px 0px 15px #D8D8D8;\n  border-radius: 10px;\n}\n.module .module-list .module-single img[data-v-f2b6376c] {\n  height: 210px;\n  width: 100%;\n  background: rgba(233, 233, 233, 0.4);\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n  height: 120px;\n  margin-top: 30px;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 150%;\n  display: flex;\n  text-align: center;\n  justify-content: center;\n  align-items: center;\n  color: #06397D;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n  margin-right: 0;\n}\n.module .more-module[data-v-f2b6376c] {\n  display: none;\n  position: relative;\n  cursor: pointer;\n  width: 100%;\n  margin-top: 42px;\n  box-sizing: border-box;\n  height: 50px;\n  border-radius: 6px;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.module .more-module span[data-v-f2b6376c] {\n  color: #FFFFFF;\n  cursor: pointer;\n  margin: 14px 10px auto 30px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n}\n.home-last[data-v-f2b6376c] {\n  position: relative;\n  height: auto;\n  background: #D6E6FF;\n  overflow: hidden;\n  padding: 80px 18% 80px 18%;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n  font-weight: bold;\n  font-size: 36px;\n  line-height: 53px;\n  color: #2D4C64;\n  margin-bottom: 15px;\n}\n.footer[data-v-f2b6376c] {\n  position: relative;\n  height: auto;\n  padding-bottom: 30px;\n  background: #FFFFFF;\n  padding-top: 40px;\n}\n.footer .footer-body[data-v-f2b6376c] {\n  position: relative;\n  width: 64%;\n  left: 18%;\n}\n.footer .footer-body .logo[data-v-f2b6376c] {\n  cursor: pointer;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.footer .footer-body .logo img[data-v-f2b6376c] {\n  width: 120px;\n  transform: translateY(-35%);\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n  top: 90px;\n  padding-bottom: 20px;\n  position: absolute;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n  position: absolute;\n  right: 0;\n  width: 520px;\n}\n.footer .footer-body .f-right .fr-head[data-v-f2b6376c] {\n  text-align: left;\n  margin-top: 15px;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 22px;\n  color: #2D4C64;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n  margin-top: 10px;\n  flex-wrap: wrap;\n}\n.footer .footer-body .f-right .contacts .contact[data-v-f2b6376c] {\n  margin-top: 15px;\n  margin-right: 40px;\n}\n.footer .footer-body .f-right .contacts .contact .label[data-v-f2b6376c] {\n  text-align: left;\n  font-style: normal;\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.footer .footer-body .f-right .contacts .contact .value[data-v-f2b6376c] {\n  margin-top: 5px;\n  text-align: left;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #999999;\n}\n@media only screen and (max-width: 1480px) {\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    max-width: 420px;\n}\n}\n@media only screen and (min-width: 1520px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 500px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 585px;\n    right: 150px;\n}\n}\n@media only screen and (min-width: 1620px) {\n.module-list .module-single[data-v-f2b6376c] {\n    padding: 30px !important;\n    height: 380px;\n}\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 660px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 645px;\n}\n}\n@media only screen and (min-width: 1740px) {\n.layout-right .layout-img[data-v-f2b6376c] {\n    min-width: 680px;\n}\n.layout-right .layout-img-in[data-v-f2b6376c] {\n    min-width: 845px;\n}\n}\n@media only screen and (max-width: 1720px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    width: 410px;\n}\n.footer .footer-body .fm-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n}\n@media only screen and (max-width: 1340px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 150px 12%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    padding: 40px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 40px;\n    width: calc(100% - 80px);\n}\n.nav-bar .logo[data-v-f2b6376c] {\n    left: 8%;\n}\n.nav-bar .slogan[data-v-f2b6376c] {\n    left: calc(8% + 106px);\n}\n.nav-bar .contact-us[data-v-f2b6376c] {\n    right: calc(8% + 320px);\n}\n.nav-bar .contact-us-active[data-v-f2b6376c] {\n    right: calc(8% + 230px);\n}\n.nav-bar .login-us[data-v-f2b6376c] {\n    right: calc(8% + 110px);\n}\n.nav-bar .lang-us[data-v-f2b6376c] {\n    right: calc(8%);\n}\n.nav-bar .lang-list[data-v-f2b6376c] {\n    right: calc(8%);\n}\n.layout[data-v-f2b6376c] {\n    height: 560px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    top: 80px !important;\n    left: 18% !important;\n}\n.layout .layout-right .layout-img[data-v-f2b6376c] {\n    right: 8% !important;\n    width: 440px !important;\n}\n.service[data-v-f2b6376c] {\n    height: 660px;\n    padding: 0 10%;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 20px 60px 10% !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n}\n.home-last[data-v-f2b6376c] {\n    padding: 30px 10% 30px 10% !important;\n}\n.footer[data-v-f2b6376c] {\n    padding-top: 50px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    width: 460px;\n}\n.footer .footer-body .f-right .contacts[data-v-f2b6376c] {\n    margin-top: 0;\n}\n}\n@media only screen and (max-width: 1120px) {\n.footer .footer-body[data-v-f2b6376c] {\n    width: 80%;\n    left: 10%;\n}\n}\n@media only screen and (max-width: 1020px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    width: 60%;\n    padding: 25px;\n}\n.contact-modal .modal-body .modal-left .ml-back[data-v-f2b6376c] {\n    position: absolute;\n    cursor: pointer;\n    bottom: 25px;\n    width: calc(100% - 50px);\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    width: 40%;\n}\n.side-menu[data-v-f2b6376c] {\n    position: fixed;\n    height: 100%;\n    z-index: 10;\n    width: 100%;\n}\n.side-menu .side-left[data-v-f2b6376c] {\n    padding-left: 12.5%;\n    padding-right: 12.5%;\n    height: 100%;\n    width: 80%;\n    background: #FFFFFF;\n    font-size: 16px;\n    line-height: 50px;\n    color: #06397D;\n    font-weight: 500;\n}\n.side-menu .side-left .side-top[data-v-f2b6376c] {\n    display: flex;\n    flex-direction: row;\n}\n.side-menu .side-left .side-top .logo[data-v-f2b6376c] {\n    cursor: pointer;\n    position: relative;\n    top: 25px;\n}\n.side-menu .side-left .side-top .logo img[data-v-f2b6376c] {\n    width: 120px;\n    transform: translateY(-35%);\n}\n.side-menu .side-left .side-top .slogan[data-v-f2b6376c] {\n    position: absolute;\n    height: 50px;\n    top: 25px;\n    left: calc(30%);\n    width: 260px;\n}\n.side-menu .side-left .side-slogan[data-v-f2b6376c] {\n    display: none;\n}\n.side-menu .side-left .side-head[data-v-f2b6376c] {\n    margin-top: 95px;\n    text-align: left;\n    font-weight: 600;\n    font-size: 18px;\n    line-height: 22px;\n    color: #2D4C64;\n}\n.side-menu .side-left .side-text[data-v-f2b6376c] {\n    text-align: left;\n    margin-top: 15px;\n    font-weight: normal;\n    font-size: 14px;\n    line-height: 158.47%;\n    color: #999999;\n}\n.side-menu .side-left .side-btns[data-v-f2b6376c] {\n    flex-wrap: wrap;\n    position: relative;\n    margin-top: 25px;\n}\n.side-menu .side-left .side-btns .contact-us[data-v-f2b6376c] {\n    margin-top: 20px;\n    margin-right: 12px;\n    cursor: pointer;\n    width: 200px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .contact-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 8px;\n}\n.side-menu .side-left .side-btns .login-us[data-v-f2b6376c] {\n    margin-top: 20px;\n    margin-right: 12px;\n    cursor: pointer;\n    width: 105px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .login-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 6px;\n}\n.side-menu .side-left .side-btns .lang-us[data-v-f2b6376c] {\n    margin-top: 20px;\n    margin-right: 12px;\n    z-index: 99;\n    cursor: pointer;\n    width: 95px;\n    color: #4985FF;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    height: 40px;\n    border-radius: 6px;\n}\n.side-menu .side-left .side-btns .lang-us span[data-v-f2b6376c] {\n    cursor: pointer;\n    margin: -5px 6px 5px 6px;\n}\n.side-menu .side-left .side-btns .lang-list[data-v-f2b6376c] {\n    position: absolute;\n    top: 46px;\n    transition: all 1s ease 0s;\n    z-index: 999 !important;\n    cursor: pointer;\n    width: 95px;\n    border: 1px solid #4985FF;\n    box-sizing: border-box;\n    border-radius: 6px;\n    overflow: hidden;\n    background: #FFFFFF;\n}\n.side-menu .side-left .side-btns .lang-list .lang-item[data-v-f2b6376c] {\n    text-align: left;\n    cursor: pointer;\n    height: 34px;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 11px;\n    line-height: 13px;\n    color: #4985FF;\n    padding: 10px 15px;\n}\n.side-menu .side-left .side-btns .lang-list .lang-item[data-v-f2b6376c]:hover {\n    background: #4985FF;\n    color: #FFFFFF;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    position: relative;\n    width: 20%;\n    height: 100%;\n    background: #2D4C64;\n    opacity: 0.7;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    position: absolute;\n    width: 48px;\n    height: 42px;\n    top: 39px;\n    right: calc(50%);\n}\n.nav-bar .menu-btn[data-v-f2b6376c] {\n    display: block;\n}\n.nav-bar .contact-us[data-v-f2b6376c], .nav-bar .login-us[data-v-f2b6376c], .nav-bar .lang-us[data-v-f2b6376c] {\n    display: none;\n}\n.layout[data-v-f2b6376c] {\n    height: 480px !important;\n}\n.layout .layout-left[data-v-f2b6376c] {\n    width: 100% !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 60% !important;\n    top: 70px !important;\n    left: 20% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-weight: 700 !important;\n    font-size: 32px !important;\n    line-height: 52px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 25px !important;\n    height: 70px !important;\n    font-size: 16spx !important;\n    line-height: 23px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 36px !important;\n    height: 50px !important;\n}\n.layout .layout-left .layout-text .join span[data-v-f2b6376c] {\n    font-size: 14px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 50px;\n}\n.service .service-list[data-v-f2b6376c] {\n    flex-direction: column !important;\n    margin-top: 25px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 30px;\n    height: 180px;\n    width: calc(100%);\n    margin-left: 0 !important;\n    margin-top: 20px;\n}\n.description-one[data-v-f2b6376c] {\n    flex-wrap: wrap;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    margin-left: 0 !important;\n    width: 100% !important;\n    height: 280px !important;\n}\n.description-two .dt-top[data-v-f2b6376c] {\n    flex-direction: column !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    text-align: left;\n    font-size: 32px;\n    line-height: 42px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    text-align: left;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 16px;\n    line-height: 26px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 24px;\n    margin-top: 24px;\n    width: calc(50% - 12px) !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 24px !important;\n}\n.description-two .dt-item[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0 !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 32px !important;\n    margin-top: 32px !important;\n    width: calc(50% - 16px) !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 32px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(2n) {\n    margin-right: 0px !important;\n}\n}\n@media only screen and (max-width: 920px) {\n.service[data-v-f2b6376c] {\n    height: 700px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 200px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    left: 30px !important;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    top: 180px;\n    padding-bottom: 20px;\n}\n.footer .footer-body .f-right[data-v-f2b6376c] {\n    margin-top: 60px;\n    width: 100%;\n}\n}\n@media only screen and (max-width: 836px) {\n.footer[data-v-f2b6376c] {\n    height: auto;\n    padding-bottom: 10px;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    top: 220px;\n    padding-bottom: 20px;\n}\n}\n@media only screen and (max-width: 640px) {\n.contact-modal[data-v-f2b6376c] {\n    padding: 120px 8%;\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 550px;\n}\n.contact-modal .modal-body .modal-left[data-v-f2b6376c] {\n    margin-top: 190px;\n    width: 100%;\n}\n.contact-modal .modal-body .modal-left .ml-head[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n}\n.contact-modal .modal-body .modal-left .ml-sub[data-v-f2b6376c] {\n    margin-top: 16px;\n    font-size: 16px;\n    line-height: 130%;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact[data-v-f2b6376c] {\n    margin-top: 10px;\n    margin-right: 20px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .label[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-left .ml-contacts .contact .value[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 18px;\n}\n.contact-modal .modal-body .modal-right[data-v-f2b6376c] {\n    position: absolute;\n    top: 0;\n    height: 190px;\n    width: 100%;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n}\n}\n@media only screen and (max-width: 620px) {\n.slogan[data-v-f2b6376c] {\n    display: none;\n}\n.side-menu .side-left[data-v-f2b6376c] {\n    width: 76%;\n}\n.side-menu .side-left .side-top .slogan[data-v-f2b6376c] {\n    height: 50px;\n    top: 25px;\n    left: calc(10%);\n    width: 260px;\n}\n.side-menu .side-left .side-slogan[data-v-f2b6376c] {\n    text-align: left;\n    display: block;\n    font-size: 16px;\n    line-height: 50px;\n    color: #06397D;\n    font-weight: 500;\n    height: 50px;\n    margin-top: 35px;\n    width: 260px;\n}\n.side-menu .side-left .side-head[data-v-f2b6376c] {\n    margin-top: 30px;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    width: 24%;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    top: 39px;\n    right: calc(20%);\n}\n.menu-btn[data-v-f2b6376c] {\n    right: calc(5%) !important;\n}\n.layout[data-v-f2b6376c] {\n    height: 440px !important;\n}\n.layout .layout-left .layout-text[data-v-f2b6376c] {\n    width: 80% !important;\n    top: 40px !important;\n    left: 10% !important;\n}\n.layout .layout-left .layout-text .header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 42px !important;\n}\n.layout .layout-left .layout-text .sub[data-v-f2b6376c] {\n    margin-top: 15px !important;\n    height: 110px !important;\n}\n.layout .layout-left .layout-text .join[data-v-f2b6376c] {\n    margin-top: 32px !important;\n}\n.layout .layout-left .layout-text .login[data-v-f2b6376c] {\n    margin-top: 10px !important;\n    flex-direction: column !important;\n}\n.layout .layout-left .layout-text .login span[data-v-f2b6376c], .layout .layout-left .layout-text .login div[data-v-f2b6376c] {\n    text-align: left !important;\n    margin-left: 0 !important;\n    margin-top: 10px !important;\n}\n.layout .layout-right[data-v-f2b6376c] {\n    display: none !important;\n}\n.service[data-v-f2b6376c] {\n    height: 800px;\n}\n.service .service-header[data-v-f2b6376c] {\n    margin-top: 40px;\n    font-size: 28px;\n}\n.service .service-sub[data-v-f2b6376c] {\n    font-size: 14px;\n    line-height: 20px;\n}\n.service .service-list[data-v-f2b6376c] {\n    margin-top: 15px !important;\n}\n.service .service-list .service-single[data-v-f2b6376c] {\n    padding: 0 20px;\n    height: 240px;\n}\n.service .service-list .service-single .service-icon[data-v-f2b6376c] {\n    top: 45px;\n    left: 45px;\n}\n.service .service-list .service-single .head[data-v-f2b6376c] {\n    margin-top: 25px;\n    font-size: 16px;\n    line-height: 140%;\n}\n.service .service-list .service-single:last-of-type .circle[data-v-f2b6376c] {\n    margin-top: 16px;\n}\n.service .service-list .service-single:last-of-type .service-icon[data-v-f2b6376c] {\n    top: 30px !important;\n}\n.description-one .desc-left[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n    width: 100% !important;\n}\n.description-one .desc-left .head[data-v-f2b6376c] {\n    font-weight: bold;\n    font-size: 28px !important;\n    line-height: 40px !important;\n}\n.description-one .desc-left .desc-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-one .desc-left .desc-list .desc-item[data-v-f2b6376c] {\n    margin-top: 25px !important;\n}\n.description-one .desc-left .desc-list .desc-item div[data-v-f2b6376c] {\n    margin-left: 20px !important;\n    font-size: 14px !important;\n    line-height: 140% !important;\n}\n.description-one .desc-right[data-v-f2b6376c] {\n    height: 200px !important;\n}\n.description-two[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.description-two .dt-top .dt-header[data-v-f2b6376c] {\n    font-size: 28px;\n    line-height: 38px;\n    width: 100% !important;\n}\n.description-two .dt-top .dt-sub[data-v-f2b6376c] {\n    margin-top: 15px;\n    width: 100% !important;\n    margin-left: 0 !important;\n    font-size: 14px;\n    line-height: 22px;\n}\n.description-two .dt-list[data-v-f2b6376c] {\n    margin-top: 10px;\n}\n.description-two .dt-list .dt-item[data-v-f2b6376c] {\n    padding: 0 8px !important;\n    margin-right: 0 !important;\n    width: calc(100% ) !important;\n}\n.module[data-v-f2b6376c] {\n    padding: 30px 10% 50px 10% !important;\n}\n.module .module-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.module .module-sub[data-v-f2b6376c] {\n    font-size: 16px;\n    line-height: 22px !important;\n}\n.module .module-list[data-v-f2b6376c] {\n    margin-top: 10px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c] {\n    padding: 15px !important;\n    height: 380px;\n    margin-right: 0 !important;\n    margin-top: 32px !important;\n    width: calc(100%) !important;\n}\n.module .module-list .module-single .head[data-v-f2b6376c] {\n    height: 120px;\n    margin-top: 20px;\n    font-size: 16px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(3n) {\n    margin-right: 0px !important;\n}\n.module .module-list .module-single[data-v-f2b6376c]:nth-child(-n+3) {\n    display: none !important;\n}\n.module .more-module[data-v-f2b6376c] {\n    display: flex !important;\n}\n.home-last[data-v-f2b6376c] {\n    padding: 30px 10% 30px 10% !important;\n}\n.home-last .hl-header[data-v-f2b6376c] {\n    font-size: 28px !important;\n    line-height: 38px !important;\n}\n.footer .footer-body .fm-foot[data-v-f2b6376c] {\n    top: 300px;\n}\n}\n@media only screen and (max-width: 444px) {\n.side-menu .side-left[data-v-f2b6376c] {\n    padding-left: 5%;\n    padding-right: 5%;\n    width: 80%;\n}\n.side-menu .side-right[data-v-f2b6376c] {\n    width: 20%;\n}\n.side-menu .side-right .side-exit[data-v-f2b6376c] {\n    right: calc(25%);\n}\n.contact-modal .modal-body[data-v-f2b6376c] {\n    height: 570px;\n}\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 260px;\n}\n}\n@media only screen and (max-width: 339px) {\n.footer .footer-body .f-mid[data-v-f2b6376c] {\n    margin-top: 276px;\n}\n}", ""]);
 
 // exports
 
@@ -5679,7 +5722,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".top-nav[data-v-f181ee82] {\n  padding: 62px 0;\n  overflow: hidden;\n}\n.top-nav .nav-header[data-v-f181ee82] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 24px;\n  line-height: 29px;\n  letter-spacing: 0.3px;\n  color: #252733;\n}\n.top-nav .nav-user[data-v-f181ee82] {\n  margin-top: 4px;\n  position: absolute;\n  right: 58px;\n  top: 62px;\n}\n.top-nav .nav-user .notify[data-v-f181ee82] {\n  position: relative;\n}\n.top-nav .nav-user .notify .label[data-v-f181ee82] {\n  position: absolute;\n  top: 3px;\n  right: 0;\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background: #4985FF;\n}\n.top-nav .nav-user .divider[data-v-f181ee82] {\n  margin: -5px 17px 0 23px;\n  width: 1px;\n  height: 32px;\n  background: #DFE0EB;\n}\n.top-nav .nav-user .user-name[data-v-f181ee82] {\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: right;\n  letter-spacing: 0.2px;\n  color: #06397D;\n}\n.top-nav .nav-user .user-img[data-v-f181ee82] {\n  cursor: pointer;\n  margin: -12px 0 auto 8px;\n  height: 44px;\n  width: 44px;\n  border-radius: 50%;\n}\n.top-nav .nav-user .user-img img[data-v-f181ee82] {\n  cursor: pointer;\n  padding: 2px;\n  border: 2px solid #4985FF;\n  -o-object-fit: cover;\n     object-fit: cover;\n  border-radius: 50%;\n}\n.top-nav .nav-user .user-drop-menu[data-v-f181ee82] {\n  position: absolute;\n  right: 0;\n  top: 40px;\n  z-index: 99;\n  background: #FFFFFF;\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);\n  border-radius: 6px;\n  padding: 6px 18px;\n}\n.top-nav .nav-user .user-drop-menu .flex-row[data-v-f181ee82] {\n  padding: 9px 0;\n  cursor: pointer;\n}\n.top-nav .nav-user .user-drop-menu .flex-row .label[data-v-f181ee82] {\n  margin-left: 9px;\n  font-size: 14px;\n  line-height: 16px;\n  text-align: left;\n  color: #4985FF;\n}\n.top-nav .nav-user .user-drop-menu .flex-row svg[data-v-f181ee82], .top-nav .nav-user .user-drop-menu .flex-row .label[data-v-f181ee82] {\n  cursor: pointer;\n}\n.top-nav .nav-user .user-drop-menu .flex-row[data-v-f181ee82]:last-of-type {\n  border-top: 0.5px solid #DFE0EB;\n}", ""]);
+exports.push([module.i, ".top-nav[data-v-f181ee82] {\n  padding: 62px 0;\n  overflow: hidden;\n}\n.top-nav .nav-header[data-v-f181ee82] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 24px;\n  line-height: 29px;\n  letter-spacing: 0.3px;\n  color: #252733;\n}\n.top-nav .nav-user[data-v-f181ee82] {\n  margin-top: 4px;\n  position: absolute;\n  right: 58px;\n  top: 62px;\n}\n.top-nav .nav-user .notify[data-v-f181ee82] {\n  cursor: pointer;\n  position: relative;\n}\n.top-nav .nav-user .notify .label[data-v-f181ee82] {\n  cursor: pointer;\n  position: absolute;\n  top: 3px;\n  right: 0;\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background: #4985FF;\n}\n.top-nav .nav-user .notify svg[data-v-f181ee82] {\n  cursor: pointer;\n}\n.top-nav .nav-user .divider[data-v-f181ee82] {\n  margin: -5px 17px 0 23px;\n  width: 1px;\n  height: 32px;\n  background: #DFE0EB;\n}\n.top-nav .nav-user .user-name[data-v-f181ee82] {\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: right;\n  letter-spacing: 0.2px;\n  color: #06397D;\n}\n.top-nav .nav-user .user-img[data-v-f181ee82] {\n  cursor: pointer;\n  margin: -12px 0 auto 8px;\n  height: 44px;\n  width: 44px;\n  border-radius: 50%;\n}\n.top-nav .nav-user .user-img img[data-v-f181ee82] {\n  cursor: pointer;\n  padding: 2px;\n  border: 2px solid #4985FF;\n  -o-object-fit: cover;\n     object-fit: cover;\n  border-radius: 50%;\n}\n.top-nav .nav-user .user-drop-menu[data-v-f181ee82] {\n  position: absolute;\n  right: 0;\n  top: 40px;\n  z-index: 99;\n  background: #FFFFFF;\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);\n  border-radius: 6px;\n  padding: 6px 18px;\n}\n.top-nav .nav-user .user-drop-menu .flex-row[data-v-f181ee82] {\n  padding: 9px 0;\n  cursor: pointer;\n}\n.top-nav .nav-user .user-drop-menu .flex-row .label[data-v-f181ee82] {\n  margin-left: 9px;\n  font-size: 14px;\n  line-height: 16px;\n  text-align: left;\n  color: #4985FF;\n}\n.top-nav .nav-user .user-drop-menu .flex-row svg[data-v-f181ee82], .top-nav .nav-user .user-drop-menu .flex-row .label[data-v-f181ee82] {\n  cursor: pointer;\n}\n.top-nav .nav-user .user-drop-menu .flex-row[data-v-f181ee82]:last-of-type {\n  border-top: 0.5px solid #DFE0EB;\n}\n.top-nav .nav-user .notify-menu[data-v-f181ee82] {\n  position: absolute;\n  display: none;\n  top: 30px;\n  right: 150px;\n  z-index: 99;\n  padding: 16px;\n  background: #FDFDFD;\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);\n  border-radius: 10px;\n}\n.top-nav .nav-user .notify-menu .notify-title[data-v-f181ee82] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 17px;\n  color: #06397D;\n}\n.top-nav .nav-user .notify-menu .notify-items[data-v-f181ee82] {\n  margin-top: 12px;\n}\n.top-nav .nav-user .notify-menu .notify-items .item[data-v-f181ee82] {\n  cursor: pointer;\n  margin-top: 10px;\n}\n.top-nav .nav-user .notify-menu .notify-items .item .circle[data-v-f181ee82] {\n  cursor: pointer;\n  margin-top: 2px;\n  border: 2px solid #29CC97;\n  border-radius: 50%;\n  height: 12px;\n  width: 12px;\n}\n.top-nav .nav-user .notify-menu .notify-items .item .middle[data-v-f181ee82] {\n  cursor: pointer;\n  margin-left: 9px;\n}\n.top-nav .nav-user .notify-menu .notify-items .item .middle .status[data-v-f181ee82] {\n  cursor: pointer;\n  text-align: left;\n  width: 120px;\n  font-size: 11px;\n  line-height: 12px;\n  color: #252733;\n  -webkit-line-clamp: 1;\n  /* no of lines */\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden !important;\n}\n.top-nav .nav-user .notify-menu .notify-items .item .middle .name[data-v-f181ee82] {\n  cursor: pointer;\n  text-align: left;\n  margin-top: 2px;\n  width: 120px;\n  font-size: 11px;\n  line-height: 18px;\n  white-space: nowrap;\n  color: #787878;\n  -webkit-line-clamp: 1;\n  /* no of lines */\n  text-overflow: ellipsis;\n  overflow: hidden !important;\n}\n.top-nav .nav-user .notify-menu .notify-items .item .date[data-v-f181ee82] {\n  cursor: pointer;\n  text-align: left;\n  font-size: 9px;\n  line-height: 10px;\n  letter-spacing: 0.2px;\n  color: #C5C5C5;\n  width: 42px;\n}\n.top-nav .nav-user .dropdwn:hover .notify-menu[data-v-f181ee82] {\n  display: flex;\n}", ""]);
 
 // exports
 
@@ -5774,7 +5817,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-739f325e] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-739f325e] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-739f325e] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-739f325e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] {\n  padding: 36px 28px 100px 28px;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] {\n  width: 40%;\n  margin-right: 50px;\n  position: relative;\n}\n.main .main-info .containe .content .content-info .top-date .item .label[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .main-info .containe .content .content-info .top-date .item input[data-v-739f325e] {\n  margin-top: 12px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  border-radius: 6px;\n  padding: 16px 20px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .content-info .top-date .item .divider[data-v-739f325e] {\n  width: 1px;\n  height: 30px;\n  background: #DFE0EB;\n  position: absolute;\n  top: 42px;\n  right: 46px;\n}\n.main .main-info .containe .content .content-info .top-date .item svg[data-v-739f325e] {\n  position: absolute;\n  top: 48px;\n  right: 16px;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-739f325e] {\n  margin-top: 40px;\n  width: 40%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  padding: 24px;\n  position: relative;\n}\n.main .main-info .containe .content .content-info .field-list .head[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-739f325e] {\n  height: 242px;\n  margin-top: 28px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label[data-v-739f325e] {\n  padding: 10px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .name[data-v-739f325e], .main .main-info .containe .content .content-info .field-list .item-list .item-label .date[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .name[data-v-739f325e] {\n  width: 42%;\n  margin-right: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .date[data-v-739f325e] {\n  width: 56%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-scroll[data-v-739f325e] {\n  overflow-y: scroll;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-739f325e] {\n  position: relative;\n  padding: 25px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-739f325e], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-739f325e] {\n  width: 42%;\n  margin-right: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-739f325e] {\n  width: 56%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-739f325e] {\n  position: absolute;\n  top: 21px;\n  right: 0;\n  cursor: pointer;\n  text-align: right;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar {\n  width: 3px;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar-thumb {\n  background: #4985FF;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar-thumb:hover {\n  background: #4985FF;\n}\n.main .main-info .containe .content .content-info .send-btn[data-v-739f325e] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-739f325e] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-739f325e] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-739f325e] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-739f325e] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] {\n  padding: 36px 28px 100px 28px;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] {\n  width: calc(30% - 40px);\n  margin-right: 50px;\n  position: relative;\n}\n.main .main-info .containe .content .content-info .top-date .item .label[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .main-info .containe .content .content-info .top-date .item input[data-v-739f325e] {\n  margin-top: 12px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  border-radius: 6px;\n  padding: 16px 20px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .content-info .top-date .item .divider[data-v-739f325e] {\n  width: 1px;\n  height: 30px;\n  background: #DFE0EB;\n  position: absolute;\n  top: 42px;\n  right: 46px;\n}\n.main .main-info .containe .content .content-info .top-date .item svg[data-v-739f325e] {\n  position: absolute;\n  top: 48px;\n  right: 16px;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .top-date .item[data-v-739f325e] ::placeholder {\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-739f325e] {\n  margin-top: 40px;\n  width: 40%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  padding: 24px;\n  position: relative;\n}\n.main .main-info .containe .content .content-info .field-list .head[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-739f325e] {\n  height: 242px;\n  margin-top: 28px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label[data-v-739f325e] {\n  padding: 10px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .name[data-v-739f325e], .main .main-info .containe .content .content-info .field-list .item-list .item-label .date[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .name[data-v-739f325e] {\n  width: 42%;\n  margin-right: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-label .date[data-v-739f325e] {\n  width: 56%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item-scroll[data-v-739f325e] {\n  overflow-y: scroll;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-739f325e] {\n  position: relative;\n  padding: 25px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-739f325e], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-739f325e] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-739f325e] {\n  width: 42%;\n  margin-right: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-739f325e] {\n  width: 56%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-739f325e] {\n  position: absolute;\n  top: 21px;\n  right: 0;\n  cursor: pointer;\n  text-align: right;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar {\n  width: 3px;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar-thumb {\n  background: #4985FF;\n}\n.main .main-info .containe .content .content-info[data-v-739f325e] ::-webkit-scrollbar-thumb:hover {\n  background: #4985FF;\n}\n.main .main-info .containe .content .content-info .send-btn[data-v-739f325e] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}", ""]);
 
 // exports
 
@@ -8304,51 +8347,98 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "login-us flex-row",
-                  on: {
-                    click: function($event) {
-                      return _vm.$router.push({ name: "login" })
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "svg",
+              _vm.userActive
+                ? _c(
+                    "div",
                     {
-                      staticStyle: { margin: "13px 0 auto 15px" },
-                      attrs: {
-                        width: "14",
-                        height: "14",
-                        viewBox: "0 0 14 14",
-                        fill: "none",
-                        xmlns: "http://www.w3.org/2000/svg"
+                      staticClass: "login-us flex-row",
+                      staticStyle: { width: "195px" },
+                      on: {
+                        click: function($event) {
+                          return _vm.$router.push({ name: "profile" })
+                        }
                       }
                     },
                     [
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
-                          fill: "#4985FF"
-                        }
-                      }),
+                      _c(
+                        "svg",
+                        {
+                          staticStyle: { margin: "13px 0 auto 15px" },
+                          attrs: {
+                            width: "14",
+                            height: "14",
+                            viewBox: "0 0 14 14",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
+                              fill: "#4985FF"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
+                              fill: "#4985FF"
+                            }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
-                          fill: "#4985FF"
+                      _c("span", [_vm._v("Личный кабинет")])
+                    ]
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "login-us flex-row",
+                      on: {
+                        click: function($event) {
+                          return _vm.$router.push({ name: "login" })
                         }
-                      })
+                      }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticStyle: { margin: "13px 0 auto 15px" },
+                          attrs: {
+                            width: "14",
+                            height: "14",
+                            viewBox: "0 0 14 14",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
+                              fill: "#4985FF"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
+                              fill: "#4985FF"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Войти")])
                     ]
                   ),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Войти")])
-                ]
-              ),
               _vm._v(" "),
               _vm.showCountrySmall
                 ? _c(
@@ -8493,6 +8583,7 @@ var render = function() {
         "div",
         {
           staticClass: "contact-us flex-row",
+          class: { "contact-us-active": !_vm.userActive },
           on: {
             click: function($event) {
               _vm.modalDisplay = true
@@ -8537,51 +8628,98 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "login-us flex-row",
-          on: {
-            click: function($event) {
-              return _vm.$router.push({ name: "login" })
-            }
-          }
-        },
-        [
-          _c(
-            "svg",
+      _vm.userActive
+        ? _c(
+            "div",
             {
-              staticStyle: { margin: "13px 0 auto 15px" },
-              attrs: {
-                width: "14",
-                height: "14",
-                viewBox: "0 0 14 14",
-                fill: "none",
-                xmlns: "http://www.w3.org/2000/svg"
+              staticClass: "login-us flex-row",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "profile" })
+                }
               }
             },
             [
-              _c("path", {
-                attrs: {
-                  d:
-                    "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
-                  fill: "#4985FF"
-                }
-              }),
+              _c(
+                "svg",
+                {
+                  staticStyle: { margin: "13px 0 auto 15px" },
+                  attrs: {
+                    width: "14",
+                    height: "14",
+                    viewBox: "0 0 14 14",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
+                      fill: "#4985FF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
+                      fill: "#4985FF"
+                    }
+                  })
+                ]
+              ),
               _vm._v(" "),
-              _c("path", {
-                attrs: {
-                  d:
-                    "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
-                  fill: "#4985FF"
+              _c("span", [_vm._v("Личный кабинет")])
+            ]
+          )
+        : _c(
+            "div",
+            {
+              staticClass: "login-us flex-row",
+              staticStyle: { width: "105px" },
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "login" })
                 }
-              })
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticStyle: { margin: "13px 0 auto 15px" },
+                  attrs: {
+                    width: "14",
+                    height: "14",
+                    viewBox: "0 0 14 14",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z",
+                      fill: "#4985FF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z",
+                      fill: "#4985FF"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [_vm._v("Войти")])
             ]
           ),
-          _vm._v(" "),
-          _c("span", [_vm._v("Войти")])
-        ]
-      ),
       _vm._v(" "),
       _c(
         "div",
@@ -8827,103 +8965,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "join flex-row" }, [
-            _c("span", [_vm._v("Присоединиться")]),
-            _vm._v(" "),
-            _c(
-              "svg",
-              {
-                staticStyle: { margin: "12px auto auto 8px" },
-                attrs: {
-                  width: "20",
-                  height: "21",
-                  viewBox: "0 0 20 21",
-                  fill: "none",
-                  xmlns: "http://www.w3.org/2000/svg"
-                }
-              },
-              [
-                _c("g", { attrs: { "clip-path": "url(#clip0)" } }, [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M5.08743 6.24219L3.35471 6.37361C2.87257 6.41019 2.44315 6.65827 2.17652 7.05421L0.178211 10.0213C-0.0240135 10.3216 -0.0561617 10.6973 0.0921575 11.0265C0.240516 11.3557 0.545396 11.5851 0.907698 11.6402L2.49421 11.8814C2.86534 9.9479 3.75377 8.01913 5.08743 6.24219Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M8.85449 18.1249L9.10023 19.6824C9.15636 20.0381 9.39003 20.3374 9.7253 20.483C9.8648 20.5436 10.0125 20.5735 10.1594 20.5735C10.3657 20.5735 10.5706 20.5145 10.7493 20.3986L13.7717 18.4368C14.175 18.175 14.4277 17.7534 14.4649 17.2802L14.5987 15.5791C12.7887 16.8884 10.824 17.7606 8.85449 18.1249Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M8.25789 17.046C8.31297 17.046 8.36836 17.0416 8.42364 17.0325C9.24879 16.8971 10.0441 16.6689 10.8028 16.3702L4.28211 9.96875C3.97789 10.7135 3.74547 11.4943 3.6075 12.3044C3.55313 12.6237 3.66223 12.949 3.89539 13.178L7.5338 16.7499C7.72739 16.9399 7.98868 17.046 8.25789 17.046Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M18.4058 9.64465C20.0014 6.61613 20.0605 3.41572 19.9771 1.91477C19.9486 1.40048 19.5309 0.990456 19.007 0.962424C18.7581 0.949079 18.463 0.939453 18.1305 0.939453C16.4209 0.939453 13.7158 1.19366 11.1332 2.50506C9.08083 3.54726 6.38956 5.84206 4.80176 8.85786C4.82051 8.87224 4.83883 8.8875 4.85609 8.90445L11.8873 15.8072C11.9046 15.8241 11.9201 15.8421 11.9347 15.8605C15.0066 14.3016 17.3442 11.6596 18.4058 9.64465ZM11.6292 5.09028C12.7715 3.96894 14.6301 3.96882 15.7724 5.09028C16.3257 5.63349 16.6305 6.35578 16.6305 7.12401C16.6305 7.89224 16.3257 8.61454 15.7724 9.15774C15.2013 9.71836 14.4509 9.99872 13.7008 9.9988C12.9505 9.99884 12.2005 9.71851 11.6292 9.15774C11.0759 8.61454 10.7711 7.89224 10.7711 7.12401C10.7711 6.35578 11.0759 5.63349 11.6292 5.09028Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M12.4572 8.34452C13.1426 9.01734 14.2578 9.01738 14.9432 8.34452C15.2752 8.01855 15.458 7.58521 15.458 7.12426C15.458 6.66331 15.2752 6.22997 14.9432 5.90404C14.6005 5.56761 14.1504 5.39941 13.7002 5.39941C13.2501 5.39941 12.7999 5.56761 12.4573 5.90404C12.1253 6.22997 11.9424 6.66331 11.9424 7.12426C11.9424 7.58521 12.1252 8.01859 12.4572 8.34452Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M0.597676 17.1203C0.747637 17.1203 0.897598 17.0642 1.01197 16.9518L2.92498 15.0738C3.15381 14.8491 3.15381 14.4849 2.92498 14.2603C2.69619 14.0356 2.32518 14.0356 2.09635 14.2603L0.18334 16.1383C-0.0454883 16.363 -0.0454883 16.7272 0.18334 16.9518C0.297754 17.0641 0.447715 17.1203 0.597676 17.1203Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M4.67818 15.981C4.44939 15.7563 4.07838 15.7563 3.84955 15.981L0.171621 19.5917C-0.057207 19.8164 -0.057207 20.1806 0.171621 20.4052C0.286035 20.5175 0.435996 20.5737 0.585957 20.5737C0.735918 20.5737 0.885879 20.5175 1.00025 20.4052L4.67814 16.7945C4.90701 16.5698 4.90701 16.2056 4.67818 15.981Z",
-                      fill: "white"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M5.60217 17.7027L3.6892 19.5807C3.46037 19.8054 3.46037 20.1696 3.6892 20.3942C3.80361 20.5065 3.95357 20.5627 4.1035 20.5627C4.25342 20.5627 4.40342 20.5066 4.51779 20.3942L6.4308 18.5162C6.65963 18.2915 6.65963 17.9273 6.4308 17.7027C6.20201 17.478 5.83099 17.478 5.60217 17.7027Z",
-                      fill: "white"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("defs", [
-                  _c("clipPath", { attrs: { id: "clip0" } }, [
-                    _c("rect", {
-                      attrs: {
-                        width: "20",
-                        height: "19.6345",
-                        fill: "white",
-                        transform: "translate(0 0.939453)"
-                      }
-                    })
-                  ])
-                ])
-              ]
-            )
-          ]),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "login flex-row" }, [
             _c("span", [_vm._v("У Вас уже есть аккаунт?")]),
@@ -8944,14 +8986,14 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(3)
     ]),
-    _vm._v(" "),
-    _vm._m(3),
     _vm._v(" "),
     _vm._m(4),
     _vm._v(" "),
     _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6),
     _vm._v(" "),
     _c("div", { staticClass: "footer" }, [
       _c("div", { staticClass: "footer-body flex-row" }, [
@@ -8968,9 +9010,9 @@ var render = function() {
           [_c("img", { attrs: { src: "/images/logo.png" } })]
         ),
         _vm._v(" "),
-        _vm._m(6),
+        _vm._m(7),
         _vm._v(" "),
-        _vm._m(7)
+        _vm._m(8)
       ])
     ])
   ])
@@ -9008,6 +9050,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-right" }, [
       _c("img", { attrs: { src: "/images/contact-modal.png", alt: "" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "join flex-row" }, [
+      _c("span", [_vm._v("Присоединиться")]),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "/images/btn-shuttle.png", alt: "" } })
     ])
   },
   function() {
@@ -11540,31 +11592,52 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "nav-user flex-row" }, [
-      _c("div", { staticClass: "notify" }, [
-        _c(
-          "svg",
-          {
-            attrs: {
-              width: "14",
-              height: "16",
-              viewBox: "0 0 14 16",
-              fill: "none",
-              xmlns: "http://www.w3.org/2000/svg"
-            }
-          },
-          [
-            _c("path", {
+      _c("div", { staticClass: "dropdwn" }, [
+        _c("div", { staticClass: "notify" }, [
+          _c(
+            "svg",
+            {
               attrs: {
-                d:
-                  "M7.00002 16C8.10377 16 8.99908 15.1047 8.99908 14H5.00096C5.00096 15.1047 5.89627 16 7.00002 16ZM13.731 11.3216C13.1272 10.6728 11.9975 9.69687 11.9975 6.5C11.9975 4.07188 10.295 2.12812 7.9994 1.65125V1C7.9994 0.447812 7.5519 0 7.00002 0C6.44815 0 6.00065 0.447812 6.00065 1V1.65125C3.70502 2.12812 2.00252 4.07188 2.00252 6.5C2.00252 9.69687 0.872834 10.6728 0.269084 11.3216C0.0815841 11.5231 -0.00154089 11.7641 2.16059e-05 12C0.00345911 12.5125 0.405647 13 1.00315 13H12.9969C13.5944 13 13.9969 12.5125 14 12C14.0016 11.7641 13.9185 11.5228 13.731 11.3216Z",
-                fill: "#788899",
-                "fill-opacity": "0.6"
+                width: "14",
+                height: "16",
+                viewBox: "0 0 14 16",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
               }
-            })
-          ]
-        ),
+            },
+            [
+              _c("path", {
+                attrs: {
+                  d:
+                    "M7.00002 16C8.10377 16 8.99908 15.1047 8.99908 14H5.00096C5.00096 15.1047 5.89627 16 7.00002 16ZM13.731 11.3216C13.1272 10.6728 11.9975 9.69687 11.9975 6.5C11.9975 4.07188 10.295 2.12812 7.9994 1.65125V1C7.9994 0.447812 7.5519 0 7.00002 0C6.44815 0 6.00065 0.447812 6.00065 1V1.65125C3.70502 2.12812 2.00252 4.07188 2.00252 6.5C2.00252 9.69687 0.872834 10.6728 0.269084 11.3216C0.0815841 11.5231 -0.00154089 11.7641 2.16059e-05 12C0.00345911 12.5125 0.405647 13 1.00315 13H12.9969C13.5944 13 13.9969 12.5125 14 12C14.0016 11.7641 13.9185 11.5228 13.731 11.3216Z",
+                  fill: "#788899",
+                  "fill-opacity": "0.6"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "label" })
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "label" })
+        _c("div", { staticClass: "notify-menu flex-col" }, [
+          _c("div", { staticClass: "notify-title" }, [_vm._v("Уведомления")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "notify-items flex-col" },
+            _vm._l(4, function(i) {
+              return _c("div", { key: i, staticClass: "item flex-row" }, [
+                _c("div", { staticClass: "circle" }),
+                _vm._v(" "),
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "date" }, [_vm._v("Июнь 7, 2020")])
+              ])
+            }),
+            0
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "divider" }),
@@ -11698,7 +11771,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "middle flex-col" }, [
+      _c("div", { staticClass: "status" }, [_vm._v("Заявка одобрена")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "name" }, [_vm._v("№ЦТС-2019/02-41")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -13116,71 +13200,89 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "content-info flex-col" }, [
                   _c("div", { staticClass: "top-date flex-row" }, [
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Показать с:")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { value: "DD.MM.YYYY", type: "text" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "svg",
-                        {
+                    _c(
+                      "div",
+                      { staticClass: "item flex-col" },
+                      [
+                        _c("div", { staticClass: "label" }, [
+                          _vm._v("Показать с:")
+                        ]),
+                        _vm._v(" "),
+                        _c("datepicker", {
                           attrs: {
-                            width: "16",
-                            height: "16",
-                            viewBox: "0 0 16 16",
-                            fill: "none",
-                            xmlns: "http://www.w3.org/2000/svg"
+                            placeholder: "YYYY-MM-DD",
+                            language: _vm.ru,
+                            format: "yyyy-MM-dd"
                           }
-                        },
-                        [
-                          _c("path", {
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "svg",
+                          {
                             attrs: {
-                              d:
-                                "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
-                              fill: "#4985FF"
+                              width: "16",
+                              height: "16",
+                              viewBox: "0 0 16 16",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
                             }
-                          })
-                        ]
-                      )
-                    ]),
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
+                                fill: "#4985FF"
+                              }
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [_vm._v("До:")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "text", placeholder: "DD.MM.YYYY" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "svg",
-                        {
+                    _c(
+                      "div",
+                      { staticClass: "item flex-col" },
+                      [
+                        _c("div", { staticClass: "label" }, [_vm._v("До:")]),
+                        _vm._v(" "),
+                        _c("datepicker", {
                           attrs: {
-                            width: "16",
-                            height: "16",
-                            viewBox: "0 0 16 16",
-                            fill: "none",
-                            xmlns: "http://www.w3.org/2000/svg"
+                            placeholder: "YYYY-MM-DD",
+                            language: _vm.ru,
+                            format: "yyyy-MM-dd"
                           }
-                        },
-                        [
-                          _c("path", {
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "svg",
+                          {
                             attrs: {
-                              d:
-                                "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
-                              fill: "#4985FF"
+                              width: "16",
+                              height: "16",
+                              viewBox: "0 0 16 16",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
                             }
-                          })
-                        ]
-                      )
-                    ]),
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
+                                fill: "#4985FF"
+                              }
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "show-btn" }, [_vm._v("Показать")])
                   ]),
@@ -13420,39 +13522,97 @@ var render = function() {
                   _c("div", { staticClass: "top-date flex-row" }, [
                     _vm._m(0),
                     _vm._v(" "),
-                    _c("div", { staticClass: "item flex-col" }, [
-                      _c("div", { staticClass: "label" }, [
-                        _vm._v("Период сверки")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "text", placeholder: "DD.MM.YYYY" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "svg",
-                        {
+                    _c(
+                      "div",
+                      { staticClass: "item flex-col" },
+                      [
+                        _c("div", { staticClass: "label" }, [
+                          _vm._v("Период сверки")
+                        ]),
+                        _vm._v(" "),
+                        _c("datepicker", {
                           attrs: {
-                            width: "16",
-                            height: "16",
-                            viewBox: "0 0 16 16",
-                            fill: "none",
-                            xmlns: "http://www.w3.org/2000/svg"
+                            disabledDates: {
+                              to: new Date(Date.now() - 8640000)
+                            },
+                            placeholder: "YYYY-MM-DD",
+                            language: _vm.ru,
+                            format: "yyyy-MM-dd"
                           }
-                        },
-                        [
-                          _c("path", {
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "svg",
+                          {
                             attrs: {
-                              d:
-                                "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
-                              fill: "#4985FF"
+                              width: "16",
+                              height: "16",
+                              viewBox: "0 0 16 16",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
                             }
-                          })
-                        ]
-                      )
-                    ])
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
+                                fill: "#4985FF"
+                              }
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "item flex-col" },
+                      [
+                        _c("div", { staticClass: "label" }, [
+                          _vm._v("Период сверки")
+                        ]),
+                        _vm._v(" "),
+                        _c("datepicker", {
+                          attrs: {
+                            disabledDates: {
+                              to: new Date(Date.now() - 8640000)
+                            },
+                            placeholder: "YYYY-MM-DD",
+                            language: _vm.ru,
+                            format: "yyyy-MM-dd"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              width: "16",
+                              height: "16",
+                              viewBox: "0 0 16 16",
+                              fill: "none",
+                              xmlns: "http://www.w3.org/2000/svg"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z",
+                                fill: "#4985FF"
+                              }
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "field-list flex-col" }, [
