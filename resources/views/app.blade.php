@@ -17,34 +17,34 @@
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 <style>
-.vdp-datepicker input{
-    width: 100%;
-    text-align: left;
-    margin-top: 8px;
-    background: #FDFDFD;
-    border: 1px solid #DFE0EB;
-    box-sizing: border-box;
-    border-radius: 6px;
-    padding: 18px 22px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-}
+    .vdp-datepicker input{
+        width: 100%;
+        text-align: left;
+        margin-top: 8px;
+        background: #FDFDFD;
+        border: 1px solid #DFE0EB;
+        box-sizing: border-box;
+        border-radius: 6px;
+        padding: 18px 22px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+    }
 
-.filter .vdp-datepicker input{
-    margin-right: 10px;
-    width: calc(100% - 20px);
-    position: relative;
-    margin-top: 15px;
-    height: 50px;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.15px;
-    border: 1px solid #DFDFDF;
-    background: #FFFFFF;
-    box-sizing: border-box;
-    border-radius: 4px;
-    padding: 13px;
-}
+    .filter .vdp-datepicker input{
+        margin-right: 10px;
+        width: calc(100% - 20px);
+        position: relative;
+        margin-top: 15px;
+        height: 50px;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0.15px;
+        border: 1px solid #DFDFDF;
+        background: #FFFFFF;
+        box-sizing: border-box;
+        border-radius: 4px;
+        padding: 13px;
+    }
 </style>
 </html>

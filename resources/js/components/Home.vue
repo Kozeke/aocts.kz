@@ -41,7 +41,9 @@
         <div v-if="sideMenu" class="side-menu flex-row">
             <div class="side-left flex-col">
                 <div class="side-top flex-row">
-                    <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
+                    <div @click="$router.push({ name: 'home' })" class="logo">
+                        <img src="/images/logo.png"/>
+                    </div>
                     <div class="slogan">Экономим ваше время!</div>
                 </div>
                 <div class="side-slogan">Экономим ваше время!</div>
@@ -113,7 +115,9 @@
             </div>
         </div>
         <div class="nav-bar flex-row">
-            <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
+            <div @click="$router.push({ name: 'home' })" class="logo">
+                <img src="/images/logo.png"/>
+            </div>
             <div class="slogan">Экономим ваше время!</div>
             <div class="contact-us flex-row" @click="modalDisplay = true;">
                 <svg style="margin: 13px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,11 +212,11 @@
                 </div>
             </div>
             <div class="layout-right">
-                <img class="layout-img" src="/images/laptop.svg" alt="laptop">
+                <img class="layout-img" src="/images/Main-img.png" alt="laptop">
                 <!-- <img class="layout-img-in" src="/images/layout-train.svg" alt="laptop"> -->
             </div>
         </div>
-        <div class="service">
+        <!-- <div class="service">
             <div class="service-header">Наши услуги</div>
             <div class="service-sub">Пользуясь услугами DARIS, у Вас появляется возможность получить широкий спектр услуг 
                 с любой точки нашей планеты, тем самым Вы экономите свое драгоценное время.</div>
@@ -245,9 +249,9 @@
                         за оказанные услуги по предоставлению подъездного пути.</div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="description flex-col">
-            <div class="description-one flex-row">
+            <!-- <div class="description-one flex-row">
                 <div class="desc-left">
                     <div class="head">Описние возможностей</div>
                     <div class="desc-list flex-col">
@@ -277,54 +281,54 @@
                 <div class="desc-right">
                     <img src="/images/description-one.svg" alt="">
                 </div>
-            </div>
+            </div> -->
             <div class="description-two">
                 <div class="dt-top flex-row">
-                    <div class="dt-header">Удобство DARIS</div>
-                    <div class="dt-sub">Lorem Ipsum - это текст-"рыба", часто используемый в
-                    Lorem Ipsum - это текст-"рыба", </div>
+                    <div class="dt-header">Возможности DARIS</div>
+                    <!-- <div class="dt-sub">Lorem Ipsum - это текст-"рыба", часто используемый в
+                    Lorem Ipsum - это текст-"рыба", </div> -->
                 </div>
                 <div class="dt-list flex-row">
-                    <div class="dt-item">Ведение лицевых счетов</div>
-                    <div class="dt-item">Электронная квитанция</div>
-                    <div class="dt-item">История платежей</div>
-                    <div class="dt-item">Формирование актов сверки
-                        <br /><span>дебиторка/кредиторка</span></div>
-                    <div class="dt-item">Счет на оплату по запросу</div>
-                    <div class="dt-item">Оплата online</div>
+                    <div class="dt-item">Заключение договоров</div>
+                    <div class="dt-item">Счета на предоплату</div>
+                    <div class="dt-item">Соглашения <span>(подачи / уборки вагонов)</span></div>
+                    <div class="dt-item">Онлайн оплата</div>
+                    <div class="dt-item">История платежей <span>(дебит / кредит)</span></div>
+                    <div class="dt-item">История взаиморасчетов<br><span>
+                    (акт выполенных работ, акт сверки)</span></div>
                 </div> 
             </div>
         </div>
         <div class="module">
             <div class="module-header">Модули в личном кабинете</div>
-            <div class="module-sub">Lorem Ipsum - это текст-"рыба", часто используемый в</div>
-            <div class="module-sub">Lorem Ipsum - это текст-"рыба",</div>
+            <!-- <div class="module-sub">Lorem Ipsum - это текст-"рыба", часто используемый в</div>
+            <div class="module-sub">Lorem Ipsum - это текст-"рыба",</div> -->
             <div class="module-list flex-row">
                 <div class="module-single flex-col">
-                    <img src="/images/module_temp.png" alt="">
-                    <div class="head">Подача заявки на заключение Договора</div>
+                    <img src="/images/image40.png" alt="">
+                    <div class="head">Панель управления</div>
                 </div> 
                 <div class="module-single flex-col">
-                    <img src="/images/module_temp.png" alt="">
-                    <div class="head">Расчет стоимости проезда подвижного состава по подъездному пути</div>
+                    <img src="/images/image41.png" alt="">
+                    <div class="head">Акты выполненных работ</div>
                 </div> 
                 <div class="module-single flex-col">
-                    <img src="/images/module_temp.png" alt="">
-                    <div class="head">Соглашение на подачу-уборку вагонов</div>
+                    <img src="/images/image42.png" alt="">
+                    <div class="head">Акт сверки</div>
                 </div> 
                 <div class="module-single flex-col">
-                    <img src="/images/module_temp.png" alt="">
-                    <div class="head">Таблица истории сделок</div>
+                    <img src="/images/image43.png" alt="">
+                    <div class="head">Договоры</div>
                 </div> 
                 <div class="module-single flex-col">
-                    <img src="/images/module_temp.png" alt="">
-                    <div class="head">Контроль и статистика</div>
+                    <img src="/images/image44.png" alt="">
+                    <div class="head">Счета на предоплату</div>
                 </div> 
                 <div class="module-single flex-col">
-                    <img src="/images/module_temp.png" alt="">
-                    <div class="head">Оплата online</div>
+                    <img src="/images/image45.png" alt="">
+                    <div class="head">Соглашения</div>
                 </div> 
-                <div class="more-module flex-row">
+                <!-- <div class="more-module flex-row">
                     <span>Показать еще</span>
                     <svg style="position: absolute; right: 30px;top: 14px;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0)">
@@ -336,43 +340,18 @@
                     </clipPath>
                     </defs>
                     </svg>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="home-last">
-            <div class="hl-header">Готовы принять решение?</div>
-            <div class="hl-sub">Lorem Ipsum - это текст-"рыба", часто используемый в</div>
-            <div class="hl-sub">Lorem Ipsum - это текст-"рыба",</div>
-            <div class="start flex-row">
-                <span>Начать сейчас</span>
-                <svg style="position: absolute; right: 30px;top: 14px;" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0)">
-                        <path d="M5.08743 6.24219L3.35471 6.37361C2.87257 6.41019 2.44315 6.65827 2.17652 7.05421L0.178211 10.0213C-0.0240135 10.3216 -0.0561617 10.6973 0.0921575 11.0265C0.240516 11.3557 0.545396 11.5851 0.907698 11.6402L2.49421 11.8814C2.86534 9.9479 3.75377 8.01913 5.08743 6.24219Z" fill="white"/>
-                        <path d="M8.85449 18.1249L9.10023 19.6824C9.15636 20.0381 9.39003 20.3374 9.7253 20.483C9.8648 20.5436 10.0125 20.5735 10.1594 20.5735C10.3657 20.5735 10.5706 20.5145 10.7493 20.3986L13.7717 18.4368C14.175 18.175 14.4277 17.7534 14.4649 17.2802L14.5987 15.5791C12.7887 16.8884 10.824 17.7606 8.85449 18.1249Z" fill="white"/>
-                        <path d="M8.25789 17.046C8.31297 17.046 8.36836 17.0416 8.42364 17.0325C9.24879 16.8971 10.0441 16.6689 10.8028 16.3702L4.28211 9.96875C3.97789 10.7135 3.74547 11.4943 3.6075 12.3044C3.55313 12.6237 3.66223 12.949 3.89539 13.178L7.5338 16.7499C7.72739 16.9399 7.98868 17.046 8.25789 17.046Z" fill="white"/>
-                        <path d="M18.4058 9.64465C20.0014 6.61613 20.0605 3.41572 19.9771 1.91477C19.9486 1.40048 19.5309 0.990456 19.007 0.962424C18.7581 0.949079 18.463 0.939453 18.1305 0.939453C16.4209 0.939453 13.7158 1.19366 11.1332 2.50506C9.08083 3.54726 6.38956 5.84206 4.80176 8.85786C4.82051 8.87224 4.83883 8.8875 4.85609 8.90445L11.8873 15.8072C11.9046 15.8241 11.9201 15.8421 11.9347 15.8605C15.0066 14.3016 17.3442 11.6596 18.4058 9.64465ZM11.6292 5.09028C12.7715 3.96894 14.6301 3.96882 15.7724 5.09028C16.3257 5.63349 16.6305 6.35578 16.6305 7.12401C16.6305 7.89224 16.3257 8.61454 15.7724 9.15774C15.2013 9.71836 14.4509 9.99872 13.7008 9.9988C12.9505 9.99884 12.2005 9.71851 11.6292 9.15774C11.0759 8.61454 10.7711 7.89224 10.7711 7.12401C10.7711 6.35578 11.0759 5.63349 11.6292 5.09028Z" fill="white"/>
-                        <path d="M12.4572 8.34452C13.1426 9.01734 14.2578 9.01738 14.9432 8.34452C15.2752 8.01855 15.458 7.58521 15.458 7.12426C15.458 6.66331 15.2752 6.22997 14.9432 5.90404C14.6005 5.56761 14.1504 5.39941 13.7002 5.39941C13.2501 5.39941 12.7999 5.56761 12.4573 5.90404C12.1253 6.22997 11.9424 6.66331 11.9424 7.12426C11.9424 7.58521 12.1252 8.01859 12.4572 8.34452Z" fill="white"/>
-                        <path d="M0.597676 17.1203C0.747637 17.1203 0.897598 17.0642 1.01197 16.9518L2.92498 15.0738C3.15381 14.8491 3.15381 14.4849 2.92498 14.2603C2.69619 14.0356 2.32518 14.0356 2.09635 14.2603L0.18334 16.1383C-0.0454883 16.363 -0.0454883 16.7272 0.18334 16.9518C0.297754 17.0641 0.447715 17.1203 0.597676 17.1203Z" fill="white"/>
-                        <path d="M4.67818 15.981C4.44939 15.7563 4.07838 15.7563 3.84955 15.981L0.171621 19.5917C-0.057207 19.8164 -0.057207 20.1806 0.171621 20.4052C0.286035 20.5175 0.435996 20.5737 0.585957 20.5737C0.735918 20.5737 0.885879 20.5175 1.00025 20.4052L4.67814 16.7945C4.90701 16.5698 4.90701 16.2056 4.67818 15.981Z" fill="white"/>
-                        <path d="M5.60217 17.7027L3.6892 19.5807C3.46037 19.8054 3.46037 20.1696 3.6892 20.3942C3.80361 20.5065 3.95357 20.5627 4.1035 20.5627C4.25342 20.5627 4.40342 20.5066 4.51779 20.3942L6.4308 18.5162C6.65963 18.2915 6.65963 17.9273 6.4308 17.7027C6.20201 17.478 5.83099 17.478 5.60217 17.7027Z" fill="white"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0">
-                        <rect width="20" height="19.6345" fill="white" transform="translate(0 0.939453)"/>
-                        </clipPath>
-                        </defs>
-                        </svg>
-            </div>
-            <img src="/images/laptop.svg" alt="laptop">
+            <div class="hl-header">Пользуясь услугами ERC DARIS, Вы получаете качественный и своевременный сервис в онлайн режиме.</div>
         </div>
         <div class="footer">
             <div class="footer-body flex-row">
-                <div @click="$router.push({ name: 'home' })" class="logo">DARIS</div>
-                <div class="f-mid flex-col">
-                    <div class="fm-head">О компании</div>
-                    <div class="fm-sub">Аутсорсинговая компания, оказывающая широкий спектр услуг по заключению Договоров и выполнению взаиморасчетов за оказанные Услуги. </div>
-                    <div class="fm-foot">© ООО «Правообладатель контента», 2010—2015</div>
+                <div @click="$router.push({ name: 'home' })" class="logo">
+                    <img src="/images/logo.png"/>
                 </div>
+                <div class="fm-foot">© ООО «Правообладатель<br> контента», 2010—2015</div>
                 <div class="f-right flex-col">
                     <div class="fr-head">Мы с радостью готовы Вам помочь!</div>
                     <div class="contacts flex-row">
@@ -559,10 +538,12 @@ import { mixin as clickaway } from 'vue-clickaway';
             cursor: pointer;
             position: absolute;
             left: 18%;
-            width: 160px;
-            height: 50px;
             top: 25px;
-            background: #F6F6F8;            
+            // background: #F6F6F8;   
+            img{
+                width: 25%;
+                transform: translateX(-150%) translateY(-35%);
+            }         
         }
         .slogan{
             position: absolute;
@@ -668,13 +649,13 @@ import { mixin as clickaway } from 'vue-clickaway';
             background: #FFFFFF;
             position: relative;
             height: 720px;
+            background-image: linear-gradient( rgba(196, 196, 196, 0.4), rgba(196, 196, 196, 0.4) ), url('/images/layout.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             .layout-left{
                 position: relative;
                 width: 56%;
-                background-image: linear-gradient( rgba(196, 196, 196, 0.4), rgba(196, 196, 196, 0.4) ), url('/images/layout.png');
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
                 .layout-text{
                     width: 460px;
                     position: relative;
@@ -742,10 +723,10 @@ import { mixin as clickaway } from 'vue-clickaway';
             .layout-right{
                 background: #FFFFFF;
                 .layout-img{
-                    width: 720px;
+                    width: 560px;
                     position: absolute;
-                    left: 44%;
-                    top: 114px;
+                    right: 10%;
+                    top: 184px;
                 }
                 .layout-img-in{
                     width: 555px;
@@ -893,12 +874,13 @@ import { mixin as clickaway } from 'vue-clickaway';
             background: #D6E6FF;
             .dt-top{
                 .dt-header{
+                    text-align: left;
                     font-style: normal;
                     font-weight: bold;
                     font-size: 32px;
                     line-height: 42px;
                     color: #06397D;
-                    width: 33%;
+                    width: 100%;
                 }
                 .dt-sub{
                     width: calc(66% - 24px);
@@ -966,7 +948,7 @@ import { mixin as clickaway } from 'vue-clickaway';
         .module-list{
             flex-wrap: wrap;
             position: relative;
-            margin-top: 30px;
+            margin-top: 50px;
             .module-single{
                 background: #FFFFFF;
                 padding: 20px;
@@ -1026,55 +1008,16 @@ import { mixin as clickaway } from 'vue-clickaway';
     }
     .home-last{
         position: relative;
-        height: 700px;
-        background: rgba(228, 233, 244, 0.2);
+        height: auto;
+        background: #D6E6FF;
         overflow: hidden;
-        padding: 80px 18% 0 18%;
+        padding: 80px 18% 80px 18%;
         .hl-header{
             font-weight: bold;
             font-size: 36px;
             line-height: 53px;
             color: #2D4C64;
             margin-bottom: 15px;
-        }
-        .hl-sub{
-            font-size: 16px;
-            line-height: 25px;
-            text-align: center;
-            color: #2D4C64;
-        }
-        .start{
-            position: relative;
-            left: calc(50% - 125px);
-            cursor: pointer;
-            width: 250px;
-            margin-top: 40px;
-            box-sizing: border-box;
-            height: 50px;
-            border-radius: 6px;
-            background: #4985FF;
-            box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
-            border-radius: 6px;
-            span{
-                color: #FFFFFF;
-                cursor: pointer;
-                margin: 14px 10px auto 42px;
-                font-weight: bold;
-                font-size: 16px;
-                line-height: 20px;
-            }
-            .circle{
-                cursor: pointer;
-                margin-left: 6px;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: #FFFFFF;
-                margin-top: 14px;
-            }
-        }
-        img{  
-            margin-top: 100px;
         }
     }
     .footer{
@@ -1093,42 +1036,26 @@ import { mixin as clickaway } from 'vue-clickaway';
                 line-height: 50px;
                 color: #06397D;
                 font-weight: 500;
-                width: 160px;
-                height: 50px;
-                background: #F6F6F8;            
+                img{
+                    width: 120px;
+                    transform: translateY(-35%);
+                }            
             }
-            .f-mid{
-                width: 440px;
-                margin-left: 30px;
-                .fm-head{
-                    text-align: left;
-                    margin-top: 15px;
-                    font-style: normal;
-                    font-weight: bold;
-                    font-size: 18px;
-                    line-height: 22px;
-                    color: #2D4C64;
-                }
-                .fm-sub, .fm-foot{
-                    text-align: left;
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 16px;
-                    line-height: 25px;
-                    display: flex;
-                    color: #999999;
-                }
-                .fm-sub{
-                    margin-top: 25px;
-                }
-                .fm-foot{
-                    margin-top: 40px;
-                }
+            .fm-foot{
+                top: 90px;
+                padding-bottom: 20px;
+                position: absolute;
+                text-align: left;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 25px;
+                color: #999999;
             }
             .f-right{
                 position: absolute;
                 right: 0;
-                width: 460px;
+                width: 520px;
                 .fr-head{
                     text-align: left;
                     margin-top: 15px;
@@ -1174,7 +1101,7 @@ import { mixin as clickaway } from 'vue-clickaway';
     @media only screen and (min-width: 1520px){
         .layout-right{
             .layout-img{
-                min-width: 760px;
+                min-width: 500px;
             }
             .layout-img-in{
                 min-width: 585px;
@@ -1191,7 +1118,7 @@ import { mixin as clickaway } from 'vue-clickaway';
         }
         .layout-right{
             .layout-img{
-                min-width: 820px;
+                min-width: 660px;
             }
             .layout-img-in{
                 min-width: 645px;
@@ -1201,7 +1128,7 @@ import { mixin as clickaway } from 'vue-clickaway';
     @media only screen and (min-width: 1740px){
         .layout-right{
             .layout-img{
-                min-width: 920px;
+                min-width: 680px;
             }
             .layout-img-in{
                 min-width: 845px;
@@ -1270,9 +1197,8 @@ import { mixin as clickaway } from 'vue-clickaway';
             }
             .layout-right{
                 .layout-img{
-                    left: 46% !important;
-                    top: 114px !important;
-                    width: 520px !important;
+                    right: 8% !important;
+                    width: 440px !important;
                 }
             }
         }
@@ -1292,14 +1218,13 @@ import { mixin as clickaway } from 'vue-clickaway';
             padding: 50px 10% !important;
         }
         .home-last{
-            height: 700px;
-            padding: 50px 10% 0 10% !important;
+            padding: 30px 10% 30px 10% !important;
         }
         .footer{
-            padding-top: 30px;
+            padding-top: 50px;
             .footer-body{
                 .f-right{
-                    width: 264px;
+                    width: 460px;
                     .contacts{
                         margin-top: 0;
                     }
@@ -1310,27 +1235,8 @@ import { mixin as clickaway } from 'vue-clickaway';
     @media only screen and (max-width: 1120px){
         .footer{
             .footer-body{
-                .logo{
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                }
                 width: 80%;
                 left: 10%;
-                .f-mid{
-                    margin-left: 20px;
-                    margin-top: 50px;
-                    width: 410px;
-                }
-                .f-right{
-                    margin-top: 50px;
-                }
-                .fm-sub{
-                    margin-top: 25px;
-                }
-                .fm-foot{
-                    margin-top: 40px;
-                }
             }
         }
     }
@@ -1375,16 +1281,17 @@ import { mixin as clickaway } from 'vue-clickaway';
                         cursor: pointer;
                         position: relative;
                         // left: 12.5%;
-                        width: 160px;
-                        height: 50px;
                         top: 25px;
-                        background: #F6F6F8;            
+                        img{
+                            width: 120px;
+                            transform: translateY(-35%);
+                        }            
                     }
                     .slogan{
-                        position: relative;
+                        position: absolute;
                         height: 50px;
                         top: 25px;
-                        left: calc(10%);
+                        left: calc(30%);
                         width: 260px;
                     }
                 }
@@ -1635,21 +1542,15 @@ import { mixin as clickaway } from 'vue-clickaway';
         }
         .footer{
             .footer-body{
-                .f-mid{
-                    margin-left: 0;
-                    width: 100%;
-                    margin-top: 190px;
+                .fm-foot{
+                    top: 180px;
+                    padding-bottom: 20px;
                 }
                 .f-right{
                     margin-top: 60px;
                     width: 100%;
                 }
-                .fm-sub{
-                    margin-top: 15px;
-                }
-                .fm-foot{
-                    margin-top: 30px;
-                }
+ 
             }
         }
     }
@@ -1658,16 +1559,9 @@ import { mixin as clickaway } from 'vue-clickaway';
             height: auto;
             padding-bottom: 10px;
             .footer-body{
-                .f-mid{
-                    margin-left: 0;
-                    width: 100%;
-                    margin-top: 250px;
-                    .fm-sub{
-                        margin-top: 10px;
-                    }
-                    .fm-foot{
-                        margin-top: 20px;
-                    }
+                .fm-foot{
+                    top: 220px;
+                    padding-bottom: 20px;
                 }
             }
         }
@@ -1927,60 +1821,16 @@ import { mixin as clickaway } from 'vue-clickaway';
             }
         }
         .home-last{
-            height: 660px;
-            padding: 30px 10% 0 10% !important;
+            padding: 30px 10% 30px 10% !important;
             .hl-header{
                 font-size: 28px !important;
                 line-height: 38px !important;
             }
-            .hl-sub{
-                font-size: 16px !important;
-                line-height: 25px !important;
-            }
-            .start{
-                left: 0;
-                width: 100%;
-            }
         }
         .footer{
             .footer-body{
-                .f-mid{
-                    margin-top: 210px;
-                    .fm-head{
-                        font-size: 14px;
-                        line-height: 18px;
-                    }
-                    .fm-sub, .fm-foot{
-                        font-size: 12px;
-                        line-height: 16px;
-                    }
-                }
-                .f-right{
-                    .fr-head{
-                        font-size: 14px;
-                        line-height: 18px;
-                    }
-                    .contacts{
-                        .contact{
-                            .label{
-                                text-align: left;
-                                font-style: normal;
-                                font-weight: 600;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #4985FF;
-                            }
-                            .value{
-                                margin-top: 5px;
-                                text-align: left;
-                                font-style: normal;
-                                font-weight: normal;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #999999;
-                            }
-                        }
-                    }
+                .fm-foot{
+                    top: 300px;
                 }
             }
         }
