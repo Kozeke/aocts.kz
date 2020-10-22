@@ -30,6 +30,7 @@ class CreateAgreementsTable extends Migration
             $table->date('agreement_end_date');
             $table->string('performer')->nullable();
             $table->string('company_name')->nullable();
+            $table->unsignedBigInteger('status');
             $table->timestamps();
         });
     }

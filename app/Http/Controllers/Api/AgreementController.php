@@ -50,6 +50,7 @@ class AgreementController extends Controller
             'performer' => $request['performer'],
             'company_name' => $request['company_name'],
             'bank_req_id' => $request['bank_req_id'],
+            'status' => 0
         ]);
         return response()->json(['agreements', $agreement], 200);
     }

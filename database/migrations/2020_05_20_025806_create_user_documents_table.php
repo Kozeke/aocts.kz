@@ -20,6 +20,7 @@ class CreateUserDocumentsTable extends Migration
             $table->string('path');
             $table->string('title')->default(0);;
             $table->integer('status')->default(0);
+            $table->timestamps();
 
         });
     }
