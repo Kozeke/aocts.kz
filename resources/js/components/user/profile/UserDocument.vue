@@ -89,6 +89,8 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import UserProfileImg from './UserProfileImg'
 import UserProfileRouteMenu from './UserProfileRouteMenu'
+import { func } from '../../../vars.js'
+
 import axios from "axios"
 
 export default {
@@ -109,7 +111,9 @@ export default {
         this.documents = JSON.parse(localStorage.getItem('xyzSessionAoUser')).documents
         console.log(this.documents)
     },
-    methods:{
+    methods: {
+        getDateString: func.getDateString,
+        getDateTime: func.getDateTime,
         showOption(index){
             document.getElementById('option-' + index).style.display = "flex";
         },

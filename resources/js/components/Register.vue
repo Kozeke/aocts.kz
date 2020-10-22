@@ -287,6 +287,11 @@
                         </svg>
                     </div> -->
                 </div>
+                <div class="input-form">
+                    <vue-recaptcha :sitekey="sitekey" @expired="onCaptchaExpired"></vue-recaptcha>
+                </div>
+                <div class="input-form">
+                </div>
                 <div class="flex-row row-last">
                      <!-- <div class="text-form-hide flex-col">
                         <label style="margin-top: 15px" class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
@@ -475,6 +480,7 @@ export default {
             infoMark: false,
             modalActualAddress: false,
             modalLegalAddress: false,
+            sitekey: '6LeMRdoZAAAAAG0J8_N0WiSaEgcAzULLpVyg0x-l',
             organization_types: [
                 {
                     id: 1,
@@ -718,7 +724,7 @@ export default {
                 console.log(err)
             })
         },
-        postUser(){
+        postUser(recaptchaToken){
             console.log("YAHOOO");
 
             var real_city = this.real_selected_locality
@@ -766,7 +772,7 @@ export default {
             data.append("locality_id", real_city.id)
             data.append("manager_phone", this.phone)
             data.append("name", this.manager_name)
-
+            data.append("recaptchaToken", recaptchaToken)
             let docs = this.docs
             let tt = 1
             var str = 'document'
@@ -782,9 +788,9 @@ export default {
             console.log(data)
             axios.post('/api/register', data)
             .then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 this.userRegistration = false
-                // localStorage.setItem('xyzSessionAo', JSON.stringify(res.data.success.token));
+                localStorage.setItem('xyzSessionAo', JSON.stringify(res.data.success.token));
                 // this.$router.push({ name : 'profile' })
             })
             .catch(err => {
@@ -799,6 +805,13 @@ export default {
             // } else {
             //     alert('Заполните все поля.')
             // }
+        },
+        validate () {
+            this.$refs.recaptcha.execute()
+        },
+
+        onCaptchaExpired () {
+            this.$refs.recaptcha.reset()
         }
     }
 }

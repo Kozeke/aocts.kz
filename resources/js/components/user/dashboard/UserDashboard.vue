@@ -86,11 +86,64 @@
                 </div>
             </div>
         </div>
+        <div v-if="dealModal" class="modal">
+            <div class="modal-content">
+                <div class="title">Перевод между договорами</div>
+                <div @click="dealModal = false" class="close">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
+                    </svg>
+                </div>
+                <div class="field-list flex-row">
+                    <div class="input-form flex-col">
+                        <label class="label">Откуда</label>
+                        <select class="input-form" v-model="transfer_from">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="deal in deals" :value="deal.id" :key="deal.id">
+                                {{ deal.id }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-form flex-col">
+                        <label class="label">Куда</label>
+                        <select class="input-form" v-model="transfer_to">
+                            <option :value="'Выберите'" disabled>Выберите</option>
+                            <option v-for="deal in deals" :value="deal.id" :key="deal.id">
+                                {{ deal.id }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-form flex-col">
+                        <label class="label">Сумма</label>
+                        <input v-model="amount" min="0" type="number" placeholder="Введите сумму">
+                    </div>
+                </div>
+                <div @click="postTransfer()" class="done-btn">Произвести перевод</div>
+            </div>
+        </div>
+        <div v-if="succModal" class="modal">
+            <div class="modal-content">
+                <div @click="succModal = false" class="close">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
+                    </svg>
+                </div>
+                <div class="succ-img">
+                    <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M92 43L52 85L36 68.2" stroke="#4985FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M128 64C128 99.3462 99.3462 128 64 128C28.6538 128 0 99.3462 0 64C0 28.6538 28.6538 0 64 0C99.3462 0 128 28.6538 128 64ZM6.4 64C6.4 95.8116 32.1884 121.6 64 121.6C95.8116 121.6 121.6 95.8116 121.6 64C121.6 32.1884 95.8116 6.4 64 6.4C32.1884 6.4 6.4 32.1884 6.4 64Z" fill="#4985FF"/>
+                    </svg>
+                </div>
+                <div class="succ-sub">Запрос на перевод принят!</div>
+                <div class="succ-amount">Сумма перевода: {{ amount ? amount : 0 }} KZT</div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import UserSide from '../UserSide'
 import UserNav from '../UserNav'
+import axios from 'axios'
 
 export default {
     components: {
@@ -99,11 +152,37 @@ export default {
     },
     data(){
         return {
-            
+            dealModal: false,
+            succModal: false,
+            deals: '',
+            transfer_from: 'Выберите договор',
+            transfer_to: 'Выберите договор',
+            amount: ''
         }
     },
+    mounted(){
+        this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
+    },
     methods: {
-        
+        postTransfer(){
+            axios.post('/api/transfer/money', null, {
+                headers: { 
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params: {
+                    // id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+                    transfer_from: this.transfer_from,
+                    transfer_to: this.transfer_to,
+                    amount: this.amount
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                alert('Ваша заявка успешно от отправлена')
+            }).catch(err => {
+                console.log(err.data)
+            })
+        }
     }
 }
 </script>
@@ -325,6 +404,120 @@ export default {
                             margin-left: 6px;
                         }
                     }
+                }
+            }
+        }
+        .modal {
+            display: flex;
+            position: fixed; /* Stay in place */
+            z-index: 99; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background: rgba(45, 76, 100, 0.7);
+            .modal-content {
+                background-color: #fefefe;
+                background: #FFFFFF;
+                border-radius: 6px;
+                margin: 120px auto auto auto;
+                padding: 50px 89px;
+                width: 952px;
+                .title{
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 22px;
+                    text-align: center;
+                    color: #2D4C64;
+                }
+                .close{
+                    position: absolute;
+                    top: 30px;
+                    right: 30px;
+                }
+                .field-list{
+                    flex-wrap: wrap;
+                    .input-form{
+                        width: 48%;
+                        position: relative;
+                        margin-top: 18px;
+                        height: 98px;
+                        .label{
+                            text-align: left;
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 20px;
+                        }
+                        input, select{
+                            width: 100%;
+                            cursor: initial;
+                            padding-left: 18px;
+                            text-align: left;
+                            margin-top: 5px;
+                            height: 50px;
+                            font-weight: normal;
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: #000000;
+                            background: #FFFFFF;
+                            border: 1px solid #E6EAF3;
+                            box-sizing: border-box;
+                            border-radius: 6px;
+                        }
+                        select{
+                            padding: 18px auto;
+                            -webkit-appearance: none;
+                            -moz-appearance : none;
+                            color: #000000;
+                            option{
+                                color: #000000;
+                            }
+                        }
+                        .not-selected{
+                            color: rgba(111, 111, 111, 0.25);
+                        }
+                        ::placeholder{
+                            font-weight: normal;
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: rgba(111, 111, 111, 0.25);
+                        }
+                    }
+                    .input-form:nth-of-type(2n){
+                        margin-left: 4%;
+                    }
+                }
+                .done-btn{
+                    width: 244px;
+                    cursor: pointer;
+                    margin: 40px auto 0 auto;
+                    padding: 18px 28px;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #FFFFFF;
+                    background: #4985FF;
+                    box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
+                    border-radius: 6px;
+                }
+                .succ-img{
+                    margin: 30px auto;
+                }
+                .succ-sub{
+                    margin: 0 auto;
+                    font-size: 18px;
+                    line-height: 20px;
+                    letter-spacing: 0.2px;
+                    color: #4985FF;
+                }
+                .succ-amount{
+                    margin: 30px auto 0 auto;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 20px;
+                    letter-spacing: 0.2px;
+                    color: #06397D;
                 }
             }
         }

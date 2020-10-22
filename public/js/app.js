@@ -2533,6 +2533,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2585,11 +2587,7 @@ __webpack_require__.r(__webpack_exports__);
         BIN: this.BIN,
         password: this.password
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/login", data, {
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      }).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/login", data).then(function (res) {
         localStorage.setItem('xyzSessionAo', JSON.stringify(res.data));
 
         _this.$router.push({
@@ -3099,6 +3097,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3112,6 +3115,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       infoMark: false,
       modalActualAddress: false,
       modalLegalAddress: false,
+      sitekey: '6LeMRdoZAAAAAG0J8_N0WiSaEgcAzULLpVyg0x-l',
       organization_types: [{
         id: 1,
         name: 'Товарищество с ограниченной ответственностью (ТОО)'
@@ -3379,9 +3383,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         console.log(err);
       });
     },
-    postUser: function postUser() {
+    postUser: function postUser(recaptchaToken) {
       var _this2 = this;
 
+      console.log("YAHOOO");
       var real_city = this.real_selected_locality;
 
       if (this.real_selected_district.is_city === 1) {
@@ -3427,6 +3432,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       data.append("locality_id", real_city.id);
       data.append("manager_phone", this.phone);
       data.append("name", this.manager_name);
+      data.append("recaptchaToken", recaptchaToken);
       var docs = this.docs;
       var tt = 1;
       var str = 'document';
@@ -3462,15 +3468,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       console.log(data);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      }).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data).then(function (res) {
         console.log(res.data);
-        _this2.userRegistration = false; // localStorage.setItem('xyzSessionAo', JSON.stringify(res.data.success.token));
-        // this.$router.push({ name : 'profile' })
+        _this2.userRegistration = false;
+        localStorage.setItem('xyzSessionAo', JSON.stringify(res.data.success.token)); // this.$router.push({ name : 'profile' })
       })["catch"](function (err) {
         if (err.response.status == 422) {
           _this2.errors = Object.assign({}, err.response.data.error);
@@ -3482,6 +3483,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }); // } else {
       //     alert('Заполните все поля.')
       // }
+    },
+    validate: function validate() {
+      this.$refs.recaptcha.execute();
+    },
+    onCaptchaExpired: function onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
     }
   }
 });
@@ -3802,6 +3809,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserSide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UserSide */ "./resources/js/components/user/UserSide.vue");
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -3892,6 +3901,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3900,9 +3962,38 @@ __webpack_require__.r(__webpack_exports__);
     UserNav: _UserNav__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      dealModal: false,
+      succModal: false,
+      deals: '',
+      transfer_from: 'Выберите договор',
+      transfer_to: 'Выберите договор',
+      amount: ''
+    };
   },
-  methods: {}
+  mounted: function mounted() {
+    this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications;
+  },
+  methods: {
+    postTransfer: function postTransfer() {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/transfer/money', null, {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+        },
+        params: {
+          // id: JSON.parse(localStorage.getItem('xyzSessionAoUser')).id,
+          transfer_from: this.transfer_from,
+          transfer_to: this.transfer_to,
+          amount: this.amount
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        alert('Ваша заявка успешно от отправлена');
+      })["catch"](function (err) {
+        console.log(err.data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3921,8 +4012,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuejs-datepicker/dist/locale */ "./node_modules/vuejs-datepicker/dist/locale/index.js");
 /* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _vars_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../vars.js */ "./resources/js/vars.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -4046,6 +4144,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4078,6 +4194,8 @@ __webpack_require__.r(__webpack_exports__);
     this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications;
   },
   methods: {
+    getDateString: _vars_js__WEBPACK_IMPORTED_MODULE_4__["func"].getDateString,
+    getDateTime: _vars_js__WEBPACK_IMPORTED_MODULE_4__["func"].getDateTime,
     showAccordian: function showAccordian(index) {
       var el = document.getElementById('extra-' + index);
 
@@ -4086,6 +4204,25 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         el.style.display = 'flex';
       }
+    },
+    showOption: function showOption(index) {
+      var options = document.getElementsByClassName('xyz-options');
+
+      var _iterator = _createForOfIteratorHelper(options),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          item.style.display = "none";
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      document.getElementById('xyz-option-' + index).style.display = "flex";
     },
     postDeal: function postDeal() {
       var now = this.access_road_grant_date;
@@ -4101,7 +4238,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.access_road_grant_date = now.getFullYear() + '-' + month + '-' + date;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/create/application', null, {
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/create/application', null, {
         headers: {
           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
         },
@@ -4361,8 +4498,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuejs-datepicker/dist/locale */ "./node_modules/vuejs-datepicker/dist/locale/index.js");
 /* harmony import */ var vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _vars_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../vars.js */ "./resources/js/vars.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 //
 //
 //
@@ -4513,12 +4651,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -4539,7 +4672,9 @@ __webpack_require__.r(__webpack_exports__);
       agreement_check: false,
       allAgreements: [],
       deals: [],
+      bank_reqs: [],
       application_id: '',
+      bank_req_id: '',
       business_index: null,
       address: '',
       company_name: '',
@@ -4560,6 +4695,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.BIN = JSON.parse(localStorage.getItem('xyzSessionAoUser')).BIN;
     this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications;
+    this.bank_reqs = JSON.parse(localStorage.getItem('xyzSessionAoUser')).bank_requisites;
     this.deals.forEach(function (deal) {
       if (deal.agreements) {
         deal.agreements.forEach(function (item) {
@@ -4569,6 +4705,8 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    getDateString: _vars_js__WEBPACK_IMPORTED_MODULE_5__["func"].getDateString,
+    getDateTime: _vars_js__WEBPACK_IMPORTED_MODULE_5__["func"].getDateTime,
     postAgeement: function postAgeement() {
       var _this2 = this;
 
@@ -4598,7 +4736,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.agreement_end_date = now.getFullYear() + '-' + month + '-' + date;
-      axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/create/agreement', null, {
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/api/create/agreement', null, {
         headers: {
           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
         },
@@ -4615,7 +4753,8 @@ __webpack_require__.r(__webpack_exports__);
           agreement_start_date: this.agreement_start_date,
           agreement_end_date: this.agreement_end_date,
           performer: this.performer,
-          company_name: this.company_name
+          company_name: this.company_name,
+          bank_req_id: this.bank_req_id
         }
       }).then(function (res) {
         console.log(res.data);
@@ -4846,8 +4985,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserNav */ "./resources/js/components/user/UserNav.vue");
 /* harmony import */ var _UserProfileImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserProfileImg */ "./resources/js/components/user/profile/UserProfileImg.vue");
 /* harmony import */ var _UserProfileRouteMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserProfileRouteMenu */ "./resources/js/components/user/profile/UserProfileRouteMenu.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _vars_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../vars.js */ "./resources/js/vars.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
 //
 //
 //
@@ -4934,6 +5074,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4958,6 +5099,8 @@ __webpack_require__.r(__webpack_exports__);
     console.log(this.documents);
   },
   methods: {
+    getDateString: _vars_js__WEBPACK_IMPORTED_MODULE_4__["func"].getDateString,
+    getDateTime: _vars_js__WEBPACK_IMPORTED_MODULE_4__["func"].getDateTime,
     showOption: function showOption(index) {
       document.getElementById('option-' + index).style.display = "flex";
     },
@@ -4967,7 +5110,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append("title", fileData.name);
       data.append("document", event.target.files[0]);
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/user/add/document', data, {
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/user/add/document', data, {
         headers: {
           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
         }
@@ -5137,6 +5280,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5152,6 +5296,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editMode: false,
+      addMode: false,
       allAccordion: [],
       chosenAccordion: '',
       bank_name: '',
@@ -5187,6 +5332,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addBankReq: function addBankReq() {
       this.chosenAccordion = {};
+      this.addMode = true;
       this.editMode = true;
     }
   }
@@ -5760,7 +5906,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-0bd99935] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-0bd99935] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-0bd99935] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-0bd99935] {\n  position: relative;\n  width: 100%;\n}\n.main .main-info .containe .content .last[data-v-0bd99935] {\n  position: relative;\n  padding: 24px 24px 0 24px;\n  width: 32%;\n  margin-right: 1.5%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .last .head[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n  width: 64%;\n  height: 44px;\n}\n.main .main-info .containe .content .last .go-all[data-v-0bd99935] {\n  cursor: pointer;\n  position: absolute;\n  right: 24px;\n  top: 24px;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: right;\n  letter-spacing: 0.2px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .last .item-list[data-v-0bd99935] {\n  margin-top: 0px;\n}\n.main .main-info .containe .content .last .item-list .item-add[data-v-0bd99935] {\n  position: relative;\n  padding: 26px 0 20px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .last .item-list .item-add .label[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .last .item-list .item-add svg[data-v-0bd99935] {\n  position: absolute;\n  right: 0;\n  top: 26px;\n}\n.main .main-info .containe .content .last .item-list .item[data-v-0bd99935] {\n  position: relative;\n  border-bottom: 1px solid #DFE0EB;\n  padding: 12px 0;\n}\n.main .main-info .containe .content .last .item-list .item .name[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .last .item-list .item .date[data-v-0bd99935] {\n  text-align: left;\n  margin-top: 3px;\n  font-size: 12px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .last .item-list .item .price[data-v-0bd99935] {\n  position: absolute;\n  right: 18px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .last .item-list .item .status[data-v-0bd99935] {\n  position: absolute;\n  right: 18px;\n  padding: 6px;\n  background: #4985FF;\n  border-radius: 6px;\n  font-weight: 500;\n  font-size: 10px;\n  line-height: 12px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n}\n.main .main-info .containe .content .last .item-list .item .status.active[data-v-0bd99935] {\n  background: #29CC97;\n}\n.main .main-info .containe .content .last .item-list .item svg[data-v-0bd99935] {\n  position: absolute;\n  top: 18px;\n  right: 0;\n}\n.main .main-info .containe .content .last .item-list .item[data-v-0bd99935]:last-of-type {\n  border-bottom: none;\n}\n.main .main-info .containe .content .last[data-v-0bd99935]:last-of-type {\n  margin-right: 0;\n}\n.main .main-info .containe .balance-info[data-v-0bd99935] {\n  margin-top: 60px;\n  width: 50%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  padding: 24px;\n  position: relative;\n}\n.main .main-info .containe .balance-info .head[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .main-info .containe .balance-info .go-transition[data-v-0bd99935] {\n  cursor: pointer;\n  position: absolute;\n  right: 24px;\n  top: 24px;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: right;\n  letter-spacing: 0.2px;\n  color: #4985FF;\n}\n.main .main-info .containe .balance-info .item-list[data-v-0bd99935] {\n  margin-top: 28px;\n}\n.main .main-info .containe .balance-info .item-list .item-label[data-v-0bd99935] {\n  padding: 10px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .balance-info .item-list .item-label .name[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item-label .price[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item-label .status[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #788899;\n}\n.main .main-info .containe .balance-info .item-list .item-label .name[data-v-0bd99935] {\n  width: 44%;\n  margin-right: 2%;\n}\n.main .main-info .containe .balance-info .item-list .item-label .price[data-v-0bd99935] {\n  width: 54%;\n}\n.main .main-info .containe .balance-info .item-list .item-label .status[data-v-0bd99935] {\n  position: absolute;\n  right: 24px;\n}\n.main .main-info .containe .balance-info .item-list .item[data-v-0bd99935] {\n  position: relative;\n  padding: 25px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .balance-info .item-list .item .name[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item .price[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item .status[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #252733;\n}\n.main .main-info .containe .balance-info .item-list .item .name[data-v-0bd99935] {\n  width: 44%;\n  margin-right: 2%;\n}\n.main .main-info .containe .balance-info .item-list .item .price[data-v-0bd99935] {\n  width: 54%;\n}\n.main .main-info .containe .balance-info .item-list .item .status[data-v-0bd99935] {\n  position: absolute;\n  right: 0;\n  font-weight: 600;\n  color: #29CC97;\n}\n.main .main-info .containe .balance-info .warning[data-v-0bd99935] {\n  text-align: left;\n  margin-top: 25px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 160%;\n  color: #06397D;\n}\n.main .main-info .containe .balance-info .warning span[data-v-0bd99935] {\n  cursor: pointer;\n  color: #4985FF;\n}\n.main .main-info .containe .balance-info .warning svg[data-v-0bd99935] {\n  cursor: pointer;\n  margin-left: 6px;\n}", ""]);
+exports.push([module.i, ".main[data-v-0bd99935] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-0bd99935] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-0bd99935] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-0bd99935] {\n  position: relative;\n  width: 100%;\n}\n.main .main-info .containe .content .last[data-v-0bd99935] {\n  position: relative;\n  padding: 24px 24px 0 24px;\n  width: 32%;\n  margin-right: 1.5%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .last .head[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n  width: 64%;\n  height: 44px;\n}\n.main .main-info .containe .content .last .go-all[data-v-0bd99935] {\n  cursor: pointer;\n  position: absolute;\n  right: 24px;\n  top: 24px;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: right;\n  letter-spacing: 0.2px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .last .item-list[data-v-0bd99935] {\n  margin-top: 0px;\n}\n.main .main-info .containe .content .last .item-list .item-add[data-v-0bd99935] {\n  position: relative;\n  padding: 26px 0 20px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .last .item-list .item-add .label[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .last .item-list .item-add svg[data-v-0bd99935] {\n  position: absolute;\n  right: 0;\n  top: 26px;\n}\n.main .main-info .containe .content .last .item-list .item[data-v-0bd99935] {\n  position: relative;\n  border-bottom: 1px solid #DFE0EB;\n  padding: 12px 0;\n}\n.main .main-info .containe .content .last .item-list .item .name[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .last .item-list .item .date[data-v-0bd99935] {\n  text-align: left;\n  margin-top: 3px;\n  font-size: 12px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .last .item-list .item .price[data-v-0bd99935] {\n  position: absolute;\n  right: 18px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .last .item-list .item .status[data-v-0bd99935] {\n  position: absolute;\n  right: 18px;\n  padding: 6px;\n  background: #4985FF;\n  border-radius: 6px;\n  font-weight: 500;\n  font-size: 10px;\n  line-height: 12px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n}\n.main .main-info .containe .content .last .item-list .item .status.active[data-v-0bd99935] {\n  background: #29CC97;\n}\n.main .main-info .containe .content .last .item-list .item svg[data-v-0bd99935] {\n  position: absolute;\n  top: 18px;\n  right: 0;\n}\n.main .main-info .containe .content .last .item-list .item[data-v-0bd99935]:last-of-type {\n  border-bottom: none;\n}\n.main .main-info .containe .content .last[data-v-0bd99935]:last-of-type {\n  margin-right: 0;\n}\n.main .main-info .containe .balance-info[data-v-0bd99935] {\n  margin-top: 60px;\n  width: 50%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  padding: 24px;\n  position: relative;\n}\n.main .main-info .containe .balance-info .head[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 18px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .main-info .containe .balance-info .go-transition[data-v-0bd99935] {\n  cursor: pointer;\n  position: absolute;\n  right: 24px;\n  top: 24px;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: right;\n  letter-spacing: 0.2px;\n  color: #4985FF;\n}\n.main .main-info .containe .balance-info .item-list[data-v-0bd99935] {\n  margin-top: 28px;\n}\n.main .main-info .containe .balance-info .item-list .item-label[data-v-0bd99935] {\n  padding: 10px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .balance-info .item-list .item-label .name[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item-label .price[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item-label .status[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #788899;\n}\n.main .main-info .containe .balance-info .item-list .item-label .name[data-v-0bd99935] {\n  width: 44%;\n  margin-right: 2%;\n}\n.main .main-info .containe .balance-info .item-list .item-label .price[data-v-0bd99935] {\n  width: 54%;\n}\n.main .main-info .containe .balance-info .item-list .item-label .status[data-v-0bd99935] {\n  position: absolute;\n  right: 24px;\n}\n.main .main-info .containe .balance-info .item-list .item[data-v-0bd99935] {\n  position: relative;\n  padding: 25px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .balance-info .item-list .item .name[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item .price[data-v-0bd99935], .main .main-info .containe .balance-info .item-list .item .status[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n  color: #252733;\n}\n.main .main-info .containe .balance-info .item-list .item .name[data-v-0bd99935] {\n  width: 44%;\n  margin-right: 2%;\n}\n.main .main-info .containe .balance-info .item-list .item .price[data-v-0bd99935] {\n  width: 54%;\n}\n.main .main-info .containe .balance-info .item-list .item .status[data-v-0bd99935] {\n  position: absolute;\n  right: 0;\n  font-weight: 600;\n  color: #29CC97;\n}\n.main .main-info .containe .balance-info .warning[data-v-0bd99935] {\n  text-align: left;\n  margin-top: 25px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 160%;\n  color: #06397D;\n}\n.main .main-info .containe .balance-info .warning span[data-v-0bd99935] {\n  cursor: pointer;\n  color: #4985FF;\n}\n.main .main-info .containe .balance-info .warning svg[data-v-0bd99935] {\n  cursor: pointer;\n  margin-left: 6px;\n}\n.main .modal[data-v-0bd99935] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-0bd99935] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 120px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-0bd99935] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-0bd99935] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-0bd99935] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935] {\n  width: 48%;\n  position: relative;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .modal .modal-content .field-list .input-form .label[data-v-0bd99935] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .modal .modal-content .field-list .input-form input[data-v-0bd99935], .main .modal .modal-content .field-list .input-form select[data-v-0bd99935] {\n  width: 100%;\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .modal .modal-content .field-list .input-form select[data-v-0bd99935] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .modal .modal-content .field-list .input-form select option[data-v-0bd99935] {\n  color: #000000;\n}\n.main .modal .modal-content .field-list .input-form .not-selected[data-v-0bd99935] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-0bd99935]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-0bd99935] {\n  width: 244px;\n  cursor: pointer;\n  margin: 40px auto 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .succ-img[data-v-0bd99935] {\n  margin: 30px auto;\n}\n.main .modal .modal-content .succ-sub[data-v-0bd99935] {\n  margin: 0 auto;\n  font-size: 18px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #4985FF;\n}\n.main .modal .modal-content .succ-amount[data-v-0bd99935] {\n  margin: 30px auto 0 auto;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #06397D;\n}", ""]);
 
 // exports
 
@@ -5779,7 +5925,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-2e43c481] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-2e43c481] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-2e43c481] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-2e43c481] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-2e43c481] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-2e43c481] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  width: 18%;\n}\n.main .main-info .containe .content .field-list .item-list[data-v-2e43c481] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .item-list .item[data-v-2e43c481] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .day[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481] {\n  width: 20%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  padding: 0;\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .item-list .item .date .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until .time[data-v-2e43c481] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481] {\n  width: 14%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #4985FF;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .extra[data-v-2e43c481] {\n  display: none;\n  text-align: left;\n  margin-left: 8%;\n}\n.main .main-info .containe .content .field-list .item-list .extra .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin-bottom: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .extra .docs[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin: 2px 0;\n}\n.main .main-info .containe .content .send-btn[data-v-2e43c481] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-2e43c481] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-2e43c481] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 30px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-2e43c481] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-2e43c481] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-2e43c481] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-2e43c481] {\n  width: 144px;\n  cursor: pointer;\n  margin: 40px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .back-btn[data-v-2e43c481] {\n  position: absolute;\n  left: 89px;\n  bottom: 69px;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #4985FF;\n}", ""]);
+exports.push([module.i, ".main[data-v-2e43c481] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-2e43c481] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-2e43c481] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-2e43c481] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-2e43c481] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-2e43c481] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .label-item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-2e43c481] {\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .label-item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-2e43c481] {\n  width: 18%;\n}\n.main .main-info .containe .content .field-list .item-list[data-v-2e43c481] {\n  position: relative;\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .item-list .item[data-v-2e43c481] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .day[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .item .index[data-v-2e43c481] {\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item-list .item .name[data-v-2e43c481] {\n  width: 20%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item-list .item .date[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  padding: 0;\n  width: 20%;\n}\n.main .main-info .containe .content .field-list .item-list .item .date .time[data-v-2e43c481], .main .main-info .containe .content .field-list .item-list .item .until .time[data-v-2e43c481] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item-list .item .until[data-v-2e43c481] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item-list .item .status[data-v-2e43c481] {\n  width: 14%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #4985FF;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .field-list .item-list .item .status.success[data-v-2e43c481] {\n  background: #29CC97;\n}\n.main .main-info .containe .content .field-list .item-list .item .setting[data-v-2e43c481] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .field-list .item-list .extra[data-v-2e43c481] {\n  display: none;\n  text-align: left;\n  margin-left: 8%;\n}\n.main .main-info .containe .content .field-list .item-list .extra .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin-bottom: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .extra .docs[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 14px;\n  color: #252733;\n  margin: 2px 0;\n}\n.main .main-info .containe .content .field-list .item-list .xyz-options[data-v-2e43c481] {\n  display: none;\n  position: absolute;\n  top: 16px;\n  background: #ffffff;\n  right: -40px;\n  z-index: 99;\n  padding: 0 8px;\n  background: #FDFDFD;\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);\n  border-radius: 6px;\n}\n.main .main-info .containe .content .field-list .item-list .xyz-options .xyz-option[data-v-2e43c481] {\n  cursor: pointer;\n  padding: 8px 0;\n}\n.main .main-info .containe .content .field-list .item-list .xyz-options .xyz-option .label[data-v-2e43c481] {\n  cursor: pointer;\n  margin-left: 10px;\n  text-align: left;\n  font-weight: 600;\n  font-size: 12px;\n  line-height: 16px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .send-btn[data-v-2e43c481] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-2e43c481] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-2e43c481] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 30px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-2e43c481] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-2e43c481] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-2e43c481] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-2e43c481] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-2e43c481]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-2e43c481]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-2e43c481] {\n  width: 144px;\n  cursor: pointer;\n  margin: 40px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .back-btn[data-v-2e43c481] {\n  position: absolute;\n  left: 89px;\n  bottom: 69px;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #4985FF;\n}", ""]);
 
 // exports
 
@@ -5836,7 +5982,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-6391be34] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-6391be34] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-6391be34] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-6391be34] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-6391be34] {\n  padding: 36px 28px 120px 28px;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-6391be34] {\n  padding: 0;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .content-info .field-list .label-item[data-v-6391be34] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .label-item div[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .index[data-v-6391be34] {\n  width: 6%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34] {\n  width: 30%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34] {\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  width: 22%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-6391be34] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-6391be34] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .time[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .day[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34] {\n  margin-left: 0;\n  width: 6%;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34] {\n  width: 30%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34] {\n  padding: 0;\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date .time[data-v-6391be34] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34] {\n  width: 18%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  background: #4985FF;\n  text-align: center;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .content-info .send-btn[data-v-6391be34] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-6391be34] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-6391be34] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 30px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-6391be34] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-6391be34] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-6391be34] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34], .main .modal .modal-content .field-list .item select[data-v-6391be34] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:focus, .main .modal .modal-content .field-list .item select[data-v-6391be34]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .field-list .check-form[data-v-6391be34] {\n  margin-top: 25px;\n}\n.main .modal .modal-content .field-list .check-form input[data-v-6391be34] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.2) !important;\n  padding: 6px;\n}\n.main .modal .modal-content .field-list .check-form .label[data-v-6391be34] {\n  margin-left: 8px !important;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .modal .modal-content .field-list .check-form span[data-v-6391be34] {\n  font-weight: bold;\n  text-decoration: underline;\n}\n.main .modal .modal-content .done-btn[data-v-6391be34] {\n  width: 144px;\n  cursor: pointer;\n  margin: 30px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .back-btn[data-v-6391be34] {\n  position: absolute;\n  left: 89px;\n  bottom: 69px;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #4985FF;\n}", ""]);
+exports.push([module.i, ".main[data-v-6391be34] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-6391be34] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-6391be34] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-6391be34] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .content-info[data-v-6391be34] {\n  padding: 36px 28px 120px 28px;\n}\n.main .main-info .containe .content .content-info .field-list[data-v-6391be34] {\n  padding: 0;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .content-info .field-list .label-item[data-v-6391be34] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .label-item div[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .index[data-v-6391be34] {\n  width: 6%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .name[data-v-6391be34] {\n  width: 30%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .date[data-v-6391be34] {\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .label-item .status[data-v-6391be34] {\n  width: 22%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list[data-v-6391be34] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item[data-v-6391be34] {\n  position: relative;\n  height: 36px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .time[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .day[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34], .main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .index[data-v-6391be34] {\n  margin-left: 0;\n  width: 6%;\n  color: #788899;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .name[data-v-6391be34] {\n  width: 30%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date[data-v-6391be34] {\n  padding: 0;\n  width: 36%;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .date .time[data-v-6391be34] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .status[data-v-6391be34] {\n  width: 18%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  background: #4985FF;\n  text-align: center;\n  border-radius: 6px;\n  height: 34px;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .status.success[data-v-6391be34] {\n  background: #29CC97;\n}\n.main .main-info .containe .content .content-info .field-list .item-list .item .setting[data-v-6391be34] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 2%;\n}\n.main .main-info .containe .content .content-info .send-btn[data-v-6391be34] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 10px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 18px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-6391be34] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-6391be34] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 30px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-6391be34] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-6391be34] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-6391be34] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] {\n  width: 48%;\n  margin-top: 36px;\n}\n.main .modal .modal-content .field-list .item .label[data-v-6391be34] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  color: #06397D;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34], .main .modal .modal-content .field-list .item select[data-v-6391be34] {\n  margin-top: 8px;\n  text-align: left;\n  background: #FDFDFD;\n  border: 1px solid #DFE0EB;\n  box-sizing: border-box;\n  border-radius: 6px;\n  padding: 18px 22px;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 17px;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:focus, .main .modal .modal-content .field-list .item select[data-v-6391be34]:focus {\n  box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.2);\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:-moz-read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item input[data-v-6391be34]:read-only {\n  padding: 18px 0px;\n  border: 1px solid #FDFDFD;\n  color: #787878;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-webkit-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-moz-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] :-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::-ms-input-placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34] ::placeholder {\n  color: #C5C5C5;\n}\n.main .modal .modal-content .field-list .item[data-v-6391be34]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .field-list .check-form[data-v-6391be34] {\n  margin-top: 25px;\n}\n.main .modal .modal-content .field-list .check-form input[data-v-6391be34] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.2) !important;\n  padding: 6px;\n}\n.main .modal .modal-content .field-list .check-form .label[data-v-6391be34] {\n  margin-left: 8px !important;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .modal .modal-content .field-list .check-form span[data-v-6391be34] {\n  font-weight: bold;\n  text-decoration: underline;\n}\n.main .modal .modal-content .done-btn[data-v-6391be34] {\n  width: 144px;\n  cursor: pointer;\n  margin: 30px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal .modal-content .back-btn[data-v-6391be34] {\n  position: absolute;\n  left: 89px;\n  bottom: 69px;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #4985FF;\n}", ""]);
 
 // exports
 
@@ -9282,9 +9428,20 @@ var render = function() {
             },
             domProps: { value: _vm.BIN },
             on: {
-              keyup: function($event) {
-                return _vm.validateForm($event)
-              },
+              keyup: [
+                function($event) {
+                  return _vm.validateForm($event)
+                },
+                function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.logIn()
+                }
+              ],
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -9338,9 +9495,20 @@ var render = function() {
             },
             domProps: { value: _vm.password },
             on: {
-              keyup: function($event) {
-                return _vm.validateForm($event)
-              },
+              keyup: [
+                function($event) {
+                  return _vm.validateForm($event)
+                },
+                function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.logIn()
+                }
+              ],
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -10306,6 +10474,20 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "input-form" },
+                  [
+                    _c("vue-recaptcha", {
+                      attrs: { sitekey: _vm.sitekey },
+                      on: { expired: _vm.onCaptchaExpired }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-form" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex-row row-last" }, [
                   _c("div", { staticClass: "input-form flex-col" }, [
@@ -12459,7 +12641,301 @@ var render = function() {
           ])
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.dealModal
+        ? _c("div", { staticClass: "modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "title" }, [
+                _vm._v("Перевод между договорами")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "close",
+                  on: {
+                    click: function($event) {
+                      _vm.dealModal = false
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "15",
+                        height: "15",
+                        viewBox: "0 0 15 15",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "field-list flex-row" }, [
+                _c("div", { staticClass: "input-form flex-col" }, [
+                  _c("label", { staticClass: "label" }, [_vm._v("Откуда")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.transfer_from,
+                          expression: "transfer_from"
+                        }
+                      ],
+                      staticClass: "input-form",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.transfer_from = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        {
+                          attrs: { disabled: "" },
+                          domProps: { value: "Выберите" }
+                        },
+                        [_vm._v("Выберите")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.deals, function(deal) {
+                        return _c(
+                          "option",
+                          { key: deal.id, domProps: { value: deal.id } },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(deal.id) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-form flex-col" }, [
+                  _c("label", { staticClass: "label" }, [_vm._v("Куда")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.transfer_to,
+                          expression: "transfer_to"
+                        }
+                      ],
+                      staticClass: "input-form",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.transfer_to = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        {
+                          attrs: { disabled: "" },
+                          domProps: { value: "Выберите" }
+                        },
+                        [_vm._v("Выберите")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.deals, function(deal) {
+                        return _c(
+                          "option",
+                          { key: deal.id, domProps: { value: deal.id } },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(deal.id) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-form flex-col" }, [
+                  _c("label", { staticClass: "label" }, [_vm._v("Сумма")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.amount,
+                        expression: "amount"
+                      }
+                    ],
+                    attrs: {
+                      min: "0",
+                      type: "number",
+                      placeholder: "Введите сумму"
+                    },
+                    domProps: { value: _vm.amount },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.amount = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "done-btn",
+                  on: {
+                    click: function($event) {
+                      return _vm.postTransfer()
+                    }
+                  }
+                },
+                [_vm._v("Произвести перевод")]
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.succModal
+        ? _c("div", { staticClass: "modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "close",
+                  on: {
+                    click: function($event) {
+                      _vm.succModal = false
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "15",
+                        height: "15",
+                        viewBox: "0 0 15 15",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z",
+                          fill: "#4985FF"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "succ-img" }, [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      width: "128",
+                      height: "128",
+                      viewBox: "0 0 128 128",
+                      fill: "none",
+                      xmlns: "http://www.w3.org/2000/svg"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d: "M92 43L52 85L36 68.2",
+                        stroke: "#4985FF",
+                        "stroke-width": "7",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M128 64C128 99.3462 99.3462 128 64 128C28.6538 128 0 99.3462 0 64C0 28.6538 28.6538 0 64 0C99.3462 0 128 28.6538 128 64ZM6.4 64C6.4 95.8116 32.1884 121.6 64 121.6C95.8116 121.6 121.6 95.8116 121.6 64C121.6 32.1884 95.8116 6.4 64 6.4C32.1884 6.4 6.4 32.1884 6.4 64Z",
+                        fill: "#4985FF"
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "succ-sub" }, [
+                _vm._v("Запрос на перевод принят!")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "succ-amount" }, [
+                _vm._v(
+                  "Сумма перевода: " +
+                    _vm._s(_vm.amount ? _vm.amount : 0) +
+                    " KZT"
+                )
+              ])
+            ])
+          ])
+        : _vm._e()
     ],
     1
   )
@@ -12631,105 +13107,262 @@ var render = function() {
                     _c("div", { staticClass: "status" }, [_vm._v("Статус")])
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.deals, function(i) {
-                    return _c("div", { key: i.id, staticClass: "item-list" }, [
-                      _c("div", { staticClass: "item flex-row" }, [
-                        _c("div", { staticClass: "index" }, [
-                          _vm._v(_vm._s(i.id))
+                  _vm._l(_vm.deals, function(deal) {
+                    return _c(
+                      "div",
+                      { key: deal.id, staticClass: "item-list" },
+                      [
+                        _c("div", { staticClass: "item flex-row" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "index",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showAccordian(deal.id)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(deal.id))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "name flex-row",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showAccordian(deal.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                №ЦТС-2019/02-41 \n                                "
+                              ),
+                              _c(
+                                "svg",
+                                {
+                                  staticStyle: { margin: "6px 0 0 4px" },
+                                  attrs: {
+                                    width: "11",
+                                    height: "6",
+                                    viewBox: "0 0 11 6",
+                                    fill: "none",
+                                    xmlns: "http://www.w3.org/2000/svg"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M6.04456 0.355294L10.7742 4.65514C11.0753 4.92867 11.0753 5.37214 10.7742 5.64553C10.4735 5.91894 9.98569 5.91894 9.68497 5.64553L5.49992 1.84082L1.31502 5.64542C1.01415 5.91883 0.526408 5.91883 0.225655 5.64542C-0.0752185 5.372 -0.0752185 4.92856 0.225655 4.65503L4.95541 0.355183C5.10586 0.218478 5.30283 0.150202 5.4999 0.150202C5.69706 0.150202 5.89418 0.218611 6.04456 0.355294Z",
+                                      fill: "#4985FF"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "date flex-col",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showAccordian(deal.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "day" }, [
+                                _vm._v(
+                                  _vm._s(_vm.getDateString(deal.updated_at))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "time" }, [
+                                _vm._v(_vm._s(_vm.getDateTime(deal.updated_at)))
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "until flex-col",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showAccordian(deal.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "day" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.getDateString(
+                                      deal.access_road_grant_date
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "time" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.getDateTime(deal.access_road_grant_date)
+                                  )
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          deal.status === 0
+                            ? _c("div", { staticClass: "status" }, [
+                                _vm._v("В обработке")
+                              ])
+                            : _c("div", { staticClass: "status success" }, [
+                                _vm._v("ОДОБРЕНО")
+                              ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "setting",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showOption(deal.id)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    width: "4",
+                                    height: "16",
+                                    viewBox: "0 0 4 16",
+                                    fill: "none",
+                                    xmlns: "http://www.w3.org/2000/svg"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z",
+                                      fill: "#C5C5C5"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
                         ]),
+                        _vm._v(" "),
+                        deal.agreements.length
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "extra flex-col",
+                                attrs: { id: "extra-" + deal.id }
+                              },
+                              [
+                                _c("div", { staticClass: "label" }, [
+                                  _vm._v("Дополнительные соглашения:")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(deal.agreements, function(item) {
+                                  return _c(
+                                    "div",
+                                    { key: item.id, staticClass: "docs" },
+                                    [_vm._v(_vm._s(item.id))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          : _vm._e(),
                         _vm._v(" "),
                         _c(
                           "div",
                           {
-                            staticClass: "name flex-row",
-                            on: {
-                              click: function($event) {
-                                return _vm.showAccordian(i)
-                              }
-                            }
+                            staticClass: "xyz-options flex-col",
+                            attrs: { id: "xyz-option-" + deal.id }
                           },
                           [
-                            _vm._v(
-                              "\n                                №ЦТС-2019/02-41 \n                                "
-                            ),
                             _c(
-                              "svg",
+                              "a",
                               {
-                                staticStyle: { margin: "6px 0 0 4px" },
-                                attrs: {
-                                  width: "11",
-                                  height: "6",
-                                  viewBox: "0 0 11 6",
-                                  fill: "none",
-                                  xmlns: "http://www.w3.org/2000/svg"
-                                }
+                                staticClass: "xyz-option flex-row",
+                                attrs: { href: "" }
                               },
                               [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M6.04456 0.355294L10.7742 4.65514C11.0753 4.92867 11.0753 5.37214 10.7742 5.64553C10.4735 5.91894 9.98569 5.91894 9.68497 5.64553L5.49992 1.84082L1.31502 5.64542C1.01415 5.91883 0.526408 5.91883 0.225655 5.64542C-0.0752185 5.372 -0.0752185 4.92856 0.225655 4.65503L4.95541 0.355183C5.10586 0.218478 5.30283 0.150202 5.4999 0.150202C5.69706 0.150202 5.89418 0.218611 6.04456 0.355294Z",
-                                    fill: "#4985FF"
-                                  }
-                                })
+                                _c(
+                                  "svg",
+                                  {
+                                    staticStyle: { "margin-top": "-2px" },
+                                    attrs: {
+                                      width: "15",
+                                      height: "16",
+                                      viewBox: "0 0 15 16",
+                                      fill: "none",
+                                      xmlns: "http://www.w3.org/2000/svg"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "g",
+                                      { attrs: { "clip-path": "url(#clip0)" } },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M12.8572 5.14286H10.1786C9.8827 5.14286 9.64285 5.39869 9.64285 5.7143C9.64285 6.0299 9.8827 6.28574 10.1786 6.28574H12.8572C13.153 6.28574 13.3929 6.54158 13.3929 6.85719V14.2858C13.3929 14.6014 13.153 14.8573 12.8572 14.8573H2.1428C1.84692 14.8573 1.60707 14.6014 1.60707 14.2858V6.85715C1.60707 6.54155 1.84692 6.28571 2.1428 6.28571H4.82138C5.11726 6.28571 5.35711 6.02987 5.35711 5.71427C5.35711 5.39866 5.11726 5.14282 4.82138 5.14282H2.1428C1.25519 5.14282 0.535645 5.91034 0.535645 6.85712V14.2858C0.535645 15.2325 1.25519 16.0001 2.1428 16.0001H12.8572C13.7448 16.0001 14.4643 15.2325 14.4643 14.2858V6.85715C14.4643 5.91037 13.7448 5.14286 12.8572 5.14286Z",
+                                            fill: "#4985FF"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M4.44294 8.97577L7.12152 11.8329C7.3307 12.056 7.66984 12.056 7.87902 11.8329L10.5576 8.97577C10.7632 8.74876 10.7573 8.38702 10.5444 8.16777C10.3368 7.95389 10.0077 7.95389 9.8001 8.16777L8.03597 10.0495L8.03597 0.57169C8.03597 0.256084 7.79612 0.000244141 7.50024 0.000244141C7.20436 0.000244141 6.96451 0.256084 6.96451 0.57169L6.96451 10.0495L5.20038 8.16774C4.98755 7.9485 4.64842 7.95479 4.44288 8.1818C4.24242 8.40326 4.24242 8.75432 4.44294 8.97577Z",
+                                            fill: "#4985FF"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("defs", [
+                                      _c(
+                                        "clipPath",
+                                        { attrs: { id: "clip0" } },
+                                        [
+                                          _c("rect", {
+                                            attrs: {
+                                              width: "15",
+                                              height: "16",
+                                              fill: "white"
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "label" }, [
+                                  _vm._v("Скачать")
+                                ])
                               ]
                             )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0, true),
-                        _vm._v(" "),
-                        _vm._m(1, true),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "status" }, [
-                          _vm._v("В обработке")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "setting" }, [
-                          _c(
-                            "svg",
-                            {
-                              attrs: {
-                                width: "4",
-                                height: "16",
-                                viewBox: "0 0 4 16",
-                                fill: "none",
-                                xmlns: "http://www.w3.org/2000/svg"
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z",
-                                  fill: "#C5C5C5"
-                                }
-                              })
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "extra flex-col",
-                          attrs: { id: "extra-" + i }
-                        },
-                        [
-                          _c("div", { staticClass: "label" }, [
-                            _vm._v("Дополнительные соглашения:")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(2, function(i) {
-                            return _c("div", { key: i, staticClass: "docs" }, [
-                              _vm._v("№ЦТС-2019/02-41")
-                            ])
-                          })
-                        ],
-                        2
-                      )
-                    ])
+                        )
+                      ]
+                    )
                   })
                 ],
                 2
@@ -12756,7 +13389,7 @@ var render = function() {
       _vm.modalNewDeal
         ? _c("div", { staticClass: "modal" }, [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "div",
@@ -13127,26 +13760,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "date flex-col" }, [
-      _c("div", { staticClass: "day" }, [_vm._v("Июнь 1, 2020")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "time" }, [_vm._v("19:23")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "until flex-col" }, [
-      _c("div", { staticClass: "day" }, [_vm._v("Август 31 , 2020")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "time" }, [_vm._v("19:23")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -13832,14 +14445,14 @@ var render = function() {
                     _vm.allAgreements
                       ? _c(
                           "div",
-                          _vm._l(_vm.allAgreements, function(i) {
+                          _vm._l(_vm.allAgreements, function(item) {
                             return _c(
                               "div",
-                              { key: i.id, staticClass: "item-list" },
+                              { key: item.id, staticClass: "item-list" },
                               [
                                 _c("div", { staticClass: "item flex-row" }, [
                                   _c("div", { staticClass: "index" }, [
-                                    _vm._v(_vm._s(i.id))
+                                    _vm._v(_vm._s(item.id))
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "name flex-row" }, [
@@ -13848,11 +14461,37 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(0, true),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "status" }, [
-                                    _vm._v("ОДОБРЕНО")
+                                  _c("div", { staticClass: "date flex-col" }, [
+                                    _c("div", { staticClass: "day" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.getDateString(
+                                            item.agreement_end_date
+                                          )
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "time" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.getDateTime(
+                                            item.agreement_end_date
+                                          )
+                                        )
+                                      )
+                                    ])
                                   ]),
+                                  _vm._v(" "),
+                                  item.status === 0
+                                    ? _c("div", { staticClass: "status" }, [
+                                        _vm._v("В обработке")
+                                      ])
+                                    : _c(
+                                        "div",
+                                        { staticClass: "status success" },
+                                        [_vm._v("ОДОБРЕНО")]
+                                      ),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "setting" }, [
                                     _c(
@@ -13907,7 +14546,7 @@ var render = function() {
           _vm.modalNewDoc
             ? _c("div", { staticClass: "modal" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -14233,7 +14872,7 @@ var render = function() {
                     ? _c("div", { staticClass: "field-list flex-row" }, [
                         _c("div", { staticClass: "item flex-col" }, [
                           _c("div", { staticClass: "label" }, [
-                            _vm._v("Выберите регион")
+                            _vm._v("Выберите договор")
                           ]),
                           _vm._v(" "),
                           _c(
@@ -14385,13 +15024,68 @@ var render = function() {
                           })
                         ]),
                         _vm._v(" "),
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _vm._m(5),
+                        _c("div", { staticClass: "item flex-col" }, [
+                          _c("div", { staticClass: "label" }, [
+                            _vm._v("Выберите реквизит")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.bank_req_id,
+                                  expression: "bank_req_id"
+                                }
+                              ],
+                              staticClass: "input-form",
+                              attrs: { name: "selected_region" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.bank_req_id = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: { disabled: "" },
+                                  domProps: { value: "Выберите" }
+                                },
+                                [_vm._v("Выберите")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.bank_reqs, function(bk) {
+                                return _c(
+                                  "option",
+                                  { key: bk.id, domProps: { value: bk.id } },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(bk.id) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item flex-col" }),
                         _vm._v(" "),
@@ -14435,7 +15129,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm._m(6)
+                          _vm._m(1)
                         ])
                       ])
                     : _vm._e(),
@@ -14499,62 +15193,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "date flex-col" }, [
-      _c("div", { staticClass: "day" }, [_vm._v("Июнь 1, 2020")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "time" }, [_vm._v("19:23")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "title" }, [
       _vm._v("Соглашение на подачу и "),
       _c("br"),
       _vm._v("уборку вагонов")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "text", placeholder: "0000 0000 0000 0000" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("БИК")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", placeholder: "987 654 321" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("КБЕ")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", placeholder: "Введите КБЕ" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item flex-col" }, [
-      _c("div", { staticClass: "label" }, [_vm._v("Наименование банка")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", placeholder: "Bank name" } })
     ])
   },
   function() {
@@ -15741,7 +16383,7 @@ var render = function() {
                         _c("div", { staticClass: "item flex-col" }, [
                           _c("div", { staticClass: "label" }, [_vm._v("ИИК")]),
                           _vm._v(" "),
-                          _vm.editMode
+                          _vm.addMode
                             ? _c("input", {
                                 directives: [
                                   {
@@ -15769,7 +16411,41 @@ var render = function() {
                                   }
                                 }
                               })
-                            : _c("input", {
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.addMode && _vm.editMode
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.chosenAccordion.IBAN,
+                                    expression: "chosenAccordion.IBAN"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "KZ 1000 0000 0000 0000",
+                                  readonly: ""
+                                },
+                                domProps: { value: _vm.chosenAccordion.IBAN },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.chosenAccordion,
+                                      "IBAN",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.addMode && !_vm.editMode
+                            ? _c("input", {
                                 attrs: { type: "text", readonly: "" },
                                 domProps: {
                                   value: _vm.chosenAccordion.IBAN
@@ -15777,6 +16453,7 @@ var render = function() {
                                     : "не заполнено"
                                 }
                               })
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item flex-col" }, [
@@ -15830,7 +16507,7 @@ var render = function() {
                           staticClass: "cancel-btn",
                           on: {
                             click: function($event) {
-                              _vm.editMode = !_vm.editMode
+                              ;(_vm.editMode = false), (_vm.addMode = false)
                             }
                           }
                         },
@@ -37173,6 +37850,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserProfileRouteMenu_vue_vue_type_template_id_37997759_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/vars.js":
+/*!******************************!*\
+  !*** ./resources/js/vars.js ***!
+  \******************************/
+/*! exports provided: func */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "func", function() { return func; });
+var func = {
+  getDateString: function getDateString(strDate) {
+    var monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];
+    var time = new Date(strDate);
+    var date = time.getDate();
+    return monthNames[Number(time.getMonth())] + ' ' + date + ', ' + time.getFullYear();
+  },
+  getDateTime: function getDateTime(strDate) {
+    var time = new Date(strDate);
+    var hours = time.getHours();
+    hours = hours.length === 1 ? '0' + hours : hours;
+    var minuts = time.getMinutes();
+    minuts = minuts.length === 1 ? '0' + minuts : minuts;
+    return hours + ' : ' + minuts;
+  }
+};
 
 /***/ }),
 

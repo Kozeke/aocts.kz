@@ -31,33 +31,50 @@
                             </div>
                             <div class="status">Статус</div>
                         </div>
-                        <div v-for="i in deals" :key="i.id" class="item-list">
+                        <div v-for="deal in deals" :key="deal.id" class="item-list">
                             <div class="item flex-row">
-                                <div class="index">{{ i.id }}</div>
-                                <div @click="showAccordian(i)" class="name flex-row">
+                                <div @click="showAccordian(deal.id)" class="index">{{ deal.id }}</div>
+                                <div @click="showAccordian(deal.id)" class="name flex-row">
                                     №ЦТС-2019/02-41 
                                     <svg style="margin: 6px 0 0 4px" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.04456 0.355294L10.7742 4.65514C11.0753 4.92867 11.0753 5.37214 10.7742 5.64553C10.4735 5.91894 9.98569 5.91894 9.68497 5.64553L5.49992 1.84082L1.31502 5.64542C1.01415 5.91883 0.526408 5.91883 0.225655 5.64542C-0.0752185 5.372 -0.0752185 4.92856 0.225655 4.65503L4.95541 0.355183C5.10586 0.218478 5.30283 0.150202 5.4999 0.150202C5.69706 0.150202 5.89418 0.218611 6.04456 0.355294Z" fill="#4985FF"/>
                                     </svg>
                                 </div>
-                                <div class="date flex-col">
-                                    <div class="day">Июнь 1, 2020</div>
-                                    <div class="time">19:23</div>
+                                <div @click="showAccordian(deal.id)" class="date flex-col">
+                                    <div class="day">{{ getDateString(deal.updated_at) }}</div>
+                                    <div class="time">{{ getDateTime(deal.updated_at) }}</div>
                                 </div>
-                                <div class="until flex-col">
-                                    <div class="day">Август 31 , 2020</div>
-                                    <div class="time">19:23</div>
+                                <div @click="showAccordian(deal.id)" class="until flex-col">
+                                    <div class="day">{{ getDateString(deal.access_road_grant_date) }}</div>
+                                    <div class="time">{{ getDateTime(deal.access_road_grant_date) }}</div>
                                 </div>
-                                <div class="status">В обработке</div>
-                                <div class="setting">
+                                <div v-if="deal.status === 0" class="status">В обработке</div>
+                                <div v-else class="status success">ОДОБРЕНО</div>
+                                <div @click="showOption(deal.id)" class="setting">
                                     <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
                                     </svg>
                                 </div>
                             </div>
-                            <div :id="'extra-' + i" class="extra flex-col">
+                            <div v-if="deal.agreements.length" :id="'extra-' + deal.id" class="extra flex-col">
                                 <div class="label">Дополнительные соглашения:</div>
-                                <div v-for="i in 2" :key="i" class="docs">№ЦТС-2019/02-41</div>
+                                <div v-for="item in deal.agreements" :key="item.id" class="docs">{{ item.id }}</div>
+                            </div>
+                            <div :id="'xyz-option-' + deal.id" class="xyz-options flex-col">
+                                <a :href="''" class="xyz-option flex-row">
+                                    <svg style="margin-top: -2px;" width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0)">
+                                        <path d="M12.8572 5.14286H10.1786C9.8827 5.14286 9.64285 5.39869 9.64285 5.7143C9.64285 6.0299 9.8827 6.28574 10.1786 6.28574H12.8572C13.153 6.28574 13.3929 6.54158 13.3929 6.85719V14.2858C13.3929 14.6014 13.153 14.8573 12.8572 14.8573H2.1428C1.84692 14.8573 1.60707 14.6014 1.60707 14.2858V6.85715C1.60707 6.54155 1.84692 6.28571 2.1428 6.28571H4.82138C5.11726 6.28571 5.35711 6.02987 5.35711 5.71427C5.35711 5.39866 5.11726 5.14282 4.82138 5.14282H2.1428C1.25519 5.14282 0.535645 5.91034 0.535645 6.85712V14.2858C0.535645 15.2325 1.25519 16.0001 2.1428 16.0001H12.8572C13.7448 16.0001 14.4643 15.2325 14.4643 14.2858V6.85715C14.4643 5.91037 13.7448 5.14286 12.8572 5.14286Z" fill="#4985FF"/>
+                                        <path d="M4.44294 8.97577L7.12152 11.8329C7.3307 12.056 7.66984 12.056 7.87902 11.8329L10.5576 8.97577C10.7632 8.74876 10.7573 8.38702 10.5444 8.16777C10.3368 7.95389 10.0077 7.95389 9.8001 8.16777L8.03597 10.0495L8.03597 0.57169C8.03597 0.256084 7.79612 0.000244141 7.50024 0.000244141C7.20436 0.000244141 6.96451 0.256084 6.96451 0.57169L6.96451 10.0495L5.20038 8.16774C4.98755 7.9485 4.64842 7.95479 4.44288 8.1818C4.24242 8.40326 4.24242 8.75432 4.44294 8.97577Z" fill="#4985FF"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0">
+                                        <rect width="15" height="16" fill="white"/>
+                                        </clipPath>
+                                        </defs>
+                                    </svg>
+                                    <div class="label">Скачать</div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -126,6 +143,8 @@ import UserSide from '../UserSide'
 import UserNav from '../UserNav'
 import Datepicker from 'vuejs-datepicker'
 import {ru} from 'vuejs-datepicker/dist/locale'
+import { func } from '../../../vars.js'
+
 import axios from 'axios'
 
 export default {
@@ -155,6 +174,8 @@ export default {
         this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
     },
     methods: {
+        getDateString: func.getDateString,
+        getDateTime: func.getDateTime,
         showAccordian( index ){
             let el = document.getElementById('extra-' + index)
             if( el.style.display === 'flex' ){
@@ -162,6 +183,13 @@ export default {
             } else {
                 el.style.display = 'flex'
             }
+        },
+        showOption(index){
+            var options = document.getElementsByClassName('xyz-options')
+            for(let item of options){
+                item.style.display = "none"
+            }
+            document.getElementById('xyz-option-' + index).style.display = "flex";
         },
         postDeal(){
             let now =  this.access_road_grant_date
@@ -257,6 +285,7 @@ export default {
                             }
                         }
                         .item-list{
+                            position: relative;
                             padding: 12px 0;
                             border-bottom: 1px solid #DFE0EB;
                             .item{
@@ -309,6 +338,9 @@ export default {
                                     border-radius: 6px;
                                     height: 34px;
                                 }
+                                .status.success{
+                                    background: #29CC97;
+                                }
                                 .setting{
                                     cursor: pointer;
                                     text-align: right;
@@ -336,6 +368,31 @@ export default {
                                     line-height: 14px;
                                     color: #252733; 
                                     margin: 2px 0;
+                                }
+                            }
+                            .xyz-options{
+                                display: none;
+                                position: absolute;
+                                top: 16px;
+                                background: #ffffff;
+                                right: -40px;
+                                z-index: 99;
+                                padding: 0 8px;
+                                background: #FDFDFD;
+                                box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);
+                                border-radius: 6px;
+                                .xyz-option{
+                                    cursor: pointer;
+                                    padding: 8px 0;
+                                    .label{
+                                        cursor: pointer;
+                                        margin-left: 10px;
+                                        text-align: left;
+                                        font-weight: 600;
+                                        font-size: 12px;
+                                        line-height: 16px;
+                                        color: #4985FF;
+                                    }
                                 }
                             }
                         }
