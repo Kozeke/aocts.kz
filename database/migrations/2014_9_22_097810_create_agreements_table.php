@@ -17,6 +17,8 @@ class CreateAgreementsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('application_id')->unsigned();
             $table->foreign('application_id')->references('id')->on('applications')->onDelete('cascade');
+            $table->unsignedBigInteger('bank_req_id')->unsigned();
+            $table->foreign('bank_req_id')->references('id')->on('bank_requisites')->onDelete('cascade');
             $table->string('business_index');
             $table->string('address');
             $table->string('access_road');

@@ -13,7 +13,6 @@ class BankRequisitesController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
             'bank_name' => 'required',
             'BIC' => 'required',
             'IBAN' => 'required',
@@ -30,7 +29,7 @@ class BankRequisitesController extends Controller
         $bank_requisites->IBAN = $request['IBAN'];
         $bank_requisites->Bank_name = $request['bank_name'];
         $bank_requisites->BIC = $request['BIC'];
-        $bank_requisites->user_id = $request['user_id'];
+        $bank_requisites->user_id = $user->id;
         $bank_requisites->CB = $request['CB'];
         $bank_requisites->save();
         return response()->json(['bank_requisites', $user->bank_requisites], 200);

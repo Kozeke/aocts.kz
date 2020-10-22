@@ -26,6 +26,7 @@ class AgreementController extends Controller
             'agreement_start_date' => 'required',
             'agreement_end_date' => 'required',
             'performer' => 'required',
+            'bank_req_id' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
@@ -48,6 +49,7 @@ class AgreementController extends Controller
             'agreement_end_date' => $request['agreement_end_date'],
             'performer' => $request['performer'],
             'company_name' => $request['company_name'],
+            'bank_req_id' => $request['bank_req_id'],
         ]);
         return response()->json(['agreements', $agreement], 200);
     }
