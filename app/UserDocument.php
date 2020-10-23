@@ -10,6 +10,7 @@ class UserDocument extends Model
 
     public $fillable = [
         'user_id',
-        'path'
+        'path',
+        'title'
     ];
 }
