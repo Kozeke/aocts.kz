@@ -830,8 +830,7 @@ export default {
             let tt = 1
             var str = 'document'
             for(let doc of docs){
-                data.append(str, doc)
-                str = (str + tt.toString()).toString()
+                data.append(str + tt.toString(), doc)
                 tt += 1
             }
             for (var pair of data.entries()) {
