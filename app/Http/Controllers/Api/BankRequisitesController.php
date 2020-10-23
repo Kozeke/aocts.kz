@@ -35,4 +35,17 @@ class BankRequisitesController extends Controller
         return response()->json(['bank_requisites', $user->bank_requisites], 200);
 
     }
+
+    public function delete(Request $request)
+    {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
+            return response()->json(['error'=> $e->getMessage()]);
+        }
+        BankRequisites::where('id', $request['id'])->delete();
+
+        return response()->json(['success'], 200);
+
+    }
 }

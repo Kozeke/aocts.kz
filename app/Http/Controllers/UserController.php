@@ -41,7 +41,6 @@ class UserController extends Controller
             'phone' => 'required|unique:users',
             'recaptcha_token' => 'string',
             'document1' => 'required',
-            'type_of_organization_id' => 'required'
 
         ]);
         if ($validator->fails()) {

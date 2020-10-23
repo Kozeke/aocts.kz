@@ -34,6 +34,7 @@ Route::get('user/download/document', 'Api\UserDocumentController@getDownload');
 Route::post('user/edit/main','Api\UserController@updateMain');
 Route::post('user/edit/contacts','Api\UserController@updateContacts');
 Route::post('user/edit/bank/requisites','Api\BankRequisitesController@update');
+Route::delete('user/delete/bank/requisites', 'Api\BankRequisitesController@delete');
 
 
 
