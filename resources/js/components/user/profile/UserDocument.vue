@@ -14,25 +14,26 @@
                             <div class="status">Статус</div>
                         </div>
                         <div v-for="doc in documents" :key="doc.id" class="item flex-row">
-                            <div class="name">Свидетельство гос. Регистрации.pdf</div>
+                            <div class="name">{{ doc.title }}</div>
                             <div class="date flex-col">
                                 <div class="day">Июнь 1, 2020</div>
                                 <div class="time">19:23</div>
                             </div>
-                            <div class="status">подтвержден</div>
+                            <div v-if="doc.status === 0" class="status">В обработке</div>
+                            <div v-else class="status success">ОДОБРЕНО</div>
                             <div @click="showOption(doc.id)" class="setting">
                                 <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
                                 </svg>
                             </div>
-                            <div :id="'option-' + doc.id" class="options flex-col">
-                                <div class="option flex-row">
+                            <div :id="'xyz-option-' + doc.id" class="xyz-options flex-col">
+                                <div @click="editDocId = doc.id, modalAddDoc = true" class="option flex-row">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 9.50035V12H2.49965L9.87196 4.62769L7.37231 2.12804L0 9.50035ZM11.805 2.69463C12.065 2.43466 12.065 2.01472 11.805 1.75476L10.2452 0.194973C9.98528 -0.064991 9.56534 -0.064991 9.30537 0.194973L8.08554 1.4148L10.5852 3.91446L11.805 2.69463Z" fill="#4985FF"/>
                                     </svg>      
                                     <div class="label">Изменить</div>
                                 </div>
-                                <div style="border-bottom: 0.5px solid #DFE0EB; border-top: 0.5px solid #DFE0EB;" class="option flex-row">
+                                <a :href="doc.path" target="_blank" rel="noopener noreferrer" style="border-bottom: 0.5px solid #DFE0EB; border-top: 0.5px solid #DFE0EB;" class="option flex-row">
                                     <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0)">
                                         <path d="M12.8572 5.14286H10.1786C9.8827 5.14286 9.64285 5.39869 9.64285 5.7143C9.64285 6.0299 9.8827 6.28574 10.1786 6.28574H12.8572C13.153 6.28574 13.3929 6.54158 13.3929 6.85719V14.2858C13.3929 14.6014 13.153 14.8573 12.8572 14.8573H2.1428C1.84692 14.8573 1.60707 14.6014 1.60707 14.2858V6.85715C1.60707 6.54155 1.84692 6.28571 2.1428 6.28571H4.82138C5.11726 6.28571 5.35711 6.02987 5.35711 5.71427C5.35711 5.39866 5.11726 5.14282 4.82138 5.14282H2.1428C1.25519 5.14282 0.535645 5.91034 0.535645 6.85712V14.2858C0.535645 15.2325 1.25519 16.0001 2.1428 16.0001H12.8572C13.7448 16.0001 14.4643 15.2325 14.4643 14.2858V6.85715C14.4643 5.91037 13.7448 5.14286 12.8572 5.14286Z" fill="#4985FF"/>
@@ -45,8 +46,8 @@
                                         </defs>
                                     </svg>
                                     <div class="label">Скачать</div>
-                                </div>
-                                <div class="option flex-row">
+                                </a>
+                                <div @click="deleteDoc(doc.id)" class="option flex-row">
                                     <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.857143 14.2222C0.857143 15.2 1.62857 16 2.57143 16H9.42857C10.3714 16 11.1429 15.2 11.1429 14.2222V3.55556H0.857143V14.2222ZM12 0.888889H9L8.14286 0H3.85714L3 0.888889H0V2.66667H12V0.888889Z" fill="#4985FF"/>
                                     </svg>
@@ -103,6 +104,7 @@ export default {
     data(){
         return {
             modalAddDoc: false,
+            editDocId: '',
             documents: '',
             fileData: ''
         }
@@ -115,28 +117,67 @@ export default {
         getDateString: func.getDateString,
         getDateTime: func.getDateTime,
         showOption(index){
-            document.getElementById('option-' + index).style.display = "flex";
+            var options = document.getElementsByClassName('xyz-options')
+            for(let item of options){
+                item.style.display = "none"
+            }
+            document.getElementById('xyz-option-' + index).style.display = "flex";
         },
         onFileChange(){
             var fileData =  event.target.files[0];
             this.fileData=fileData.name;
             let data = new FormData();
-                
             data.append("title", fileData.name)
             data.append("document", event.target.files[0])
-            
-            axios.post('/api/user/add/document', data, {
+
+            if(this.editDocId){
+                data.append("id", this.editDocId)
+                axios.post('/api/user/update/document', data, {
                     headers: { 
                         'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
                     }
                 })
             .then(res => {
-                alert('Вы успешно добавили файл')
-                let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
-                localStorage.removeItem('xyzSessionAoUser');
-                userSt.documents.push( res.data.document )
-                localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
-                location.reload()
+                alert('Вы успешно изменили файл')
+                this.$router.push({ name : 'profile' })
+            })
+            .catch(err => {
+                alert('Неизвестная ошибка')
+                // location.reload()
+                console.log(err.data)
+            })
+            } else {
+                axios.post('/api/user/add/document', data, {
+                        headers: { 
+                            'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                        }
+                    })
+                .then(res => {
+                    alert('Вы успешно добавили файл')
+                    this.$router.push({ name : 'profile' })
+                    // let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+                    // localStorage.removeItem('xyzSessionAoUser');
+                    // userSt.documents.push( res.data.document )
+                    // localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+                    // location.reload()
+                })
+                .catch(err => {
+                    alert('Неизвестная ошибка')
+                    // location.reload()
+                    console.log(err.data)
+                })
+            }
+        },
+        deleteDoc(index){
+            axios.delete('/api/user/delete/document?id=' + index, {
+                    headers: { 
+                        'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                    }
+                })
+            .then(res => {
+                alert('Вы успешно удалили файл')
+                this.$router.push({ name : 'profile' })
+                // location.reload()
             })
             .catch(err => {
                 alert('Неизвестная ошибка')
@@ -239,6 +280,9 @@ export default {
                                 background: #29CC97;
                                 border-radius: 6px;
                             }
+                            .status.success{
+                                background: #29CC97;
+                            }
                             .setting{
                                 cursor: pointer;
                                 text-align: right;
@@ -248,7 +292,7 @@ export default {
                             .setting:focus ~ .options{
                                 display: flex;
                             }
-                            .options{
+                            .xyz-options{
                                 display: none;
                                 position: absolute;
                                 background: #ffffff;

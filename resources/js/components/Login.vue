@@ -82,11 +82,11 @@ export default {
   },
   methods: {
     validateForm(e) {
-              console.log(e.target.value)
+              // console.log(e.target.value)
 
       // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (e.target.id === "BIN") {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         // if (!pattern.test(String(e.target.value).toLowerCase())) {
           if ( String(e.target.value).length < 12 ) {
           document.getElementById("err-BIN").style.visibility = "visible";

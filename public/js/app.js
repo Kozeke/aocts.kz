@@ -2546,11 +2546,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     validateForm: function validateForm(e) {
-      console.log(e.target.value); // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+      // console.log(e.target.value)
+      // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (e.target.id === "BIN") {
-        console.log(e.target.value); // if (!pattern.test(String(e.target.value).toLowerCase())) {
-
+        // console.log(e.target.value)
+        // if (!pattern.test(String(e.target.value).toLowerCase())) {
         if (String(e.target.value).length < 12) {
           document.getElementById("err-BIN").style.visibility = "visible";
           e.srcElement.classList.add("error");
@@ -3521,8 +3521,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var doc = _step2.value;
-          data.append(str, doc);
-          str = (str + tt.toString()).toString();
+          data.append(str + tt.toString(), doc);
           tt += 1;
         }
       } catch (err) {
@@ -5065,6 +5064,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vars_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../vars.js */ "./resources/js/vars.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
 //
 //
 //
@@ -5167,6 +5173,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       modalAddDoc: false,
+      editDocId: '',
       documents: '',
       fileData: ''
     };
@@ -5179,25 +5186,87 @@ __webpack_require__.r(__webpack_exports__);
     getDateString: _vars_js__WEBPACK_IMPORTED_MODULE_4__["func"].getDateString,
     getDateTime: _vars_js__WEBPACK_IMPORTED_MODULE_4__["func"].getDateTime,
     showOption: function showOption(index) {
-      document.getElementById('option-' + index).style.display = "flex";
+      var options = document.getElementsByClassName('xyz-options');
+
+      var _iterator = _createForOfIteratorHelper(options),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          item.style.display = "none";
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      document.getElementById('xyz-option-' + index).style.display = "flex";
     },
     onFileChange: function onFileChange() {
+      var _this = this;
+
       var fileData = event.target.files[0];
       this.fileData = fileData.name;
       var data = new FormData();
       data.append("title", fileData.name);
       data.append("document", event.target.files[0]);
-      axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/user/add/document', data, {
+
+      if (this.editDocId) {
+        data.append("id", this.editDocId);
+        axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/user/update/document', data, {
+          headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+          }
+        }).then(function (res) {
+          alert('Вы успешно изменили файл');
+
+          _this.$router.push({
+            name: 'profile'
+          });
+        })["catch"](function (err) {
+          alert('Неизвестная ошибка'); // location.reload()
+
+          console.log(err.data);
+        });
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/user/add/document', data, {
+          headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+          }
+        }).then(function (res) {
+          alert('Вы успешно добавили файл');
+
+          _this.$router.push({
+            name: 'profile'
+          }); // let userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'))
+          // localStorage.removeItem('xyzSessionAoUser');
+          // userSt.documents.push( res.data.document )
+          // localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
+          // location.reload()
+
+        })["catch"](function (err) {
+          alert('Неизвестная ошибка'); // location.reload()
+
+          console.log(err.data);
+        });
+      }
+    },
+    deleteDoc: function deleteDoc(index) {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a["delete"]('/api/user/delete/document?id=' + index, {
         headers: {
           'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
         }
       }).then(function (res) {
-        alert('Вы успешно добавили файл');
-        var userSt = JSON.parse(localStorage.getItem('xyzSessionAoUser'));
-        localStorage.removeItem('xyzSessionAoUser');
-        userSt.documents.push(res.data.document);
-        localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
-        location.reload();
+        alert('Вы успешно удалили файл');
+
+        _this2.$router.push({
+          name: 'profile'
+        }); // location.reload()
+
       })["catch"](function (err) {
         alert('Неизвестная ошибка'); // location.reload()
 
@@ -6135,7 +6204,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".main[data-v-f3eace56] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-f3eace56] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-f3eace56] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-f3eace56] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-f3eace56] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-f3eace56] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .statis[data-v-f3eace56] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56] {\n  width: 36%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-f3eace56] {\n  width: 30%;\n}\n.main .main-info .containe .content .field-list .item[data-v-f3eace56] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n  height: 60px;\n  position: relative;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56], .main .main-info .containe .content .field-list .item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .item .time[data-v-f3eace56], .main .main-info .containe .content .field-list .item .day[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56] {\n  width: 36%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item .date[data-v-f3eace56] {\n  margin-left: 2%;\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item .date .time[data-v-f3eace56] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item .status[data-v-f3eace56] {\n  width: 22%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #29CC97;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item .setting:focus ~ .options[data-v-f3eace56] {\n  display: flex;\n}\n.main .main-info .containe .content .field-list .item .options[data-v-f3eace56] {\n  display: none;\n  position: absolute;\n  background: #ffffff;\n  right: -40px;\n  z-index: 99;\n  padding: 0 8px;\n}\n.main .main-info .containe .content .field-list .item .options .option[data-v-f3eace56] {\n  cursor: pointer;\n  padding: 8px 0;\n}\n.main .main-info .containe .content .field-list .item .options .option .label[data-v-f3eace56] {\n  cursor: pointer;\n  margin-left: 10px;\n  text-align: left;\n  font-weight: 600;\n  font-size: 10px;\n  line-height: 16px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .send-btn[data-v-f3eace56] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-f3eace56] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-f3eace56] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 140px auto auto auto;\n  padding: 72px 96px;\n  width: auto;\n}\n.main .modal .modal-content .close[data-v-f3eace56] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .upload[data-v-f3eace56] {\n  border: 1px dashed #4985FF;\n  border-radius: 6px;\n  padding: 64px 180px;\n  height: 314px;\n  width: 643px;\n}\n.main .modal .modal-content .upload svg[data-v-f3eace56] {\n  text-align: center;\n  margin: 0 auto;\n}\n.main .modal .modal-content .upload .label[data-v-f3eace56] {\n  margin: 42px auto 0 auto;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  color: #252733;\n}\n.main .modal .modal-content .upload .label p[data-v-f3eace56] {\n  margin: 0;\n}\n.main .modal .modal-content .upload .label span[data-v-f3eace56] {\n  color: #4985FF;\n}\n.main .modal .modal-content .input-file[data-v-f3eace56] {\n  position: absolute;\n  z-index: 99;\n  opacity: 0;\n  height: 314px;\n  width: 643px;\n}", ""]);
+exports.push([module.i, ".main[data-v-f3eace56] {\n  background: #FFFFFF;\n}\n.main .main-info[data-v-f3eace56] {\n  padding: 0 58px 37px 58px;\n  margin-left: 303px;\n}\n.main .main-info .containe[data-v-f3eace56] {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n.main .main-info .containe .content[data-v-f3eace56] {\n  position: relative;\n  width: 100%;\n  margin-left: 42px;\n  background: #FFFFFF;\n  border: 1px solid #DFE0EB;\n  border-radius: 6px;\n  min-height: 580px;\n  padding-bottom: 80px;\n}\n.main .main-info .containe .content .field-list[data-v-f3eace56] {\n  padding: 32px 32px;\n  flex-wrap: wrap;\n}\n.main .main-info .containe .content .field-list .label-item[data-v-f3eace56] {\n  padding-bottom: 10px;\n  border-bottom: 1.5px solid #DFE0EB;\n}\n.main .main-info .containe .content .field-list .label-item div[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  height: 20px;\n  letter-spacing: 0.2px;\n  color: #788899;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .label-item .statis[data-v-f3eace56] {\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .label-item .name[data-v-f3eace56] {\n  width: 36%;\n}\n.main .main-info .containe .content .field-list .label-item .date[data-v-f3eace56] {\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .label-item .status[data-v-f3eace56] {\n  width: 30%;\n}\n.main .main-info .containe .content .field-list .item[data-v-f3eace56] {\n  padding: 12px 0;\n  border-bottom: 1px solid #DFE0EB;\n  height: 60px;\n  position: relative;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56], .main .main-info .containe .content .field-list .item .date[data-v-f3eace56], .main .main-info .containe .content .field-list .item .time[data-v-f3eace56], .main .main-info .containe .content .field-list .item .day[data-v-f3eace56] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 20px;\n  letter-spacing: 0.2px;\n  color: #252733;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56], .main .main-info .containe .content .field-list .item .status[data-v-f3eace56], .main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  padding: 6px 0;\n  margin-left: 2%;\n}\n.main .main-info .containe .content .field-list .item .name[data-v-f3eace56] {\n  width: 36%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.main .main-info .containe .content .field-list .item .date[data-v-f3eace56] {\n  margin-left: 2%;\n  width: 28%;\n}\n.main .main-info .containe .content .field-list .item .date .time[data-v-f3eace56] {\n  font-weight: normal;\n  font-size: 12px;\n  line-height: 16px;\n  letter-spacing: 0.1px;\n  color: #C5C5C5;\n}\n.main .main-info .containe .content .field-list .item .status[data-v-f3eace56] {\n  width: 22%;\n  letter-spacing: 0.5px;\n  text-transform: uppercase;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 22px;\n  text-align: center;\n  background: #29CC97;\n  border-radius: 6px;\n}\n.main .main-info .containe .content .field-list .item .status.success[data-v-f3eace56] {\n  background: #29CC97;\n}\n.main .main-info .containe .content .field-list .item .setting[data-v-f3eace56] {\n  cursor: pointer;\n  text-align: right;\n  margin-right: 2%;\n  width: 4%;\n}\n.main .main-info .containe .content .field-list .item .setting:focus ~ .options[data-v-f3eace56] {\n  display: flex;\n}\n.main .main-info .containe .content .field-list .item .xyz-options[data-v-f3eace56] {\n  display: none;\n  position: absolute;\n  background: #ffffff;\n  right: -40px;\n  z-index: 99;\n  padding: 0 8px;\n}\n.main .main-info .containe .content .field-list .item .xyz-options .option[data-v-f3eace56] {\n  cursor: pointer;\n  padding: 8px 0;\n}\n.main .main-info .containe .content .field-list .item .xyz-options .option .label[data-v-f3eace56] {\n  cursor: pointer;\n  margin-left: 10px;\n  text-align: left;\n  font-weight: 600;\n  font-size: 10px;\n  line-height: 16px;\n  color: #4985FF;\n}\n.main .main-info .containe .content .send-btn[data-v-f3eace56] {\n  position: absolute;\n  bottom: 32px;\n  right: 32px;\n  max-width: 270px;\n  cursor: pointer;\n  margin: 80px 0 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n.main .modal[data-v-f3eace56] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-f3eace56] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 140px auto auto auto;\n  padding: 72px 96px;\n  width: auto;\n}\n.main .modal .modal-content .close[data-v-f3eace56] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .upload[data-v-f3eace56] {\n  border: 1px dashed #4985FF;\n  border-radius: 6px;\n  padding: 64px 180px;\n  height: 314px;\n  width: 643px;\n}\n.main .modal .modal-content .upload svg[data-v-f3eace56] {\n  text-align: center;\n  margin: 0 auto;\n}\n.main .modal .modal-content .upload .label[data-v-f3eace56] {\n  margin: 42px auto 0 auto;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  color: #252733;\n}\n.main .modal .modal-content .upload .label p[data-v-f3eace56] {\n  margin: 0;\n}\n.main .modal .modal-content .upload .label span[data-v-f3eace56] {\n  color: #4985FF;\n}\n.main .modal .modal-content .input-file[data-v-f3eace56] {\n  position: absolute;\n  z-index: 99;\n  opacity: 0;\n  height: 314px;\n  width: 643px;\n}", ""]);
 
 // exports
 
@@ -16555,14 +16624,18 @@ var render = function() {
                           { key: doc.id, staticClass: "item flex-row" },
                           [
                             _c("div", { staticClass: "name" }, [
-                              _vm._v("Свидетельство гос. Регистрации.pdf")
+                              _vm._v(_vm._s(doc.title))
                             ]),
                             _vm._v(" "),
                             _vm._m(1, true),
                             _vm._v(" "),
-                            _c("div", { staticClass: "status" }, [
-                              _vm._v("подтвержден")
-                            ]),
+                            doc.status === 0
+                              ? _c("div", { staticClass: "status" }, [
+                                  _vm._v("В обработке")
+                                ])
+                              : _c("div", { staticClass: "status success" }, [
+                                  _vm._v("ОДОБРЕНО")
+                                ]),
                             _vm._v(" "),
                             _c(
                               "div",
@@ -16602,45 +16675,62 @@ var render = function() {
                             _c(
                               "div",
                               {
-                                staticClass: "options flex-col",
-                                attrs: { id: "option-" + doc.id }
+                                staticClass: "xyz-options flex-col",
+                                attrs: { id: "xyz-option-" + doc.id }
                               },
                               [
-                                _c("div", { staticClass: "option flex-row" }, [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        width: "12",
-                                        height: "12",
-                                        viewBox: "0 0 12 12",
-                                        fill: "none",
-                                        xmlns: "http://www.w3.org/2000/svg"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          d:
-                                            "M0 9.50035V12H2.49965L9.87196 4.62769L7.37231 2.12804L0 9.50035ZM11.805 2.69463C12.065 2.43466 12.065 2.01472 11.805 1.75476L10.2452 0.194973C9.98528 -0.064991 9.56534 -0.064991 9.30537 0.194973L8.08554 1.4148L10.5852 3.91446L11.805 2.69463Z",
-                                          fill: "#4985FF"
-                                        }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "label" }, [
-                                    _vm._v("Изменить")
-                                  ])
-                                ]),
-                                _vm._v(" "),
                                 _c(
                                   "div",
+                                  {
+                                    staticClass: "option flex-row",
+                                    on: {
+                                      click: function($event) {
+                                        ;(_vm.editDocId = doc.id),
+                                          (_vm.modalAddDoc = true)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          width: "12",
+                                          height: "12",
+                                          viewBox: "0 0 12 12",
+                                          fill: "none",
+                                          xmlns: "http://www.w3.org/2000/svg"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M0 9.50035V12H2.49965L9.87196 4.62769L7.37231 2.12804L0 9.50035ZM11.805 2.69463C12.065 2.43466 12.065 2.01472 11.805 1.75476L10.2452 0.194973C9.98528 -0.064991 9.56534 -0.064991 9.30537 0.194973L8.08554 1.4148L10.5852 3.91446L11.805 2.69463Z",
+                                            fill: "#4985FF"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "label" }, [
+                                      _vm._v("Изменить")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
                                   {
                                     staticClass: "option flex-row",
                                     staticStyle: {
                                       "border-bottom": "0.5px solid #DFE0EB",
                                       "border-top": "0.5px solid #DFE0EB"
+                                    },
+                                    attrs: {
+                                      href: doc.path,
+                                      target: "_blank",
+                                      rel: "noopener noreferrer"
                                     }
                                   },
                                   [
@@ -16706,33 +16796,44 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "option flex-row" }, [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        width: "12",
-                                        height: "16",
-                                        viewBox: "0 0 12 16",
-                                        fill: "none",
-                                        xmlns: "http://www.w3.org/2000/svg"
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "option flex-row",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteDoc(doc.id)
                                       }
-                                    },
-                                    [
-                                      _c("path", {
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
                                         attrs: {
-                                          d:
-                                            "M0.857143 14.2222C0.857143 15.2 1.62857 16 2.57143 16H9.42857C10.3714 16 11.1429 15.2 11.1429 14.2222V3.55556H0.857143V14.2222ZM12 0.888889H9L8.14286 0H3.85714L3 0.888889H0V2.66667H12V0.888889Z",
-                                          fill: "#4985FF"
+                                          width: "12",
+                                          height: "16",
+                                          viewBox: "0 0 12 16",
+                                          fill: "none",
+                                          xmlns: "http://www.w3.org/2000/svg"
                                         }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "label" }, [
-                                    _vm._v("Удалить")
-                                  ])
-                                ])
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M0.857143 14.2222C0.857143 15.2 1.62857 16 2.57143 16H9.42857C10.3714 16 11.1429 15.2 11.1429 14.2222V3.55556H0.857143V14.2222ZM12 0.888889H9L8.14286 0H3.85714L3 0.888889H0V2.66667H12V0.888889Z",
+                                            fill: "#4985FF"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "label" }, [
+                                      _vm._v("Удалить")
+                                    ])
+                                  ]
+                                )
                               ]
                             )
                           ]
