@@ -2546,10 +2546,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     validateForm: function validateForm(e) {
-      // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      console.log(e.target.value); // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
       if (e.target.id === "BIN") {
-        // if (!pattern.test(String(e.target.value).toLowerCase())) {
-        if (String(e.target.value).length === 0) {
+        console.log(e.target.value); // if (!pattern.test(String(e.target.value).toLowerCase())) {
+
+        if (String(e.target.value).length < 12) {
           document.getElementById("err-BIN").style.visibility = "visible";
           e.srcElement.classList.add("error");
         } else {
@@ -2571,7 +2573,7 @@ __webpack_require__.r(__webpack_exports__);
     logIn: function logIn() {
       var _this = this;
 
-      if (this.BIN === "") {
+      if (this.BIN < 12) {
         document.getElementById("err-BIN").style.visibility = "visible";
         document.getElementById("BIN").classList.add("error");
         return;
@@ -2599,6 +2601,8 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         if (err.response.status === 401) {
+          document.getElementById("err-password").style.visibility = "visible";
+          document.getElementById("password").classList.add("error");
           alert("Почта или логин не правильно.");
         }
 
@@ -9422,7 +9426,7 @@ var render = function() {
               }
             ],
             attrs: {
-              name: "BIN",
+              id: "BIN",
               oninput: "validity.valid||(value='');",
               placeholder: "Введите 12 значный код"
             },
