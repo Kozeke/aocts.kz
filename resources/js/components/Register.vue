@@ -20,22 +20,22 @@
                 <div class="input-form flex-col">
                     <label class="label">Название компании</label>
                     <input v-bind:class="{ 'error' : errors.name_of_company }" v-on:keyup="validateForm($event)" v-model="name_of_company" name="name_of_company" type="text" placeholder="Введите название компании">
-                    <!-- <span v-if="errors.name" id="err-text-name" class="err-text">{{ errors.name[0] }}</span>
-                    <div :style="{ 'visibility' : errors.name ? 'visible' : 'hidden' }" class="err" id="err-name">
+                    <span v-if="errors.name_of_company" id="err-text-name_of_company" class="err-text">{{ errors.name_of_company[0] }}</span>
+                    <div :style="{ 'visibility' : errors.name_of_company ? 'visible' : 'hidden' }" class="err" id="err-name_of_company">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">ФИО первого руководителя</label>
                     <input v-bind:class="{ 'error' : errors.manager_name }" v-on:keyup="validateForm($event)" v-model="manager_name" name="manager_name" type="text" placeholder="Введите ФИО руководителя">
-                    <!-- <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
-                    <div :style="{ 'visibility' : errors.BIN ? 'visible' : 'hidden' }" class="err" id="err-BIN">
+                    <span v-if="errors.manager_name" id="err-text-manager_name" class="err-text">{{ errors.manager_name[0] }}</span>
+                    <div :style="{ 'visibility' : errors.manager_name ? 'visible' : 'hidden' }" class="err" id="err-manager_name">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Резидент РК</label>
@@ -59,7 +59,7 @@
                 </div>
                 <div v-show="resident_of_RK === '0'" class="input-form flex-col">
                     <label class="label">Страна резидентства</label>
-                    <input v-bind:class="{ 'error' : errors.country }" v-on:keyup="validateForm($event)" v-model="country" name="country" type="text" placeholder="Введите страну">
+                    <input v-on:keyup="validateForm($event)" v-model="country" name="country" type="text" placeholder="Введите страну">
                     <!-- <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
                     <div :style="{ 'visibility' : errors.BIN ? 'visible' : 'hidden' }" class="err" id="err-BIN">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,111 +70,54 @@
                 <div class="input-form flex-col">
                     <label class="label">Электронная почта компании</label>
                     <input v-bind:class="{ 'error' : errors.company_email }" v-on:keyup="validateForm($event)" v-model="company_email" name="company_email" type="text" placeholder="Введите email">
-                    <!-- <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
+                    <span v-if="errors.company_email" id="err-text-company_email" class="err-text">{{ errors.company_email[0] }}</span>
+                    <div :style="{ 'visibility' : errors.BIN ? 'visible' : 'hidden' }" class="err" id="err-company_email">
+                        <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="input-form flex-col">
+                    <label class="label">БИН/ИНН</label>
+                    <input v-bind:class="{ 'error' : errors.BIN }" v-on:keyup="validateForm($event)" v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'############'" placeholder="Введите 12 значный код">
+                    <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
                     <div :style="{ 'visibility' : errors.BIN ? 'visible' : 'hidden' }" class="err" id="err-BIN">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
-                </div>
-
-                <div class="input-form flex-col">
-                    <label class="label">БИН/ИНН</label>
-                    <input v-bind:class="{ 'error' : errors.BIN }" v-on:keyup="validateForm($event)" v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'############'" placeholder="Введите 12 значный код">
-                    <!-- <span v-if="errors.email" id="err-text-email" class="err-text">{{ errors.email[0] }}</span>
-                    <div :style="{ 'visibility' : errors.email ? 'visible' : 'hidden' }" class="err" id="err-email">
-                        <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
-                        </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Пароль</label>
                     <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password" name="password" type="password" placeholder="Введите пароль">
-                    <!-- <span v-if="errors.phone" id="err-text-phone" class="err-text">{{ errors.phone[0] }}</span>
-                    <div :style="{ 'visibility' : errors.phone ? 'visible' : 'hidden' }" class="err" id="err-phone">
+                    <span v-if="errors.password" id="err-text-password" class="err-text">{{ errors.password[0] }}</span>
+                    <div :style="{ 'visibility' : errors.password ? 'visible' : 'hidden' }" class="err" id="err-password">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
-
                 <div class="input-form flex-col">
                     <label class="label">Повторите пароль</label>
-                    <input v-bind:class="{ 'error' : errors.password_repeat }" v-on:keyup="validateForm($event)" v-model="password_repeat" name="password" type="password" placeholder="Введите пароль ещё раз">
-                    <!-- <span v-if="errors.password_repeat" id="err-text-email" class="err-text">{{ errors.password_repeat[0] }}</span>
-                    <div :style="{ 'visibility' : errors.password_repeat ? 'visible' : 'hidden' }" class="err" id="err-email">
+                    <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password_repeat" name="password_repeat" type="password" placeholder="Введите пароль ещё раз">
+                    <span v-if="errors.password" id="err-text-password_repeat" class="err-text">{{ errors.password[0] }}</span>
+                    <div :style="{ 'visibility' : errors.password ? 'visible' : 'hidden' }" class="err" id="err-password_repeat">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Кодовое слово</label>
                     <!-- <input v-bind:class="{ 'error' : errors.phone }" v-on:keyup="validateForm($event)" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="Придумайте кодовое слово"> -->
-                    <input v-bind:class="{ 'error' : errors.code }" v-on:keyup="validateForm($event)" v-model="code" name="email" type="text" placeholder="Придумайте кодовое слово">
-                    <!-- <span v-if="errors.code_str" id="err-text-phone" class="err-text">{{ errors.code_str[0] }}</span>
-                    <div :style="{ 'visibility' : errors.code_str ? 'visible' : 'hidden' }" class="err" id="err-phone">
+                    <input v-bind:class="{ 'error' : errors.code }" v-on:keyup="validateForm($event)" v-model="code" name="code" type="text" placeholder="Придумайте кодовое слово">
+                    <span v-if="errors.code" id="err-text-code" class="err-text">{{ errors.code[0] }}</span>
+                    <div :style="{ 'visibility' : errors.code ? 'visible' : 'hidden' }" class="err" id="err-code">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
-
-                <!-- <div class="flex-row">
-                    <div class="input-form flex-col">
-                        <label class="label">Пароль</label>
-                        <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password" name="password" type="password" placeholder="Введите пароль">
-                        <span v-if="errors.password" id="err-text-password" class="err-text">{{ errors.password[0] }}</span>
-                        <div :style="{ 'visibility' : errors.password ? 'visible' : 'hidden' }" class="err" id="err-password">
-                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="input-form flex-col">
-                        <label class="label">Учредительные документы компании</label>
-                        <input v-bind:class="{ 'error' : errors.document }" v-on:keyup="validateForm($event)" :value="doc" class="file-input" id="doc" name="doc" type="text" placeholder="+ Добавить PDF-файл" readonly>
-                        <input class="file-hidden" type="file"  @change="uploadDoc" multiple>
-                        <span v-if="errors.document" id="err-text-doc" class="err-text">{{ errors.document[0] }}</span>
-                        <div :style="{ 'visibility' : errors.document ? 'visible' : 'hidden' }" class="err" id="err-doc">
-                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
-                            </svg>
-                        </div>
-                        <div class="info-mark" @click="infoMark = true" @mouseover="infoMark = true">
-                            <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.7302 0C10.1897 0 13.5956 1.59326 13.5956 5.40421C13.5956 8.91858 9.56848 10.2701 8.7036 11.54C8.0543 12.4846 8.27116 13.8119 6.48719 13.8119C5.32509 13.8119 4.75743 12.8667 4.75743 12.0018C4.75743 8.78336 9.4862 8.05498 9.4862 5.40485C9.4862 3.94617 8.51544 3.08129 6.89284 3.08129C3.43333 3.08129 4.78422 6.64796 2.16407 6.64796C1.21819 6.64796 0.40625 6.0803 0.40625 4.99984C0.405612 2.34908 3.43205 0 6.7302 0ZM6.59562 15.5665C7.81002 15.5665 8.81203 16.5654 8.81203 17.7836C8.81203 19.0018 7.81193 20.0006 6.59562 20.0006C5.3793 20.0006 4.37857 19.0031 4.37857 17.7836C4.37857 16.566 5.3793 15.5665 6.59562 15.5665Z" fill="#4985FF"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div v-if="infoMark" class="flex-col info-extra">
-                        <div class="exit-icon" @click="infoMark = false">
-                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14.493 2.95446L9.94808 7.49984L14.493 12.045C15.169 12.7213 15.169 13.8168 14.493 14.4931C14.1552 14.8309 13.7124 14.9999 13.2697 14.9999C12.8264 14.9999 12.3835 14.8311 12.0459 14.4931L7.50003 9.9474L2.95447 14.493C2.61673 14.8308 2.17384 14.9998 1.73081 14.9998C1.28792 14.9998 0.845322 14.8311 0.507284 14.493C-0.16875 13.8171 -0.16875 12.7215 0.507284 12.045L5.05207 7.49979L0.507026 2.95446C-0.169009 2.27843 -0.169009 1.18267 0.507026 0.506637C1.18293 -0.168879 2.27805 -0.168879 2.95421 0.506637L7.49999 5.05202L12.0454 0.506637C12.7217 -0.168879 13.817 -0.168879 14.4927 0.506637C15.169 1.18267 15.169 2.27843 14.493 2.95446Z" fill="#4985FF"/>
-                            </svg>
-                        </div>
-                        <div class="head-text">Учредительные документы компании</div>
-                        <div class="sub-head-text">Добавьте перечисленные файлы:</div>
-                        <ul>
-                            <li>Устав</li>
-                            <li>Свидетельство гос. Регистрации</li>
-                            <li>Приказ о назначении первого руководителя (директора)</li>
-                            <li>Банковские реквизиты</li>
-                            <li>Реквизиты организации (адрес,Юр-Факт; контакты)</li>
-                        </ul>
-                    </div> -->
-                    <!-- <div class="input-form flex-col">
-                        <label class="label">Повторите пароль</label>
-                        <input v-bind:class="{ 'error' : errors.password }" v-on:keyup="validateForm($event)" v-model="password_repeat" name="password_repeat" type="password" placeholder="Введите пароль еще раз">
-                        <span v-if="errors.password" id="err-text-password_repeat" class="err-text">{{ errors.password[0] }}</span>
-                        <div :style="{ 'visibility' : errors.password ? 'visible' : 'hidden' }" class="err" id="err-password_repeat">
-                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
-                            </svg>
-                        </div>
-                    </div>   -->
-                <!-- </div> -->
                 <div class="flex-col row-last">
                     <div class="check-form flex-row">
                         <input v-model="agreement" type="checkbox">
@@ -188,18 +131,23 @@
             <div v-else class="reg-form flex-row">
                 <div class="input-form flex-col">
                     <div class="label">Тип организации</div>
-                    <select name="selected_region" class="input-form" v-model="type_of_organization_id">
-                        <option :value="'Выберите тип организации'" disabled>Выберите тип организации</option>
+                    <select v-bind:class="{ 'error' : errors.type_of_organization_id, 'not-selected' : type_of_organization_id === 'Выберите' }" name="type_of_organization_id" class="input-form" v-model="type_of_organization_id">
+                        <option :value="'Выберите'" disabled>Выберите</option>
                         <option v-for="type in organization_types" :value="type.id" :key="type.id">
                             {{ type.name }}
                         </option>
                     </select>
+                    <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-type_of_organization_id">
+                        <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Учредительные документы компании</label>
                     <input style="margin-top: -4px" v-bind:class="{ 'error' : errors.document }" v-on:keyup="validateForm($event)" :value="doc" class="file-input" id="doc" name="doc" type="text" placeholder="+ Добавить PDF-файл" readonly>
                     <input style="margin-top: -4px" class="file-hidden" type="file"  @change="uploadDoc" multiple>
-                    <!-- <span v-if="errors.document" id="err-text-doc" class="err-text">{{ errors.document[0] }}</span>
+                    <span v-if="errors.document" id="err-text-doc" class="err-text">{{ errors.document[0] }}</span>
                     <div :style="{ 'visibility' : errors.document ? 'visible' : 'hidden' }" class="err" id="err-doc">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
@@ -209,7 +157,7 @@
                         <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.7302 0C10.1897 0 13.5956 1.59326 13.5956 5.40421C13.5956 8.91858 9.56848 10.2701 8.7036 11.54C8.0543 12.4846 8.27116 13.8119 6.48719 13.8119C5.32509 13.8119 4.75743 12.8667 4.75743 12.0018C4.75743 8.78336 9.4862 8.05498 9.4862 5.40485C9.4862 3.94617 8.51544 3.08129 6.89284 3.08129C3.43333 3.08129 4.78422 6.64796 2.16407 6.64796C1.21819 6.64796 0.40625 6.0803 0.40625 4.99984C0.405612 2.34908 3.43205 0 6.7302 0ZM6.59562 15.5665C7.81002 15.5665 8.81203 16.5654 8.81203 17.7836C8.81203 19.0018 7.81193 20.0006 6.59562 20.0006C5.3793 20.0006 4.37857 19.0031 4.37857 17.7836C4.37857 16.566 5.3793 15.5665 6.59562 15.5665Z" fill="#4985FF"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div v-if="infoMark" class="flex-col info-extra">
                         <div class="exit-icon" @click="infoMark = false">
@@ -230,12 +178,12 @@
                 <div class="input-form flex-col">
                     <label class="label">Вид деятельности</label>
                     <input v-bind:class="{ 'error' : errors.type_of_agency }" v-on:keyup="validateForm($event)" v-model="type_of_agency" name="type_of_agency" type="text" placeholder="Введите ваш вид деятельности">
-                    <!-- <span v-if="errors.address" id="err-text-address" class="err-text">{{ errors.address[0] }}</span>
-                    <div :style="{ 'visibility' : errors.address ? 'visible' : 'hidden' }" class="err" id="err-address">
+                    <span v-if="errors.type_of_agency" id="err-text-type_of_agency" class="err-text">{{ errors.type_of_agency[0] }}</span>
+                    <div :style="{ 'visibility' : errors.type_of_agency ? 'visible' : 'hidden' }" class="err" id="err-type_of_agency">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Юридический адрес компании</label>
@@ -260,32 +208,32 @@
                 <div class="input-form flex-col">
                     <label class="label">ФИО исполнителя</label>
                     <input v-bind:class="{ 'error' : errors.performer_name }" v-on:keyup="validateForm($event)" v-model="performer_name" name="performer_name" type="text" placeholder="Введите ФИО исполнителя">
-                    <!-- <span v-if="errors.company_email" id="err-text-company_email" class="err-text">{{ errors.company_email[0] }}</span>
-                    <div :style="{ 'visibility' : errors.company_email ? 'visible' : 'hidden' }" class="err" id="err-company_email">
+                    <span v-if="errors.performer_name" id="err-text-performer_name" class="err-text">{{ errors.performer_name[0] }}</span>
+                    <div :style="{ 'visibility' : errors.performer_name ? 'visible' : 'hidden' }" class="err" id="err-performer_name">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Контактный номер</label>
                     <input v-bind:class="{ 'error' : errors.phone }" v-on:keyup="validateForm($event)" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="Введите номер телефона">
-                    <!-- <span v-if="errors.manager_phone" id="err-text-manager_phone" class="err-text">{{ errors.manager_phone[0] }}</span>
-                    <div :style="{ 'visibility' : errors.manager_phone ? 'visible' : 'hidden' }" class="err" id="err-manager_phone">
+                    <span v-if="errors.phone" id="err-text-phone" class="err-text">{{ errors.phone[0] }}</span>
+                    <div :style="{ 'visibility' : errors.phone ? 'visible' : 'hidden' }" class="err" id="err-phone">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form flex-col">
                     <label class="label">Электронная почта</label>
                     <input v-bind:class="{ 'error' : errors.email }" v-on:keyup="validateForm($event)" v-model="email" name="email" type="text" placeholder="Введите email менеджера">
-                    <!-- <span v-if="errors.company_email" id="err-text-company_email" class="err-text">{{ errors.company_email[0] }}</span>
-                    <div :style="{ 'visibility' : errors.company_email ? 'visible' : 'hidden' }" class="err" id="err-company_email">
+                    <span v-if="errors.email" id="err-text-email" class="err-text">{{ errors.email[0] }}</span>
+                    <div :style="{ 'visibility' : errors.email ? 'visible' : 'hidden' }" class="err" id="err-email">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                         </svg>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="input-form">
                     <vue-recaptcha :sitekey="sitekey" @expired="onCaptchaExpired"></vue-recaptcha>
@@ -335,11 +283,11 @@
                                 {{ region.name }}
                             </option>
                         </select>
-                        <!-- <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_region">
+                        <div :style="{ 'visibility' : errors.locality_id ? 'visible' : 'hidden' }" class="err" id="err-selected_region">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="input-form flex-col">
                         <label class="label">Выберите город</label>
@@ -381,12 +329,12 @@
                     <div class="input-form flex-col">
                         <label class="label">Адрес</label>
                         <input v-bind:class="{ 'error' : errors.real_address }" v-on:keyup="validateForm($event)" v-model="real_address" name="real_address" type="text" placeholder="Введите адрес (офис, каб)">
-                        <!-- <span v-if="errors.address" id="err-text-address" class="err-text">{{ errors.address[0] }}</span>
-                        <div :style="{ 'visibility' : errors.address ? 'visible' : 'hidden' }" class="err" id="err-address">
+                        <span v-if="errors.real_address" id="err-text-real_address" class="err-text">{{ errors.real_address[0] }}</span>
+                        <div :style="{ 'visibility' : errors.real_address ? 'visible' : 'hidden' }" class="err" id="err-real_address">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div @click="modalActualAddress = false" class="done-btn">Готово</div>
@@ -455,12 +403,12 @@
                     <div class="input-form flex-col">
                         <label class="label">Адрес</label>
                         <input v-bind:class="{ 'error' : errors.juridical_address }" v-on:keyup="validateForm($event)" v-model="juridical_address" name="juridical_address" type="text" placeholder="Введите адрес (офис, каб)">
-                        <!-- <span v-if="errors.address" id="err-text-address" class="err-text">{{ errors.address[0] }}</span>
-                        <div :style="{ 'visibility' : errors.address ? 'visible' : 'hidden' }" class="err" id="err-address">
+                        <span v-if="errors.juridical_address" id="err-text-juridical_address" class="err-text">{{ errors.juridical_address[0] }}</span>
+                        <div :style="{ 'visibility' : errors.juridical_address ? 'visible' : 'hidden' }" class="err" id="err-juridical_address">
                             <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
                             </svg>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div @click="modalLegalAddress = false" class="done-btn">Готово</div>
@@ -500,7 +448,7 @@ export default {
                 }
             ],
             regions: '',
-
+            doc: '',
             name_of_company: '',
             manager_name: '',
             resident_of_RK: '',
@@ -511,7 +459,7 @@ export default {
             password: '',
             password_repeat: '',
             code: '',
-            type_of_organization_id: 'Выберите тип организации',
+            type_of_organization_id: 'Выберите',
             title: '',
             type_of_agency: '',
             document: '',
@@ -542,16 +490,44 @@ export default {
     methods: {
         validateForm(e){
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if(e.target.name === 'name'){
-                if(this.errors.name){
-                    delete this.errors.name
+            if(e.target.name === 'name_of_company'){
+                if(this.errors.name_of_company){
+                    delete this.errors.name_of_company
                 }
                 if(String(e.target.value).length === 0 ){
-                    document.getElementById('err-name').style.visibility = 'visible'
+                    document.getElementById('err-name_of_company').style.visibility = 'visible'
                     document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
                     e.srcElement.classList.add('error')
                 } else {
-                    document.getElementById('err-name').style.visibility = 'hidden'
+                    document.getElementById('err-name_of_company').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'manager_name'){
+                if(this.errors.manager_name){
+                    delete this.errors.manager_name
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-manager_name').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-manager_name').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'company_email'){
+                if(this.errors.company_email){
+                    delete this.errors.company_email
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-company_email').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-company_email').style.visibility = 'hidden'
                     document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
                     e.srcElement.classList.remove('error')
                 }
@@ -570,39 +546,11 @@ export default {
                     e.srcElement.classList.remove('error')
                 }
             }
-            if(e.target.name === 'email'){
-                if(this.errors.email){
-                    delete this.errors.email
-                }
-                if( !pattern.test(String(e.target.value).toLowerCase()) ){
-                    document.getElementById('err-email').style.visibility = 'visible'
-                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
-                    e.srcElement.classList.add('error')
-                } else {
-                    document.getElementById('err-email').style.visibility = 'hidden'
-                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
-                    e.srcElement.classList.remove('error')
-                }
-            }
-            if(e.target.name === 'phone'){
-                if(this.errors.phone){
-                    delete this.errors.phone
-                }
-                if(String(e.target.value).length !== 16 ){
-                    document.getElementById('err-phone').style.visibility = 'visible'
-                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
-                    e.srcElement.classList.add('error')
-                } else {
-                    document.getElementById('err-phone').style.visibility = 'hidden'
-                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
-                    e.srcElement.classList.remove('error')
-                }
-            }
             if(e.target.name === 'password'){
                 if(this.errors.password){
                     delete this.errors.password
                 }
-                if(String(e.target.value).length === 0 ){
+                if(String(e.target.value).length <= 6 ){
                     document.getElementById('err-password').style.visibility = 'visible'
                     document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
                     e.srcElement.classList.add('error')
@@ -626,6 +574,110 @@ export default {
                     e.srcElement.classList.remove('error')
                 }
             }
+            if(e.target.name === 'code'){
+                if(this.errors.code){
+                    delete this.errors.code
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-code').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-code').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'type_of_organization_id'){
+                if(e.target.value !== this.type_of_organization_id){
+                    this.type_of_organization_id = 'Выберите'
+                }
+            }
+            if(e.target.name === 'type_of_agency'){
+                if(this.errors.type_of_agency){
+                    delete this.errors.type_of_agency
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-type_of_agency').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-type_of_agency').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'performer_name'){
+                if(this.errors.performer_name){
+                    delete this.errors.performer_name
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-performer_name').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-performer_name').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'phone'){
+                if(this.errors.phone){
+                    delete this.errors.phone
+                }
+                if(String(e.target.value).length !== 16 ){
+                    document.getElementById('err-phone').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-phone').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'email'){
+                if(this.errors.email){
+                    delete this.errors.email
+                }
+                if( !pattern.test(String(e.target.value).toLowerCase()) ){
+                    document.getElementById('err-email').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-email').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'real_address'){
+                if(this.errors.real_address){
+                    delete this.errors.real_address
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-real_address').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-real_address').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+            if(e.target.name === 'juridical_address'){
+                if(this.errors.juridical_address){
+                    delete this.errors.juridical_address
+                }
+                if(String(e.target.value).length === 0 ){
+                    document.getElementById('err-juridical_address').style.visibility = 'visible'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'visible'
+                    e.srcElement.classList.add('error')
+                } else {
+                    document.getElementById('err-juridical_address').style.visibility = 'hidden'
+                    document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden'
+                    e.srcElement.classList.remove('error')
+                }
+            }
+
             if(e.target.name === 'selected_region'){
                 if(e.target.value !== this.selected_region){
                     this.selected_district = 'Выберите'
@@ -695,12 +747,14 @@ export default {
             }
         },
         uploadDoc(e){
+            if(this.docs.length > 5){
+                alert("Максимум 5 документов")
+                return
+            }
             if(this.errors.document){
                 delete this.errors.document
             }
             const file = e.target.files
-
-            this.doc = "загружен " + file.length + " файл"
             for(var item of file){
                 if(item.type !== 'application/pdf'){
                     document.getElementById('err-doc').style.visibility = 'visible'
@@ -713,6 +767,7 @@ export default {
                     this.hasError = false
                 }
             }
+            this.doc = "загружен " + this.docs.length + " файл"
         },
         getRegions(){
             axios.get('/api/regions')
@@ -725,8 +780,6 @@ export default {
             })
         },
         postUser(recaptchaToken){
-            console.log("YAHOOO");
-
             var real_city = this.real_selected_locality
             if(this.real_selected_district.is_city === 1){
                 real_city = this.real_selected_district
@@ -736,16 +789,16 @@ export default {
                 juridical_city = this.juridical_selected_district
             }
 
-            // if(document.getElementsByClassName('error').length !== 0){
-            //     alert('Заполните все поля правильно.')
-            //     return
-            // }
-            // if(this.agreement){
-            //     this.firstPage = false
-            // } else{
-            //     alert('Согласитесь с условием пользователя.')
-            //     return
-            // }
+            if(document.getElementsByClassName('error').length !== 0){
+                alert('Заполните все поля правильно.')
+                return
+            }
+            if(this.agreement){
+                this.firstPage = false
+            } else{
+                alert('Согласитесь с условием пользователя.')
+                return
+            }
 
             let data = new FormData();
 
@@ -785,7 +838,6 @@ export default {
                 console.log(pair[0]+ ', ' + pair[1]) + ',' + typeof(pair[1])
             }
 
-            console.log(data)
             axios.post('/api/register', data)
             .then(res => {
                 console.log(res.data)
@@ -800,7 +852,7 @@ export default {
                 }
 
                 alert('Что-то пошло не так. Проверьте данные еще раз.')
-                console.log(err)
+                console.log(err.response.data.error)
             })
             // } else {
             //     alert('Заполните все поля.')
@@ -927,7 +979,7 @@ export default {
                 flex-wrap: wrap;
                 .input-form{
                     position: relative;
-                    width: 350px;
+                    width: calc(50% - 60px);
                     margin-right: 60px;
                     margin-top: 18px;
                     height: 98px;
@@ -998,6 +1050,7 @@ export default {
                         font-size: 12px
                     }
                     select{
+                        width: 100%;
                         padding: 18px auto;
                         -webkit-appearance: none;
                         -moz-appearance : none;

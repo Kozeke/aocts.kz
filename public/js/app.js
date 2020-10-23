@@ -3054,58 +3054,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3134,6 +3082,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         name: 'Государственное предприятие (ГП)'
       }],
       regions: '',
+      doc: '',
       name_of_company: '',
       manager_name: '',
       resident_of_RK: '',
@@ -3143,7 +3092,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       password: '',
       password_repeat: '',
       code: '',
-      type_of_organization_id: 'Выберите тип организации',
+      type_of_organization_id: 'Выберите',
       title: '',
       type_of_agency: '',
       document: '',
@@ -3172,17 +3121,49 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     validateForm: function validateForm(e) {
       var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      if (e.target.name === 'name') {
-        if (this.errors.name) {
-          delete this.errors.name;
+      if (e.target.name === 'name_of_company') {
+        if (this.errors.name_of_company) {
+          delete this.errors.name_of_company;
         }
 
         if (String(e.target.value).length === 0) {
-          document.getElementById('err-name').style.visibility = 'visible';
+          document.getElementById('err-name_of_company').style.visibility = 'visible';
           document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
         } else {
-          document.getElementById('err-name').style.visibility = 'hidden';
+          document.getElementById('err-name_of_company').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'manager_name') {
+        if (this.errors.manager_name) {
+          delete this.errors.manager_name;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-manager_name').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-manager_name').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'company_email') {
+        if (this.errors.company_email) {
+          delete this.errors.company_email;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-company_email').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-company_email').style.visibility = 'hidden';
           document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
@@ -3204,44 +3185,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       }
 
-      if (e.target.name === 'email') {
-        if (this.errors.email) {
-          delete this.errors.email;
-        }
-
-        if (!pattern.test(String(e.target.value).toLowerCase())) {
-          document.getElementById('err-email').style.visibility = 'visible';
-          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
-          e.srcElement.classList.add('error');
-        } else {
-          document.getElementById('err-email').style.visibility = 'hidden';
-          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
-          e.srcElement.classList.remove('error');
-        }
-      }
-
-      if (e.target.name === 'phone') {
-        if (this.errors.phone) {
-          delete this.errors.phone;
-        }
-
-        if (String(e.target.value).length !== 16) {
-          document.getElementById('err-phone').style.visibility = 'visible';
-          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
-          e.srcElement.classList.add('error');
-        } else {
-          document.getElementById('err-phone').style.visibility = 'hidden';
-          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
-          e.srcElement.classList.remove('error');
-        }
-      }
-
       if (e.target.name === 'password') {
         if (this.errors.password) {
           delete this.errors.password;
         }
 
-        if (String(e.target.value).length === 0) {
+        if (String(e.target.value).length <= 6) {
           document.getElementById('err-password').style.visibility = 'visible';
           document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
           e.srcElement.classList.add('error');
@@ -3263,6 +3212,124 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           e.srcElement.classList.add('error');
         } else {
           document.getElementById('err-password_repeat').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'code') {
+        if (this.errors.code) {
+          delete this.errors.code;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-code').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-code').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'type_of_organization_id') {
+        if (e.target.value !== this.type_of_organization_id) {
+          this.type_of_organization_id = 'Выберите';
+        }
+      }
+
+      if (e.target.name === 'type_of_agency') {
+        if (this.errors.type_of_agency) {
+          delete this.errors.type_of_agency;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-type_of_agency').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-type_of_agency').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'performer_name') {
+        if (this.errors.performer_name) {
+          delete this.errors.performer_name;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-performer_name').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-performer_name').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'phone') {
+        if (this.errors.phone) {
+          delete this.errors.phone;
+        }
+
+        if (String(e.target.value).length !== 16) {
+          document.getElementById('err-phone').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-phone').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'email') {
+        if (this.errors.email) {
+          delete this.errors.email;
+        }
+
+        if (!pattern.test(String(e.target.value).toLowerCase())) {
+          document.getElementById('err-email').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-email').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'real_address') {
+        if (this.errors.real_address) {
+          delete this.errors.real_address;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-real_address').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-real_address').style.visibility = 'hidden';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
+          e.srcElement.classList.remove('error');
+        }
+      }
+
+      if (e.target.name === 'juridical_address') {
+        if (this.errors.juridical_address) {
+          delete this.errors.juridical_address;
+        }
+
+        if (String(e.target.value).length === 0) {
+          document.getElementById('err-juridical_address').style.visibility = 'visible';
+          document.getElementById('err-text-' + e.target.name).style.visibility = 'visible';
+          e.srcElement.classList.add('error');
+        } else {
+          document.getElementById('err-juridical_address').style.visibility = 'hidden';
           document.getElementById('err-text-' + e.target.name).style.visibility = 'hidden';
           e.srcElement.classList.remove('error');
         }
@@ -3346,12 +3413,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     },
     uploadDoc: function uploadDoc(e) {
+      if (this.docs.length > 5) {
+        alert("Максимум 5 документов");
+        return;
+      }
+
       if (this.errors.document) {
         delete this.errors.document;
       }
 
       var file = e.target.files;
-      this.doc = "загружен " + file.length + " файл";
 
       var _iterator = _createForOfIteratorHelper(file),
           _step;
@@ -3376,6 +3447,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       } finally {
         _iterator.f();
       }
+
+      this.doc = "загружен " + this.docs.length + " файл";
     },
     getRegions: function getRegions() {
       var _this = this;
@@ -3390,7 +3463,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     postUser: function postUser(recaptchaToken) {
       var _this2 = this;
 
-      console.log("YAHOOO");
       var real_city = this.real_selected_locality;
 
       if (this.real_selected_district.is_city === 1) {
@@ -3401,17 +3473,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       if (this.juridical_selected_district.is_city === 1) {
         juridical_city = this.juridical_selected_district;
-      } // if(document.getElementsByClassName('error').length !== 0){
-      //     alert('Заполните все поля правильно.')
-      //     return
-      // }
-      // if(this.agreement){
-      //     this.firstPage = false
-      // } else{
-      //     alert('Согласитесь с условием пользователя.')
-      //     return
-      // }
+      }
 
+      if (document.getElementsByClassName('error').length !== 0) {
+        alert('Заполните все поля правильно.');
+        return;
+      }
+
+      if (this.agreement) {
+        this.firstPage = false;
+      } else {
+        alert('Согласитесь с условием пользователя.');
+        return;
+      }
 
       var data = new FormData();
       data.append("name_of_company", this.name_of_company);
@@ -3471,7 +3545,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _iterator3.f();
       }
 
-      console.log(data);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data).then(function (res) {
         console.log(res.data);
         _this2.userRegistration = false;
@@ -3483,7 +3556,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
 
         alert('Что-то пошло не так. Проверьте данные еще раз.');
-        console.log(err);
+        console.log(err.response.data.error);
       }); // } else {
       //     alert('Заполните все поля.')
       // }
@@ -5815,7 +5888,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n.main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 1020px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(14%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 780px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  height: 56px;\n  position: relative;\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 20px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form[data-v-97358ae4] {\n  margin-top: 12px;\n  flex-wrap: wrap;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: 350px;\n  margin-right: 60px;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .radio-field[data-v-97358ae4] {\n  width: 100%;\n}\n.main .register .reg-form .input-form .radio-field .flex-row[data-v-97358ae4] {\n  margin-top: 8px;\n  width: 100%;\n}\n.main .register .reg-form .input-form .radio-field .radio-label[data-v-97358ae4] {\n  margin: 0 auto 0 0;\n  font-size: 14px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.main .register .reg-form .input-form .radio-field input[data-v-97358ae4] {\n  margin: 0 12px 0 0;\n  height: 24px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form .err-text[data-v-97358ae4] {\n  line-height: 1.2;\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .register .reg-form .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 25px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .check-form span[data-v-97358ae4] {\n  font-weight: bold;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.main .register .reg-form .text-form[data-v-97358ae4], .main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 15px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4], .main .register .reg-form .text-form-hide .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  display: none;\n  margin-top: 0;\n}\n.main .register .reg-form .info-extra[data-v-97358ae4] {\n  top: 214px;\n  width: 420px;\n  left: 470px;\n  position: absolute;\n  z-index: 100;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  /* активный элемент */\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n  border-radius: 10px;\n  padding: 20px 25px;\n}\n.main .register .reg-form .info-extra .exit-icon[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  right: 25px;\n  top: 20px;\n}\n.main .register .reg-form .info-extra .head-text[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra .sub-head-text[data-v-97358ae4] {\n  margin-top: 20px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 15px;\n  line-height: 170%;\n  display: flex;\n  align-items: center;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra ul[data-v-97358ae4] {\n  margin-top: 5px;\n  padding-left: 0;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4] {\n  list-style: none;\n  text-align: left;\n  margin-top: 10px;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4]:before {\n  margin-right: 15px;\n  content: \"\";\n  display: inline-block;\n  background: #4985FF;\n  height: 10px;\n  width: 10px;\n  border-radius: 50%;\n  padding-left: 0;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  cursor: pointer;\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .register .reg-form .info-mark[data-v-97358ae4] {\n  cursor: pointer;\n  padding: 8px;\n  position: absolute;\n  top: 28px;\n  z-index: 99;\n  left: calc(100% + 15px);\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n  background: #FFFFFF;\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .modal[data-v-97358ae4] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-97358ae4] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 120px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-97358ae4] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-97358ae4] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-97358ae4] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] {\n  width: 48%;\n  position: relative;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .modal .modal-content .field-list .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .modal .modal-content .field-list .input-form input[data-v-97358ae4], .main .modal .modal-content .field-list .input-form select[data-v-97358ae4] {\n  width: 100%;\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .modal .modal-content .field-list .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .modal .modal-content .field-list .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .modal .modal-content .field-list .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .modal .modal-content .field-list .input-form .err-text[data-v-97358ae4] {\n  line-height: 1.2;\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .modal .modal-content .field-list .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .modal .modal-content .field-list .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .modal .modal-content .field-list .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-97358ae4] {\n  width: 144px;\n  cursor: pointer;\n  margin: 40px auto 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n@media screen and (max-width: 1420px) {\n.register[data-v-97358ae4] {\n    height: 820px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 88px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    position: absolute;\n    right: auto;\n    left: 0;\n    top: 42px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1320px) {\n.logo[data-v-97358ae4] {\n    left: calc(8%) !important;\n}\n.register[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 425px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 425px;\n    height: 100%;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1120px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1020px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 14px !important;\n}\n.reg-form .flex-row[data-v-97358ae4] {\n    flex-wrap: wrap;\n}\n.reg-form .input-form[data-v-97358ae4] {\n    margin-top: 10px !important;\n    width: 100% !important;\n}\n.reg-form .row-last .input-form[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.reg-form .row-last .text-form[data-v-97358ae4] {\n    display: none;\n}\n.reg-form .row-last .text-form-hide[data-v-97358ae4] {\n    display: block !important;\n}\n.reg-form .row-last .text-form-hide label[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 558px !important;\n    width: 420px;\n    left: calc(100% - 440px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    font-size: 14px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 13px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 385px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 385px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 920px) {\n.confirm .left[data-v-97358ae4] {\n    max-width: 285px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 285px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 720px) {\n.logo[data-v-97358ae4] {\n    left: calc(20px) !important;\n}\n.register[data-v-97358ae4] {\n    height: 1060px !important;\n    width: calc(100% - 40px) !important;\n    margin: 0 20px;\n    padding: 15px 20px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    text-align: left !important;\n    height: 130px !important;\n    flex-direction: column !important;\n}\n.register .reg-top .header[data-v-97358ae4] {\n    text-align: left;\n    font-size: 26px !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    position: absolute;\n    top: 84px;\n}\n.register .dis-d .step[data-v-97358ae4] {\n    margin-left: 0 !important;\n    font-size: 22px !important;\n    line-height: 36px !important;\n}\n.register .dis-d .one[data-v-97358ae4], .register .dis-d .two[data-v-97358ae4] {\n    margin-left: 20px !important;\n    font-size: 20px !important;\n    line-height: 34px !important;\n    height: 34px !important;\n    width: 34px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 42px;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 580px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 240px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 240px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -90px;\n    padding: 15px 20px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 0 !important;\n    font-size: 26px !important;\n    line-height: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 14px !important;\n    font-size: 14px !important;\n    left: 20px !important;\n    line-height: 22px !important;\n}\n.confirm .right .sub-l[data-v-97358ae4] {\n    bottom: 85px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 20px !important;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 620px) {\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1090px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 164px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 52px;\n    flex-wrap: wrap;\n}\n.register .reg-top-r label[data-v-97358ae4], .register .reg-top-r span[data-v-97358ae4] {\n    text-align: left !important;\n    width: 100%;\n    line-height: 18px !important;\n    margin-left: 0 !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    top: 120px;\n}\n.input-form[data-v-97358ae4] {\n    margin-right: 0 !important;\n}\n#doc[data-v-97358ae4] {\n    margin-right: 50px !important;\n}\n.info-mark[data-v-97358ae4] {\n    left: calc(100% - 30px) !important;\n}\n.val[data-v-97358ae4] {\n    width: calc(100%) !important;\n    font-size: 14px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n}\n@media screen and (max-width: 520px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1120px !important;\n}\n.reg-top-r label[data-v-97358ae4], .reg-top-r span[data-v-97358ae4] {\n    font-size: 13px !important;\n    line-height: 18px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 11px !important;\n}\n.check-form input[data-v-97358ae4] {\n    /* IE */\n    /* FF */\n    /* Safari and Chrome */\n    /* Opera */\n    transform: scale(1.2) !important;\n}\n.check-form .label[data-v-97358ae4] {\n    margin-left: 15px !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n    width: 280px !important;\n    left: calc(100% - 270px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    width: calc(100% - 40px);\n    font-size: 12px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 11px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 10px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n.confirm .right .header[data-v-97358ae4] {\n    font-size: 22px !important;\n    line-height: 28px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 20px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n}", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n.main[data-v-97358ae4] {\n  position: relative;\n  width: 100%;\n  background: #FFFFFF;\n  height: 1020px;\n  background-image: linear-gradient(rgba(214, 230, 255, 0.4), rgba(214, 230, 255, 0.4)), url(\"/images/register-layout.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.main .logo[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  left: calc(14%);\n  width: 160px;\n  height: 50px;\n  top: 25px;\n  background: #F6F6F8;\n  font-size: 16px;\n  line-height: 50px;\n  color: #06397D;\n  font-weight: 500;\n}\n.main .register[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 6px;\n  height: 780px;\n  padding: 26px 60px;\n  color: #06397D;\n}\n.main .register .reg-top[data-v-97358ae4] {\n  height: 56px;\n  position: relative;\n  border-bottom: 1px solid #4985FF;\n  padding-bottom: 10px;\n}\n.main .register .reg-top .header[data-v-97358ae4] {\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 42px;\n}\n.main .register .reg-top .step[data-v-97358ae4] {\n  margin-left: 35px;\n  font-weight: 600;\n  font-size: 30px;\n  line-height: 46px;\n}\n.main .register .reg-top .one[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 30px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .two[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 46px;\n  color: #9F9F9F;\n  background: #F7F7F7;\n  height: 45px;\n  width: 45px;\n  border-radius: 50%;\n}\n.main .register .reg-top .current-step[data-v-97358ae4] {\n  color: #FFFFFF;\n  background: #4985FF;\n}\n.main .register .reg-top .reg-top-r[data-v-97358ae4] {\n  position: absolute;\n  right: 60px;\n}\n.main .register .reg-top .reg-top-r label[data-v-97358ae4] {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 44px;\n  color: #909090;\n}\n.main .register .reg-top .reg-top-r span[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 15px;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 46px;\n  color: #4985FF;\n}\n.main .register .top-sub-one[data-v-97358ae4] {\n  margin-top: 20px;\n}\n.main .register .top-sub-one[data-v-97358ae4], .main .register .top-sub-last[data-v-97358ae4] {\n  text-align: left;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .register .reg-form[data-v-97358ae4] {\n  margin-top: 12px;\n  flex-wrap: wrap;\n}\n.main .register .reg-form .input-form[data-v-97358ae4] {\n  position: relative;\n  width: calc(50% - 60px);\n  margin-right: 60px;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .register .reg-form .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .input-form input[data-v-97358ae4], .main .register .reg-form .input-form select[data-v-97358ae4] {\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .register .reg-form .input-form .radio-field[data-v-97358ae4] {\n  width: 100%;\n}\n.main .register .reg-form .input-form .radio-field .flex-row[data-v-97358ae4] {\n  margin-top: 8px;\n  width: 100%;\n}\n.main .register .reg-form .input-form .radio-field .radio-label[data-v-97358ae4] {\n  margin: 0 auto 0 0;\n  font-size: 14px;\n  line-height: 22px;\n  color: #4985FF;\n}\n.main .register .reg-form .input-form .radio-field input[data-v-97358ae4] {\n  margin: 0 12px 0 0;\n  height: 24px;\n}\n.main .register .reg-form .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .register .reg-form .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .register .reg-form .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .register .reg-form .input-form .err-text[data-v-97358ae4] {\n  line-height: 1.2;\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .register .reg-form .input-form select[data-v-97358ae4] {\n  width: 100%;\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .register .reg-form .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .register .reg-form .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .register .reg-form .input-form .val[data-v-97358ae4] {\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  margin-top: 8px;\n  height: 50px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 48px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .register .reg-form .check-form[data-v-97358ae4] {\n  margin-top: 25px;\n}\n.main .register .reg-form .check-form input[data-v-97358ae4] {\n  cursor: pointer;\n  margin-left: 3px;\n  margin-top: 3px;\n  /* IE */\n  /* FF */\n  /* Safari and Chrome */\n  /* Opera */\n  transform: scale(1.5);\n  padding: 6px;\n}\n.main .register .reg-form .check-form .label[data-v-97358ae4] {\n  margin-left: 9px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .check-form span[data-v-97358ae4] {\n  font-weight: bold;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.main .register .reg-form .text-form[data-v-97358ae4], .main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  max-width: 520px;\n  margin-top: 15px;\n}\n.main .register .reg-form .text-form .label[data-v-97358ae4], .main .register .reg-form .text-form-hide .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .register .reg-form .text-form-hide[data-v-97358ae4] {\n  display: none;\n  margin-top: 0;\n}\n.main .register .reg-form .info-extra[data-v-97358ae4] {\n  top: 214px;\n  width: 420px;\n  left: 470px;\n  position: absolute;\n  z-index: 100;\n  background: #FCFCFC;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  /* активный элемент */\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n  border-radius: 10px;\n  padding: 20px 25px;\n}\n.main .register .reg-form .info-extra .exit-icon[data-v-97358ae4] {\n  cursor: pointer;\n  position: absolute;\n  right: 25px;\n  top: 20px;\n}\n.main .register .reg-form .info-extra .head-text[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 22px;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra .sub-head-text[data-v-97358ae4] {\n  margin-top: 20px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 15px;\n  line-height: 170%;\n  display: flex;\n  align-items: center;\n  color: #06397D;\n}\n.main .register .reg-form .info-extra ul[data-v-97358ae4] {\n  margin-top: 5px;\n  padding-left: 0;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4] {\n  list-style: none;\n  text-align: left;\n  margin-top: 10px;\n}\n.main .register .reg-form .info-extra ul li[data-v-97358ae4]:before {\n  margin-right: 15px;\n  content: \"\";\n  display: inline-block;\n  background: #4985FF;\n  height: 10px;\n  width: 10px;\n  border-radius: 50%;\n  padding-left: 0;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-webkit-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-moz-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]:-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::-ms-input-placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-input[data-v-97358ae4]::placeholder {\n  color: #4985FF;\n}\n.main .register .reg-form .file-hidden[data-v-97358ae4] {\n  cursor: pointer;\n  opacity: 0;\n  top: 28px;\n  position: absolute;\n  width: 100%;\n  z-index: 99;\n}\n.main .register .reg-form .info-mark[data-v-97358ae4] {\n  cursor: pointer;\n  padding: 8px;\n  position: absolute;\n  top: 28px;\n  z-index: 99;\n  left: calc(100% + 15px);\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n  background: #FFFFFF;\n  box-shadow: 0px 0px 15px rgba(73, 133, 255, 0.25);\n}\n.main .confirm[data-v-97358ae4] {\n  position: relative;\n  top: 115px;\n  width: 72%;\n  margin: 0 auto;\n  background: #FFFFFF;\n  border-radius: 12px;\n  height: 680px;\n  color: #06397D;\n}\n.main .confirm .left[data-v-97358ae4] {\n  max-width: 545px;\n}\n.main .confirm .left img[data-v-97358ae4] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.main .confirm .right[data-v-97358ae4] {\n  position: relative;\n  padding: 50px;\n}\n.main .confirm .right .header[data-v-97358ae4] {\n  text-align: left;\n  font-weight: bold;\n  font-size: 34px;\n  line-height: 146.28%;\n  color: #2D4C64;\n  margin-bottom: 30px;\n}\n.main .confirm .right .sub[data-v-97358ae4], .main .confirm .right .sub-l[data-v-97358ae4] {\n  text-align: left;\n  margin-top: 30px;\n  font-weight: normal;\n  font-size: 16px;\n  line-height: 25px;\n  color: #06397D;\n}\n.main .confirm .right .sub-l[data-v-97358ae4] {\n  position: absolute;\n  left: 50px;\n  bottom: 125px;\n}\n.main .confirm .right .btn[data-v-97358ae4] {\n  position: absolute;\n  width: 350px;\n  cursor: pointer;\n  text-align: left;\n  bottom: 50px;\n  height: 55px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 38px;\n  text-align: center;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n.main .modal[data-v-97358ae4] {\n  display: flex;\n  position: fixed;\n  /* Stay in place */\n  z-index: 99;\n  /* Sit on top */\n  left: 0;\n  top: 0;\n  width: 100%;\n  /* Full width */\n  height: 100%;\n  /* Full height */\n  overflow: auto;\n  /* Enable scroll if needed */\n  background: rgba(45, 76, 100, 0.7);\n}\n.main .modal .modal-content[data-v-97358ae4] {\n  background-color: #fefefe;\n  background: #FFFFFF;\n  border-radius: 6px;\n  margin: 120px auto auto auto;\n  padding: 50px 89px;\n  width: 952px;\n}\n.main .modal .modal-content .title[data-v-97358ae4] {\n  font-weight: 600;\n  font-size: 18px;\n  line-height: 22px;\n  text-align: center;\n  color: #2D4C64;\n}\n.main .modal .modal-content .close[data-v-97358ae4] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\n.main .modal .modal-content .field-list[data-v-97358ae4] {\n  flex-wrap: wrap;\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] {\n  width: 48%;\n  position: relative;\n  margin-top: 18px;\n  height: 98px;\n}\n.main .modal .modal-content .field-list .input-form .label[data-v-97358ae4] {\n  text-align: left;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 20px;\n}\n.main .modal .modal-content .field-list .input-form input[data-v-97358ae4], .main .modal .modal-content .field-list .input-form select[data-v-97358ae4] {\n  width: 100%;\n  cursor: initial;\n  padding-left: 18px;\n  text-align: left;\n  margin-top: 5px;\n  height: 50px;\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: #000000;\n  background: #FFFFFF;\n  border: 1px solid #E6EAF3;\n  box-sizing: border-box;\n  border-radius: 6px;\n}\n.main .modal .modal-content .field-list .input-form .error[data-v-97358ae4] {\n  border: 1px solid #E4002F !important;\n  box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;\n}\n.main .modal .modal-content .field-list .input-form .err[data-v-97358ae4] {\n  visibility: hidden;\n  position: absolute;\n  top: 46px;\n  right: 18px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background: #FFFFFF;\n  border: 1px solid #E4002F;\n  box-sizing: border-box;\n}\n.main .modal .modal-content .field-list .input-form .err svg[data-v-97358ae4] {\n  margin-top: -8px;\n}\n.main .modal .modal-content .field-list .input-form .err-text[data-v-97358ae4] {\n  line-height: 1.2;\n  position: absolute;\n  bottom: 0;\n  text-align: left;\n  color: #E4002F;\n  font-size: 12px;\n}\n.main .modal .modal-content .field-list .input-form select[data-v-97358ae4] {\n  padding: 18px auto;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  color: #000000;\n}\n.main .modal .modal-content .field-list .input-form select option[data-v-97358ae4] {\n  color: #000000;\n}\n.main .modal .modal-content .field-list .input-form .not-selected[data-v-97358ae4] {\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::-webkit-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::-moz-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] :-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::-ms-input-placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4] ::placeholder {\n  font-weight: normal;\n  font-size: 14px;\n  line-height: 22px;\n  color: rgba(111, 111, 111, 0.25);\n}\n.main .modal .modal-content .field-list .input-form[data-v-97358ae4]:nth-of-type(2n) {\n  margin-left: 4%;\n}\n.main .modal .modal-content .done-btn[data-v-97358ae4] {\n  width: 144px;\n  cursor: pointer;\n  margin: 40px auto 0 auto;\n  padding: 18px 28px;\n  font-weight: bold;\n  font-size: 16px;\n  line-height: 20px;\n  color: #FFFFFF;\n  background: #4985FF;\n  box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);\n  border-radius: 6px;\n}\n@media screen and (max-width: 1420px) {\n.register[data-v-97358ae4] {\n    height: 820px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 88px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    position: absolute;\n    right: auto;\n    left: 0;\n    top: 42px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1320px) {\n.logo[data-v-97358ae4] {\n    left: calc(8%) !important;\n}\n.register[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm[data-v-97358ae4] {\n    width: 84% !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 425px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 425px;\n    height: 100%;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n}\n}\n@media screen and (max-width: 1120px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1020px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 14px !important;\n    line-height: 21px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 14px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 14px !important;\n}\n.reg-form .flex-row[data-v-97358ae4] {\n    flex-wrap: wrap;\n}\n.reg-form .input-form[data-v-97358ae4] {\n    margin-top: 10px !important;\n    width: 100% !important;\n}\n.reg-form .row-last .input-form[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.reg-form .row-last .text-form[data-v-97358ae4] {\n    display: none;\n}\n.reg-form .row-last .text-form-hide[data-v-97358ae4] {\n    display: block !important;\n}\n.reg-form .row-last .text-form-hide label[data-v-97358ae4] {\n    margin-top: 0 !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 558px !important;\n    width: 420px;\n    left: calc(100% - 440px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    font-size: 14px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 13px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    max-width: 385px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 385px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 920px) {\n.confirm .left[data-v-97358ae4] {\n    max-width: 285px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 285px;\n}\n.confirm .right[data-v-97358ae4] {\n    padding: 30px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 10px !important;\n    font-size: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 20px !important;\n    font-size: 14px !important;\n    left: 30px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    position: absolute;\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 50px;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 720px) {\n.logo[data-v-97358ae4] {\n    left: calc(20px) !important;\n}\n.register[data-v-97358ae4] {\n    height: 1060px !important;\n    width: calc(100% - 40px) !important;\n    margin: 0 20px;\n    padding: 15px 20px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    text-align: left !important;\n    height: 130px !important;\n    flex-direction: column !important;\n}\n.register .reg-top .header[data-v-97358ae4] {\n    text-align: left;\n    font-size: 26px !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    position: absolute;\n    top: 84px;\n}\n.register .dis-d .step[data-v-97358ae4] {\n    margin-left: 0 !important;\n    font-size: 22px !important;\n    line-height: 36px !important;\n}\n.register .dis-d .one[data-v-97358ae4], .register .dis-d .two[data-v-97358ae4] {\n    margin-left: 20px !important;\n    font-size: 20px !important;\n    line-height: 34px !important;\n    height: 34px !important;\n    width: 34px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 42px;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 580px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 240px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 240px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -90px;\n    padding: 15px 20px !important;\n}\n.confirm .right .header[data-v-97358ae4] {\n    margin-bottom: 0 !important;\n    font-size: 26px !important;\n    line-height: 26px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    margin-top: 14px !important;\n    font-size: 14px !important;\n    left: 20px !important;\n    line-height: 22px !important;\n}\n.confirm .right .sub-l[data-v-97358ae4] {\n    bottom: 85px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    width: 240px !important;\n    cursor: pointer;\n    text-align: left;\n    bottom: 20px !important;\n    height: 55px;\n    font-weight: bold;\n    font-size: 14px !important;\n}\n}\n@media screen and (max-width: 620px) {\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1090px !important;\n}\n.register .reg-top[data-v-97358ae4] {\n    height: 164px !important;\n}\n.register .reg-top-r[data-v-97358ae4] {\n    top: 52px;\n    flex-wrap: wrap;\n}\n.register .reg-top-r label[data-v-97358ae4], .register .reg-top-r span[data-v-97358ae4] {\n    text-align: left !important;\n    width: 100%;\n    line-height: 18px !important;\n    margin-left: 0 !important;\n}\n.register .dis-d[data-v-97358ae4] {\n    top: 120px;\n}\n.input-form[data-v-97358ae4] {\n    margin-right: 0 !important;\n}\n#doc[data-v-97358ae4] {\n    margin-right: 50px !important;\n}\n.info-mark[data-v-97358ae4] {\n    left: calc(100% - 30px) !important;\n}\n.val[data-v-97358ae4] {\n    width: calc(100%) !important;\n    font-size: 14px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n}\n@media screen and (max-width: 520px) {\n.main[data-v-97358ae4] {\n    height: 1340px !important;\n}\n.register[data-v-97358ae4] {\n    height: 1120px !important;\n}\n.reg-top-r label[data-v-97358ae4], .reg-top-r span[data-v-97358ae4] {\n    font-size: 13px !important;\n    line-height: 18px !important;\n}\n.top-sub-one[data-v-97358ae4], .top-sub-last[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form label[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 18px !important;\n}\n.reg-form[data-v-97358ae4] ::-webkit-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-moz-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] :-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form[data-v-97358ae4] ::-ms-input-placeholder {\n    font-size: 11px !important;\n}\n.reg-form input[data-v-97358ae4], .reg-form select[data-v-97358ae4], .reg-form[data-v-97358ae4] ::placeholder {\n    font-size: 11px !important;\n}\n.check-form input[data-v-97358ae4] {\n    /* IE */\n    /* FF */\n    /* Safari and Chrome */\n    /* Opera */\n    transform: scale(1.2) !important;\n}\n.check-form .label[data-v-97358ae4] {\n    margin-left: 15px !important;\n}\n.info-extra[data-v-97358ae4] {\n    top: 598px !important;\n    width: 280px !important;\n    left: calc(100% - 270px) !important;\n}\n.info-extra .head-text[data-v-97358ae4] {\n    width: calc(100% - 40px);\n    font-size: 12px;\n    line-height: 21px;\n}\n.info-extra .sub-head-text[data-v-97358ae4] {\n    font-size: 11px;\n}\n.info-extra ul li[data-v-97358ae4] {\n    font-size: 10px !important;\n}\n.confirm[data-v-97358ae4] {\n    width: calc(100% - 40px) !important;\n    flex-wrap: wrap;\n    height: 640px !important;\n}\n.confirm .left[data-v-97358ae4] {\n    width: 100% !important;\n    max-width: 100% !important;\n    height: 200px !important;\n}\n.confirm .left img[data-v-97358ae4] {\n    width: 100% !important;\n    height: 200px;\n}\n.confirm .right[data-v-97358ae4] {\n    margin-top: -140px;\n}\n.confirm .right .header[data-v-97358ae4] {\n    font-size: 22px !important;\n    line-height: 28px !important;\n}\n.confirm .right .sub[data-v-97358ae4], .confirm .right .sub-l[data-v-97358ae4] {\n    font-size: 12px !important;\n    line-height: 20px !important;\n}\n.confirm .right .btn[data-v-97358ae4] {\n    font-size: 12px !important;\n}\n}", ""]);
 
 // exports
 
@@ -9742,7 +9815,54 @@ var render = function() {
                         _vm.name_of_company = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.name_of_company
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-name_of_company" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.name_of_company[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.name_of_company
+                          ? "visible"
+                          : "hidden"
+                      },
+                      attrs: { id: "err-name_of_company" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -9777,7 +9897,54 @@ var render = function() {
                         _vm.manager_name = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.manager_name
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-manager_name" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.manager_name[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.manager_name
+                          ? "visible"
+                          : "hidden"
+                      },
+                      attrs: { id: "err-manager_name" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -9863,7 +10030,6 @@ var render = function() {
                           expression: "country"
                         }
                       ],
-                      class: { error: _vm.errors.country },
                       attrs: {
                         name: "country",
                         type: "text",
@@ -9917,7 +10083,52 @@ var render = function() {
                         _vm.company_email = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.company_email
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-company_email" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.company_email[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.BIN ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-company_email" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -9956,7 +10167,52 @@ var render = function() {
                         _vm.BIN = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.BIN
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-BIN" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.BIN[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.BIN ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-BIN" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -9989,7 +10245,52 @@ var render = function() {
                         _vm.password = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.password
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-password" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.password[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.password ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-password" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -10006,9 +10307,9 @@ var render = function() {
                         expression: "password_repeat"
                       }
                     ],
-                    class: { error: _vm.errors.password_repeat },
+                    class: { error: _vm.errors.password },
                     attrs: {
-                      name: "password",
+                      name: "password_repeat",
                       type: "password",
                       placeholder: "Введите пароль ещё раз"
                     },
@@ -10024,7 +10325,52 @@ var render = function() {
                         _vm.password_repeat = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.password
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-password_repeat" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.password[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.password ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-password_repeat" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -10043,7 +10389,7 @@ var render = function() {
                     ],
                     class: { error: _vm.errors.code },
                     attrs: {
-                      name: "email",
+                      name: "code",
                       type: "text",
                       placeholder: "Придумайте кодовое слово"
                     },
@@ -10059,7 +10405,52 @@ var render = function() {
                         _vm.code = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.code
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-code" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.code[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.code ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-code" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex-col row-last" }, [
@@ -10139,7 +10530,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "input-form",
-                      attrs: { name: "selected_region" },
+                      class: {
+                        error: _vm.errors.type_of_organization_id,
+                        "not-selected":
+                          _vm.type_of_organization_id === "Выберите"
+                      },
+                      attrs: { name: "type_of_organization_id" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -10161,9 +10557,9 @@ var render = function() {
                         "option",
                         {
                           attrs: { disabled: "" },
-                          domProps: { value: "Выберите тип организации" }
+                          domProps: { value: "Выберите" }
                         },
-                        [_vm._v("Выберите тип организации")]
+                        [_vm._v("Выберите")]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.organization_types, function(type) {
@@ -10181,6 +10577,42 @@ var render = function() {
                       })
                     ],
                     2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.locality_id
+                          ? "visible"
+                          : "hidden"
+                      },
+                      attrs: { id: "err-type_of_organization_id" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -10213,7 +10645,90 @@ var render = function() {
                     staticStyle: { "margin-top": "-4px" },
                     attrs: { type: "file", multiple: "" },
                     on: { change: _vm.uploadDoc }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.document
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-doc" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.document[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.document ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-doc" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "info-mark",
+                      on: {
+                        click: function($event) {
+                          _vm.infoMark = true
+                        },
+                        mouseover: function($event) {
+                          _vm.infoMark = true
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "14",
+                            height: "20",
+                            viewBox: "0 0 14 20",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M6.7302 0C10.1897 0 13.5956 1.59326 13.5956 5.40421C13.5956 8.91858 9.56848 10.2701 8.7036 11.54C8.0543 12.4846 8.27116 13.8119 6.48719 13.8119C5.32509 13.8119 4.75743 12.8667 4.75743 12.0018C4.75743 8.78336 9.4862 8.05498 9.4862 5.40485C9.4862 3.94617 8.51544 3.08129 6.89284 3.08129C3.43333 3.08129 4.78422 6.64796 2.16407 6.64796C1.21819 6.64796 0.40625 6.0803 0.40625 4.99984C0.405612 2.34908 3.43205 0 6.7302 0ZM6.59562 15.5665C7.81002 15.5665 8.81203 16.5654 8.81203 17.7836C8.81203 19.0018 7.81193 20.0006 6.59562 20.0006C5.3793 20.0006 4.37857 19.0031 4.37857 17.7836C4.37857 16.566 5.3793 15.5665 6.59562 15.5665Z",
+                              fill: "#4985FF"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _vm.infoMark
@@ -10297,7 +10812,54 @@ var render = function() {
                         _vm.type_of_agency = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.type_of_agency
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-type_of_agency" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.type_of_agency[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.type_of_agency
+                          ? "visible"
+                          : "hidden"
+                      },
+                      attrs: { id: "err-type_of_agency" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -10400,7 +10962,54 @@ var render = function() {
                         _vm.performer_name = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.performer_name
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-performer_name" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.performer_name[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.performer_name
+                          ? "visible"
+                          : "hidden"
+                      },
+                      attrs: { id: "err-performer_name" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -10441,7 +11050,52 @@ var render = function() {
                         _vm.phone = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.phone
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-phone" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.phone[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.phone ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-phone" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-form flex-col" }, [
@@ -10476,7 +11130,52 @@ var render = function() {
                         _vm.email = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.email
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "err-text",
+                          attrs: { id: "err-text-email" }
+                        },
+                        [_vm._v(_vm._s(_vm.errors.email[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "err",
+                      style: {
+                        visibility: _vm.errors.email ? "visible" : "hidden"
+                      },
+                      attrs: { id: "err-email" }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            width: "4",
+                            height: "13",
+                            viewBox: "0 0 4 13",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                              fill: "#E4002F"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c(
@@ -10668,6 +11367,40 @@ var render = function() {
                     })
                   ],
                   2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "err",
+                    style: {
+                      visibility: _vm.errors.locality_id ? "visible" : "hidden"
+                    },
+                    attrs: { id: "err-selected_region" }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "4",
+                          height: "13",
+                          viewBox: "0 0 4 13",
+                          fill: "none",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                            fill: "#E4002F"
+                          }
+                        })
+                      ]
+                    )
+                  ]
                 )
               ]),
               _vm._v(" "),
@@ -10968,7 +11701,52 @@ var render = function() {
                       _vm.real_address = $event.target.value
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors.real_address
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "err-text",
+                        attrs: { id: "err-text-real_address" }
+                      },
+                      [_vm._v(_vm._s(_vm.errors.real_address[0]))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "err",
+                    style: {
+                      visibility: _vm.errors.real_address ? "visible" : "hidden"
+                    },
+                    attrs: { id: "err-real_address" }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "4",
+                          height: "13",
+                          viewBox: "0 0 4 13",
+                          fill: "none",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                            fill: "#E4002F"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                )
               ])
             ]),
             _vm._v(" "),
@@ -11403,7 +12181,54 @@ var render = function() {
                       _vm.juridical_address = $event.target.value
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors.juridical_address
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "err-text",
+                        attrs: { id: "err-text-juridical_address" }
+                      },
+                      [_vm._v(_vm._s(_vm.errors.juridical_address[0]))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "err",
+                    style: {
+                      visibility: _vm.errors.juridical_address
+                        ? "visible"
+                        : "hidden"
+                    },
+                    attrs: { id: "err-juridical_address" }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "4",
+                          height: "13",
+                          viewBox: "0 0 4 13",
+                          fill: "none",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z",
+                            fill: "#E4002F"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                )
               ])
             ]),
             _vm._v(" "),
