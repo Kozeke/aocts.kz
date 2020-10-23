@@ -16,8 +16,8 @@
                         <div v-for="doc in documents" :key="doc.id" class="item flex-row">
                             <div class="name">{{ doc.title }}</div>
                             <div class="date flex-col">
-                                <div class="day">Июнь 1, 2020</div>
-                                <div class="time">19:23</div>
+                                <div class="day">{{ getDateString(doc.updated_at) }}</div>
+                                <div class="time">{{ getDateTime(doc.updated_at) }}</div>
                             </div>
                             <div v-if="doc.status === 0" class="status">В обработке</div>
                             <div v-else class="status success">ОДОБРЕНО</div>

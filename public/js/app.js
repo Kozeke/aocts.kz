@@ -16627,7 +16627,17 @@ var render = function() {
                               _vm._v(_vm._s(doc.title))
                             ]),
                             _vm._v(" "),
-                            _vm._m(1, true),
+                            _c("div", { staticClass: "date flex-col" }, [
+                              _c("div", { staticClass: "day" }, [
+                                _vm._v(
+                                  _vm._s(_vm.getDateString(doc.updated_at))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "time" }, [
+                                _vm._v(_vm._s(_vm.getDateTime(doc.updated_at)))
+                              ])
+                            ]),
                             _vm._v(" "),
                             doc.status === 0
                               ? _c("div", { staticClass: "status" }, [
@@ -16973,16 +16983,6 @@ var staticRenderFns = [
       _c("div", { staticClass: "date" }, [_vm._v("Дата изменения")]),
       _vm._v(" "),
       _c("div", { staticClass: "status" }, [_vm._v("Статус")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "date flex-col" }, [
-      _c("div", { staticClass: "day" }, [_vm._v("Июнь 1, 2020")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "time" }, [_vm._v("19:23")])
     ])
   }
 ]
