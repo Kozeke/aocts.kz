@@ -39,7 +39,9 @@ class UserController extends Controller
             'type_of_agency' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users',
-            'recaptcha_token' => 'string'
+            'recaptcha_token' => 'string',
+            'document1' => 'required',
+            'type_of_organization_id' => 'required'
 
         ]);
         if ($validator->fails()) {
@@ -50,55 +52,35 @@ class UserController extends Controller
                 'error' => 'Captcha is invalid.',
             ], Response::HTTP_BAD_REQUEST);
         }
-        $file = $request->file('document');
-        if ($file->getClientOriginalExtension() === "pdf") {
-            $url = Storage::putFile('public/user_documents', new File($file));
-            $text = url('/') . '/storage/app/public/' . substr($url, 7);
-        } else {
-            return response()->json(['document'], 422);
-
-        }
-        if ($request->file('document1')) {
-            $file = $request->file('document1');
-            if ($file->getClientOriginalExtension() === "pdf") {
-                $url = Storage::putFile('public/user_documents', new File($file));
-                $text = url('/') . '/storage/app/public/' . substr($url, 7);
-            } else {
-                return response()->json(['document'], 422);
-            }
+        $file1 = $request->file('document1');
+        if ($file1->getClientOriginalExtension() != "pdf") {
+            return response()->json(['error'=>'download all documents in pdf format'], 422);
         }
         if ($request->file('document2')) {
-            $file = $request->file('document2');
-            if ($file->getClientOriginalExtension() === "pdf") {
-                $url = Storage::putFile('public/user_documents', new File($file));
-                $text = url('/') . '/storage/app/public/' . substr($url, 7);
-            } else {
-                return response()->json(['document'], 422);
+            $file2 = $request->file('document2');
+            if ($file2->getClientOriginalExtension() != "pdf") {
+                return response()->json(['error'=>'download all documents in pdf format'], 422);
             }
         }
         if ($request->file('document3')) {
-            $file = $request->file('document3');
-            if ($file->getClientOriginalExtension() === "pdf") {
-                $url = Storage::putFile('public/user_documents', new File($file));
-                $text = url('/') . '/storage/app/public/' . substr($url, 7);
-            } else {
-                return response()->json(['document'], 422);
+            $file3 = $request->file('document3');
+            if ($file3->getClientOriginalExtension() != "pdf") {
+                return response()->json(['error'=>'download all documents in pdf format'], 422);
             }
         }
         if ($request->file('document4')) {
-            $file = $request->file('document4');
-            if ($file->getClientOriginalExtension() === "pdf") {
-                $url = Storage::putFile('public/user_documents', new File($file));
-                $text = url('/') . '/storage/app/public/' . substr($url, 7);
-            } else {
-                return response()->json(['document'], 422);
+            $file4 = $request->file('document4');
+            if ($file4->getClientOriginalExtension() != "pdf") {
+                return response()->json(['error'=>'download all documents in pdf format'], 422);
             }
         }
-//        if($input['document']){
-//            $exploded=explode('/', $input['document']);
-//            $exploded2=explode('.', $exploded[5]);
+        if ($request->file('document5')) {
+            $file5 = $request->file('document5');
+            if ($file5->getClientOriginalExtension() != "pdf") {
+                return response()->json(['error'=>'download all documents in pdf format'], 422);
+            }
+        }
 
-//            if($exploded2[1]==='pdf'){
         $input['password'] = bcrypt($input['password']);
         $user = User::create([
             "name_of_company" => $input["name_of_company"],
@@ -120,15 +102,58 @@ class UserController extends Controller
             "type_of_agency" => $input["type_of_agency"],
             "approved" => 0, //false
         ]);
+        //creating first document
+        $url = Storage::putFile('public/user_documents', new File($file1));
+        $text = url('/') . '/storage/app/public/' . substr($url, 7);
         UserDocument::create([
             'user_id' => $user->id,
             'path' => $text,
-            'title' =>$input['title'],
+            'title' =>$file1->getClientOriginalName(),
             'status' => 0
         ]);
-//            }else{
-//                return response()->json(['image'], 422);
-//            }
+        //creating second document
+        if ($request->file('document2')) {
+            $url = Storage::putFile('public/user_documents', new File($file2));
+            $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            UserDocument::create([
+                'user_id' => $user->id,
+                'path' => $text,
+                'title' =>$file2->getClientOriginalName(),
+                'status' => 0
+            ]);
+        }
+        //creating third document
+        if ($request->file('document3')) {
+            $url = Storage::putFile('public/user_documents', new File($file3));
+            $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            UserDocument::create([
+                'user_id' => $user->id,
+                'path' => $text,
+                'title' =>$file3->getClientOriginalName(),
+                'status' => 0
+            ]);
+        }
+        //creating fourth document
+        if ($request->file('document4')) {
+            $url = Storage::putFile('public/user_documents', new File($file4));
+            $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            UserDocument::create([
+                'user_id' => $user->id,
+                'path' => $text,
+                'title' =>$file4->getClientOriginalName(),
+                'status' => 0
+            ]);
+        }
+        if ($request->file('document5')) {
+            $url = Storage::putFile('public/user_documents', new File($file5));
+            $text = url('/') . '/storage/app/public/' . substr($url, 7);
+            UserDocument::create([
+                'user_id' => $user->id,
+                'path' => $text,
+                'title' =>$file5->getClientOriginalName(),
+                'status' => 0
+            ]);
+        }
         $creds = $request->only(['BIN', 'password']);
         $token = auth()->attempt($creds);
         $success['user'] = $user;
