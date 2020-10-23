@@ -236,7 +236,7 @@ export default {
         this.init()
         this.getRegions()
     },
-    methods:{
+    methods: {
         getRegions(){
             axios.get('/api/regions')
             .then(res => {

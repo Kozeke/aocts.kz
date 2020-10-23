@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="/images/title-logo.svg" />
     <title>Daris</title>
     <link href=" {{ mix('css/app.css') }}" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
 </head>
 <body style="background: #ffffff">
     <div id="app">

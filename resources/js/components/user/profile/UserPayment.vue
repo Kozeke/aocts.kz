@@ -25,8 +25,9 @@
                                 </div>
                                 <div class="item flex-col">
                                     <div class="label">ИИК</div>
-                                    <input v-if="editMode" v-model="chosenAccordion.IBAN" type="text" placeholder="KZ 1000 0000 0000 0000">
-                                    <input v-else type="text" :value="chosenAccordion.IBAN ? chosenAccordion.IBAN : 'не заполнено'" readonly>
+                                    <input v-if="addMode" v-model="chosenAccordion.IBAN" type="text" placeholder="KZ 1000 0000 0000 0000">
+                                    <input v-if="!addMode && editMode" v-model="chosenAccordion.IBAN" type="text" placeholder="KZ 1000 0000 0000 0000" readonly>
+                                    <input v-if="!addMode && !editMode" type="text" :value="chosenAccordion.IBAN ? chosenAccordion.IBAN : 'не заполнено'" readonly>
                                 </div>
                                 <div class="item flex-col">
                                     <div class="label">CB</div>
@@ -37,7 +38,7 @@
                         </div> 
                     </div>
 
-                    <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
+                    <div @click="editMode = false, addMode = false" v-if="editMode" class="cancel-btn">Отмена</div>
                     <div @click="postBankReq()" v-if="editMode" class="send-btn">Сохранить изменения</div>
                     <div @click="editMode = !editMode" v-if="!editMode" class="edit-btn">Изменить настройки</div>
                     <div @click="addBankReq()" v-if="!editMode" class="new-btn">Добавить реквизиты</div>
@@ -63,6 +64,7 @@ export default {
     data(){
         return {
             editMode: false,
+            addMode: false,
             allAccordion: [],
             chosenAccordion: '',
             bank_name: '',
@@ -101,6 +103,7 @@ export default {
         },
         addBankReq(){
             this.chosenAccordion = {}
+            this.addMode = true
             this.editMode = true
         }
     }

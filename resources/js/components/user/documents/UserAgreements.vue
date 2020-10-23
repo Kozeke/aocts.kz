@@ -27,17 +27,18 @@
                                 <div class="status">Статус</div>
                             </div>
                             <div v-if="allAgreements">
-                                <div v-for="i in allAgreements" :key="i.id" class="item-list">
+                                <div v-for="item in allAgreements" :key="item.id" class="item-list">
                                     <div class="item flex-row">
-                                        <div class="index">{{ i.id }}</div>
+                                        <div class="index">{{ item.id }}</div>
                                         <div class="name flex-row">
                                             №ЦТС-2019/02-41
                                         </div>
                                         <div class="date flex-col">
-                                            <div class="day">Июнь 1, 2020</div>
-                                            <div class="time">19:23</div>
+                                            <div class="day">{{ getDateString(item.agreement_end_date) }}</div>
+                                            <div class="time">{{ getDateTime(item.agreement_end_date) }}</div>
                                         </div>
-                                        <div class="status">ОДОБРЕНО</div>
+                                        <div v-if="item.status === 0" class="status">В обработке</div>
+                                        <div v-else class="status success">ОДОБРЕНО</div>
                                         <div class="setting">
                                             <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
@@ -101,7 +102,7 @@
                     </div>
                     <div v-if="modalPage === 2" class="field-list flex-row">
                         <div class="item flex-col">
-                            <div class="label">Выберите регион</div>
+                            <div class="label">Выберите договор</div>
                             <select name="selected_region" class="input-form" v-model="application_id">
                                 <option :value="'Выберите'" disabled>Выберите</option>
                                 <option v-for="deal in deals" :value="deal.id" :key="deal.id">
@@ -122,20 +123,13 @@
                             <input v-model="BIN" type="text" placeholder="000 000 000 000">
                         </div>
                         <div class="item flex-col">
-                            <div class="label">ИИК</div>
-                            <input type="text" placeholder="0000 0000 0000 0000">
-                        </div>
-                        <div class="item flex-col">
-                            <div class="label">БИК</div>
-                            <input type="text" placeholder="987 654 321">
-                        </div>
-                        <div class="item flex-col">
-                            <div class="label">КБЕ</div>
-                            <input type="text" placeholder="Введите КБЕ">
-                        </div>
-                        <div class="item flex-col">
-                            <div class="label">Наименование банка</div>
-                            <input type="text" placeholder="Bank name">
+                            <div class="label">Выберите реквизит</div>
+                            <select name="selected_region" class="input-form" v-model="bank_req_id">
+                                <option :value="'Выберите'" disabled>Выберите</option>
+                                <option v-for="bk in bank_reqs" :value="bk.id" :key="bk.id">
+                                    {{ bk.id }}
+                                </option>
+                            </select>
                         </div>
                         <div class="item flex-col">
                             <!-- <div class="label">Срок соглашения</div>
@@ -160,6 +154,8 @@ import UserNav from '../UserNav'
 import UserDocumentsRouter from './UserDocumentsRoute'
 import Datepicker from 'vuejs-datepicker'
 import {ru} from 'vuejs-datepicker/dist/locale'
+import { func } from '../../../vars.js'
+
 import axios from 'axios'
 
 export default {
@@ -176,7 +172,9 @@ export default {
             agreement_check: false,
             allAgreements: [],
             deals: [],
+            bank_reqs: [],
             application_id: '',
+            bank_req_id: '',
             business_index: null,
             address: '',
             company_name: '',
@@ -195,6 +193,7 @@ export default {
     mounted(){
         this.BIN = JSON.parse(localStorage.getItem('xyzSessionAoUser')).BIN
         this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
+        this.bank_reqs = JSON.parse(localStorage.getItem('xyzSessionAoUser')).bank_requisites
         this.deals.forEach( deal => {
             if( deal.agreements ){
                 deal.agreements.forEach( item => {
@@ -204,6 +203,8 @@ export default {
         })
     },
     methods: {
+        getDateString: func.getDateString,
+        getDateTime: func.getDateTime,
         postAgeement(){
             let now =  this.agreement_start_date
             let month  = String(Number(now.getMonth() + 1));
@@ -225,7 +226,7 @@ export default {
                 date = '0' + date
             }
             this.agreement_end_date = now.getFullYear() + '-' + month + '-' + date
-
+            
             axios.post('/api/create/agreement', null, {
                 headers: { 
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
@@ -243,7 +244,8 @@ export default {
                     agreement_start_date: this.agreement_start_date, 
                     agreement_end_date: this.agreement_end_date, 
                     performer: this.performer,
-                    company_name: this.company_name
+                    company_name: this.company_name,
+                    bank_req_id: this.bank_req_id
                 }
             })
             .then(res => {
@@ -365,6 +367,9 @@ export default {
                                         text-align: center;
                                         border-radius: 6px;
                                         height: 34px;
+                                    }
+                                    .status.success{
+                                        background: #29CC97;
                                     }
                                     .setting{
                                         cursor: pointer;
