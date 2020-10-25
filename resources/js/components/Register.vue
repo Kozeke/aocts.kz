@@ -236,7 +236,14 @@
                     </div>
                 </div>
                 <div class="input-form">
-                    <vue-recaptcha :sitekey="sitekey" @expired="onCaptchaExpired"></vue-recaptcha>
+<!--                    <vue-recaptcha :sitekey="sitekey" @expired="onCaptchaExpired"></vue-recaptcha>-->
+                    <vue-recaptcha
+                        ref="recaptcha"
+                        size="invisible"
+                        :sitekey="sitekey"
+                        @verify="postUser"
+                        @expired="onCaptchaExpired"
+                    />
                 </div>
                 <div class="input-form">
                 </div>
@@ -245,7 +252,7 @@
                         <label style="margin-top: 15px" class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
                     </div> -->
                     <div class="input-form flex-col">
-                        <span style="margin-top: 15px" @click="postUser()" class="val">Отправить на расмотрение</span>
+                        <span style="margin-top: 15px" @click="validate" class="val">Отправить на расмотрение</span>
                     </div>
                     <!-- <div class="text-form flex-col">
                         <label style="margin-top: 15px" class="label">В течении нескольких дней мы проверим достоверность укаанных данных и напишем вам на электронную почту.</label>
@@ -780,6 +787,7 @@ export default {
             })
         },
         postUser(recaptchaToken){
+            console.log(recaptchaToken);
             var real_city = this.real_selected_locality
             if(this.real_selected_district.is_city === 1){
                 real_city = this.real_selected_district
@@ -859,6 +867,7 @@ export default {
         },
         validate () {
             this.$refs.recaptcha.execute()
+            console.log("validate");
         },
 
         onCaptchaExpired () {
