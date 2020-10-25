@@ -39,14 +39,14 @@ class UserController extends Controller
             'type_of_agency' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users',
-            'recaptcha_token' => 'string',
+            'recaptchaToken' => 'string',
             'document1' => 'required',
 
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
-        if (config('recaptcha.enabled') && !$this->checkRecaptcha($request->recaptcha_token, $request->ip())) {
+        if (config('recaptcha.enabled') && !$this->checkRecaptcha($input['recaptchaToken'], $request->ip())) {
             return response()->json([
                 'error' => 'Captcha is invalid.',
             ], Response::HTTP_BAD_REQUEST);
