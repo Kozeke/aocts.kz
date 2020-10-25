@@ -7,7 +7,7 @@
                 <UserProfileImg></UserProfileImg>
                 <div class="content flex-col">
                     <UserProfileRouteMenu></UserProfileRouteMenu>
-                    <div class="field-list flex-col">
+                    <div v-if="documents.length" class="field-list flex-col">
                         <div class="label-item flex-row">
                             <div class="name">Название документа</div>
                             <div class="date">Дата изменения</div>
@@ -74,9 +74,12 @@
                     </svg>
                     <div class="label">
                         <p v-if="fileData">{{ fileData }}</p>
-                        <p v-else>
+                        <!-- <p v-else>
                         Перетащите файлы сюда<br>
                         или <span>выберите (прикрепить файл)</span>
+                        </p> -->
+                        <p v-else>
+                        <span>выберите (прикрепить файл)</span>
                         </p>
                     </div>
                 </div>
@@ -111,7 +114,6 @@ export default {
     },
     mounted(){
         this.documents = JSON.parse(localStorage.getItem('xyzSessionAoUser')).documents
-        console.log(this.documents)
     },
     methods: {
         getDateString: func.getDateString,

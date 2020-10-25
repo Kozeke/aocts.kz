@@ -93,45 +93,93 @@
                 <div v-if="modalPage === 1" class="field-list flex-row">
                     <div class="item flex-col">
                         <div class="label">Полное наименование ветвепользователя</div>
-                        <input v-model="name" type="text" placeholder="Some company." >
+                        <input v-bind:class="{ 'error' : errors.name }" v-on:keyup="validateForm($event)" v-model="name" name="name" type="text" placeholder="Some company." >
+                        <span v-if="errors.name" id="err-text-name" class="err-text">{{ errors.name[0] }}</span>
+                        <div :style="{ 'display' : errors.name ? 'flex' : 'none' }" class="err" id="err-name">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Исполнитель</div>
-                        <input v-model="performer" type="text" placeholder="Name Surname Middlename">
+                        <input v-bind:class="{ 'error' : errors.performer }" v-on:keyup="validateForm($event)" v-model="performer" name="performer" type="text" placeholder="Name Surname Middlename">
+                        <span v-if="errors.performer" id="err-text-performer" class="err-text">{{ errors.performer[0] }}</span>
+                        <div :style="{ 'display' : errors.performer ? 'flex' : 'none' }" class="err" id="err-performer">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Станция</div>
-                        <input v-model="station" type="text" placeholder="Введите станцию">
+                        <input v-bind:class="{ 'error' : errors.station }" v-on:keyup="validateForm($event)" v-model="station" name="station" type="text" placeholder="Введите станцию">
+                        <span v-if="errors.station" id="err-text-station" class="err-text">{{ errors.station[0] }}</span>
+                        <div :style="{ 'display' : errors.station ? 'flex' : 'none' }" class="err" id="err-station">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Подъездной путь</div>
-                        <input v-model="access_road" type="text" placeholder="Введите подъездной путь">
+                        <input v-bind:class="{ 'error' : errors.access_road }" v-on:keyup="validateForm($event)" v-model="access_road" name="access_road" type="text" placeholder="Введите подъездной путь">
+                        <span v-if="errors.access_road" id="err-text-access_road" class="err-text">{{ errors.access_road[0] }}</span>
+                        <div :style="{ 'display' : errors.access_road ? 'flex' : 'none' }" class="err" id="err-access_road">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Тупик</div>
-                        <input v-model="dead_end" type="text" placeholder="Введите место тупика">
+                        <input v-bind:class="{ 'error' : errors.dead_end }" v-on:keyup="validateForm($event)" v-model="dead_end" name="dead_end" type="text" placeholder="Введите место тупика">
+                        <span v-if="errors.dead_end" id="err-text-dead_end" class="err-text">{{ errors.dead_end[0] }}</span>
+                        <div :style="{ 'display' : errors.dead_end ? 'flex' : 'none' }" class="err" id="err-dead_end">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Дата предоставления подъездного пути</div>
-                        <datepicker v-model="access_road_grant_date" :disabledDates="{ to: new Date(Date.now() - 8640000) }" :placeholder="'2020-01-01'" :language="ru" format="yyyy-MM-dd"></datepicker> 
-                        <!-- <input v-model="access_road_grant_date" type="text" placeholder="YYYY-MM-DD"> -->
+                        <datepicker v-model="access_road_grant_date" name="access_road_grant_date" :disabledDates="{ to: new Date(Date.now() - 8640000) }" :placeholder="'2020-01-01'" :language="ru" format="yyyy-MM-dd"></datepicker> 
+                        <span v-if="errors.access_road_grant_date" id="err-text-access_road_grant_date" class="err-text">{{ errors.access_road_grant_date[0] }}</span>
+                        <div :style="{ 'display' : errors.access_road_grant_date ? 'flex' : 'none' }" class="err" id="err-access_road_grant_date">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Планируемый вагонооборот в месяц</div>
-                        <input v-model="wagon_turnover_per_month" type="text" placeholder="Введите планируемый вагонооборот в месяц">
+                        <input v-bind:class="{ 'error' : errors.wagon_turnover_per_month }" v-on:keyup="validateForm($event)" v-model="wagon_turnover_per_month" name="wagon_turnover_per_month" type="number" min="0" placeholder="Введите планируемый вагонооборот в месяц">
+                        <span v-if="errors.wagon_turnover_per_month" id="err-text-wagon_turnover_per_month" class="err-text">{{ errors.wagon_turnover_per_month[0] }}</span>
+                        <div :style="{ 'display' : errors.wagon_turnover_per_month ? 'flex' : 'none' }" class="err" id="err-wagon_turnover_per_month">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="item flex-col">
                         <div class="label">Планируемый вагонооборот в год</div>
-                        <input v-model="wagon_turnover_per_year" type="text" placeholder="Введите планируемый вагонооборот в год">
+                        <input v-bind:class="{ 'error' : errors.wagon_turnover_per_year }" v-on:keyup="validateForm($event)" v-model="wagon_turnover_per_year" name="wagon_turnover_per_year" type="number" min="0" placeholder="Введите планируемый вагонооборот в год">
+                        <span v-if="errors.wagon_turnover_per_year" id="err-text-wagon_turnover_per_year" class="err-text">{{ errors.wagon_turnover_per_year[0] }}</span>
+                        <div :style="{ 'display' : errors.wagon_turnover_per_year ? 'flex' : 'none' }" class="err" id="err-wagon_turnover_per_year">
+                            <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
                 <div v-if="modalPage === 2" class="field-list flex-row">
                     <div style="margin-bottom: 200px" class="item flex-col">
                         <div class="label">БИН/ИНН</div>
-                        <input v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'############'"  placeholder="000 000 000 000" >
+                        <input v-bind:class="{ 'error' : errors.BIN }" v-on:keyup="validateForm($event)" v-model="BIN" name="BIN" oninput="validity.valid||(value='');" v-mask="'### ### ### ###'"  placeholder="000 000 000 000" >
+                        <span v-if="errors.BIN" id="err-text-BIN" class="err-text">{{ errors.BIN[0] }}</span>
                     </div>
                 </div>
-                <div v-if="modalPage === 1" @click="modalPage = 2" class="done-btn">Вперёд</div>
+                <div v-if="modalPage === 1" @click="goNextPage()" class="done-btn">Вперёд</div>
                 <div v-if="modalPage === 2" @click="modalPage = 1" class="back-btn">Назад</div>
                 <div v-if="modalPage === 2" @click="postDeal()" class="done-btn">Отправить</div>
             </div>
@@ -166,22 +214,179 @@ export default {
             wagon_turnover_per_year: null,
             wagon_turnover_per_month: null,
             access_road_grant_date: '',
-            BIN: ''
+            BIN: '',
+            errors: ''
         }
     },
     mounted(){
-        this.name = JSON.parse(localStorage.getItem('xyzSessionAoUser')).name
         this.deals = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
     },
     methods: {
         getDateString: func.getDateString,
         getDateTime: func.getDateTime,
+        validateForm(e){
+            if(e.target.name === 'name'){
+                if(this.errors.name){
+                    delete this.errors.name
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-name').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-name').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'performer'){
+                if(this.errors.performer){
+                    delete this.errors.performer
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-performer').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-performer').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'station'){
+                if(this.errors.station){
+                    delete this.errors.station
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-station').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-station').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'access_road'){
+                if(this.errors.access_road){
+                    delete this.errors.access_road
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-access_road').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-access_road').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'dead_end'){
+                if(this.errors.dead_end){
+                    delete this.errors.dead_end
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-dead_end').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-dead_end').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'wagon_turnover_per_month'){
+                if(this.errors.wagon_turnover_per_month){
+                    delete this.errors.wagon_turnover_per_month
+                }
+                if( e.target.value <= 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-wagon_turnover_per_month').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-wagon_turnover_per_month').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'wagon_turnover_per_year'){
+                if(this.errors.wagon_turnover_per_year){
+                    delete this.errors.wagon_turnover_per_year
+                }
+                if( e.target.value <= 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-wagon_turnover_per_year').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-wagon_turnover_per_year').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'BIN'){
+                if(this.errors.BIN){
+                    delete this.errors.BIN
+                }
+                if(String(e.target.value).length !== 15 ){
+                    e.srcElement.classList.add('error')
+                } else {
+                    e.srcElement.classList.remove('error')
+                }
+            }
+        },
         showAccordian( index ){
             let el = document.getElementById('extra-' + index)
             if( el.style.display === 'flex' ){
                 el.style.display = 'none'
             } else {
                 el.style.display = 'flex'
+            }
+        },
+        goNextPage(){
+            if( this.name === '' ){
+                document.getElementsByName('name')[0].classList.add('error')
+                document.getElementById('err-name').style.display = 'flex'
+                document.getElementById('err-text-name').style.display = 'flex'
+            }
+            if( this.performer === '' ){
+                document.getElementsByName('performer')[0].classList.add('error')
+                document.getElementById('err-performer').style.display = 'flex'
+                document.getElementById('err-text-performer').style.display = 'flex'
+            }
+            if( this.station === '' ){
+                document.getElementsByName('station')[0].classList.add('error')
+                document.getElementById('err-station').style.display = 'flex'
+                document.getElementById('err-text-station').style.display = 'flex'
+            }
+            if( this.access_road === '' ){
+                document.getElementsByName('access_road')[0].classList.add('error')
+                document.getElementById('err-access_road').style.display = 'flex'
+                document.getElementById('err-text-access_road').style.display = 'flex'
+            }
+            if( this.dead_end === '' ){
+                document.getElementsByName('dead_end')[0].classList.add('error')
+                document.getElementById('err-dead_end').style.display = 'flex'
+                document.getElementById('err-text-dead_end').style.display = 'flex'
+            }
+             if( this.wagon_turnover_per_month === null ){
+                document.getElementsByName('wagon_turnover_per_month')[0].classList.add('error')
+                document.getElementById('err-wagon_turnover_per_month').style.display = 'flex'
+                document.getElementById('err-text-wagon_turnover_per_month').style.display = 'flex'
+            }
+            if( this.wagon_turnover_per_year === null ){
+                document.getElementsByName('wagon_turnover_per_year')[0].classList.add('error')
+                document.getElementById('err-wagon_turnover_per_year').style.display = 'flex'
+                document.getElementById('err-text-wagon_turnover_per_year').style.display = 'flex'
+            }
+            if( this.access_road_grant_date === '' ){
+                alert('Выберите дату.')
+                return 
+            }
+            if(document.getElementsByClassName('error').length !== 0){
+                alert('Заполните все поля правильно.')
+                return 
+            } else {
+                this.modalPage = 2
             }
         },
         showOption(index){
@@ -192,6 +397,13 @@ export default {
             document.getElementById('xyz-option-' + index).style.display = "flex";
         },
         postDeal(){
+            if( this.BIN.length !== 15 ){
+                document.getElementsByName('BIN')[0].classList.add('error')
+            }
+            if(document.getElementsByClassName('error').length !== 0){
+                alert('Заполните все поля правильно.')
+                return 
+            }
             let now =  this.access_road_grant_date
             let month  = String(Number(now.getMonth() + 1));
             let date = String(now.getDate())
@@ -202,6 +414,7 @@ export default {
                 date = '0' + date
             }
             this.access_road_grant_date = now.getFullYear() + '-' + month + '-' + date
+            // now.toISOString()
             axios.post('/api/create/application', null, {
                 headers: { 
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
@@ -215,6 +428,7 @@ export default {
                     wagon_turnover_per_year: this.wagon_turnover_per_year,
                     wagon_turnover_per_month: this.wagon_turnover_per_month,
                     access_road_grant_date: this.access_road_grant_date
+                    // BIN = BIN.replace(/\s+/g, '');
                 }
                 })
                 .then(res => {
@@ -226,7 +440,8 @@ export default {
                     localStorage.setItem('xyzSessionAoUser', JSON.stringify(userSt));
                     location.reload()
                 }).catch(err => {
-                    console.log(err.data)
+                    this.errors = Object.assign({}, err.response.data.error)
+                    console.log(err.response.data.error)
             })
         }
     }
@@ -448,8 +663,9 @@ export default {
                 .field-list{
                     flex-wrap: wrap;
                     .item{
+                        position: relative;
                         width: 48%;
-                        margin-top: 36px;
+                        margin-top: 22px;
                         .label{
                             text-align: left;
                             font-weight: 500;
@@ -479,6 +695,35 @@ export default {
                         }
                         ::placeholder{
                             color: #C5C5C5;
+                        }
+                        .error{
+                            border: 1px solid #E4002F !important;
+                            box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;
+                        }
+                        .err{
+                            display: none;
+                            position: absolute;
+                            top: 46px;
+                            right: 18px;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+
+                            background: #FFFFFF;
+                            border: 1px solid #E4002F;
+                            box-sizing: border-box;
+                            svg{
+                                margin-top: 2px;
+                                margin-left: 7px
+                            }
+                        }
+                        .err-text{
+                            line-height: 1.2;
+                            position: absolute;
+                            bottom: -18px;
+                            text-align: left;
+                            color: #E4002F;
+                            font-size: 12px
                         }
                     }
                     .item:nth-of-type(2n){

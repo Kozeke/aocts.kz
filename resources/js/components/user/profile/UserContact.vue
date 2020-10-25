@@ -10,23 +10,47 @@
                     <div class="field-list flex-row">
                         <div class="item flex-col">
                             <div class="label">ФИО первого руководителя</div>
-                            <input v-if="editMode" v-model="manager_name" type="text" placeholder="Somename Somesurname" >
+                            <input v-if="editMode" v-bind:class="{ 'error' : errors.manager_name }" v-on:keyup="validateForm($event)" v-model="manager_name" name="manager_name" type="text" placeholder="Somename Somesurname" >
                             <input v-else type="text" :value="manager_name" readonly>
+                            <span v-if="errors.manager_name" id="err-text-manager_name" class="err-text">{{ errors.manager_name }}</span>
+                            <div :style="{ 'display' : errors.manager_name ? 'flex' : 'none' }" class="err" id="err-manager_name">
+                                <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                                </svg>
+                            </div>
                         </div>
                         <div class="item flex-col">
                             <div class="label">ФИО исполнителя</div>
-                            <input v-if="editMode" v-model="performer_name" type="text" placeholder="Somename Somesurname">
+                            <input v-if="editMode" v-bind:class="{ 'error' : errors.performer_name }" v-on:keyup="validateForm($event)" v-model="performer_name" name="performer_name" type="text" placeholder="Somename Somesurname">
                             <input v-else type="text" :value="performer_name" readonly>
+                            <span v-if="errors.performer_name" id="err-text-performer_name" class="err-text">{{ errors.performer_name }}</span>
+                            <div :style="{ 'display' : errors.performer_name ? 'flex' : 'none' }" class="err" id="err-performer_name">
+                                <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                                </svg>
+                            </div>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Контактный номер</div>
-                            <input v-if="editMode" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="+7 700 000 00 00">
+                            <input v-if="editMode" v-bind:class="{ 'error' : errors.phone }" v-on:keyup="validateForm($event)" v-model="phone" name="phone" oninput="validity.valid||(value='');" v-mask="'+7(###)###-##-##'" placeholder="+7 700 000 00 00">
                             <input v-else type="text" :value="phone" readonly>
+                            <span v-if="errors.phone" id="err-text-phone" class="err-text">{{ errors.phone }}</span>
+                            <div :style="{ 'display' : errors.phone ? 'flex' : 'none' }" class="err" id="err-phone">
+                                <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                                </svg>
+                            </div>
                         </div>
                         <div class="item flex-col">
                             <div class="label">Электронная почта</div>
-                            <input v-if="editMode" v-model="email" type="text" placeholder="email@company.kz">
+                            <input v-if="editMode" v-bind:class="{ 'error' : errors.email }" v-on:keyup="validateForm($event)" v-model="email" name="email" type="text" placeholder="email@company.kz">
                             <input v-else type="text" :value="email" readonly>
+                            <span v-if="errors.email" id="err-text-email" class="err-text">{{ errors.email }}</span>
+                            <div :style="{ 'display' : errors.email ? 'flex' : 'none' }" class="err" id="err-email">
+                                <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <div @click="editMode = !editMode" v-if="editMode" class="cancel-btn">Отмена</div>
@@ -57,7 +81,8 @@ export default {
             manager_name: '',
             performer_name: '',
             phone: '',
-            email: ''
+            email: '',
+            errors: ''
         }
     },
     mounted(){
@@ -68,7 +93,70 @@ export default {
         this.email = user.email
     },
     methods:{
+        validateForm(e){
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(e.target.name === 'manager_name'){
+                if(this.errors.manager_name){
+                    delete this.errors.manager_name
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-manager_name').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-manager_name').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'performer_name'){
+                if(this.errors.performer_name){
+                    delete this.errors.performer_name
+                }
+                if(String(e.target.value).length === 0 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-performer_name').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-performer_name').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'phone'){
+                if(this.errors.phone){
+                    delete this.errors.phone
+                }
+                if(String(e.target.value).length !== 16 ){
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-phone').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-phone').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+            if(e.target.name === 'email'){
+                if(this.errors.email){
+                    delete this.errors.email
+                }
+                if (!pattern.test(String(e.target.value).toLowerCase())) {
+                    e.srcElement.classList.add('error')
+                    document.getElementById('err-email').style.display = 'flex'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'flex'
+                } else {
+                    e.srcElement.classList.remove('error')
+                    document.getElementById('err-email').style.display = 'none'
+                    document.getElementById('err-text-' + e.target.name).style.display = 'none'
+                }
+            }
+        },
         postUserContact(){
+            if(document.getElementsByClassName('error').length !== 0){
+                alert('Заполните все поля правильно.')
+                return 
+            }
             axios.post('/api/user/edit/contacts', null, {
                 headers: { 
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
@@ -81,13 +169,14 @@ export default {
                     email: this.email
                 }
             })
-                .then(res => {
+            .then(res => {
                 console.log(res.data)
                 alert('Ваши данные успешно сохранены')
                 localStorage.removeItem('xyzSessionAoUser');
                 localStorage.setItem('xyzSessionAoUser', JSON.stringify(res.data[1][0]));
                 location.reload()
             }).catch(err => {
+                this.errors = Object.assign({}, err.response.data.error)
                 console.log(err.data)
             })
         }
@@ -116,8 +205,9 @@ export default {
                         padding: 32px 32px;
                         flex-wrap: wrap;
                         .item{
+                            position: relative;
                             width: 49%;
-                            margin-bottom: 28px;
+                            margin-bottom: 32px;
                             .label{
                                 text-align: left;
                                 font-weight: 500;
@@ -147,6 +237,35 @@ export default {
                             }
                             ::placeholder{
                                 color: #C5C5C5;
+                            }
+                            .error{
+                                border: 1px solid #E4002F !important;
+                                box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;
+                            }
+                            .err{
+                                display: none;
+                                position: absolute;
+                                top: 46px;
+                                right: 18px;
+                                width: 20px;
+                                height: 20px;
+                                border-radius: 50%;
+
+                                background: #FFFFFF;
+                                border: 1px solid #E4002F;
+                                box-sizing: border-box;
+                                svg{
+                                    margin-top: 2px;
+                                    margin-left: 7px
+                                }
+                            }
+                            .err-text{
+                                line-height: 1.2;
+                                position: absolute;
+                                bottom: -18px;
+                                text-align: left;
+                                color: #E4002F;
+                                font-size: 12px
                             }
                         }
                         .item:nth-of-type(2n){

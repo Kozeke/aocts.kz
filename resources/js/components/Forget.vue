@@ -8,7 +8,8 @@
                     Мы отправим вам письмо для восстановления пароля</div>
                 <div class="input-form flex-col">
                     <label class="label">Ваш электронный адрес</label>
-                    <input v-on:keyup="validateForm($event)" v-model="email" type="text" id="email" placeholder="Ваш электронный адрес">
+                    <input v-bind:class="{ 'error' : errors }" v-on:keyup="validateForm($event)" v-model="email" type="text" id="email" placeholder="Ваш электронный адрес">
+                    <span v-if="errors" id="err-text-manager_name" class="err-text">{{ errors[0] }}</span>
                     <div class="err" id="err-email">
                         <svg width="4" height="13" viewBox="0 0 4 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.01301 0.703613C2.61266 0.703613 3.09767 1.23401 3.08003 1.87237L2.90366 8.42492C2.89044 8.94124 2.49361 9.3496 2.0086 9.3496C1.52359 9.3496 1.12677 8.93654 1.11354 8.42492L0.941582 1.87237C0.928355 1.23401 1.40895 0.703613 2.01301 0.703613ZM1.99978 12.5555C1.38691 12.5555 0.888672 12.0251 0.888672 11.3726C0.888672 10.7202 1.38691 10.1898 1.99978 10.1898C2.61266 10.1898 3.11089 10.7202 3.11089 11.3726C3.11089 12.0251 2.61266 12.5555 1.99978 12.5555Z" fill="#E4002F"/>
@@ -34,7 +35,8 @@ export default {
     data(){
         return{
             email: '',
-            password: ''
+            password: '',
+            errors: ''
         }
     },
     methods: {
@@ -42,21 +44,23 @@ export default {
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if(e.target.id === 'email'){
                 if( !pattern.test(String(e.target.value).toLowerCase()) ){
-                    document.getElementById('err-email').style.visibility = 'visible'
+                    document.getElementById('err-email').style.display = 'flex'
                     e.srcElement.classList.add('error')
                 } else {
-                    document.getElementById('err-email').style.visibility = 'hidden'
+                    document.getElementById('err-email').style.display = 'none'
                     e.srcElement.classList.remove('error')
                 }
             }
         },
         getPwdLink(){
             if(this.email === ''){
-                document.getElementById('err-email').style.visibility = 'visible'
+                document.getElementById('err-email').style.display = 'flex'
                 document.getElementById('email').classList.add('error')
-                return
             }
-
+            if(document.getElementsByClassName('error').length !== 0){
+                alert('Заполните все поля правильно.')
+                return 
+            }
             axios.post('/api/forgot/password', {
                     email:this.email,
                 })
@@ -65,10 +69,8 @@ export default {
                     console.log(res)
                 })
                 .catch(err => {
-                    if(err.response.status === 402){
-                        alert('Указанный почта не зарегистрирован.')
-                    }
-                console.log(err)
+                    this.errors = Object.assign({}, err.response.data)
+                    console.log(err.response.data)
             })
         }
     }
@@ -147,7 +149,7 @@ export default {
                         box-shadow: 0px 0px 10px rgba(228, 0, 47, 0.2) !important;
                     }
                     .err{
-                        visibility: hidden;
+                        display: none;
                         position: absolute;
                         top: 50px;
                         right: 18px;
@@ -159,8 +161,17 @@ export default {
                         border: 1px solid #E4002F;
                         box-sizing: border-box;
                         svg{
-                            margin-top: -8px;
+                            margin-top: 2px;
+                            margin-left: 7px
                         }
+                    }
+                    .err-text{
+                        line-height: 1.2;
+                        position: absolute;
+                        bottom: -18px;
+                        text-align: left;
+                        color: #E4002F;
+                        font-size: 12px
                     }
                     ::placeholder{
                         font-weight: normal;

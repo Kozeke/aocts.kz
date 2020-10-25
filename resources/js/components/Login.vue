@@ -7,11 +7,12 @@
         <div class="input-form flex-col">
           <label class="label">БИН/ИНН</label>
           <input
+            v-bind:class="{ 'error' : errors.BIN }"
             v-on:keyup="validateForm($event)"
             v-model="BIN"
             id="BIN"
             oninput="validity.valid||(value='');"
-            v-mask="'############'"
+            v-mask="'### ### ### ###'"
             placeholder="Введите 12 значный код"
             @keyup.enter="logIn()"
           />
@@ -33,6 +34,7 @@
         <div class="input-form flex-col">
           <label class="label">Пароль</label>
           <input
+           v-bind:class="{ 'error' : errors.password }"
             v-on:keyup="validateForm($event)"
             v-model="password"
             type="password"
@@ -82,43 +84,38 @@ export default {
   },
   methods: {
     validateForm(e) {
-              // console.log(e.target.value)
-
-      // const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (e.target.id === "BIN") {
-        // console.log(e.target.value)
-        // if (!pattern.test(String(e.target.value).toLowerCase())) {
-          if ( String(e.target.value).length < 12 ) {
-          document.getElementById("err-BIN").style.visibility = "visible";
-          e.srcElement.classList.add("error");
+        if ( String(e.target.value).length !== 15 ) {
+          e.srcElement.classList.add("error")
+          document.getElementById("err-BIN").style.display = "flex";
         } else {
-          document.getElementById("err-BIN").style.visibility = "hidden";
-          e.srcElement.classList.remove("error");
+          e.srcElement.classList.remove("error")
+          document.getElementById("err-BIN").style.display = "none";
         }
       }
       if (e.target.id === "password") {
         if (String(e.target.value).length === 0) {
-          document.getElementById("err-password").style.visibility = "visible";
-          e.srcElement.classList.add("error");
+          e.srcElement.classList.add("error")
+          document.getElementById("err-password").style.display = "display";
         } else {
-          document.getElementById("err-password").style.visibility = "hidden";
           e.srcElement.classList.remove("error");
+          document.getElementById("err-password").style.display = "none";
         }
       }
     },
     logIn() {
-      if (this.BIN < 12) {
-        document.getElementById("err-BIN").style.visibility = "visible";
-        document.getElementById("BIN").classList.add("error");
+      if (this.BIN.length !== 15) {
+        document.getElementById("BIN").classList.add("error")
+        document.getElementById("err-BIN").style.display = "flex";
         return;
       }
       if (this.password === "") {
-        document.getElementById("err-password").style.visibility = "visible";
-        document.getElementById("password").classList.add("error");
+        document.getElementById("password").classList.add("error")
+        document.getElementById("err-password").style.display = "flex";
         return;
       }
       var data = {
-        BIN: this.BIN,
+        BIN: this.BIN.replace(/\s+/g, ''),
         password: this.password
       };
 
@@ -138,7 +135,6 @@ export default {
             alert("Почта или логин не правильно.");
           }
           this.errors = Object.assign({}, err.response.data.error);
-          console.log(this.errors);
           console.log(err);
         });
     }
