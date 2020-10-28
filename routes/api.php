@@ -55,3 +55,8 @@ Route::post('create/agreement','Api\AgreementController@create');
 //payment
 Route::post('make/payment','Api\PaymentHistoryController@make');
 Route::post('transfer/money','Api\PaymentHistoryController@transferMoney');
+
+//acts of completed work
+Route::post('create/act','ActsOfCompletedWorkController@create');
+Route::get('get/act','ActsOfCompletedWorkController@show');
+

@@ -34,6 +34,11 @@ class PaymentHistoryController extends Controller
             'application_id' => $request['application_id']
         ]);
 
+        $app = Application::find($request['application_id']);
+        $app->payment_balance = $request['payment'];
+        $app->save();
+
+
         return response()->json(['success'], 200);
 
     }
