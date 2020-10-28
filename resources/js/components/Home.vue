@@ -592,7 +592,7 @@ import { mixin as clickaway } from 'vue-clickaway';
             cursor: pointer;
             width: 95px;
             top: 76px;
-            right: calc(14%);
+            right: calc(8%);
             border: 1px solid #4985FF;
             background: #FFFFFF;
             box-sizing: border-box;
