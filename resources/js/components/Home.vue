@@ -134,13 +134,29 @@
                     </svg>
                     <span>Связаться с нами</span>
                 </div>
-                <div class="login-us flex-row" @click="$router.push({ name: userActive ? 'profile' : 'login' })">
+                <div @click="showUserMenu = true" class="login-us flex-row">
                     <svg style="margin: 13px 0 auto 8px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.9679 12.7804L11.4725 8.8934C11.3032 7.56066 10.1694 6.5752 8.82596 6.5752H5.1741C3.8307 6.5752 2.69658 7.56066 2.52751 8.8934L2.03188 12.7877C1.99776 13.0601 2.08154 13.4025 2.26279 13.6078C2.44435 13.8134 2.70541 13.9998 2.97957 13.9998H11.0202C11.2943 13.9998 11.5554 13.8098 11.7373 13.6041C11.9185 13.3979 12.0023 13.0531 11.9679 12.7804Z" fill="#4985FF"/>
                     <path d="M6.99939 5.68432C8.56907 5.68432 9.84155 4.41184 9.84155 2.84216C9.84155 1.27248 8.56907 0 6.99939 0C5.42971 0 4.15723 1.27248 4.15723 2.84216C4.15723 4.41184 5.42971 5.68432 6.99939 5.68432Z" fill="#4985FF"/>
                     </svg>
-                    <span v-if="userActive">Личный кабинет</span>
+                    <span v-if="userActive">{{ userName.substr(0,userName.indexOf(' ')) + ' ' + userName.substr(userName.indexOf(' ')+1)[0] + '.' }}</span>
                     <span v-else>Войти</span>
+                </div>
+                <div v-on-clickaway="toggleDropdown" v-show="showUserMenu" id="user-drop-menu" class="user-drop-menu flex-col">
+                    <div @click="$router.push({ name: 'profile' })" class="flex-row">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.8212 8.68225L12.5651 7.9879C12.6919 7.33306 12.6919 6.66129 12.5651 6.00646L13.8212 5.3121C13.9657 5.23307 14.0305 5.06936 13.9833 4.91694C13.6561 3.91211 13.0988 3.00324 12.3705 2.24679C12.2585 2.13107 12.0757 2.10284 11.9342 2.18187L10.6781 2.87623C10.1503 2.44155 9.54294 2.10566 8.88543 1.8855V0.499621C8.88543 0.341557 8.77044 0.203251 8.60827 0.169381C7.52618 -0.0620701 6.41755 -0.0507798 5.38853 0.169381C5.22636 0.203251 5.11137 0.341557 5.11137 0.499621V1.88833C4.45681 2.11131 3.84942 2.44719 3.31869 2.87905L2.06559 2.1847C1.92112 2.10566 1.74126 2.13107 1.62922 2.24961C0.900941 3.00324 0.343678 3.91211 0.0163971 4.91977C-0.0337271 5.07218 0.034088 5.23589 0.178563 5.31493L1.43462 6.00928C1.30783 6.66411 1.30783 7.33589 1.43462 7.99072L0.178563 8.68507C0.034088 8.76411 -0.0307786 8.92781 0.0163971 9.08023C0.343678 10.0851 0.900941 10.9939 1.62922 11.7504C1.74126 11.8661 1.92406 11.8943 2.06559 11.8153L3.32164 11.121C3.84942 11.5556 4.45681 11.8915 5.11432 12.1117V13.5004C5.11432 13.6584 5.22931 13.7967 5.39148 13.8306C6.47357 14.0621 7.5822 14.0508 8.61122 13.8306C8.77338 13.7967 8.88837 13.6584 8.88837 13.5004V12.1117C9.54294 11.8887 10.1503 11.5528 10.681 11.121L11.9371 11.8153C12.0816 11.8943 12.2614 11.8689 12.3735 11.7504C13.1018 10.9968 13.659 10.0879 13.9863 9.08023C14.0305 8.92499 13.9657 8.76128 13.8212 8.68225ZM6.9984 9.25523C5.69812 9.25523 4.63961 8.24193 4.63961 6.99718C4.63961 5.75242 5.69812 4.73912 6.9984 4.73912C8.29868 4.73912 9.35718 5.75242 9.35718 6.99718C9.35718 8.24193 8.29868 9.25523 6.9984 9.25523Z" fill="#4985FF"/>
+                        </svg>
+                        <div class="label">Профиль</div>
+                    </div>
+                    <div @click="logOut()" class="flex-row">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13H2.33333C1.97971 13 1.64057 12.8595 1.39052 12.6095C1.14048 12.3594 1 12.0203 1 11.6667V2.33333C1 1.97971 1.14048 1.64057 1.39052 1.39052C1.64057 1.14048 1.97971 1 2.33333 1H5" stroke="#4985FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.66602 10.3332L12.9993 6.99984L9.66602 3.6665" stroke="#4985FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 7H5" stroke="#4985FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div class="label">Выйти</div>
+                    </div>
                 </div>
                 <div id="lang-us" class="lang-us flex-row" @click="showCountry = showCountry ? false : true">
                     <svg style="margin: 12px 0 auto 15px;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -371,7 +387,8 @@ import { mixin as clickaway } from 'vue-clickaway';
                 showCountry: false,
                 showCountrySmall: false,
                 modalDisplay: false,
-                sideMenu: !false,
+                sideMenu: false,
+                showUserMenu: false,
                 selectedLang: 'RU',
                 lang: [
                     {
@@ -390,19 +407,30 @@ import { mixin as clickaway } from 'vue-clickaway';
                         attr: 'EN'
                     }
                 ],
-                userActive: false
+                userActive: false,
+                userName: ''
             }
         },
         mounted() {
             if( JSON.parse(localStorage.getItem('xyzSessionAoUser')) ){
                 this.userActive = true
+                this.userName = JSON.parse(localStorage.getItem('xyzSessionAoUser')).manager_name
             }
         },
-        methods:{
+        methods: {
+            logOut(){
+                localStorage.removeItem('xyzSessionAo');
+                localStorage.removeItem('xyzSessionAoUser');
+                this.$router.push({ name: 'home' })
+            },
             toggleDropdown(e) {
                 let langUs = document.getElementById("lang-us")
                 if(!langUs.contains(e.target)){
                     this.showCountry = false
+                }
+                let userMenu = document.getElementById("user-drop-menu")
+                if(!userMenu.contains(e.target)){
+                    this.showUserMenu = false
                 }
             },
             toggleDropdownSmall(e) {
@@ -544,6 +572,33 @@ import { mixin as clickaway } from 'vue-clickaway';
             position: absolute;
             top: 30px;
             right: 8%;
+            .user-drop-menu{
+                position: absolute;
+                right: 120px;
+                top: 40px;
+                z-index: 98;
+                background: #FFFFFF;
+                box-shadow: 0px 0px 10px rgba(73, 133, 255, 0.15);
+                border-radius: 6px;
+                padding: 6px 18px;
+                .flex-row{
+                    padding: 9px 0;
+                    cursor: pointer;
+                    .label{
+                        margin-left: 9px;
+                        font-size: 14px;
+                        line-height: 16px;
+                        text-align: left;
+                        color: #4985FF;
+                    }
+                    svg, .label{
+                        cursor: pointer;
+                    }
+                }
+                .flex-row:last-of-type{
+                    border-top: 0.5px solid #DFE0EB;
+                }
+            }
         }
         .contact-us{
             cursor: pointer;
@@ -558,6 +613,7 @@ import { mixin as clickaway } from 'vue-clickaway';
             }
         }
         .login-us{
+            z-index: 99;
             cursor: pointer;
             margin-left: 10px;
             width: auto;
@@ -590,7 +646,7 @@ import { mixin as clickaway } from 'vue-clickaway';
             z-index: 999;
             position: absolute;
             cursor: pointer;
-            width: 95px;
+            width: auto;
             top: 76px;
             right: calc(8%);
             border: 1px solid #4985FF;
@@ -604,7 +660,7 @@ import { mixin as clickaway } from 'vue-clickaway';
                 height: 34px;
                 font-style: normal;
                 font-weight: 500;
-                font-size: 11px;
+                font-size: 12px;
                 line-height: 13px;
                 color: #4985FF;
                 padding: 10px 15px;
@@ -628,6 +684,9 @@ import { mixin as clickaway } from 'vue-clickaway';
             box-sizing: border-box;
             border-radius: 6px;
         }
+    }
+    .side-menu{
+        display: none;
     }
     .main{
         position: relative;
