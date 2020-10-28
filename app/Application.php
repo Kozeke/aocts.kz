@@ -13,4 +13,7 @@ class Application extends Model
     public function agreements(){
         return $this->hasMany('App\Agreement');
     }
+    public function acts(){
+        return $this->hasMany('App\ActsOfCompletedWork');
+    }
 }

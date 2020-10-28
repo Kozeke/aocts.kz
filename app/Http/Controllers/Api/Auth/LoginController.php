@@ -28,7 +28,14 @@ class LoginController extends Controller
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
             return response()->json(['error'=> $e->getMessage()]);
         }
-        $me = User::where('id', auth()->user()->id)->with(['documents','bank_requisites','applications.agreements','juridical_locality.districts','juridical_locality.regions','real_locality.districts','real_locality.regions'])->get();
+        $me = User::where('id', auth()->user()->id)->with(['documents','bank_requisites','applications.acts','applications.agreements','juridical_locality.districts','juridical_locality.regions','real_locality.districts','real_locality.regions'])->get();
+
+        foreach($me as $user) {
+            foreach ($user->applications as $invoice) {
+
+                $invoice->date = \Carbon\Carbon::createFromTimeStamp(strtotime($invoice->created_at))->format('Y-m-d');
+            }
+        }
         return response()->json(['user'=>$me]);
     }
 

@@ -36,6 +36,7 @@ class PaymentHistoryController extends Controller
 
         $app = Application::find($request['application_id']);
         $app->payment_balance = $request['payment'];
+        $app->wagon_turnover_per_month = $request['vagon_quantity'];
         $app->save();
 
 

@@ -28,7 +28,7 @@
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="9" cy="9" r="8.5" fill="white" stroke="#C5C5C5"/>
                                     <path d="M14 9.71429H9.71429V14H8.28571V9.71429H4V8.28571H8.28571V4H9.71429V8.28571H14V9.71429Z" fill="#C5C5C5"/>
-                                </svg>                  
+                                </svg>
                             </div>
                             <div v-for="i in 3" :key="i" class="item flex-col">
                                 <div class="name">№ЦТС-2019/02-41</div>
@@ -49,7 +49,7 @@
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="9" cy="9" r="8.5" fill="white" stroke="#C5C5C5"/>
                                     <path d="M14 9.71429H9.71429V14H8.28571V9.71429H4V8.28571H8.28571V4H9.71429V8.28571H14V9.71429Z" fill="#C5C5C5"/>
-                                </svg>                  
+                                </svg>
                             </div>
                             <div v-for="i in 3" :key="i" class="item flex-col">
                                 <div class="name">№10155</div>
@@ -118,7 +118,7 @@
                         <input v-model="amount" min="0" type="number" placeholder="Введите сумму">
                     </div>
                 </div>
-                <div @click="succModal = true" class="done-btn">Произвести перевод</div>
+                <div @click="postTransfer" class="done-btn">Произвести перевод</div>
             </div>
         </div>
         <div v-if="succModal" class="modal">
@@ -166,7 +166,7 @@ export default {
     methods: {
         postTransfer(){
             axios.post('/api/transfer/money', null, {
-                headers: { 
+                headers: {
                     'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
                 },
                 params: {
@@ -179,6 +179,7 @@ export default {
             .then(res => {
                 console.log(res.data)
                 alert('Ваша заявка успешно от отправлена')
+                this.succModal = true
             }).catch(err => {
                 console.log(err.data)
             })
@@ -189,7 +190,7 @@ export default {
 <style lang="scss" scoped>
     .main{
         background: #FFFFFF;
-        .main-info{          
+        .main-info{
             padding: 0 58px 37px 58px;
             margin-left: 303px;
             .containe{
