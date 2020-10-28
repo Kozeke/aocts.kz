@@ -36,6 +36,9 @@ Route::post('user/edit/contacts','Api\UserController@updateContacts');
 Route::post('user/edit/bank/requisites','Api\BankRequisitesController@update');
 Route::delete('user/delete/bank/requisites', 'Api\BankRequisitesController@delete');
 
+//update image
+Route::post('user/edit/photo','Api\UserController@uploadImage');
+
 
 
 Route::get('regions','RegionController@all');

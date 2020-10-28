@@ -82,5 +82,26 @@ class UserController extends Controller
 
 
     }
+    public function uploadImage(Request $request)
+    {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e){
+            return response()->json(['error'=> $e->getMessage()]);
+        }
+        $file = $request->file('image');
+        // Log:info( $file->getClientOriginalExtension());
+        if($file->getClientOriginalExtension()==="pdf"||$file->getClientOriginalExtension()==="png"||$file->getClientOriginalExtension()==="jpg"||$file->getClientOriginalExtension()==="jpeg"){
+            $url = Storage::putFile('public/user_photos', new File($file));
+            $text = url('/').'/storage/app/public/user_photo/'.substr($url,7);
+            $user=User::find($user->id);
+            $user->user_photo=$text;
+            return response()->json(['image'=>$text],200);
+        }
+        else{
+            return response()->json(['image'], 422);
 
+        }
+    }
 }
+
