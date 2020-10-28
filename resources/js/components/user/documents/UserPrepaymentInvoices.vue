@@ -12,12 +12,15 @@
                             <div class="item-list flex-col">
                                 <div class="item-label flex-row">
                                     <div class="name">Номер договора</div>
+                                    <div class="name">Кол-во вагонов</div>
                                     <div class="date">Период сверки</div>
                                 </div>
                                 <div class="item-scroll">
-                                    <div v-for="i in 8" :key="i" class="item flex-row">
-                                        <div class="name">№ЦТС-2020-14</div>
-                                        <div class="date">01.07.2020 - 04.08.2020</div>
+                                    <div v-for="(i,index) in applications" :key="i" class="item flex-row">
+                                        <div> <input type="radio" :value="i" v-model="app"> </div>
+                                        <div style="width:32%" class="name">№ЦТС-2020-14</div>
+                                        <input v-model="i.vagon_quantity" style="width: 9%;margin-left:3%;margin-right:18%" class="name" type="number">
+                                        <div class="date">{{i.date}} - {{i.access_road_grant_date}}</div>
                                         <div class="setting">
                                             <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
@@ -25,6 +28,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="send-btn" @click="paymentModal = true">Оплатить</div>
+
                             </div>
                         </div>
                     </div>
@@ -84,14 +89,17 @@ export default {
     },
     data(){
         return {
-            paymentModal: true,
+            paymentModal: false,
             options: [ 'Банковская карта' ],
             paymentType: 'Выберите',
             cardNumber: '',
             cardExp: '',
             cardName: '',
             cardCvv: '',
-            errors: ''
+            errors: '',
+            applications:"",
+            app:"",
+            vagon_quantity:""
         }
     },
     methods: {
@@ -134,25 +142,48 @@ export default {
             }
         },
         postPayment(){
-            if(this.paymentType === 'Выберите'){
-                alert('Выберите вид оплаты')
-                return
-            }
-
-            if(document.getElementsByClassName('error').length !== 0){
-                alert('Заполните все поля правильно.')
-                return 
-            }
+            // if(this.paymentType === 'Выберите'){
+            //     alert('Выберите вид оплаты')
+            //     return
+            // }
+            //
+            // if(document.getElementsByClassName('error').length !== 0){
+            //     alert('Заполните все поля правильно.')
+            //     return
+            // }
             // axios
-            alert(this.cardNumber)
+            var _this = this;
+            axios.post('/api/make/payment', null, {
+                headers: {
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params: {
+                    status: 1,
+                    vagon_quantity: _this.app['vagon_quantity'],
+                    application_id: _this.app['id'],
+                    payment: _this.payment?_this.payment:_this.app['payment']
+                }
+            })
+                .then(res => {
+                    console.log(res.data)
+                    alert('Ваша заявка успешно от отправлена')
+
+                }).catch(err => {
+                    console.log(err);
+            })
         }
-    }
+    },
+    mounted(){
+
+        this.applications = JSON.parse(localStorage.getItem('xyzSessionAoUser')).applications
+    },
+
 }
 </script>
 <style lang="scss" scoped>
     .main{
         background: #FFFFFF;
-        .main-info{          
+        .main-info{
             padding: 0 58px 37px 58px;
             margin-left: 303px;
             .containe{
@@ -164,7 +195,7 @@ export default {
                     width: 100%;
                     background: #FFFFFF;
                     border: 1px solid #DFE0EB;
-                    border-radius: 6px;       
+                    border-radius: 6px;
                     .content-info{
                         padding: 36px 28px 100px 28px;
                         .field-list{
@@ -345,7 +376,24 @@ export default {
                     box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
                     border-radius: 6px;
                 }
+
             }
+        }
+        .send-btn{
+            position: absolute;
+            bottom: 32px;
+            right: 32px;
+            max-width: 270px;
+            cursor: pointer;
+            margin: 80px 0 0 auto;
+            padding: 10px 28px;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 18px;
+            color: #FFFFFF;
+            background: #4985FF;
+            box-shadow: 0px 0px 10px rgba(111, 111, 111, 0.25);
+            border-radius: 6px;
         }
     }
 </style>

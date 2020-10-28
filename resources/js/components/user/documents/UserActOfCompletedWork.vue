@@ -10,7 +10,7 @@
                         <div class="top-date flex-row">
                             <div class="item flex-col">
                                 <div class="label">Показать с:</div>
-                                <datepicker :placeholder="'YYYY-MM-DD'" :language="ru" format="yyyy-MM-dd"></datepicker> 
+                                <datepicker v-model="start_date" :placeholder="'YYYY-MM-DD'" :language="ru" :format="customFormatterStartDate"></datepicker>
                                 <div class="divider"></div>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z" fill="#4985FF"/>
@@ -18,13 +18,13 @@
                             </div>
                             <div class="item flex-col">
                                 <div class="label">До:</div>
-                                <datepicker :placeholder="'YYYY-MM-DD'" :language="ru" format="yyyy-MM-dd"></datepicker> 
+                                <datepicker v-model="end_date" :placeholder="'YYYY-MM-DD'" :language="ru" :format="customFormatterEndDate"></datepicker>
                                 <div class="divider"></div>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.9375 1.25H12.5V0.5C12.5 0.223875 12.2762 0 12 0C11.7238 0 11.5 0.223875 11.5 0.5V1.25H4.5V0.5C4.5 0.223875 4.27616 0 4 0C3.72384 0 3.5 0.223875 3.5 0.5V1.25H2.0625C0.925219 1.25 0 2.17522 0 3.3125V13.9375C0 15.0748 0.925219 16 2.0625 16H13.9375C15.0748 16 16 15.0748 16 13.9375V3.3125C16 2.17522 15.0748 1.25 13.9375 1.25ZM2.0625 2.25H3.5V2.75C3.5 3.02612 3.72384 3.25 4 3.25C4.27616 3.25 4.5 3.02612 4.5 2.75V2.25H11.5V2.75C11.5 3.02612 11.7238 3.25 12 3.25C12.2762 3.25 12.5 3.02612 12.5 2.75V2.25H13.9375C14.5234 2.25 15 2.72662 15 3.3125V4.5H1V3.3125C1 2.72662 1.47662 2.25 2.0625 2.25ZM13.9375 15H2.0625C1.47662 15 1 14.5234 1 13.9375V5.5H15V13.9375C15 14.5234 14.5234 15 13.9375 15Z" fill="#4985FF"/>
                                 </svg>
                             </div>
-                            <div class="show-btn">Показать</div>
+                            <div class="show-btn" @click="getActs">Показать</div>
                         </div>
                         <div class="field-list flex-col">
                             <div class="label-item flex-row">
@@ -52,19 +52,19 @@
                                 </div>
                                 <div class="status">Статус платежа</div>
                             </div>
-                            <div v-for="i in 5" :key="i" class="item-list">
+                            <div v-for="i in data" :key="i" class="item-list">
                                 <div class="item flex-row">
-                                    <div class="index">{{ i }}</div>
+                                    <div class="index">{{ i.id }}</div>
                                     <div class="name flex-row">
-                                        Май 31 , 2020
+                                        {{ i.act_end_date }}
                                     </div>
                                     <div class="date flex-col">
-                                        10155
+                                        {{ i.number_of_ABP}}
                                     </div>
                                     <div class="until flex-col">
-                                        1050031.6 KZT
+                                        {{ i.payment}} KZT
                                     </div>
-                                    <div class="status">Погашен</div>
+                                    <div v-if="i.status==0" class="status" style="color:red">Задолженность</div>
                                     <div class="setting">
                                         <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4ZM2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z" fill="#C5C5C5"/>
@@ -85,6 +85,8 @@ import UserNav from '../UserNav'
 import UserDocumentsRouter from './UserDocumentsRoute'
 import Datepicker from 'vuejs-datepicker'
 import {ru} from 'vuejs-datepicker/dist/locale'
+import moment from 'moment';
+import axios from 'axios'
 
 export default {
     components: {
@@ -95,18 +97,52 @@ export default {
     },
     data(){
         return {
-            
+            start_date:"",
+            end_date:"",
+            data:""
         }
     },
     methods: {
-        
+        customFormatterStartDate(date) {
+            var date= moment(date).format('YYYY.MM.DD');
+            this.start_date=date;
+            return date;
+        },
+        customFormatterEndDate(date) {
+            var date= moment(date).format('YYYY.MM.DD');
+            this.end_date=date;
+            return date;
+        },
+        getActs(page){
+            var _this = this;
+            axios.get("/api/get/act",{
+                headers: {
+                    'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('xyzSessionAo')).token
+                },
+                params:{
+                    page: page,
+                    start_date:this.start_date,
+                    end_date:this.end_date,
+                    application_id:this.application_id
+                }
+            }).then(response=>{
+                console.log(response.data);
+                _this.data=response.data;
+            }).catch(e=>{
+                console.log(e);
+            })
+        }
+    },
+    mounted() {
+        this.getActs();
+
     }
 }
 </script>
 <style lang="scss" scoped>
     .main{
         background: #FFFFFF;
-        .main-info{          
+        .main-info{
             padding: 0 58px 37px 58px;
             margin-left: 303px;
             .containe{
@@ -118,7 +154,7 @@ export default {
                     width: 100%;
                     background: #FFFFFF;
                     border: 1px solid #DFE0EB;
-                    border-radius: 6px;   
+                    border-radius: 6px;
                     .content-info{
                         padding: 36px 28px;
                         .top-date{
@@ -240,7 +276,7 @@ export default {
                                     .name{
                                         width: 20%;
                                         text-overflow: ellipsis;
-                                        overflow: hidden; 
+                                        overflow: hidden;
                                         white-space: nowrap;
                                     }
                                     .date, .until{
@@ -267,9 +303,9 @@ export default {
                                         width: 2%;
                                     }
                                 }
-                            }                            
+                            }
                         }
-                    }    
+                    }
                 }
             }
         }

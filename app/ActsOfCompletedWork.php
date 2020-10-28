@@ -11,11 +11,10 @@ class ActsOfCompletedWork extends Model
 public function scopeFilter($query,$filters)
 {
     if(isset($filters['end_date'])) {
-        $query->whereDate('act_start_date', '<=', $filters['end_date']);
-
+        $query->whereDate('act_end_date', '<=', $filters['end_date']);
     }
     if(isset($filters['start_date'])) {
-        $query->whereDate('act_end_date', '>=', $filters['start_date']);
+        $query->whereDate('act_start_date', '>=', $filters['start_date']);
     }
 
     if(isset($filters['application_id'])) {
