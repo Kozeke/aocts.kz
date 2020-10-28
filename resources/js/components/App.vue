@@ -1,10 +1,10 @@
 <template>
     <div class="nav-bar flex-row">
-        <div class="logo">DARIS</div>
-        <div class="slogan">Слоган</div>
-        <div class="sub-head">Мы с радостью готовы Вам помочь!</div>
+        <div class="logo">{{ $t('app.DARIS') }}</div>
+        <div class="slogan">{{ $t('app.slogan') }}</div>
+        <div class="sub-head">{{ $t('app.help') }}</div>
         <div class="contact-us flex-row">
-            <span>Связаться с нами</span>
+            <span>{{ $t('app.online') }}</span>
             <div class="circle"></div>
         </div>
     </div>
@@ -12,13 +12,13 @@
 <script>
 export default {
     data(){
-    
+
     },
     mounted() {
-    
+
     },
     methods : {
-    
+
     }
 }
 </script>
@@ -38,7 +38,7 @@ export default {
             width: 160px;
             height: 50px;
             top: 25px;
-            background: #F6F6F8;            
+            background: #F6F6F8;
         }
         .slogan{
             position: absolute;
@@ -79,5 +79,5 @@ export default {
             }
         }
     }
-    
+
 </style>

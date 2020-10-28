@@ -8940,30 +8940,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "nav-bar flex-row" }, [
-      _c("div", { staticClass: "logo" }, [_vm._v("DARIS")]),
+  return _c("div", { staticClass: "nav-bar flex-row" }, [
+    _c("div", { staticClass: "logo" }, [_vm._v(_vm._s(_vm.$t("app.DARIS")))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "slogan" }, [
+      _vm._v(_vm._s(_vm.$t("app.slogan")))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "sub-head" }, [
+      _vm._v(_vm._s(_vm.$t("app.help")))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "contact-us flex-row" }, [
+      _c("span", [_vm._v(_vm._s(_vm.$t("app.online")))]),
       _vm._v(" "),
-      _c("div", { staticClass: "slogan" }, [_vm._v("Слоган")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sub-head" }, [
-        _vm._v("Мы с радостью готовы Вам помочь!")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "contact-us flex-row" }, [
-        _c("span", [_vm._v("Связаться с нами")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "circle" })
-      ])
+      _c("div", { staticClass: "circle" })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -10030,20 +10025,26 @@ var render = function() {
     _c("div", { staticClass: "layout flex-row" }, [
       _c("div", { staticClass: "layout-left" }, [
         _c("div", { staticClass: "layout-text" }, [
-          _c("div", { staticClass: "header" }, [_vm._v("Онлайн договор")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "header" }, [_vm._v("в пару кликов")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sub" }, [
-            _vm._v(
-              "Компания Daris занимается заключением договоров, на оплату услуг передвижения и остановки грузов по всем железно дорожным путям Казахстана"
-            )
+          _c("div", { staticClass: "header" }, [
+            _vm._v(_vm._s(_vm.$t("home.online-application")))
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "header" }, [
+            _vm._v(_vm._s(_vm.$t("home.title")))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "sub" }, [
+            _vm._v(_vm._s(_vm.$t("home.content")))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "join flex-row" }, [
+            _c("span", [_vm._v(_vm._s(_vm.$t("home.enter")))]),
+            _vm._v(" "),
+            _c("img", { attrs: { src: "/images/btn-shuttle.png", alt: "" } })
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "login flex-row" }, [
-            _c("span", [_vm._v("У Вас уже есть аккаунт?")]),
+            _c("span", [_vm._v(_vm._s(_vm.$t("home.have-account")) + "?")]),
             _vm._v(" "),
             _c(
               "div",
@@ -10055,20 +10056,20 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Войти в систему")]
+              [_vm._v(_vm._s(_vm.$t("home.enter-system")))]
             )
           ])
         ])
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _vm._m(2)
     ]),
+    _vm._v(" "),
+    _vm._m(3),
     _vm._v(" "),
     _vm._m(4),
     _vm._v(" "),
     _vm._m(5),
-    _vm._v(" "),
-    _vm._m(6),
     _vm._v(" "),
     _c("div", { staticClass: "footer" }, [
       _c("div", { staticClass: "footer-body flex-row" }, [
@@ -10085,9 +10086,9 @@ var render = function() {
           [_c("img", { attrs: { src: "/images/logo.png" } })]
         ),
         _vm._v(" "),
-        _vm._m(7),
+        _vm._m(6),
         _vm._v(" "),
-        _vm._m(8)
+        _vm._m(7)
       ])
     ])
   ])
@@ -10125,16 +10126,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-right" }, [
       _c("img", { attrs: { src: "/images/contact-modal.png", alt: "" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "join flex-row" }, [
-      _c("span", [_vm._v("Присоединиться")]),
-      _vm._v(" "),
-      _c("img", { attrs: { src: "/images/btn-shuttle.png", alt: "" } })
     ])
   },
   function() {
@@ -38953,24 +38944,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
-/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
-/* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue");
-/* harmony import */ var _components_Forget__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Forget */ "./resources/js/components/Forget.vue");
-/* harmony import */ var _components_Reset__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Reset */ "./resources/js/components/Reset.vue");
-/* harmony import */ var _components_ResetPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ResetPage */ "./resources/js/components/ResetPage.vue");
-/* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue");
-/* harmony import */ var _components_user_profile_UserProfile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/user/profile/UserProfile */ "./resources/js/components/user/profile/UserProfile.vue");
-/* harmony import */ var _components_user_profile_UserContact__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/user/profile/UserContact */ "./resources/js/components/user/profile/UserContact.vue");
-/* harmony import */ var _components_user_profile_UserDocument__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/user/profile/UserDocument */ "./resources/js/components/user/profile/UserDocument.vue");
-/* harmony import */ var _components_user_profile_UserPayment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/user/profile/UserPayment */ "./resources/js/components/user/profile/UserPayment.vue");
-/* harmony import */ var _components_user_profile_UserPassword__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/user/profile/UserPassword */ "./resources/js/components/user/profile/UserPassword.vue");
-/* harmony import */ var _components_user_dashboard_UserDashboard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/user/dashboard/UserDashboard */ "./resources/js/components/user/dashboard/UserDashboard.vue");
-/* harmony import */ var _components_user_deal_UserDeal__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/user/deal/UserDeal */ "./resources/js/components/user/deal/UserDeal.vue");
-/* harmony import */ var _components_user_documents_UserActOfCompletedWork__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/user/documents/UserActOfCompletedWork */ "./resources/js/components/user/documents/UserActOfCompletedWork.vue");
-/* harmony import */ var _components_user_documents_UserActOfReconciliation__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/user/documents/UserActOfReconciliation */ "./resources/js/components/user/documents/UserActOfReconciliation.vue");
-/* harmony import */ var _components_user_documents_UserPrepaymentInvoices__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/user/documents/UserPrepaymentInvoices */ "./resources/js/components/user/documents/UserPrepaymentInvoices.vue");
-/* harmony import */ var _components_user_documents_UserAgreements__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/user/documents/UserAgreements */ "./resources/js/components/user/documents/UserAgreements.vue");
+/* harmony import */ var _src_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/i18n */ "./src/i18n.js");
+/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
+/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
+/* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue");
+/* harmony import */ var _components_Forget__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Forget */ "./resources/js/components/Forget.vue");
+/* harmony import */ var _components_Reset__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Reset */ "./resources/js/components/Reset.vue");
+/* harmony import */ var _components_ResetPage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ResetPage */ "./resources/js/components/ResetPage.vue");
+/* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue");
+/* harmony import */ var _components_user_profile_UserProfile__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/user/profile/UserProfile */ "./resources/js/components/user/profile/UserProfile.vue");
+/* harmony import */ var _components_user_profile_UserContact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/user/profile/UserContact */ "./resources/js/components/user/profile/UserContact.vue");
+/* harmony import */ var _components_user_profile_UserDocument__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/user/profile/UserDocument */ "./resources/js/components/user/profile/UserDocument.vue");
+/* harmony import */ var _components_user_profile_UserPayment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/user/profile/UserPayment */ "./resources/js/components/user/profile/UserPayment.vue");
+/* harmony import */ var _components_user_profile_UserPassword__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/user/profile/UserPassword */ "./resources/js/components/user/profile/UserPassword.vue");
+/* harmony import */ var _components_user_dashboard_UserDashboard__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/user/dashboard/UserDashboard */ "./resources/js/components/user/dashboard/UserDashboard.vue");
+/* harmony import */ var _components_user_deal_UserDeal__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/user/deal/UserDeal */ "./resources/js/components/user/deal/UserDeal.vue");
+/* harmony import */ var _components_user_documents_UserActOfCompletedWork__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/user/documents/UserActOfCompletedWork */ "./resources/js/components/user/documents/UserActOfCompletedWork.vue");
+/* harmony import */ var _components_user_documents_UserActOfReconciliation__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/user/documents/UserActOfReconciliation */ "./resources/js/components/user/documents/UserActOfReconciliation.vue");
+/* harmony import */ var _components_user_documents_UserPrepaymentInvoices__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/user/documents/UserPrepaymentInvoices */ "./resources/js/components/user/documents/UserPrepaymentInvoices.vue");
+/* harmony import */ var _components_user_documents_UserAgreements__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/user/documents/UserAgreements */ "./resources/js/components/user/documents/UserAgreements.vue");
+
 
 
 
@@ -38999,119 +38992,119 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
     name: 'home',
-    component: _components_Home__WEBPACK_IMPORTED_MODULE_4__["default"],
+    component: _components_Home__WEBPACK_IMPORTED_MODULE_5__["default"],
     meta: {
       title: "Главная"
     }
   }, {
     path: '/login',
     name: 'login',
-    component: _components_Login__WEBPACK_IMPORTED_MODULE_5__["default"],
+    component: _components_Login__WEBPACK_IMPORTED_MODULE_6__["default"],
     meta: {
       title: "Авторизация"
     }
   }, {
     path: '/register',
     name: 'register',
-    component: _components_Register__WEBPACK_IMPORTED_MODULE_9__["default"],
+    component: _components_Register__WEBPACK_IMPORTED_MODULE_10__["default"],
     meta: {
       title: "Авторизация"
     }
   }, {
     path: '/forget-pwd',
     name: 'forget',
-    component: _components_Forget__WEBPACK_IMPORTED_MODULE_6__["default"],
+    component: _components_Forget__WEBPACK_IMPORTED_MODULE_7__["default"],
     meta: {
       title: "Забыли пароль"
     }
   }, {
     path: '/reset',
     name: 'reset',
-    component: _components_Reset__WEBPACK_IMPORTED_MODULE_7__["default"],
+    component: _components_Reset__WEBPACK_IMPORTED_MODULE_8__["default"],
     meta: {
       title: "Забыли пароль"
     }
   }, {
     path: '/reset-pwd',
     name: 'reset-pwd',
-    component: _components_ResetPage__WEBPACK_IMPORTED_MODULE_8__["default"],
+    component: _components_ResetPage__WEBPACK_IMPORTED_MODULE_9__["default"],
     meta: {
       title: "Забыли пароль"
     }
   }, {
     path: '/profile',
     name: 'profile',
-    component: _components_user_profile_UserProfile__WEBPACK_IMPORTED_MODULE_10__["default"],
+    component: _components_user_profile_UserProfile__WEBPACK_IMPORTED_MODULE_11__["default"],
     meta: {
       title: "Профиль аккаунта"
     }
   }, {
     path: '/contacts',
     name: 'contacts',
-    component: _components_user_profile_UserContact__WEBPACK_IMPORTED_MODULE_11__["default"],
+    component: _components_user_profile_UserContact__WEBPACK_IMPORTED_MODULE_12__["default"],
     meta: {
       title: "Профиль аккаунта"
     }
   }, {
     path: '/document',
     name: 'document',
-    component: _components_user_profile_UserDocument__WEBPACK_IMPORTED_MODULE_12__["default"],
+    component: _components_user_profile_UserDocument__WEBPACK_IMPORTED_MODULE_13__["default"],
     meta: {
       title: "Профиль аккаунта"
     }
   }, {
     path: '/payment',
     name: 'payment',
-    component: _components_user_profile_UserPayment__WEBPACK_IMPORTED_MODULE_13__["default"],
+    component: _components_user_profile_UserPayment__WEBPACK_IMPORTED_MODULE_14__["default"],
     meta: {
       title: "Профиль аккаунта"
     }
   }, {
     path: '/password',
     name: 'password',
-    component: _components_user_profile_UserPassword__WEBPACK_IMPORTED_MODULE_14__["default"],
+    component: _components_user_profile_UserPassword__WEBPACK_IMPORTED_MODULE_15__["default"],
     meta: {
       title: "Профиль аккаунта"
     }
   }, {
     path: '/dashboard',
     name: 'dashboard',
-    component: _components_user_dashboard_UserDashboard__WEBPACK_IMPORTED_MODULE_15__["default"],
+    component: _components_user_dashboard_UserDashboard__WEBPACK_IMPORTED_MODULE_16__["default"],
     meta: {
       title: "Панель управления"
     }
   }, {
     path: '/acts-of-completed-work',
     name: 'acts-of-completed-work',
-    component: _components_user_documents_UserActOfCompletedWork__WEBPACK_IMPORTED_MODULE_17__["default"],
+    component: _components_user_documents_UserActOfCompletedWork__WEBPACK_IMPORTED_MODULE_18__["default"],
     meta: {
       title: "Финансовые документы"
     }
   }, {
     path: '/act-of-reconciliation',
     name: 'act-of-reconciliation',
-    component: _components_user_documents_UserActOfReconciliation__WEBPACK_IMPORTED_MODULE_18__["default"],
+    component: _components_user_documents_UserActOfReconciliation__WEBPACK_IMPORTED_MODULE_19__["default"],
     meta: {
       title: "Финансовые документы"
     }
   }, {
     path: '/prepayment-invoices',
     name: 'prepayment-invoices',
-    component: _components_user_documents_UserPrepaymentInvoices__WEBPACK_IMPORTED_MODULE_19__["default"],
+    component: _components_user_documents_UserPrepaymentInvoices__WEBPACK_IMPORTED_MODULE_20__["default"],
     meta: {
       title: "Финансовые документы"
     }
   }, {
     path: '/agreements',
     name: 'agreements',
-    component: _components_user_documents_UserAgreements__WEBPACK_IMPORTED_MODULE_20__["default"],
+    component: _components_user_documents_UserAgreements__WEBPACK_IMPORTED_MODULE_21__["default"],
     meta: {
       title: "Финансовые документы"
     }
   }, {
     path: '/deal',
     name: 'deal',
-    component: _components_user_deal_UserDeal__WEBPACK_IMPORTED_MODULE_16__["default"],
+    component: _components_user_deal_UserDeal__WEBPACK_IMPORTED_MODULE_17__["default"],
     meta: {
       title: "Договоры"
     }
@@ -39120,9 +39113,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   components: {
-    App: _components_App__WEBPACK_IMPORTED_MODULE_3__["default"]
+    App: _components_App__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  router: router
+  router: router,
+  i18n: _src_i18n__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 var DEFAULT_TITLE = 'Daris';
 router.afterEach(function (to, from) {
@@ -41172,6 +41166,101 @@ var func = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./src/i18n.js":
+/*!*********************!*\
+  !*** ./src/i18n.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-i18n'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-i18n'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+function loadLocaleMessages() {
+  var locales = __webpack_require__("./src/locales sync recursive [A-Za-z0-9-_,\\s]+\\.json$/");
+
+  var messages = {};
+  locales.keys().forEach(function (key) {
+    var matched = key.match(/([A-Za-z0-9-_]+)\./i);
+
+    if (matched && matched.length > 1) {
+      var locale = matched[1];
+      messages[locale] = locales(key);
+    }
+  });
+  return messages;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (new !(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-i18n'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())({
+  locale: 'en',
+  fallbackLocale: 'ru',
+  messages: loadLocaleMessages()
+}));
+
+/***/ }),
+
+/***/ "./src/locales sync recursive [A-Za-z0-9-_,\\s]+\\.json$/":
+/*!****************************************************!*\
+  !*** ./src/locales sync [A-Za-z0-9-_,\s]+\.json$/ ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./en.json": "./src/locales/en.json",
+	"./ru.json": "./src/locales/ru.json"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./src/locales sync recursive [A-Za-z0-9-_,\\s]+\\.json$/";
+
+/***/ }),
+
+/***/ "./src/locales/en.json":
+/*!*****************************!*\
+  !*** ./src/locales/en.json ***!
+  \*****************************/
+/*! exports provided: app, home, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"app\":{\"message\":\"Онлайн договор\",\"DARIS\":\"DARIS\",\"slogan\":\"Слоган\",\"help\":\"Мы с радостью готовы Вам помочь!\",\"online\":\"Связаться с нами\"},\"home\":{\"online-application\":\"Online application\",\"title\":\"в пару кликов\",\"content\":\"Компания Daris занимается заключением договоров, на оплату услуг передвижения и остановки грузов по всем железно дорожным путям Казахстана\",\"enter\":\"Присоединиться\",\"have-account\":\"У Вас уже есть аккаунт\",\"enter-system\":\"Войти в систему\"}}");
+
+/***/ }),
+
+/***/ "./src/locales/ru.json":
+/*!*****************************!*\
+  !*** ./src/locales/ru.json ***!
+  \*****************************/
+/*! exports provided: app, home, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"app\":{\"message\":\"Онлайн договор\",\"DARIS\":\"DARIS\",\"slogan\":\"Слоган\",\"help\":\"Мы с радостью готовы Вам помочь!\",\"online\":\"Связаться с нами\"},\"home\":{\"online-application\":\"Онлайн договор\",\"title\":\"в пару кликов\",\"content\":\"Компания Daris занимается заключением договоров, на оплату услуг передвижения и остановки грузов по всем железно дорожным путям Казахстана\",\"enter\":\"Присоединиться\",\"have-account\":\"У Вас уже есть аккаунт\",\"enter-system\":\"Войти в систему\"}}");
 
 /***/ }),
 

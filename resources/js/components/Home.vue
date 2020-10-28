@@ -196,16 +196,16 @@
         <div class="layout flex-row">
             <div class="layout-left">
                 <div class="layout-text">
-                    <div class="header">Онлайн договор</div>
-                    <div class="header">в пару кликов</div>
-                    <div class="sub">Компания Daris занимается заключением договоров, на оплату услуг передвижения и остановки грузов по всем железно дорожным путям Казахстана</div>
+                    <div class="header">{{ $t('home.online-application')}}</div>
+                    <div class="header">{{ $t('home.title')}}</div>
+                    <div class="sub">{{ $t('home.content')}}</div>
                     <div class="join flex-row">
-                        <span>Присоединиться</span>
+                        <span>{{ $t('home.enter')}}</span>
                         <img src="/images/btn-shuttle.png" alt="">
                     </div>
                     <div class="login flex-row">
-                        <span>У Вас уже есть аккаунт?</span>
-                        <div @click="$router.push({ name: 'login' })" class="go-login">Войти в систему</div>
+                        <span>{{ $t('home.have-account')}}?</span>
+                        <div @click="$router.push({ name: 'login' })" class="go-login">{{ $t('home.enter-system')}}</div>
                     </div>
                 </div>
             </div>
@@ -216,7 +216,7 @@
         </div>
         <!-- <div class="service">
             <div class="service-header">Наши услуги</div>
-            <div class="service-sub">Пользуясь услугами DARIS, у Вас появляется возможность получить широкий спектр услуг 
+            <div class="service-sub">Пользуясь услугами DARIS, у Вас появляется возможность получить широкий спектр услуг
                 с любой точки нашей планеты, тем самым Вы экономите свое драгоценное время.</div>
             <div class="service-list flex-row">
                 <div class="service-single flex-col">
@@ -257,7 +257,7 @@
                             <span class="circle">
                                 <img src="/images/desc_1.png" alt="">
                             </span>
-                            <div>Теперь нет необходимости тратить свое время 
+                            <div>Теперь нет необходимости тратить свое время
                             на бумажную работу.</div>
                         </div>
                         <div class="desc-item flex-row">
@@ -271,7 +271,7 @@
                             <span class="circle">
                                 <img src="/images/desc_3.png" alt="">
                             </span>
-                            <div>Пользуясь услугами Компании Дарис, Вы получаете:<br /><span>качественный и своевременный спектр услуг 
+                            <div>Пользуясь услугами Компании Дарис, Вы получаете:<br /><span>качественный и своевременный спектр услуг
                             в онлайн режиме.</span></div>
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                     <div class="dt-item">История платежей <span>(дебит / кредит)</span></div>
                     <div class="dt-item">История взаиморасчетов<br><span>
                     (акт выполенных работ, акт сверки)</span></div>
-                </div> 
+                </div>
             </div>
         </div>
         <div class="module">
@@ -305,27 +305,27 @@
                 <div class="module-single flex-col">
                     <img src="/images/image40.png" alt="">
                     <div class="head">Панель управления</div>
-                </div> 
+                </div>
                 <div class="module-single flex-col">
                     <img src="/images/image41.png" alt="">
                     <div class="head">Акты выполненных работ</div>
-                </div> 
+                </div>
                 <div class="module-single flex-col">
                     <img src="/images/image42.png" alt="">
                     <div class="head">Акт сверки</div>
-                </div> 
+                </div>
                 <div class="module-single flex-col">
                     <img src="/images/image43.png" alt="">
                     <div class="head">Договоры</div>
-                </div> 
+                </div>
                 <div class="module-single flex-col">
                     <img src="/images/image44.png" alt="">
                     <div class="head">Счета на предоплату</div>
-                </div> 
+                </div>
                 <div class="module-single flex-col">
                     <img src="/images/image45.png" alt="">
                     <div class="head">Соглашения</div>
-                </div> 
+                </div>
                 <!-- <div class="more-module flex-row">
                     <span>Показать еще</span>
                     <svg style="position: absolute; right: 30px;top: 14px;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -540,11 +540,11 @@ import { mixin as clickaway } from 'vue-clickaway';
             position: absolute;
             left: 18%;
             top: 25px;
-            // background: #F6F6F8;   
+            // background: #F6F6F8;
             img{
                 width: 25%;
                 transform: translateX(-150%) translateY(-35%);
-            }         
+            }
         }
         .slogan{
             position: absolute;
@@ -1039,7 +1039,7 @@ import { mixin as clickaway } from 'vue-clickaway';
                 img{
                     width: 120px;
                     transform: translateY(-35%);
-                }            
+                }
             }
             .fm-foot{
                 top: 90px;
@@ -1169,7 +1169,7 @@ import { mixin as clickaway } from 'vue-clickaway';
         }
         .nav-bar{
             .logo{
-                left: 8%;          
+                left: 8%;
             }
             .slogan{
                 left: calc(8% + 106px);
@@ -1288,7 +1288,7 @@ import { mixin as clickaway } from 'vue-clickaway';
                         img{
                             width: 120px;
                             transform: translateY(-35%);
-                        }            
+                        }
                     }
                     .slogan{
                         position: absolute;
@@ -1557,7 +1557,7 @@ import { mixin as clickaway } from 'vue-clickaway';
                     margin-top: 60px;
                     width: 100%;
                 }
- 
+
             }
         }
     }

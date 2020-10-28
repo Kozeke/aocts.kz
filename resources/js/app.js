@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueTheMask from 'vue-the-mask'
+import i18n from '../../src/i18n'
 
 Vue.use(VueRouter)
 Vue.use(VueTheMask)
@@ -27,6 +28,7 @@ import UserActOfCompletedWork from './components/user/documents/UserActOfComplet
 import UserActOfReconciliation from './components/user/documents/UserActOfReconciliation'
 import UserPrepaymentInvoices from './components/user/documents/UserPrepaymentInvoices'
 import UserAgreements from './components/user/documents/UserAgreements'
+
 
 
 const router = new VueRouter({
@@ -133,7 +135,7 @@ const router = new VueRouter({
             name: 'deal',
             component: UserDeal,
             meta: { title: "Договоры" },
-        } 
+        }
     ],
 })
 
@@ -141,6 +143,7 @@ const app = new Vue({
     el: '#app',
     components: { App },
     router,
+    i18n
 });
 
 const DEFAULT_TITLE = 'Daris';
